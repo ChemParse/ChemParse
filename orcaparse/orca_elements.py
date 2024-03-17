@@ -100,7 +100,6 @@ class OrcaBlockUnrecognizedWithBody(OrcaBlock):
         header_raw, body_raw = self.extract_header_and_body()
         self.header = OrcaHeader(header_raw, header_level)
         self.body = OrcaText(body_raw, header_level)
-        print(f'{header_raw = }')
         self.readable_name: str = self.extract_readable_name(header_raw)
 
     def extract_readable_name(self, header_raw: str) -> str:

@@ -5,6 +5,8 @@ import warnings
 import numpy as np
 import pandas as pd
 
+from .units_and_constants import EH_TO_EV
+
 numeric_const_pattern = '[-+]? (?: (?: \d* \. \d+ ) | (?: \d+ \.? ) )(?: [Ee] [+-]? \d+ ) ?'
 rx = re.compile(numeric_const_pattern, re.VERBOSE)
 
@@ -27,17 +29,15 @@ def get_last_occurrence(filename, bstring):
 
 #     parse the time string to give back the time as a float:
 def parse_time(string):
-    # print(f'{string = }')
     try:
         r = rx.findall(string)
         time = float(r[0])
     except Exception as e:
-        # print(Exception)
         time = 0.0
     return time
 
 
-def energy_from_ocra(filename):
+def energy_from_orca(filename):
     """
     Energy in Eh
     """
@@ -51,11 +51,11 @@ def energy_from_ocra(filename):
         return float(d[0])
 
 
-def energy_from_ocra_ev(filename):
+def energy_from_orca_ev(filename):
     """
     Energy in eV
     """
-    return EH_TO_EV*energy_from_ocra(filename)
+    return EH_TO_EV*energy_from_orca(filename)
 
 
 def surface_energy_from_orca(filename, energy_type='Actual Energy'):
@@ -94,15 +94,13 @@ def surface_energy_from_orca(filename, energy_type='Actual Energy'):
     return pd.DataFrame(data)
 
 
-def orbital_energy_from_ocra(filename):
+def orbital_energy_from_orca(filename):
     data = pd.DataFrame()
     with open(filename) as f:
         lines = f.readlines()
         for id, line in enumerate(lines[::-1]):
             if line.startswith('ORBITAL ENERGIES'):
                 break
-        # print(f'{id = }')
-        # print(f'{line = }')
 
         for line in lines[id + 4:]:
             if line.startswith('------------------') or len(line) <= 2:
@@ -114,7 +112,7 @@ def orbital_energy_from_ocra(filename):
     return data
 
 
-def neb_energy_from_ocra(filename):
+def neb_energy_from_orca(filename):
     data = pd.DataFrame()
     with open(filename) as f:
         lines = f.readlines()
@@ -127,11 +125,8 @@ def neb_energy_from_ocra(filename):
                 file_key = 'TS'
                 break
         id = len(lines) - id
-        # print(f'{id = }')
-        # print(f'{line = }')
 
         for i, line in enumerate(lines[id + 4:]):
-            # print(f'{line = }')
             if line.startswith('--------') or len(line) <= 2:
                 break
             if file_key == 'TS':
@@ -166,7 +161,7 @@ def neb_energy_from_ocra(filename):
     return data
 
 
-def neb_energy_from_ocra(filename):
+def neb_energy_from_orca(filename):
     data = pd.DataFrame()
     try:
         with open(filename) as f:
@@ -180,12 +175,7 @@ def neb_energy_from_ocra(filename):
                     file_key = 'CI'
                     break
             id = len(lines) - id
-            # print(f'{id = }')
-            # print(f'{line = }')
-            # print(f'{file_key = }')
-
             for i, line in enumerate(lines[id + 4:]):
-                # print(f'{line = }')
                 if line.startswith('--------') or len(line) <= 2:
                     break
                 if file_key == 'TS':
@@ -209,14 +199,13 @@ def neb_energy_from_ocra(filename):
                             float(d[3])], 'max(|Fp|)': [float(d[4])], 'RMS(Fp)': [float(d[5])], 'Comment': ['']})], ignore_index=True)
 
     except Exception as e:
-        print(e)
         data = pd.DataFrame({'Image': [0], 'Dist.(Ang.)': [0.], 'E(Eh)': [np.nan], 'dE(kcal/mol)': [
             np.nan], 'max(|Fp|)': [np.nan], 'RMS(Fp)': [np.nan], 'Comment': ['']})
     data['Energy, eV'] = EH_TO_EV*(data['E(Eh)'])
     return data
 
 
-def neb_energy_from_ocra_interp(filename):
+def neb_energy_from_orca_interp(filename):
     points = pd.DataFrame()
     interpolation = pd.DataFrame()
     try:
@@ -225,11 +214,7 @@ def neb_energy_from_ocra_interp(filename):
             for id, line in enumerate(lines):
                 if 'Images' in line:
                     break
-            # print(f'{id = }')
-            # print(f'{line = }')
-
             for i, line in enumerate(lines[id + 1:]):
-                # print(f'{line = }')
                 if line.startswith('--------') or len(line) <= 2:
                     break
 
@@ -237,11 +222,7 @@ def neb_energy_from_ocra_interp(filename):
                 points = pd.concat([points, pd.DataFrame({'Image': [i], 'Images': [float(d[0])], 'Distance (Bohr)': [
                     float(d[1])], 'Energy (Eh)': [float(d[2])]})], ignore_index=True)
 
-            # print(f'{i = }')
-            # print(f'{line = }')
-
             for j, line in enumerate(lines[id + i + 4:]):
-                # print(f'{line = }')
                 if line.startswith('--------') or len(line) <= 2:
                     break
 
@@ -249,7 +230,6 @@ def neb_energy_from_ocra_interp(filename):
                 interpolation = pd.concat([interpolation, pd.DataFrame({'Interp': [float(d[0])], 'Distance (Bohr)': [
                     float(d[1])], 'Energy (Eh)': [float(d[2])]})], ignore_index=True)
     except Exception as e:
-        print(e)
         points = pd.DataFrame({'Image': [0], 'Images': [0.], 'Distance (Bohr)': [
             0.], 'Energy (Eh)': [np.nan]})
         interpolation = pd.DataFrame({'Interp': [0.], 'Distance (Bohr)': [
@@ -263,7 +243,7 @@ def neb_energy_from_ocra_interp(filename):
     return points, interpolation
 
 
-def neb_free_energy_from_ocra(filename):
+def neb_free_energy_from_orca(filename):
     try:
         with open(filename) as f:
             lines = f.readlines()
@@ -274,7 +254,6 @@ def neb_free_energy_from_ocra(filename):
                     free_energy = float(d[-1])
                     break
     except Exception as e:
-        print(e)
         return np.nan
 
     return EH_TO_EV*free_energy

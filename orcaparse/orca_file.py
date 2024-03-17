@@ -57,11 +57,6 @@ class OrcaFile:
             # The specific part you want to replace (previously match.group(1))
             extracted_text = match.group(1)
 
-            # print(f'{p_subtype = }')
-            if p_subtype == "OrcaBlockUnrecognizedWithBody":
-                pass
-                # print(full_match)
-
             if '<@%' in extracted_text or '%@>' in extracted_text:
                 warnings.warn(
                     f'Attempt to replace the marker in {p_type, p_subtype}:{extracted_text}')
