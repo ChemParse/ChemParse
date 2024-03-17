@@ -22,25 +22,119 @@ class OrcaFile:
             if regex_settings is not None
             else OrcaFile.default_regex_settings
         )
-        self.blocks: dict[str, OrcaElement] = {}
-        self._pattern_metadata: dict | None = None
-        self._marked_text: str | None = None
+        self.initialized = False
         with open(self.file_path, "r") as file:
             self.original_text: str = file.read()
 
-    def get_pattern_metadata(self):
-        if self._pattern_metadata is None or self._marked_text is None:
+        self._blocks: dict[str, OrcaElement] = {}
+        self._marked_text: str = self.original_text
+
+    def get_blocks(self):
+        if not self.initialized:
             self.process_patterns()
-        return self._pattern_metadata
+        return self._blocks
 
     def get_marked_text(self):
-        if self._pattern_metadata is None or self._marked_text is None:
+        if not self.initialized:
             self.process_patterns()
         return self._marked_text
 
     def process_patterns(self):
-        self._pattern_metadata = {}
+        self._blocks = {}
         self._marked_text = self.original_text
+        self.initialized = True
+
+        def replace_with_marker(match):
+
+            def find_substring_positions(text, substring):
+                # method to search for the block position in the original text
+                positions = [(m.start(), m.end())
+                             for m in re.finditer(re.escape(substring), text)]
+                return positions
+            # The entire matched text
+            full_match = match.group(0)
+
+            # The specific part you want to replace (previously match.group(1))
+            extracted_text = match.group(1)
+
+            # print(f'{p_subtype = }')
+            if p_subtype == "OrcaBlockUnrecognizedWithBody":
+                pass
+                # print(full_match)
+
+            if '<@%' in extracted_text or '%@>' in extracted_text:
+                warnings.warn(
+                    f'Attempt to replace the marker in {p_type, p_subtype}:{extracted_text}')
+                return full_match
+
+            # Generate a unique identifier
+            unique_id = str(uuid.uuid4())
+
+            if p_type == 'Block':
+
+                # Find all positions of the extracted text in the original text
+                positions = find_substring_positions(
+                    self.original_text, extracted_text)
+
+                if not positions:
+                    warnings.warn(
+                        f"No match found for the extracted text: '{extracted_text}' in the original text.")
+                    position, start_index, end_index = None, None, None
+
+                elif len(positions) > 1:
+                    warnings.warn(
+                        f"Multiple matches found for the extracted text: '{extracted_text}' in the original text. Using the first match.")
+                    start_index, end_index = positions[0]
+                else:
+                    start_index, end_index = positions[0]
+
+                if start_index is not None and end_index is not None:
+                    start_line = self.original_text.count(
+                        '\n', 0, start_index) + 1
+                    end_line = self.original_text.count('\n', 0, end_index) + 1
+                    # Tuple containing start and end lines
+                    position = (start_line, end_line)
+
+            # Dynamically instantiate the class based on p_subtype or fall back to OrcaDefaultBlock
+            class_name = p_subtype  # Directly use p_subtype as class name
+            if class_name in self.available_types:
+                if p_type == "Block":
+                    # Create an instance of the class, block have position parameter
+                    element_instance = self.available_types[class_name](
+                        extracted_text, position=position)
+                else:
+                    # Create an instance of the class, block have position parameter
+                    element_instance = self.available_types[class_name](
+                        extracted_text)
+
+            else:
+                if p_type == "Block":
+                    # Fall back to OrcaDefaultBlock and raise a warning
+                    warnings.warn(
+                        f"Subtype '{p_subtype}' not recognized. Falling back to OrcaBlock."
+                    )
+                    element_instance = OrcaBlock(
+                        extracted_text, position=position)
+                else:
+                    # Handle other types or raise a generic warning
+                    warnings.warn(
+                        f"Subtype '{p_subtype}' not recognized and type '{p_type}' does not have a default."
+                    )
+                    element_instance = None
+
+            if element_instance:
+                # Store the instance or raw text with the unique ID
+                self._blocks[unique_id] = element_instance
+
+                # Replace the extracted text within the full match with the marker
+                text_with_markers = full_match.replace(
+                    extracted_text, f"<@%{p_type}|{p_subtype}|{unique_id}%@>"
+                )
+
+            else:
+                text_with_markers = full_match
+
+            return text_with_markers
 
         for regex in self.regex_settings.regexes:
             pattern = regex["pattern"]
@@ -51,110 +145,8 @@ class OrcaFile:
             for flag_name in flag_names:
                 flags |= getattr(re, flag_name)
             compiled_pattern = re.compile(pattern, flags)
-            self._pattern_metadata[compiled_pattern.pattern] = (
-                p_type, p_subtype)
             self._marked_text = compiled_pattern.sub(
-                self._replace_with_marker, self._marked_text)
-
-    def _replace_with_marker(self, match):
-        if not isinstance(self._pattern_metadata, dict):
-            raise ValueError(
-                "Pattern metadata was accessed before initialization. Do not touch internal methods")
-        if not isinstance(self._marked_text, str):
-            raise ValueError(
-                "Marked text was accessed before initialization. Do not touch internal methods")
-
-        def find_substring_positions(text, substring):
-            # method to search for the block position in the original text
-            positions = [(m.start(), m.end())
-                         for m in re.finditer(re.escape(substring), text)]
-            return positions
-        # The entire matched text
-        full_match = match.group(0)
-
-        # The specific part you want to replace (previously match.group(1))
-        extracted_text = match.group(1)
-
-        # Retrieve pattern type and subtype using the full pattern string
-        pattern_str = match.re.pattern
-        p_type, p_subtype = self._pattern_metadata[pattern_str]
-
-        # print(f'{p_subtype = }')
-        if p_subtype == "OrcaBlockUnrecognizedWithBody":
-            pass
-            # print(full_match)
-
-        if '<@%' in extracted_text or '%@>' in extracted_text:
-            warnings.warn(
-                f'Attempt to replace the marker in {p_type, p_subtype}:{extracted_text}')
-            return full_match
-
-        # Generate a unique identifier
-        unique_id = str(uuid.uuid4())
-
-        if p_type == 'Block':
-
-            # Find all positions of the extracted text in the original text
-            positions = find_substring_positions(
-                self.original_text, extracted_text)
-
-            if not positions:
-                warnings.warn(
-                    f"No match found for the extracted text: '{extracted_text}' in the original text.")
-                position, start_index, end_index = None, None, None
-
-            elif len(positions) > 1:
-                warnings.warn(
-                    f"Multiple matches found for the extracted text: '{extracted_text}' in the original text. Using the first match.")
-                start_index, end_index = positions[0]
-            else:
-                start_index, end_index = positions[0]
-
-            if start_index is not None and end_index is not None:
-                start_line = self.original_text.count('\n', 0, start_index) + 1
-                end_line = self.original_text.count('\n', 0, end_index) + 1
-                # Tuple containing start and end lines
-                position = (start_line, end_line)
-
-        # Dynamically instantiate the class based on p_subtype or fall back to OrcaDefaultBlock
-        class_name = p_subtype  # Directly use p_subtype as class name
-        if class_name in self.available_types:
-            if p_type == "Block":
-                # Create an instance of the class, block have position parameter
-                element_instance = self.available_types[class_name](
-                    extracted_text, position=position)
-            else:
-                # Create an instance of the class, block have position parameter
-                element_instance = self.available_types[class_name](
-                    extracted_text)
-
-        else:
-            if p_type == "Block":
-                # Fall back to OrcaDefaultBlock and raise a warning
-                warnings.warn(
-                    f"Subtype '{p_subtype}' not recognized. Falling back to OrcaBlock."
-                )
-                element_instance = OrcaBlock(extracted_text, position=position)
-            else:
-                # Handle other types or raise a generic warning
-                warnings.warn(
-                    f"Subtype '{p_subtype}' not recognized and type '{p_type}' does not have a default."
-                )
-                element_instance = None
-
-        if element_instance:
-            # Store the instance or raw text with the unique ID
-            self.blocks[unique_id] = element_instance
-
-            # Replace the extracted text within the full match with the marker
-            text_with_markers = full_match.replace(
-                extracted_text, f"<@%{p_type}|{p_subtype}|{unique_id}%@>"
-            )
-
-        else:
-            text_with_markers = full_match
-
-        return text_with_markers
+                replace_with_marker, self._marked_text)
 
     def get_data(self):
         def extract_data_errors_to_none(orca_element: OrcaElement):
@@ -165,7 +157,7 @@ class OrcaFile:
                     f"An unexpected error occurred while extracting data from {orca_element}: {e}, returning None instead of data.\n Raw context of the element is {orca_element.raw_data}")
                 return None
 
-        return {id: extract_data_errors_to_none(block) for id, block in self.blocks.items()}
+        return {id: extract_data_errors_to_none(block) for id, block in self._blocks.items()}
 
     def get_data_by_type(self, element_type: type[OrcaBlock]):
         def extract_data_errors_to_none(orca_element: OrcaElement):
@@ -176,7 +168,7 @@ class OrcaFile:
                     f"An unexpected error occurred while extracting data from {orca_element}: {e}, returning None instead of data.\n Raw context of the element is {orca_element.raw_data}")
                 return None
 
-        return {id: extract_data_errors_to_none(block) for id, block in self.blocks.items() if isinstance(block, element_type)}
+        return {id: extract_data_errors_to_none(block) for id, block in self._blocks.items() if isinstance(block, element_type)}
 
     # Simple CSS for styling
     default_css_content = """
@@ -445,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
             # Extract pattern type, subtype, and unique ID from the marker
             p_type, p_subtype, unique_id = match.groups()
             # Retrieve the corresponding OrcaElement
-            element = self.blocks.get(unique_id)
+            element = self._blocks.get(unique_id)
 
             if element:
                 # Convert the OrcaElement to HTML
