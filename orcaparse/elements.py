@@ -32,12 +32,13 @@ class Element:
 
     def data(self) -> Data:
         warnings.warn(
-            f"No procedure for analyzing the data found in {self.p_type} {self.p_subtype}, returning the raw data: {self.raw_data}"
+            f"No procedure for analyzing the data found in type `{self.p_type}` subtype `{self.p_subtype}`, returning the raw data: {self.raw_data}"
         )
         return Data(data={'raw data': self.raw_data}, comment="No procedure for analyzing the data found, `raw data` collected.\nPlease contribute to the project if you have knowledge on how to extract data from it.")
 
     def to_html(self) -> str:
-        class_name = f"{self.p_type.lower().replace(' ', '-')}-{self.p_subtype.lower().replace(' ', '-')}"
+        class_name = f"{self.p_type.lower().replace(
+            ' ', '-')}-{self.p_subtype.lower().replace(' ', '-')}"
         data = self.raw_data
         return f'<div class="{class_name}" data-p-type="{self.p_type}" data-p-subtype="{self.p_subtype}"><pre>{data}</pre></div>'
 
@@ -73,12 +74,6 @@ class Spacer(Element):
     def data(self) -> None:
         return None
 
-    def to_html(self) -> str:
-        class_name = f"{self.p_type.lower().replace(' ', '-')}-{self.p_subtype.lower().replace(' ', '-')}"
-        data = self.raw_data.replace('\n', '<br>')+'<br>'
-        return f'<div class="{class_name}" data-p-type="{self.p_type}" data-p-subtype="{self.p_subtype}">{data}</div>'
-
-
 class Block(Element):
     p_type: str = 'block'
     data_available: bool = False
@@ -100,15 +95,19 @@ class Block(Element):
 
     def to_html(self) -> str:
         readable_name, header, body = self.extract_name_header_and_body()
-        class_name = f"{self.p_type.lower().replace(' ', '-')}-{self.p_subtype.lower().replace(' ', '-')}"
+        class_name = f"{self.p_type.lower().replace(
+            ' ', '-')}-{self.p_subtype.lower().replace(' ', '-')}"
         header_level = max(7-self.depth(), 1)
-        header_html = f'<h{header_level}><pre>{self.header_preformat(header)}</pre></h{header_level}>' if header else ''
-        body_html = f'<div class = data><pre>{self.body_preformat(body)}</pre></div>' if body else ''
+        header_html = f'<h{header_level}><pre>{self.header_preformat(
+            header)}</pre></h{header_level}>' if header else ''
+        body_html = f'<div class = data><pre>{
+            self.body_preformat(body)}</pre></div>' if body else ''
         line_start, line_finish = self.position or (-1, -1)
         can_extract_data = 1 if self.data_available else 0
         return (f'<div class="{class_name}" data-p-type="{self.p_type}" '
                 f'data-p-subtype="{self.p_subtype}" readable-name="{readable_name}" '
-                f'start-line={line_start} finish-line={line_finish} data_available={can_extract_data}>'
+                f'start-line={line_start} finish-line={line_finish} '
+                f'data_available={can_extract_data}>'
                 f'{header_html+body_html}</div>')
 
 
@@ -157,7 +156,7 @@ class BlockUnrecognizedWithHeader(Block):
 
             if len(readable_name) < 2:
                 warnings.warn(
-                    f'No readable name found in the header:{header_raw}')
+                    f'No readable name found in the header: {header_raw}')
                 readable_name = Element.process_invalid_name(self.raw_data)
 
             return readable_name, header_raw, body_raw
@@ -173,7 +172,7 @@ class BlockUnrecognizedFormat(Block):
 
     def data(self):
         warnings.warn(
-            f'The extraction method for {self.p_subtype} block is not yet established, furthermore, the block looks not structured. Please contribute to the project if you have knowledge on how to extract data from it.')
+            f'The extraction method for `{self.p_subtype}` block is not yet established, furthermore, the block looks not structured. Please contribute to the project if you have knowledge on how to extract data from it.')
         return self.raw_data
 
 

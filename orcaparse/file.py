@@ -197,14 +197,14 @@ class File:
                 if p_type == "Block":
                     # Fall back to OrcaDefaultBlock and raise a warning
                     warnings.warn(
-                        f"Subtype '{p_subtype}' not recognized. Falling back to OrcaBlock."
+                        f"Subtype `{p_subtype}` not recognized. Falling back to OrcaBlock."
                     )
                     element_instance = Block(
                         extracted_text, position=position)
                 else:
                     # Handle other types or raise a generic warning
                     warnings.warn(
-                        f"Subtype '{p_subtype}' not recognized and type '{p_type}' does not have a default."
+                        f"Subtype `{p_subtype}` not recognized and type `{p_type}` does not have a default."
                     )
                     element_instance = None
 
