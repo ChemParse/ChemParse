@@ -1,4 +1,4 @@
-from orcaparse.orca_regex_settings import RegexSettings
+from orcaparse.regex_settings import RegexSettings
 
 
 def test_regex_settings():

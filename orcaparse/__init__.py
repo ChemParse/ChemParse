@@ -1,2 +1,2 @@
-from .parse import *
-from .orca_file import OrcaFile
+from .data import Data
+from .file import File
