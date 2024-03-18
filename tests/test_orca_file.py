@@ -68,11 +68,11 @@ def test_orca_marked_text(orca_output_file):
 
 
 @pytest.mark.parametrize("orca_output_file", [f for f in os.listdir("tests/orca_test_outputs") if not os.path.isdir(os.path.join("tests", "orca_test_outputs", f))])
-def test_orca_raw_data_collection(orca_output_file):
+def test_orca_raw_data_extraction(orca_output_file):
     file_path = os.path.join("tests", "orca_test_outputs", orca_output_file)
 
     orca_file = op.File(file_path)
-    data = orca_file.get_raw_data()
+    data = orca_file.get_data(extract_raw=True)
 
     assert isinstance(
         data, pd.DataFrame), f"Expected data to be a pandas DataFrame, but got {type(data)}"
@@ -86,7 +86,7 @@ def test_orca_raw_data_collection(orca_output_file):
 
 
 @pytest.mark.parametrize("orca_output_file", [f for f in os.listdir("tests/orca_test_outputs") if not os.path.isdir(os.path.join("tests", "orca_test_outputs", f))])
-def test_orca_data_collection(orca_output_file):
+def test_orca_data_extraction(orca_output_file):
     file_path = os.path.join("tests", "orca_test_outputs", orca_output_file)
 
     orca_file = op.File(file_path)

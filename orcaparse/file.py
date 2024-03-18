@@ -11,11 +11,6 @@ from .elements import Block, Element
 from .regex_settings import RegexSettings
 
 
-class Data:
-    def __init__(self, data) -> None:
-        self.data = data
-
-
 class File:
     # Load default settings for all instances of OrcaFile.
     default_regex_settings: RegexSettings = RegexSettings()
@@ -246,84 +241,6 @@ class File:
             self._marked_text = compiled_pattern.sub(
                 replace_with_marker, self._marked_text)
 
-    def search_elements_by_type(self, element_type: type[Element]) -> pd.DataFrame:
-        """
-        Searches for OrcaElement instances by their type.
-
-        This method filters the elements based on the specified type and returns a new DataFrame containing
-        only the elements that are instances of the specified type.
-
-        Parameters:
-            element_type (type[OrcaElement]): The class type of the OrcaElement to search for.
-
-        Returns:
-            pd.DataFrame: A new DataFrame containing the filtered OrcaElements.
-        """
-        self.initialize()
-
-        # Create a copy of the _blocks DataFrame to avoid modifying the original.
-        blocks_copy = self._blocks.copy()
-
-        # Filter the DataFrame for rows where the 'Element' column instances are of the specified type.
-        filtered_blocks = blocks_copy[blocks_copy['Element'].apply(
-            lambda x: isinstance(x, element_type))]
-
-        return filtered_blocks
-
-    def search_elements_by_readable_name(self, search_term: str) -> pd.DataFrame:
-        """
-        Searches for OrcaElement instances by their readable_name.
-
-        This method filters the elements based on the exact match of the readable_name attribute and returns
-        a new DataFrame containing only the elements that match the search term.
-
-        Parameters:
-            search_term (str): The exact term to search for in the readable_name attribute of each OrcaElement.
-
-        Returns:
-            pd.DataFrame: A new DataFrame containing the filtered OrcaElements.
-        """
-        self.initialize()
-
-        # Create a copy of the _blocks DataFrame to avoid modifying the original.
-        blocks_copy = self._blocks.copy()
-
-        blocks_copy['ReadableName'] = blocks_copy['Element'].apply(
-            lambda x: x.readable_name)
-
-        # Filter the DataFrame copy to include only those rows where the ReadableName column matches the search term exactly.
-        filtered_blocks = blocks_copy[blocks_copy['ReadableName']
-                                      == search_term]
-
-        return filtered_blocks
-
-    def search_elements_by_raw_data(self, substring: str) -> pd.DataFrame:
-        """
-        Searches for OrcaElement instances based on a substring of their raw_data.
-
-        This method filters the elements based on the presence of the specified substring within the raw_data attribute
-        and returns a new DataFrame containing only the elements that contain the substring.
-
-        Parameters:
-            substring (str): The substring to search for within the raw_data of each OrcaElement.
-
-        Returns:
-            pd.DataFrame: A new DataFrame containing the filtered OrcaElements.
-        """
-        self.initialize()
-
-        # Create a copy of the _blocks DataFrame to avoid modifying the original.
-        blocks_copy = self._blocks.copy()
-
-        # Use the DataFrame's apply method on the 'Element' column to check if the substring is in the raw_data of each element.
-        matches = blocks_copy['Element'].apply(
-            lambda x: substring in x.raw_data)
-
-        # Filter the DataFrame copy using the boolean Series to get only the rows where the condition is True.
-        filtered_blocks = blocks_copy[matches]
-
-        return filtered_blocks
-
     @staticmethod
     def extract_raw_data_errors_to_none(orca_element: Element) -> str | None:
         """
@@ -370,240 +287,66 @@ class File:
                 f"An unexpected error occurred while extracting data from {orca_element}: {e}, returning None instead of data.\n Raw context of the element is {orca_element.raw_data}")
             return None
 
-    def _extract_raw_data_with_errors_handled(self, df: pd.DataFrame) -> pd.DataFrame:
+    def search_elements(self, element_type: type[Element] = None, readable_name: str = None, raw_data_substring: str = None) -> pd.DataFrame:
         """
-        Processes and extracts data from OrcaElement instances within a DataFrame, handling any errors gracefully.
-
-        This method iterates over each OrcaElement in the 'Element' column of the provided DataFrame. It attempts
-        to extract data from each element using the element's raw_data . If an error occurs during this process,
-        a warning is issued, and None is returned for that element's extracted data. This approach ensures that a
-        single problematic element does not halt the entire data extraction process for all elements.
+        Searches for OrcaElement instances based on various criteria.
 
         Parameters:
-            df (pd.DataFrame): A DataFrame containing OrcaElement instances in its 'Element' column. This DataFrame
-            is expected to be a copy or a subset of the main _blocks DataFrame of the OrcaFile instance, tailored
-            to specific needs such as filtering by type or attributes.
+            element_type (type[Element], optional): The class type of the OrcaElement to search for.
+            readable_name (str, optional): The exact term to search for in the readable_name attribute.
+            raw_data_substring (str, optional): The substring to search for within the raw_data attribute.
 
         Returns:
-            pd.DataFrame: The same DataFrame passed as input, but with an additional column named 'ExtractedData'.
-            This column contains the data extracted from each OrcaElement. In cases where data extraction was
-            unsuccessful, the corresponding entry in the 'ExtractedData' column will be None.
-
-        Note:
-            The method ensures the OrcaFile instance is initialized by calling `self.initialize()` before proceeding
-            with data extraction. This is crucial to ensure that all necessary preprocessing has been completed.
-        """
-
-        self.initialize()
-        df['ExtractedData'] = df['Element'].apply(
-            self.extract_raw_data_errors_to_none)
-
-        return df
-
-    def _extract_data_with_errors_handled(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Processes and extracts data from OrcaElement instances within a DataFrame, handling any errors gracefully.
-
-        This method iterates over each OrcaElement in the 'Element' column of the provided DataFrame. It attempts
-        to extract data from each element using the element's `data()` method. If an error occurs during this process,
-        a warning is issued, and None is returned for that element's extracted data. This approach ensures that a
-        single problematic element does not halt the entire data extraction process for all elements.
-
-        Parameters:
-            df (pd.DataFrame): A DataFrame containing OrcaElement instances in its 'Element' column. This DataFrame
-            is expected to be a copy or a subset of the main _blocks DataFrame of the OrcaFile instance, tailored
-            to specific needs such as filtering by type or attributes.
-
-        Returns:
-            pd.DataFrame: The same DataFrame passed as input, but with an additional column named 'ExtractedData'.
-            This column contains the data extracted from each OrcaElement. In cases where data extraction was
-            unsuccessful, the corresponding entry in the 'ExtractedData' column will be None.
-
-        Note:
-            The method ensures the OrcaFile instance is initialized by calling `self.initialize()` before proceeding
-            with data extraction. This is crucial to ensure that all necessary preprocessing has been completed.
-        """
-
-        self.initialize()
-        # df['ExtractedData'] = pd.Series([extract_data_errors_to_none(
-        #     element) for element in df['Element']], dtype='object')
-        df['ExtractedData'] = df['Element'].apply(
-            self.extract_data_errors_to_none)
-
-        return df
-
-    def get_raw_data(self) -> pd.DataFrame:
-        """
-        Retrieves raw data strings from all elements within the file, focusing on data integrity and error resilience.
-
-        The method encompasses the following steps:
-        1. Invokes self.initialize() to ensure the file instance is adequately prepared for raw data retrieval, which includes processing necessary patterns and populating the internal DataFrame with element instances.
-        2. Operates on a copy of the internal DataFrame to prevent any changes to the original data, thus maintaining its integrity throughout the process.
-        3. Employs self._extract_raw_data_with_errors_handled on the duplicated DataFrame to extract raw data strings from each element. This procedure is designed to handle any extraction errors with grace, issuing warnings for troubled elements and continuing the extraction process uninterrupted.
-        4. Constructs and returns a new DataFrame that houses the raw data strings for each element, potentially along with additional metadata gleaned during the extraction phase. This DataFrame provides a clear and comprehensive view of the raw data within the file.
-
-        Returns:
-            pd.DataFrame: A new DataFrame containing raw data strings for each element, supplemented with any relevant metadata. Entries for elements from which raw data could not be retrieved will be marked as None, ensuring the dataset's completeness and clarity.
+            pd.DataFrame: A DataFrame containing the filtered OrcaElements based on the provided criteria.
         """
         self.initialize()
-        return self._extract_raw_data_with_errors_handled(self._blocks.copy())
+        blocks_copy = self._blocks.copy()
 
-    def get_data(self) -> pd.DataFrame:
+        if element_type is not None:
+            blocks_copy = blocks_copy[blocks_copy['Element'].apply(
+                lambda x: isinstance(x, element_type))]
+
+        if readable_name is not None:
+            blocks_copy['ReadableName'] = blocks_copy['Element'].apply(
+                lambda x: x.readable_name)
+            blocks_copy = blocks_copy[blocks_copy['ReadableName']
+                                      == readable_name]
+
+        if raw_data_substring is not None:
+            matches = blocks_copy['Element'].apply(
+                lambda x: raw_data_substring in x.raw_data)
+            blocks_copy = blocks_copy[matches]
+
+        return blocks_copy
+
+    def get_data(self, extract_raw: bool = False, element_type: type[Element] = None, readable_name: str = None, raw_data_substring: str = None) -> pd.DataFrame:
         """
-        Retrieves and processes data from all elements within the file, ensuring data integrity and robust error handling.
+        Retrieves and extracts data or raw data strings from OrcaElement instances based on specified search criteria and extraction type.
 
-        The method executes several critical steps:
-        1. Initializes the file instance via self.initialize(), setting up the necessary environment for data handling by preparing patterns and populating the internal DataFrame with element instances.
-        2. Works on a duplicate of the internal DataFrame to safeguard the original data against any inadvertent modifications during processing, thus preserving data integrity.
-        3. Utilizes self._extract_data_with_errors_handled on the cloned DataFrame to methodically extract data from each element. This function is designed to gracefully manage any extraction errors by issuing warnings and returning None for the affected elements, thereby ensuring continuity in data processing.
-        4. Compiles and returns a DataFrame comprising extracted data for each element, augmented with additional metadata as processed by the extraction function. This resulting DataFrame serves as a comprehensive aggregation of the processed data.
-
-        Returns:
-            pd.DataFrame: A compilation of extracted data from each element within the file, enhanced with relevant metadata. Entries corresponding to elements from which data could not be extracted will contain None, ensuring clarity and completeness of the processed data.
-        """
-        self.initialize()
-        return self._extract_data_with_errors_handled(self._blocks.copy())
-
-    def get_raw_data_by_type(self, element_type: type[Element]) -> pd.DataFrame:
-        """
-        Filters OrcaElement instances by their type and extracts raw data strings from the matching elements.
-
-        This method operates in two main steps:
-        1. It first utilizes the `search_elements_by_type` method to filter out the elements that are instances
-        of the specified type. Only elements that are exactly of the provided `element_type` or are derived from it
-        will be considered a match.
-        2. After obtaining a DataFrame of filtered elements, it then extracts raw data strings from these elements using the
-        `_extract_raw_data_with_errors_handled` method. This step ensures that raw data is extracted in a robust manner,
-        with any errors encountered during the extraction process being handled gracefully. Specifically, if an
-        error occurs while extracting raw data from an element (due to unexpected data formats, missing information,
-        or any other issue), a warning is issued, and None is returned for that element's raw data. This approach ensures
-        that the presence of problematic elements does not prevent the extraction of raw data from other, non-problematic elements.
+        This method first searches for OrcaElement instances based on the provided search criteria, which can include the element's type, readable name, or a substring of its raw data. After filtering the elements, it extracts either raw data strings or processed data from them, depending on the 'extract_raw' flag.
 
         Parameters:
-            element_type (type[Element]): The type of OrcaElement to search for. Elements that are instances of this type
-                                        or are derived from this type will be included in the raw data extraction process.
+            extract_raw (bool, optional): Determines the type of data to extract. If True, raw data strings are extracted. If False, processed data is extracted. Defaults to False.
+            element_type (type[Element], optional): The class type of the OrcaElements to filter by. Only elements that are instances of this type or derived from it will be included. Defaults to None, which skips this filter.
+            readable_name (str, optional): The exact name to match against the 'readable_name' attribute of OrcaElements. Only elements with a matching readable name are included. Defaults to None, which skips this filter.
+            raw_data_substring (str, optional): A substring to search for within the 'raw_data' attribute of OrcaElements. Only elements whose raw data contains this substring are included. Defaults to None, which skips this filter.
 
         Returns:
-            pd.DataFrame: A DataFrame containing the extracted raw data strings from the filtered OrcaElements. Each row corresponds
-                        to one of the filtered elements, and there is an 'ExtractedRawData' column that contains the raw data string
-                        extracted from each element. If raw data extraction was unsuccessful for any element (due to errors),
-                        the corresponding entry in the 'ExtractedRawData' column will be None.
-
+            pd.DataFrame: A DataFrame containing the extracted data or raw data strings from the filtered OrcaElements. The DataFrame includes an 'ExtractedData' column with the extracted information. If no elements match the search criteria, an empty DataFrame is returned.
         """
-        filtered_blocks = self.search_elements_by_type(element_type)
-        return self._extract_raw_data_with_errors_handled(filtered_blocks)
+        blocks = self.search_elements(element_type=element_type,
+                                      readable_name=readable_name, raw_data_substring=raw_data_substring)
+        if extract_raw:
+            # Implement the logic to extract raw data from blocks
+            extracted_data = blocks['Element'].apply(
+                lambda x: self.extract_raw_data_errors_to_none(x))
+        else:
+            # Implement the logic to extract processed data from blocks
+            extracted_data = blocks['Element'].apply(
+                lambda x: self.extract_data_errors_to_none(x))
 
-    def get_data_by_type(self, element_type: type[Element]) -> pd.DataFrame:
-        """
-        Filters OrcaElement instances by their type and extracts data from the matching elements.
-
-        This method operates in two main steps:
-        1. It first utilizes the `search_elements_by_type` method to filter out the elements that are instances
-        of the specified type. Only elements that are exactly of the provided `element_type` or are derived from it
-        will be considered a match.
-        2. After obtaining a DataFrame of filtered elements, it then extracts data from these elements using the
-        `_extract_data_with_errors_handled` method. This step ensures that data is extracted in a robust manner,
-        with any errors encountered during the extraction process being handled gracefully. Specifically, if an
-        error occurs while extracting data from an element (due to unexpected data formats, missing information,
-        or any other issue), a warning is issued, and None is returned for that element's data. This approach ensures
-        that the presence of problematic elements does not prevent the extraction of data from other, non-problematic elements.
-
-        Parameters:
-            element_type (type[Element]): The type of OrcaElement to search for. Elements that are instances of this type
-                                        or are derived from this type will be included in the data extraction process.
-
-        Returns:
-            pd.DataFrame: A DataFrame containing the extracted data from the filtered OrcaElements. Each row corresponds
-                        to one of the filtered elements, and there is an 'ExtractedData' column that contains the data
-                        extracted from each element in orcaparse.Data format. If data extraction was unsuccessful for any element (due to errors),
-                        the corresponding entry in the 'ExtractedData' column will be None.
-
-        """
-        filtered_blocks = self.search_elements_by_type(element_type)
-        return self._extract_data_with_errors_handled(filtered_blocks)
-
-    def get_raw_data_by_readable_name(self, search_term: str) -> pd.DataFrame:
-        """
-        Retrieves raw data strings for OrcaElement instances based on their readable_name.
-
-        This method filters elements by matching their readable_name attribute with the provided search term and extracts raw data strings from these elements, preserving the original _blocks DataFrame integrity.
-
-        Parameters:
-            search_term (str): The exact term to match against the readable_name attribute of each OrcaElement.
-
-        Returns:
-            pd.DataFrame: A DataFrame containing the raw data strings from the filtered OrcaElements. If no elements match the search term, an empty DataFrame is returned.
-        """
-        # Filter _blocks by readable_name.
-        filtered_blocks = self.search_elements_by_readable_name(search_term)
-
-        # Extract raw data strings from the filtered elements.
-        return self._extract_raw_data_with_errors_handled(filtered_blocks)
-
-    def get_data_by_readable_name(self, search_term: str) -> pd.DataFrame:
-        """
-        Retrieves data for OrcaElement instances by their readable_name.
-
-        This method filters elements based on their readable_name and extracts data from the matching elements,
-        without altering the original _blocks DataFrame.
-
-        Parameters:
-            search_term (str): The exact term to search for in the readable_name attribute of each OrcaElement.
-
-        Returns:
-            pd.DataFrame: A DataFrame containing the extracted data from the filtered OrcaElements. If no elements are found, returns an empty DataFrame.
-        """
-        # Use the search method to get a filtered copy of _blocks.
-        filtered_blocks = self.search_elements_by_readable_name(search_term)
-
-        # Extract data from the filtered elements.
-        return self._extract_data_with_errors_handled(filtered_blocks)
-
-    def get_raw_data_by_raw_data(self, substring: str) -> pd.DataFrame:
-        """
-        Retrieves raw data strings from OrcaElement instances by searching for a specified substring within their raw data.
-
-        This method involves two main steps:
-        1. Utilizing the `search_elements_by_raw_data` method to identify elements whose raw data includes the specified substring, without requiring exact matches. Any element containing the substring within its raw data is considered a match.
-        2. Extracting raw data strings from these filtered elements using the `_extract_raw_data_with_errors_handled` method. This process is designed to ensure robust data extraction, with graceful handling of any extraction errors. If an issue arises during the extraction from an element (e.g., due to unexpected data formats or missing information), a warning is issued, and None is returned for that element's raw data, allowing for uninterrupted extraction from other elements.
-
-        Parameters:
-            substring (str): The substring to search within the raw data of each OrcaElement. Elements with raw data containing this substring are included in the extraction process.
-
-        Returns:
-            pd.DataFrame: A DataFrame containing the raw data strings from the filtered OrcaElements. Each row corresponds to an element, with a column for the raw data strings. In cases where raw data extraction was unsuccessful (due to errors), the respective entry will be None.
-        """
-        filtered_blocks = self.search_elements_by_raw_data(substring)
-        return self._extract_raw_data_with_errors_handled(filtered_blocks)
-
-    def get_data_by_raw_data(self, substring: str) -> pd.DataFrame:
-        """
-        Filters OrcaElement instances by a specified substring in their raw data and extracts data from the matching elements.
-
-        This method operates in two main steps:
-        1. It first utilizes the `search_elements_by_raw_data` method to filter out the elements whose raw data
-        contains the specified substring. This search is not limited to exact matches; any element whose raw data
-        includes the substring anywhere within it will be considered a match.
-        2. After obtaining a DataFrame of filtered elements, it then extracts data from these elements using the
-        `_extract_data_with_errors_handled` method. This step ensures that data is extracted in a robust manner,
-        with any errors encountered during the extraction process being handled gracefully. Specifically, if an
-        error occurs while extracting data from an element (due to unexpected data formats, missing information,
-        or any other issue), a warning is issued, and None is returned for that element's data. This approach ensures
-        that the presence of problematic elements does not prevent the extraction of data from other, non-problematic elements.
-
-        Parameters:
-            substring (str): The substring to search for within the raw data of each OrcaElement. Elements whose raw data
-                            contains this substring will be included in the data extraction process.
-
-        Returns:
-            pd.DataFrame: A DataFrame containing the extracted data from the filtered OrcaElements. Each row corresponds
-                        to one of the filtered elements, and there is an 'ExtractedData' column that contains the data
-                        extracted from each element in orcaparse.Data format. If data extraction was unsuccessful for any element (due to errors),
-                        the corresponding entry in the 'ExtractedData' column will be None.
-
-        """
-        filtered_blocks = self.search_elements_by_raw_data(substring)
-        return self._extract_data_with_errors_handled(filtered_blocks)
+        blocks['ExtractedData'] = extracted_data
+        return blocks
 
     def create_html(self, css_content: str | None = None, js_content: str | None = None, insert_css: bool = True, insert_js: bool = True, insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True) -> str:
         """
