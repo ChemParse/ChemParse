@@ -37,8 +37,8 @@ class Element:
         return Data(data={'raw data': self.raw_data}, comment="No procedure for analyzing the data found, `raw data` collected.\nPlease contribute to the project if you have knowledge on how to extract data from it.")
 
     def to_html(self) -> str:
-        class_name = f"{self.p_type.lower().replace(
-            ' ', '-')}-{self.p_subtype.lower().replace(' ', '-')}"
+        class_name = (f"{self.p_type.lower().replace(' ', '-')}-"
+                      f"{self.p_subtype.lower().replace(' ', '-')}")
         data = self.raw_data
         return f'<div class="{class_name}" data-p-type="{self.p_type}" data-p-subtype="{self.p_subtype}"><pre>{data}</pre></div>'
 
@@ -74,6 +74,7 @@ class Spacer(Element):
     def data(self) -> None:
         return None
 
+
 class Block(Element):
     p_type: str = 'block'
     data_available: bool = False
@@ -95,13 +96,15 @@ class Block(Element):
 
     def to_html(self) -> str:
         readable_name, header, body = self.extract_name_header_and_body()
-        class_name = f"{self.p_type.lower().replace(
-            ' ', '-')}-{self.p_subtype.lower().replace(' ', '-')}"
+        class_name = (f"{self.p_type.lower().replace(' ', '-')}-"
+                      f"{self.p_subtype.lower().replace(' ', '-')}")
         header_level = max(7-self.depth(), 1)
-        header_html = f'<h{header_level}><pre>{self.header_preformat(
-            header)}</pre></h{header_level}>' if header else ''
-        body_html = f'<div class = data><pre>{
-            self.body_preformat(body)}</pre></div>' if body else ''
+        header_html = (f'<h{header_level}>'
+                       f'<pre>{self.header_preformat(header)}</pre>'
+                       f'</h{header_level}>') if header else ''
+        body_html = (f'<div class = data>'
+                     f'<pre>{self.body_preformat(body)}</pre>'
+                     f'</div>') if body else ''
         line_start, line_finish = self.position or (-1, -1)
         can_extract_data = 1 if self.data_available else 0
         return (f'<div class="{class_name}" data-p-type="{self.p_type}" '
