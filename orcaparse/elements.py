@@ -32,9 +32,12 @@ class Element:
 
     def data(self) -> Data:
         warnings.warn(
-            f"No procedure for analyzing the data found in type `{self.p_type}` subtype `{self.p_subtype}`, returning the raw data: {self.raw_data}"
+            (f"No procedure for analyzing the data found in type `{self.p_type}`"
+             f" subtype `{self.p_subtype}`, returning the raw data: {self.raw_data}")
         )
-        return Data(data={'raw data': self.raw_data}, comment="No procedure for analyzing the data found, `raw data` collected.\nPlease contribute to the project if you have knowledge on how to extract data from it.")
+        return Data(data={'raw data': self.raw_data},
+                    comment=("No procedure for analyzing the data found, `raw data` collected.\n"
+                             "Please contribute to the project if you have knowledge on how to extract data from it."))
 
     def to_html(self) -> str:
         class_name = (f"{self.p_type.lower().replace(' ', '-')}-"
