@@ -91,22 +91,23 @@ class Block(Element):
 
     @staticmethod
     def header_preformat(header_raw: str) -> str:
-        return header_raw
+        return f'<pre>{header_raw}</pre>'
 
     @staticmethod
     def body_preformat(body_raw: str) -> str:
-        return body_raw
+        return f'<pre>{body_raw}</pre>'
 
     def to_html(self) -> str:
         readable_name, header, body = self.extract_name_header_and_body()
         class_name = (f"{self.p_type.lower().replace(' ', '-')}-"
                       f"{self.p_subtype.lower().replace(' ', '-')}")
         header_level = max(7-self.depth(), 1)
-        header_html = (f'<h{header_level}>'
-                       f'<pre>{self.header_preformat(header)}</pre>'
-                       f'</h{header_level}>') if header else ''
-        body_html = (f'<div class = data>'
-                     f'<pre>{self.body_preformat(body)}</pre>'
+        header_html = (f'<div class="header"><h{header_level}>'
+                       f'{self.header_preformat(header)}'
+                       f'</h{header_level}></div>'
+                       f'<hr class="hr-in-block"></hr>') if header else ''
+        body_html = (f'<div class="data">'
+                     f'{self.body_preformat(body)}'
                      f'</div>') if body else ''
         line_start, line_finish = self.position or (-1, -1)
         can_extract_data = 1 if self.data_available else 0
@@ -114,7 +115,8 @@ class Block(Element):
                 f'data-p-subtype="{self.p_subtype}" readable-name="{readable_name}" '
                 f'start-line={line_start} finish-line={line_finish} '
                 f'data_available={can_extract_data}>'
-                f'{header_html+body_html}</div>')
+                f'{header_html+body_html}</div>'
+                f'<hr class = "hr-between-blocks"></hr>')
 
 
 class BlockUnrecognizedWithHeader(Block):

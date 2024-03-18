@@ -1,36 +1,43 @@
 :root {
     /* Color palette */
-    --body-bg-color: #f2f2f7; /* White background for the body */    
+    --body-bg-color: #f2f2f7;
 
-    --block-bg-color:  #ffffff;
-    --block-hover-bg-color: var(--body-bg-color); /* Light grey for block hover */
+    --block-bg-color: #ffffff;
 
-    --block-default-color: #121212; /* Dark grey for default block text */
-    --block-icon-color: #2264dc; /* Blue for icon blocks */
-    --block-unrecognized-color: #dd0063; /* Pink/red for unrecognized blocks */
-    
-    --header-bg-color: transparent; /* Slightly darker grey for headers */
+    --block-hover-bg-color: var(--body-bg-color);
 
-    --comment-available-color: #517ee7; /* Green for data available */
-    --comment-unavailable-color: #ffcc00; /* Yellow for raw data available */
-    --comment-error-color: #f96208; /* Red for unrecognized format */
+    --hr-bg-color: var(--body-bg-color);
+    --hr-hover-bg-color: var(--block-bg-color);
+
+    --block-default-color: #121212;
+    --block-icon-color: #2264dc;
+    --block-unrecognized-color: #dd0063;
+
+    --header-bg-color: transparent;
+
+    --comment-available-color: #517ee7;
+    --comment-unavailable-color: #ffcc00;
+    --comment-error-color: #f96208;
 
     --toc-header-color: #121212;
     --toc-entry-color: #121212;
     --toc-bg-color: #ffffff;
-    --toc-hover-bg-color: var(--body-bg-color); /* Light grey for TOC entry hover */
-    
-    --sidebar-bg-color: var(--body-bg-color); /* Light grey for sidebars */
-    --comment-sidebar-bg-color: var(--body-bg-color);
+    --toc-hover-bg-color: var(--body-bg-color);
+
+    --sidebar-bg-color: var(--body-bg-color);
+    --comment-sidebar-bg-color: var(--block-bg-color);
     --comment-sidebar-text-color: #757575;
 }
 
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    height: 100vh; /* Full viewport height */
-    margin: 0; /* Remove default margin */
-    overflow: hidden; /* Prevent scrolling on the body */
+    height: 100vh;
+    /* Full viewport height */
+    margin: 0;
+    /* Remove default margin */
+    overflow: hidden;
+    /* Prevent scrolling on the body */
     background-color: var(--body-bg-color);
 }
 
@@ -46,12 +53,14 @@ body {
 
 /* Main content area */
 .content {
-    flex-grow: 1; /* Take up remaining space */
+    flex-grow: 1;
+    /* Take up remaining space */
     padding: 10px 2px 10px 2px;
     /* Allow vertical scrolling and enable horizontal scrolling if needed */
     overflow-y: auto;
     overflow-x: auto;
-    height: 100vh; /* Full viewport height */
+    height: 100vh;
+    /* Full viewport height */
     /* Ensure the content's width expands as needed to fit its contents */
     min-width: 0;
 }
@@ -68,18 +77,22 @@ body {
 
 .content div[data-p-type^="block"] {
     display: block;
-    margin: 2px 0; /* Maintain vertical spacing between blocks */
-    padding: 0; /* Remove padding to allow header to align with block top */
-    background-color: var(--block-bg-color); /* No background color by default */
+    margin: 2px 0;
+    /* Maintain vertical spacing between blocks */
+    padding: 0;
+    /* Remove padding to allow header to align with block top */
+    background-color: var(--block-bg-color);
     border: none;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    transition: background-color 0.3s;
+    /* Smooth transition for hover effect */
     /* Prevent the block from having its own horizontal scrollbar */
     overflow-x: hidden;
 }
 
 /* On hover, only change the background color inside the padding area */
 .content div[data-p-type^="block"]:hover {
-    background-color: var(--block-hover-bg-color); /* Change background color on hover */
+    background-color: var(--block-hover-bg-color);
+    /* Change background color on hover */
 }
 
 /* Styling for headers within blocks */
@@ -92,24 +105,43 @@ body {
     font-family: Arial, sans-serif;
     font-size: 16px;
     font-weight: normal;
-    margin: 0; /* Remove all margins to align header with block top */
-    padding: 0; /* Add padding for the header content */
-    background-color: var(--header-bg-color); /* Different background color for headers */
+    margin: 0;
+    padding: 0;
+    background-color: var(--header-bg-color);
+    /* Different background color for headers */
     border: none;
-    width: 100%; /* Adjust width to account for padding */
+    width: 100%;
+    /* Adjust width to account for padding */
 }
 
-/* Optional: Add styling for preformatted text if you use <pre> within blocks */
-.content  div[data-p-type^="block"] pre {
+.content div[data-p-type^="block"] pre {
     border: none;
     padding: 10px;
     margin: 0;
     overflow-x: hidden;
 }
 
+.content div[data-p-type^="block"] .hr-in-block {
+    height: 2px;
+    border: none;
+    background-color: var(--hr-bg-color);
+}
+
+.content div[data-p-type^="block"]:hover .hr-in-block {
+    background-color: var(--hr-hover-bg-color);
+    /* Change hr background color on hover */
+}
+
+.content .hr-between-blocks {
+    height: 0;
+    border: none;
+    background-color: transparent;
+}
+
 /* Default block styling */
 .content .block-default.block-default {
-    color: var(--block-default-color); /* Darker text for better readability */
+    color: var(--block-default-color);
+    /* Darker text for better readability */
 }
 
 /* Specific styling for different block subtypes */
@@ -124,81 +156,112 @@ body {
 
 /* Left sidebar */
 .sidebar {
-    flex: 0 0 300px; /* Fixed width */
-    background-color: var(--sidebar-bg-color); /* Light grey background */
+    flex: 0 0 300px;
+    /* Fixed width */
+    background-color: var(--sidebar-bg-color);
+    /* Light grey background */
     padding: 0 20px 20px 0;
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
 }
 
 /* TOC specific styling */
 .sidebar .toc {
     background-color: var(--toc-bg-color);
-    list-style-type: none; /* Remove default list styling */
+    list-style-type: none;
+    /* Remove default list styling */
     padding: 0px;
 }
 
 .sidebar .toc h2 {
     color: var(--toc-header-color);
-    font-size: 20px; /* Set the size for the TOC title */
+    font-size: 20px;
+    /* Set the size for the TOC title */
     padding: 20px;
     margin: 0px;
 }
 
 .sidebar .toc .toc-entry {
     color: var(--toc-entry-color);
-    cursor: pointer; /* Change cursor to pointer to indicate clickable items */
-    padding: 8px 10px 8px 20px; /* Add some padding for better readability */
-    border: none; /* Optional: Add rounded corners for aesthetic purposes */
-    margin-bottom: 5px; /* Space between TOC entries */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    cursor: pointer;
+    /* Change cursor to pointer to indicate clickable items */
+    padding: 8px 10px 8px 20px;
+    /* Add some padding for better readability */
+    border: none;
+    /* Optional: Add rounded corners for aesthetic purposes */
+    margin-bottom: 5px;
+    /* Space between TOC entries */
+    transition: background-color 0.3s;
+    /* Smooth transition for hover effect */
 }
 
 .sidebar .toc .toc-entry:hover {
-    background-color: var(--toc-hover-bg-color); /* Light background color on hover for better interaction feedback */
+    background-color: var(--toc-hover-bg-color);
 }
 
 .sidebar .toc .toc-entry .color-block {
-    width: 10px; /* Width of the circle */
-    height: 10px; /* Height of the circle */
-    border-radius: 50%; /* Makes the element a circle */
-    margin-right: 5px; /* Space between the circle and the text */
+    width: 10px;
+    /* Width of the circle */
+    height: 10px;
+    /* Height of the circle */
+    border-radius: 50%;
+    /* Makes the element a circle */
+    margin-right: 5px;
+    /* Space between the circle and the text */
 }
 
 /* Left comment-sidebar for color-comment sections */
 .comment-sidebar {
-    flex: 0 0 auto; /* Adjust the width as needed for the content */
-    background-color: var(--comment-sidebar-bg-color); /* Matching background color */
-    position: relative; /* Positioning context for color-comment sections */
-    height: 100vh; /* Match the height of the main content area */
-    overflow: hidden; /* Hide overflow to maintain clean sidebar appearance */
-    padding-left: 5px; /* Provide some spacing from the left edge */
-    width: auto; /* Remove fixed width */
+    flex: 0 0 auto;
+    /* Adjust the width as needed for the content */
+    background-color: var(--comment-sidebar-bg-color);
+    /* Matching background color */
+    position: relative;
+    /* Positioning context for color-comment sections */
+    height: 100vh;
+    /* Match the height of the main content area */
+    overflow: hidden;
+    /* Hide overflow to maintain clean sidebar appearance */
+    padding-left: 5px;
+    /* Provide some spacing from the left edge */
+    width: auto;
+    /* Remove fixed width */
 }
 
 .comment-sidebar .comment-section {
-    display: flex; /* Use flex layout for horizontal alignment of color block and text */
-    position: absolute; /* Absolute positioning within comment-sidebar */
-    width: calc(100% - 5px); /* Adjust width considering padding */
+    display: flex;
+    /* Use flex layout for horizontal alignment of color block and text */
+    position: absolute;
+    /* Absolute positioning within comment-sidebar */
+    width: calc(100% - 5px);
+    /* Adjust width considering padding */
     /* Height and top properties will be set dynamically by JavaScript */
 }
 
 .comment-sidebar .comment-section .indicatorColorBlock {
-    width: 5px; /* Width of the color indicator block */
-    height: 100%; /* Full height of its container */
-    border-radius: 0; /* Set to 0 for square blocks, or 50% for circles */
-    background-color: inherit; /* Inherit color from JavaScript dynamically */
+    width: 5px;
+    /* Width of the color indicator block */
+    height: 100%;
+    /* Full height of its container */
+    border-radius: 0;
+    /* Set to 0 for square blocks, or 50% for circles */
+    background-color: inherit;
+    /* Inherit color from JavaScript dynamically */
 }
 
 .comment-sidebar .comment-section .text-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distributes space between top and bottom text */
-    height: 100%; /* Ensures it takes the full height of its container */
+    justify-content: space-between;
+    /* Distributes space between top and bottom text */
+    height: 100%;
+    /* Ensures it takes the full height of its container */
     margin: 0 2px 0 2px;
 }
 
 
-.comment-sidebar .comment-section .top-text, .bottom-text {
+.comment-sidebar .comment-section .top-text,
+.bottom-text {
     font-size: 10px;
     color: var(--comment-sidebar-text-color);
 }
