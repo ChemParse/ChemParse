@@ -9,7 +9,7 @@ class RegexSettings:
             # Get the directory of this file
             directory = os.path.dirname(__file__)
             # Construct the path to orca_regex.json
-            settings_file = os.path.join(directory, 'orca_regex.json')
+            settings_file = os.path.join(directory, 'regex.json')
         self.regexes = self.load_settings(settings_file)
 
     def load_settings(self, settings_file):

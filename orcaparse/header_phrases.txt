@@ -1,2 +1,0 @@
-Timings for individual modules:
-Scratch size is (after job, before scratch deletion):
