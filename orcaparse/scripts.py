@@ -91,13 +91,16 @@ def orca_parse():
     data = orca_file.get_data(
         extract_raw=True, readable_name=args.readable_name, raw_data_substring=args.raw_data_substring)[['Type', 'Subtype', 'Position', 'ExtractedData']]
 
+    # Sort the DataFrame by the 'Position' column
+    data_sorted = data.sort_values(by='Position')
+
     # Save the data in the chosen format
     if args.format == 'csv':
-        data.to_csv(args.output_file, index=False)
+        data_sorted.to_csv(args.output_file, index=False)
     elif args.format == 'json':
-        data.to_json(args.output_file, orient="records", lines=True)
+        data_sorted.to_json(args.output_file, orient="records", lines=True)
     elif args.format == 'html':
-        data.to_html(args.output_file, index=False)
+        data_sorted.to_html(args.output_file, index=False)
     elif args.format == 'excel':
         # Ensure you have the necessary dependencies installed for Excel output
-        data.to_excel(args.output_file, index=False)
+        data_sorted.to_excel(args.output_file, index=False)
