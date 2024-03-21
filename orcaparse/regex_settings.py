@@ -3,6 +3,8 @@ import json
 import os
 from typing import Dict, List, Optional, Union
 
+import warnings
+
 DEFAULT_REGEX_FILE = os.path.join(os.path.dirname(__file__), 'regex.json')
 
 
@@ -30,6 +32,20 @@ class RegexRequest:
             else:
                 raise ValueError(f"Warning: {flag_name} is not a valid flag.")
         return compiled_flags
+
+    def validate_configuration(self):
+        pass
+
+    def to_dict(self) -> Dict[str, Union[str, List[str]]]:
+        """Converts the RegexRequest instance to a dictionary."""
+        return {
+            "p_type": self.p_type,
+            "p_subtype": self.p_subtype,
+            "pattern": self.pattern,
+            # Note: You might want to convert flags back to their string representations
+            "flags": self.flags,
+            "comment": self.comment
+        }
 
     def __len__(self):
         return 1
@@ -64,11 +80,15 @@ class RegexSettings:
             raise ValueError(
                 f'items: {items}, order: {items}. One of them is None, while the other is not.')
 
+        self.validate_configuration()
+
     def add_item(self, name: str, item: Union[RegexRequest, 'RegexSettings']) -> None:
         self.items[name] = item
+        self.validate_configuration()
 
     def set_order(self, order: List[str]) -> None:
         self.order = order
+        self.validate_configuration()
 
     def get_ordered_items(self) -> List[Union[RegexRequest, 'RegexSettings']]:
         ordered_items = []
@@ -122,6 +142,8 @@ class RegexSettings:
                 self.items[name] = subgroup
                 self.order.append(name)
 
+        self.validate_configuration()
+
     def tree(self, depth: int = 0) -> str:
         result = "  " * depth + "RegexGroup:\n"
         for name in self.order:
@@ -132,6 +154,43 @@ class RegexSettings:
             else:
                 result += "  " * (depth + 1) + f"{name}: {item}\n"
         return result
+
+    def validate_configuration(self) -> None:
+        """
+        Validates the regex configuration to ensure consistency between 'order' and 'items'.
+        Also recursively validates the configuration of nested RegexSettings instances.
+
+        Raises:
+            ValueError: If an item in 'order' does not have a corresponding entry in 'items'.
+
+        Warns:
+            RuntimeWarning: If there are keys in 'items' not listed in 'order'.
+        """
+        # Check for items in 'order' that are not in 'items'
+        for name in self.order:
+            if name not in self.items:
+                raise ValueError(
+                    f"Error: Item '{name}' listed in 'order' but not found in 'items'.")
+
+        for name, item in self.items.items():
+            item.validate_configuration()
+            if name not in self.order:
+                warnings.warn(
+                    f"Warning: Item '{name}' found in 'items' but not listed in 'order'.", RuntimeWarning)
+
+    def to_dict(self) -> Dict[str, Union[Dict, List[str]]]:
+        """Converts the RegexSettings instance and its nested structure to a dictionary."""
+        result = {"order": self.order}
+        for name in self.order:
+            item = self.items[name]
+            result[name] = item.to_dict() if isinstance(
+                item, (RegexRequest, RegexSettings)) else item
+        return result
+
+    def save_as_json(self, filename: str) -> None:
+        """Saves the RegexSettings instance as a JSON file."""
+        with open(filename, 'w') as file:
+            json.dump(self.to_dict(), file, indent=4)
 
     def __repr__(self) -> str:
         return f"RegexGroup(Order: {self.order}, Items: {list(self.items.keys())})"
