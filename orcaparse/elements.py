@@ -78,6 +78,31 @@ class Spacer(Element):
         return None
 
 
+class AvailableBlocks:
+    # Dictionary to hold all available block types.
+    blocks: dict[str, type[Element]] = {}
+
+    @classmethod
+    def register_block(cls, block_cls: type[Element]) -> type[Element]:
+        """
+        Decorator to register a block type.
+
+        When a new subclass of Element is defined and this decorator is applied,
+        it will automatically be registered into the blocks dictionary.
+
+        Args:
+            block_cls: The class of the block to be registered.
+
+        Returns:
+            The same block class, allowing the decorator to be used without altering the class.
+        """
+        block_name = block_cls.__name__
+        if block_name in cls.blocks:
+            raise ValueError(f"Block type {block_name} is already defined.")
+        cls.blocks[block_name] = block_cls
+        return block_cls
+
+
 class Block(Element):
     p_type: str = 'block'
     data_available: bool = False
@@ -119,6 +144,7 @@ class Block(Element):
                 f'<hr class = "hr-between-blocks"></hr>')
 
 
+@AvailableBlocks.register_block
 class BlockUnrecognizedWithHeader(Block):
     p_subtype: str = 'unrecognized-with-header'
 
@@ -175,15 +201,19 @@ class BlockUnrecognizedWithHeader(Block):
             return Element.process_invalid_name(self.raw_data), None, self.raw_data
 
 
+@AvailableBlocks.register_block
 class BlockUnrecognizedFormat(Block):
     p_subtype: str = 'unrecognized-format'
 
     def data(self):
         warnings.warn(
-            f'The extraction method for `{self.p_subtype}` block is not yet established, furthermore, the block looks not structured. Please contribute to the project if you have knowledge on how to extract data from it.')
-        return self.raw_data
+            f'The block looks not structured. Please contribute to the project if you have knowledge on how to extract data from it.')
+        return Data(data={'raw data': self.raw_data},
+                    comment=("No procedure for analyzing the data found, furthermore, the block looks not structured `raw data` collected.\n"
+                             "Please contribute to the project if you have knowledge on how to extract data from it."))
 
 
+@AvailableBlocks.register_block
 class BlockIcon(Block):
     p_subtype: str = 'icon'
     readable_name = 'Icon'
@@ -196,12 +226,13 @@ class BlockIcon(Block):
         '''
         Icon is icon, noting to extract except for the ascii symbols
         '''
-        Data(data={'Icon': self.raw_data}, comment="Raw `Icon` string")
+        return Data(data={'Icon': self.raw_data}, comment="Raw `Icon` string")
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return 'Orca Icon', None, self.raw_data
 
 
+@AvailableBlocks.register_block
 class BlockAllRightsReserved(Block):
     p_subtype: str = 'all-rights-reserved'
 
@@ -209,6 +240,7 @@ class BlockAllRightsReserved(Block):
         return 'All Rights Reserved', None, self.raw_data
 
 
+@AvailableBlocks.register_block
 class BlockFinalSinglePointEnergy(Block):
     p_subtype: str = 'final-single-point-energy'
     data_available: bool = True
@@ -240,6 +272,7 @@ class BlockFinalSinglePointEnergy(Block):
             raise e
 
 
+@AvailableBlocks.register_block
 class BlockScfConverged(Block):
     p_subtype: str = 'scf-converged'
     data_available: bool = True

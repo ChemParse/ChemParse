@@ -7,28 +7,14 @@ import pandas as pd
 from typing_extensions import Self
 
 from .data import Data
-from .elements import Block, Element
-from .regex_settings import RegexSettings, DEFAULT_REGEX_FILE
+from .elements import AvailableBlocks, Block, Element, Spacer
+from .regex_settings import DEFAULT_REGEX_FILE, RegexSettings
 
 
 class File:
     # Load default settings for all instances of OrcaFile.
     default_regex_settings: RegexSettings = RegexSettings(
         settings_file=DEFAULT_REGEX_FILE)
-
-    # Collect all available subclasses of OrcaElement for dynamic instantiation.
-    available_types: Dict[str, Type[Element]] = {
-        cls.__name__: cls for cls in (
-            lambda f: (
-                lambda x: x(x)
-            )(
-                lambda y: f(lambda *args: y(y)(*args))
-            )
-        )(
-            lambda f: lambda cls: [
-                cls] + [sub for c in cls.__subclasses__() for sub in f(c)]
-        )(Element)
-    }
 
     def __init__(self, file_path: str, regex_settings: Optional[RegexSettings] = None) -> None:
         """
@@ -179,33 +165,34 @@ class File:
 
             # Dynamically instantiate the class based on p_subtype or fall back to OrcaDefaultBlock
             class_name = regex.p_subtype  # Directly use p_subtype as class name
-            if class_name in self.available_types:
+            if class_name in AvailableBlocks.blocks:
                 if regex.p_type == "Block":
                     # Create an instance of the class, block have position parameter
-                    element_instance = self.available_types[class_name](
+                    element_instance = AvailableBlocks.blocks[class_name](
                         extracted_text, position=position)
                 else:
                     # Create an instance of the class, block have position parameter
-                    element_instance = self.available_types[class_name](
+                    element_instance = AvailableBlocks.blocks[class_name](
                         extracted_text)
+            elif regex.p_type == "Spacer":
+                element_instance = Spacer(extracted_text)
+            elif regex.p_type == "Block":
+                # Fall back to OrcaDefaultBlock and raise a warning
+                warnings.warn(
+                    (f"Subtype `{regex.p_subtype}`"
+                        f" not recognized. Falling back to OrcaBlock.")
+                )
+                element_instance = Block(
+                    extracted_text, position=position)
 
             else:
-                if regex.p_type == "Block":
-                    # Fall back to OrcaDefaultBlock and raise a warning
-                    warnings.warn(
-                        (f"Subtype `{regex.p_subtype}`"
-                         f" not recognized. Falling back to OrcaBlock.")
-                    )
-                    element_instance = Block(
-                        extracted_text, position=position)
-                else:
-                    # Handle other types or raise a generic warning
-                    warnings.warn(
-                        (f"Subtype `{regex.p_subtype}`"
-                         f" not recognized and type `{regex.p_type}`"
-                         f" does not have a default.")
-                    )
-                    element_instance = None
+                # Handle other types or raise a generic warning
+                warnings.warn(
+                    (f"Subtype `{regex.p_subtype}`"
+                        f" not recognized and type `{regex.p_type}`"
+                        f" does not have a default.")
+                )
+                element_instance = None
 
             if element_instance:
                 unique_id = hash(element_instance)

@@ -4,8 +4,6 @@ import re
 import warnings
 from typing import Dict, List, Optional, Union
 
-from typing import List, Dict, Union
-import re
 DEFAULT_REGEX_FILE = os.path.join(os.path.dirname(__file__), 'regex.json')
 
 
