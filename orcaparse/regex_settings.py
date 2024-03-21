@@ -33,17 +33,31 @@ class RegexRequest:
                 raise ValueError(f"Warning: {flag_name} is not a valid flag.")
         return compiled_flags
 
+    def _decompile_flags(self) -> List[str]:
+        """Converts the integer flags back to a list of their string representations."""
+        valid_flags = {
+            "IGNORECASE": re.IGNORECASE,
+            "MULTILINE": re.MULTILINE,
+            "DOTALL": re.DOTALL,
+            "UNICODE": re.UNICODE,
+            "VERBOSE": re.VERBOSE
+        }
+        flag_names = []
+        for flag_str, flag_val in valid_flags.items():
+            if self.flags & flag_val:
+                flag_names.append(flag_str)
+        return flag_names
+
     def validate_configuration(self):
         pass
 
     def to_dict(self) -> Dict[str, Union[str, List[str]]]:
-        """Converts the RegexRequest instance to a dictionary."""
+        """Converts the RegexRequest instance to a dictionary, including string representations for flags."""
         return {
             "p_type": self.p_type,
             "p_subtype": self.p_subtype,
             "pattern": self.pattern,
-            # Note: You might want to convert flags back to their string representations
-            "flags": self.flags,
+            "flags": self._decompile_flags(),
             "comment": self.comment
         }
 
