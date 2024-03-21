@@ -1,90 +1,143 @@
+import re
 import json
 import os
-from typing import Optional
+from typing import Dict, List, Optional, Union
+
+DEFAULT_REGEX_FILE = os.path.join(os.path.dirname(__file__), 'regex.json')
+
+
+class RegexRequest:
+    def __init__(self, p_type: str, p_subtype: str, pattern: str, flags: list, comment: str = '') -> None:
+        self.p_type = p_type
+        self.p_subtype = p_subtype
+        self.pattern = pattern
+        self.comment = comment
+        self.flags = self._compile_flags(flags)
+
+    def _compile_flags(self, flag_names: List[str]) -> int:
+        compiled_flags = 0
+        valid_flags = {
+            "IGNORECASE": re.IGNORECASE,
+            "MULTILINE": re.MULTILINE,
+            "DOTALL": re.DOTALL,
+            "UNICODE": re.UNICODE,
+            "VERBOSE": re.VERBOSE
+        }
+        for flag_name in flag_names:
+            flag = valid_flags.get(flag_name.upper())
+            if flag is not None:
+                compiled_flags |= flag
+            else:
+                raise ValueError(f"Warning: {flag_name} is not a valid flag.")
+        return compiled_flags
+
+    def __len__(self):
+        return 1
+
+    def __repr__(self) -> str:
+        # Show a part of the pattern for brevity
+        pattern = self.pattern if len(
+            self.pattern) < 25 else self.pattern[:25] + '...'
+        # Show a part of the comment for brevity
+        comment = self.comment if len(
+            self.comment) < 25 else self.comment[:25] + '...'
+
+        return f"RegexRequest(p_type={self.p_type}, p_subtype={self.p_subtype}, pattern={pattern}, flags={self.flags}, comment={comment}"
 
 
 class RegexSettings:
-    """
-    A class to load and process regular expression settings from a configuration file.
-    """
-
-    def __init__(self, settings_file: Optional[str] = None) -> None:
-        """
-        Initializes the RegexSettings class by loading regex settings from a specified file.
-
-        :param settings_file: Optional; the file path of the regex settings JSON file.
-                              If not provided, it defaults to 'regex.json' in the current directory.
-        """
-        if settings_file is None:
-            # Get the directory of this file
-            directory = os.path.dirname(__file__)
-            # Construct the path to the default settings file
-            settings_file = os.path.join(directory, 'regex.json')
-        self.regexes = self._load_settings(settings_file)
-
-    def _load_settings(self, settings_file: str) -> dict[str, dict | list]:
-        """
-        Loads regex settings from a JSON file.
-
-        :param settings_file: The file path of the regex settings JSON file.
-        :return: A dictionary representing the loaded regex settings.
-        """
-        with open(settings_file, "r") as file:
-            return json.load(file)
-
-    def to_list(self) -> list[dict[str, str | list[str]]]:
-        """
-        Generates a list of regex patterns and their associated details from the settings.
-
-        :return: A list of dictionaries, each containing details of a regex pattern.
-        """
-        # Initialize an empty list to hold all regex pattern details
-        ordered_regexes: list[dict[str, str | list[str]]] = []
-
-        # Recursive function to walk through the nested structure
-        def walk_through_blocks(block_dict: dict[str, dict | list | str]) -> None:
-            """
-            Recursively processes blocks to extract regex patterns and their details.
-
-            :param block_dict: The current block of regex settings to process.
-            """
-            # Check if 'order' is a key in the current block
-            if 'order' in block_dict:
-                # Iterate over the order list
-                for item in block_dict['order']:
-                    # Recursively process the nested blocks
-                    walk_through_blocks(block_dict[item])
+    def __init__(self, settings_file: str = None, items=None, order=None) -> None:
+        if items is None and order is None:
+            if settings_file is not None:
+                # load from file
+                self.items = {}  # To hold both RegexRequest and RegexGroup objects
+                self.order = []  # To hold the order of processing for items
+                self.load_settings(settings_file)
             else:
-                # If there's no 'order', it means we're at a leaf node
-                if 'pattern' in block_dict:
-                    # Add the entire block (dictionary) to the list
-                    ordered_regexes.append(block_dict)
-
-        # Start the recursive walk from the root
-        walk_through_blocks(self.regexes)
-        return ordered_regexes
-
-    def tree(self, block_dict: Optional[dict[str, dict | list | str]] = None, depth: int = 0) -> str:
-        """
-        Generates a string representation of the regex settings in a tree-like structure.
-
-        :param block_dict: The current block of regex settings to process. Defaults to the root block.
-        :param depth: The current depth in the tree, used for indentation. Defaults to 0.
-        :return: A string representing the tree structure of the regex settings.
-        """
-        if block_dict is None:
-            block_dict = self.regexes
-            result = "Regex Settings Tree:\n"
+                # empty class
+                self.items = {}  # To hold both RegexRequest and RegexGroup objects
+                self.order = []  # To hold the order of processing for items
+        elif items is not None and order is not None:
+            self.items = items  # To hold both RegexRequest and RegexGroup objects
+            self.order = order  # To hold the order of processing for items
         else:
-            result = ""
+            raise ValueError(
+                f'items: {items}, order: {items}. One of them is None, while the other is not.')
 
-        # Check if 'order' is in the current block
-        if 'order' in block_dict:
-            for item in block_dict['order']:
-                # Add indentation based on the depth level
-                indentation = '    ' * depth
-                # Add the current item and a newline to the result
-                result += f"{indentation}{item}\n"
-                # Recursively call the function to process the nested blocks
-                result += self.tree(block_dict[item], depth + 1)
+    def add_item(self, name: str, item: Union[RegexRequest, 'RegexSettings']) -> None:
+        self.items[name] = item
+
+    def set_order(self, order: List[str]) -> None:
+        self.order = order
+
+    def get_ordered_items(self) -> List[Union[RegexRequest, 'RegexSettings']]:
+        ordered_items = []
+        for name in self.order:
+            item = self.items.get(name)
+            if item:
+                ordered_items.append(item)
+            else:
+                raise ValueError(f"No item found with name '{name}'")
+        return ordered_items
+
+    def to_list(self) -> List[Union[RegexRequest, 'RegexSettings']]:
+        ordered_items = []
+        for name in self.order:
+            if name not in self.items:
+                raise ValueError(
+                    f'{name} is not in items {list(self.items.keys())}')
+            item = self.items[name]
+            if isinstance(item, RegexRequest):
+                ordered_items.append(item)
+            elif isinstance(item, RegexSettings):
+                ordered_items.extend(item.to_list())
+            else:
+                raise TypeError(f'Unknown type of item {name}: {type(item)}')
+        return ordered_items
+
+    def load_settings(self, settings_file: str) -> None:
+        with open(settings_file, "r") as file:
+            settings = json.load(file)
+            self.parse_settings(settings)
+
+    def parse_settings(self, settings: Dict[str, Union[Dict, List, str]]) -> None:
+        # To hold both RegexRequest and RegexGroup objects
+        self.items: dict[str, RegexRequest | RegexSettings] = {}
+        self.order: list[str] = []  # To hold the order of processing for items
+        for name in settings['order']:
+            item_settings = settings[name]
+            if 'pattern' in item_settings:  # This is a RegexRequest
+                request = RegexRequest(
+                    p_type=item_settings.get('p_type'),
+                    p_subtype=item_settings.get('p_subtype'),
+                    pattern=item_settings['pattern'],
+                    flags=item_settings.get('flags', []),
+                    comment=item_settings.get('comment', '')
+                )
+                self.items[name] = request
+                self.order.append(name)
+            else:  # Nested RegexGroup
+                subgroup = RegexSettings()
+                subgroup.parse_settings(item_settings)
+                self.items[name] = subgroup
+                self.order.append(name)
+
+    def tree(self, depth: int = 0) -> str:
+        result = "  " * depth + "RegexGroup:\n"
+        for name in self.order:
+            item = self.items[name]
+            if isinstance(item, RegexSettings):
+                result += "  " * (depth + 1) + \
+                    f"{name}:\n" + item.tree(depth + 2)
+            else:
+                result += "  " * (depth + 1) + f"{name}: {item}\n"
         return result
+
+    def __repr__(self) -> str:
+        return f"RegexGroup(Order: {self.order}, Items: {list(self.items.keys())})"
+
+    def __len__(self) -> str:
+        return sum(len(item) for item in self.items.values())
+
+    def __str__(self) -> str:
+        return self.tree()

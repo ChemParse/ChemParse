@@ -1,9 +1,9 @@
-from orcaparse.regex_settings import RegexSettings
+from orcaparse.regex_settings import RegexSettings, DEFAULT_REGEX_FILE
 
 
 def test_regex_settings():
-    reg = RegexSettings()
+    rs = RegexSettings(settings_file=DEFAULT_REGEX_FILE)
 
     # Verify that `regexes` is not None or empty
-    assert reg.regexes is not None
-    assert len(reg.regexes) > 0
+    assert rs.get_ordered_items() is not None
+    assert len(rs) > 0
