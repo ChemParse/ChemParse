@@ -229,7 +229,7 @@ class File:
 
             return text_with_markers
 
-        for regex in self.regex_settings.regexes:
+        for regex in self.regex_settings.to_list():
             pattern = regex["pattern"]
             p_type = regex["p_type"]
             p_subtype = regex["p_subtype"]
