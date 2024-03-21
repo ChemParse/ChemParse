@@ -10,7 +10,7 @@
       "BlockIcon",
       "BlockShark",
       "BlockWarnings",
-      "PatternOneLineHeader",
+      "BlueprintOneLineHeader",
       "BlockOrbitalBasis",
       "BlockAuxJBasis",
       "BlockInputFile",
@@ -53,16 +53,7 @@
       ],
       "comment": "Starts with ===, then WARNINGS, then up to 3 non-special lines inside of header, then ===, then non-special lines, then one more non-special line, but \\n is outside of the main search bracket. Non-special line is defined by (?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*. Non-special line might be empty. <@% %@> is the internal marker for blocks."
     },
-    "BlockIntro": {
-      "p_type": "Block",
-      "p_subtype": "BlockIntro",
-      "pattern": "^([ \\t]*\\*{17}[ \\t]*$\\s*\\* O   R   C   A \\*[ \\t]*$\\s*\\*{17}[ \\t]*)$",
-      "flags": [
-        "MULTILINE"
-      ],
-      "comment": "This pattern is designed to match the introduction block of an ORCA output file. It looks for a sequence of 17 asterisks, possibly surrounded by spaces or tabs, followed by a line that spells O R C A with each letter separated by three spaces, each flanked by asterisks. The entire block is expected to be surrounded by newlines."
-    },
-    "PatternOneLineHeader": {
+    "BlueprintOneLineHeader": {
       "order": [
         "BlockVersion",
         "BlockContributions",
@@ -71,60 +62,22 @@
         "BlockLibXc",
         "BlockUses"
       ],
-      "BlockVersion": {
-        "p_type": "Block",
-        "p_subtype": "BlockVersion",
-        "pattern": "^([ \\t]*Program Version.*?\\n([ \\t]*\\S.*\\n)*[ \\t]*\\S.*)$",
+      "pattern_structure": {
+        "beginning": "^([ \\t]*",
+        "ending": ".*?\\n([ \\t]*\\S.*\\n)*[ \\t]*\\S.*)$",
         "flags": [
           "MULTILINE"
-        ],
-        "comment": "Standard pattern: Starts with, non-empty lines then one more non-empty line, but \\n is outside of the main search bracket"
+        ]
       },
-      "BlockContributions": {
-        "p_type": "Block",
-        "p_subtype": "BlockContributions",
-        "pattern": "^([ \\t]*With contributions from.*?\\n([ \\t]*\\S.*\\n)*[ \\t]*\\S.*)$",
-        "flags": [
-          "MULTILINE"
-        ],
-        "comment": "Standard pattern: Starts with, non-empty lines then one more non-empty line, but \\n is outside of the main search bracket"
+      "pattern_texts": {
+        "BlockVersion": "Program Version",
+        "BlockContributions": "With contributions from",
+        "BlockAcknowledgement": "We gratefully acknowledge",
+        "BlockLibint2": "Your calculation uses the libint2",
+        "BlockLibXc": "Your ORCA version has been built with support for libXC",
+        "BlockUses": "This ORCA versions uses"
       },
-      "BlockAcknowledgement": {
-        "p_type": "Block",
-        "p_subtype": "BlockAcknowledgement",
-        "pattern": "^([ \\t]*We gratefully acknowledge.*?\\n([ \\t]*\\S.*\\n)*[ \\t]*\\S.*)$",
-        "flags": [
-          "MULTILINE"
-        ],
-        "comment": "Standard pattern: Starts with, non-empty lines then one more non-empty line, but \\n is outside of the main search bracket"
-      },
-      "BlockLibint2": {
-        "p_type": "Block",
-        "p_subtype": "BlockLibint2",
-        "pattern": "^([ \\t]*Your calculation uses the libint2.*?\\n([ \\t]*\\S.*\\n)*[ \\t]*\\S.*)$",
-        "flags": [
-          "MULTILINE"
-        ],
-        "comment": "Standard pattern: Starts with, non-empty lines then one more non-empty line, but \\n is outside of the main search bracket"
-      },
-      "BlockLibXc": {
-        "p_type": "Block",
-        "p_subtype": "BlockLibXc",
-        "pattern": "^([ \\t]*Your ORCA version has been built with support for libXC.*?\\n([ \\t]*\\S.*\\n)*[ \\t]*\\S.*)$",
-        "flags": [
-          "MULTILINE"
-        ],
-        "comment": "Standard pattern: Starts with, non-empty lines then one more non-empty line, but \\n is outside of the main search bracket"
-      },
-      "BlockUses": {
-        "p_type": "Block",
-        "p_subtype": "BlockUses",
-        "pattern": "^([ \\t]*This ORCA versions uses.*?\\n([ \\t]*\\S.*\\n)*[ \\t]*\\S.*)$",
-        "flags": [
-          "MULTILINE"
-        ],
-        "comment": "Standard pattern: Starts with, non-empty lines then one more non-empty line, but \\n is outside of the main search bracket"
-      }
+      "comment": "Blueprint: Starts with specified text, followed by non-empty lines, then one more non-empty line, but \\n is outside of the main search bracket"
     },
     "BlockOrbitalBasis": {
       "p_type": "Block",

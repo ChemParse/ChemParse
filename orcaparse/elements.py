@@ -206,7 +206,7 @@ class BlockAllRightsReserved(Block):
     p_subtype: str = 'all-rights-reserved'
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
-        return 'Orca Icon', None, self.raw_data
+        return 'All Rights Reserved', None, self.raw_data
 
 
 class BlockFinalSinglePointEnergy(Block):

@@ -1,5 +1,7 @@
-from orcaparse.regex_settings import RegexSettings, DEFAULT_REGEX_FILE
 import pytest
+
+from orcaparse.regex_settings import (DEFAULT_REGEX_FILE, RegexBlueprint,
+                                      RegexRequest, RegexSettings)
 
 
 @pytest.fixture
@@ -43,8 +45,7 @@ def test_regex_settings_to_list_not_empty(regex_settings):
     items_list = regex_settings.to_list()
     assert items_list is not None
     assert len(items_list) > 0
-    from orcaparse.regex_settings import RegexRequest
-    assert all(isinstance(item, (RegexRequest, RegexSettings))
+    assert all(isinstance(item, RegexRequest)
                for item in items_list)
 
 
@@ -66,3 +67,63 @@ def test_regex_settings_save_as_json(tmp_path, regex_settings):
     regex_settings.save_as_json(str(file_path))
     assert file_path.exists()
     assert file_path.stat().st_size > 0
+
+
+@pytest.fixture
+def sample_blueprint():
+    order = ['TestBlock1', 'TestBlock2']
+    pattern_structure = {
+        'beginning': '^Test ',
+        'ending': ' end$',
+        'flags': ['MULTILINE']
+    }
+    pattern_texts = {
+        'TestBlock1': 'Content for Block1',
+        'TestBlock2': 'Content for Block2'
+    }
+    comment = 'Sample blueprint for testing'
+    return RegexBlueprint(order, pattern_structure, pattern_texts, comment)
+
+
+def test_regex_blueprint_to_list(sample_blueprint):
+    # Verify that the to_list method generates the expected list of RegexRequest objects
+    request_list = sample_blueprint.to_list()
+    assert len(request_list) == len(sample_blueprint.order)
+    for request, name in zip(request_list, sample_blueprint.order):
+        assert isinstance(request, RegexRequest)
+        assert request.p_subtype == name
+        assert request.comment == sample_blueprint.comment
+
+
+def test_regex_blueprint_validate_configuration(sample_blueprint):
+    # Verify that the configuration validation of blueprint passes without errors
+    try:
+        sample_blueprint.validate_configuration()
+    except ValueError as e:
+        pytest.fail(f"Blueprint configuration validation failed: {e}")
+
+
+def test_regex_blueprint_to_dict_structure(sample_blueprint):
+    # Verify the structure of the dictionary representation of a blueprint
+    blueprint_dict = sample_blueprint.to_dict()
+    assert 'order' in blueprint_dict
+    assert 'pattern_structure' in blueprint_dict
+    assert 'pattern_texts' in blueprint_dict
+    assert 'comment' in blueprint_dict
+    assert blueprint_dict['comment'] == sample_blueprint.comment
+    for name in blueprint_dict['order']:
+        assert name in blueprint_dict['pattern_texts']
+
+
+def test_regex_blueprint_length(sample_blueprint):
+    # Verify that the length of the blueprint corresponds to the number of items in 'order'
+    assert len(sample_blueprint) == len(sample_blueprint.order)
+
+
+def test_regex_blueprint_tree_structure(sample_blueprint):
+    # Verify the tree structure representation of a blueprint
+    tree_str = sample_blueprint.tree()
+    assert isinstance(tree_str, str)
+    assert "RegexBlueprint:" in tree_str
+    for name in sample_blueprint.order:
+        assert name in tree_str
