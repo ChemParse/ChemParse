@@ -1,32 +1,52 @@
-from .file import File
 import argparse
+import os
+from typing import Optional
+
+from .file import File
 
 
-def orca_to_html():
+def orca_to_html(input_file: str, output_file: str, insert_css: bool = True, insert_js: bool = True,
+                 insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True):
     """
-    Converts an ORCA output file to an HTML document, with options to include or exclude CSS, JavaScript, a left sidebar (TOC), and a color-comment sidebar.
+    Converts an ORCA output file to an HTML document, optionally including CSS, JavaScript, a left sidebar (TOC),
+    and a color-comment sidebar.
 
-    The script takes command-line arguments for the input ORCA file and the desired output HTML file path. Additional optional flags can be used to control the inclusion of CSS, JavaScript, and sidebar elements in the generated HTML.
+    Parameters:
+        input_file (str): Path to the input ORCA file.
+        output_file (str): Path where the HTML file will be saved.
+        insert_css (bool): Flag to include CSS in the HTML output. Included by default.
+        insert_js (bool): Flag to include JavaScript in the HTML output. Included by default.
+        insert_left_sidebar (bool): Flag to include a left sidebar (TOC) in the HTML output. Included by default.
+        insert_colorcomment_sidebar (bool): Flag to include a color-comment sidebar in the HTML output. Included by default.
 
-    Usage:
-        python script.py input_file output_file [--insert_css] [--insert_js] [--insert_left_sidebar] [--insert_colorcomment_sidebar]
-
-    Arguments:
-        input_file: Path to the input ORCA file.
-        output_file: Path where the HTML file will be saved.
-        --insert_css: Flag to include CSS in the HTML output (included by default, use --no-insert_css to exclude).
-        --insert_js: Flag to include JavaScript in the HTML output (included by default, use --no-insert_js to exclude).
-        --insert_left_sidebar: Flag to include a left sidebar (TOC) in the HTML output (included by default, use --no-insert_left_sidebar to exclude).
-        --insert_colorcomment_sidebar: Flag to include a color-comment sidebar in the HTML output (included by default, use --no-insert_colorcomment_sidebar to exclude).
+    This function does not return any value but outputs the converted HTML file to the specified output path.
     """
-    # Create a parser for the CLI arguments
+    # Assuming the existence of a `File` class and its `save_as_html` method as in the original script
+    orca_file = File(file_path=input_file)
+    orca_file.save_as_html(
+        output_file_path=output_file,
+        insert_css=insert_css,
+        insert_js=insert_js,
+        insert_left_sidebar=insert_left_sidebar,
+        insert_colorcomment_sidebar=insert_colorcomment_sidebar
+    )
+
+
+def orca_to_html_cli():
+    """
+    Parses command-line arguments to convert an ORCA output file to an HTML document with optional features.
+
+    This function is the entry point when using the script from the command line. It handles parsing the input and output file paths, as well as optional flags for including CSS, JavaScript, a left sidebar (TOC), and a color-comment sidebar in the generated HTML document.
+
+    The flags for optional features are set to include the features by default. Use '--no-' prefix to exclude a feature (e.g., --no-insert_css).
+    """
     parser = argparse.ArgumentParser(
         description="Convert an ORCA output file to an HTML document with optional features.")
 
-    # Define the CLI arguments
-    parser.add_argument("input_file", help="Path to the input ORCA file.")
-    parser.add_argument(
-        "output_file", help="Path where the HTML file will be saved.")
+    parser.add_argument("input_file", type=str,
+                        help="Path to the input ORCA file.")
+    parser.add_argument("output_file", type=str,
+                        help="Path where the HTML file will be saved.")
     parser.add_argument("--insert_css", action="store_false", default=True,
                         help="Exclude CSS from the HTML output. Included by default.")
     parser.add_argument("--insert_js", action="store_false", default=True,
@@ -36,71 +56,72 @@ def orca_to_html():
     parser.add_argument("--insert_colorcomment_sidebar", action="store_false", default=True,
                         help="Exclude a color-comment sidebar from the HTML output. Included by default.")
 
-    # Parse the CLI arguments
     args = parser.parse_args()
 
-    # Initialize the File object and call the save_as_html method
-    orca_file = File(file_path=args.input_file)
-    orca_file.save_as_html(
-        output_file_path=args.output_file,
-        insert_css=args.insert_css,
-        insert_js=args.insert_js,
-        insert_left_sidebar=args.insert_left_sidebar,
-        insert_colorcomment_sidebar=args.insert_colorcomment_sidebar
-    )
+    orca_to_html(input_file=args.input_file, output_file=args.output_file,
+                 insert_css=args.insert_css, insert_js=args.insert_js,
+                 insert_left_sidebar=args.insert_left_sidebar,
+                 insert_colorcomment_sidebar=args.insert_colorcomment_sidebar)
 
 
-def orca_parse():
+def orca_parse(input_file: str, output_file: str, file_format: str = 'auto', readable_name: Optional[str] = None,
+               raw_data_substrings: list[str] = []):
     """
-    Exports data from an ORCA output file to various formats based on specified criteria. The script supports exporting to CSV, JSON, HTML, and Excel formats.
+    Exports data from an ORCA output file to various formats based on specified filtering criteria.
 
-    The function allows filtering the ORCA elements by their readable name or a substring of their raw data. The extracted data can then be saved in one of the supported formats, with CSV being the default.
+    The function supports CSV, JSON, HTML, and Excel formats for output, with 'auto' format detection based on the output file extension. It also allows for filtering the ORCA elements by their readable name or substrings of their raw data.
 
-    Usage:
-        python script.py input_file output_file [--format csv|json|html|excel] [--readable_name NAME] [--raw_data_substring SUBSTRING]
+    Parameters:
+        input_file (str): Path to the input ORCA file.
+        output_file (str): Path where the output file will be saved.
+        file_format (str): Desired output format ('auto', 'csv', 'json', 'html', 'xlsx'). Defaults to 'auto'.
+        readable_name (Optional[str]): Filter elements by their readable name (None by default).
+        raw_data_substrings (list[str]): list of substrings to filter elements by their raw data ([] by default).
 
-    Arguments:
-        input_file: Path to the input ORCA file.
-        output_file: Path where the output file will be saved.
-        --format: Desired output format (csv, json, html, excel). Defaults to 'csv'.
-        --readable_name: Filter elements by their readable name (optional).
-        --raw_data_substring: Filter elements by a substring of their raw data (optional).
+    The function doesn't return any value but saves the extracted data to the specified output path in the chosen format.
     """
-    # Create a parser for the CLI arguments
-    parser = argparse.ArgumentParser(
-        description="Export the raw or processed data from an ORCA output file based on specified criteria.")
-
-    # Define the CLI arguments
-    parser.add_argument("input_file", help="Path to the input ORCA file.")
-    parser.add_argument(
-        "output_file", help="Path where the output file will be saved.")
-    parser.add_argument("-f", "--format", choices=['csv', 'json', 'html', 'excel'], default='csv',
-                        help="Output format (csv, json, html, excel). Default is csv.")
-    parser.add_argument("--readable_name", default=None,
-                        help="Filter elements by their readable name.")
-    parser.add_argument("--raw_data_substring", default=None,
-                        help="Filter elements by a substring of their raw data.")
-
-    # Parse the CLI arguments
-    args = parser.parse_args()
-
-    # Initialize the File object
-    orca_file = File(file_path=args.input_file)
-
-    # Get the data based on the specified criteria and extract_raw set to True
+    # Assuming the existence of a `File` class with a `get_data` method as indicated in the original script
+    orca_file = File(file_path=input_file)
     data = orca_file.get_data(
-        extract_raw=True, readable_name=args.readable_name, raw_data_substring=args.raw_data_substring)[['Type', 'Subtype', 'Position', 'ExtractedData']]
-
-    # Sort the DataFrame by the 'Position' column
+        extract_only_raw=True, readable_name=readable_name, raw_data_substring=raw_data_substrings).drop('Element', axis=1)
     data_sorted = data.sort_values(by='Position')
 
-    # Save the data in the chosen format
-    if args.format == 'csv':
-        data_sorted.to_csv(args.output_file, index=False)
-    elif args.format == 'json':
-        data_sorted.to_json(args.output_file, orient="records", lines=True)
-    elif args.format == 'html':
-        data_sorted.to_html(args.output_file, index=False)
-    elif args.format == 'excel':
-        # Ensure you have the necessary dependencies installed for Excel output
-        data_sorted.to_excel(args.output_file, index=False)
+    if file_format == 'auto':
+        file_format = os.path.splitext(output_file)[-1][1:]
+
+    if file_format == 'csv':
+        data_sorted.to_csv(output_file, index=False)
+    elif file_format == 'json':
+        data_sorted.to_json(output_file, orient="records", lines=True)
+    elif file_format == 'html':
+        data_sorted.to_html(output_file, index=False)
+    elif file_format == 'xlsx':
+        data_sorted.to_excel(output_file, index=False)
+
+
+def orca_parse_cli():
+    """
+    Parses command-line arguments to export data from an ORCA output file to specified formats based on filtering criteria.
+
+    The script supports exporting to CSV, JSON, HTML, and Excel formats, with the option to filter ORCA elements by their readable name or substrings of their raw data.
+
+    The function serves as the entry point when the script is executed from the command line, handling the parsing of input and output file paths, output format, and filtering options.
+    """
+    parser = argparse.ArgumentParser(
+        description="Export data from an ORCA output file to specified formats based on filtering criteria.")
+
+    parser.add_argument("input_file", type=str,
+                        help="Path to the input ORCA file.")
+    parser.add_argument("output_file", type=str,
+                        help="Path where the output file will be saved.")
+    parser.add_argument("-f", "--format", choices=['auto', 'csv', 'json', 'html', 'xlsx'], default='auto',
+                        help="Output format (csv, json, html, xlsx). Defaults to 'auto' for detection based on file extension.")
+    parser.add_argument("--readable_name", type=str, default=None,
+                        help="Filter elements by their readable name.")
+    parser.add_argument("--raw_data_substring", action='append', default=[],
+                        help="Filter elements by a substring of their raw data. Can be used multiple times.")
+
+    args = parser.parse_args()
+
+    orca_parse(input_file=args.input_file, output_file=args.output_file, file_format=args.format,
+               readable_name=args.readable_name, raw_data_substrings=args.raw_data_substring)
