@@ -1,0 +1,23 @@
+
+My start of the message: message1
+message2
+
+--------------------
+My data
+--------------------
+ 
+My value: 1.234 eV
+
+--------------------
+Another data
+--------------------
+ 
+My value: 9.876 eV
+
+-------------------------   --------------------
+FINAL SINGLE POINT ENERGY      -440.508559636589
+-------------------------   --------------------
+
+
+                             ****ORCA TERMINATED NORMALLY****
+TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec
