@@ -17,22 +17,6 @@ def is_html_valid(html):
         return False
 
 
-def test_orca_available_types():
-    # Retrieve the available types from the op.File class
-    # This should return a dictionary where keys are type names and values are descriptions or classes associated with these types
-    available_types = op.File.available_types
-
-    # Assert that available_types is an instance of a dictionary
-    # This checks that the structure used to store available types is indeed a dictionary, which is expected for mapping type names to their descriptions or classes
-    assert isinstance(
-        available_types, dict), "Expected available_types to be a dictionary"
-
-    # Assert that the dictionary is not empty
-    # This checks that there are actually types defined and available, ensuring the functionality related to type handling is implemented and not just an empty placeholder
-    assert len(
-        available_types) > 0, "Expected available_types to contain at least one type definition"
-
-
 @pytest.mark.parametrize("orca_output_file", [f for f in os.listdir("tests/orca_test_outputs") if not os.path.isdir(os.path.join("tests", "orca_test_outputs", f))])
 def test_orca_blocks(orca_output_file):
     file_path = os.path.join("tests", "orca_test_outputs", orca_output_file)

@@ -7,27 +7,14 @@ import pandas as pd
 from typing_extensions import Self
 
 from .data import Data
-from .elements import Block, Element
-from .regex_settings import RegexSettings
+from .elements import AvailableBlocks, Block, Element, Spacer
+from .regex_settings import DEFAULT_REGEX_FILE, RegexSettings
 
 
 class File:
     # Load default settings for all instances of OrcaFile.
-    default_regex_settings: RegexSettings = RegexSettings()
-
-    # Collect all available subclasses of OrcaElement for dynamic instantiation.
-    available_types: Dict[str, Type[Element]] = {
-        cls.__name__: cls for cls in (
-            lambda f: (
-                lambda x: x(x)
-            )(
-                lambda y: f(lambda *args: y(y)(*args))
-            )
-        )(
-            lambda f: lambda cls: [
-                cls] + [sub for c in cls.__subclasses__() for sub in f(c)]
-        )(Element)
-    }
+    default_regex_settings: RegexSettings = RegexSettings(
+        settings_file=DEFAULT_REGEX_FILE)
 
     def __init__(self, file_path: str, regex_settings: Optional[RegexSettings] = None) -> None:
         """
@@ -148,10 +135,10 @@ class File:
 
             if '<@%' in extracted_text or '%@>' in extracted_text:
                 warnings.warn(
-                    f'Attempt to replace the marker in {p_type, p_subtype}:{extracted_text}')
+                    f'Attempt to replace the marker in {regex.p_type, regex.p_subtype}:{extracted_text}')
                 return full_match
 
-            if p_type == 'Block':
+            if regex.p_type == 'Block':
 
                 # Find all positions of the extracted text in the original text
                 positions = find_substring_positions(
@@ -177,43 +164,44 @@ class File:
                     position = (start_line, end_line)
 
             # Dynamically instantiate the class based on p_subtype or fall back to OrcaDefaultBlock
-            class_name = p_subtype  # Directly use p_subtype as class name
-            if class_name in self.available_types:
-                if p_type == "Block":
+            class_name = regex.p_subtype  # Directly use p_subtype as class name
+            if class_name in AvailableBlocks.blocks:
+                if regex.p_type == "Block":
                     # Create an instance of the class, block have position parameter
-                    element_instance = self.available_types[class_name](
+                    element_instance = AvailableBlocks.blocks[class_name](
                         extracted_text, position=position)
                 else:
                     # Create an instance of the class, block have position parameter
-                    element_instance = self.available_types[class_name](
+                    element_instance = AvailableBlocks.blocks[class_name](
                         extracted_text)
+            elif regex.p_type == "Spacer":
+                element_instance = Spacer(extracted_text)
+            elif regex.p_type == "Block":
+                # Fall back to OrcaDefaultBlock and raise a warning
+                warnings.warn(
+                    (f"Subtype `{regex.p_subtype}`"
+                        f" not recognized. Falling back to OrcaBlock.")
+                )
+                element_instance = Block(
+                    extracted_text, position=position)
 
             else:
-                if p_type == "Block":
-                    # Fall back to OrcaDefaultBlock and raise a warning
-                    warnings.warn(
-                        (f"Subtype `{p_subtype}`"
-                         f" not recognized. Falling back to OrcaBlock.")
-                    )
-                    element_instance = Block(
-                        extracted_text, position=position)
-                else:
-                    # Handle other types or raise a generic warning
-                    warnings.warn(
-                        (f"Subtype `{p_subtype}`"
-                         f" not recognized and type `{p_type}`"
-                         f" does not have a default.")
-                    )
-                    element_instance = None
+                # Handle other types or raise a generic warning
+                warnings.warn(
+                    (f"Subtype `{regex.p_subtype}`"
+                        f" not recognized and type `{regex.p_type}`"
+                        f" does not have a default.")
+                )
+                element_instance = None
 
             if element_instance:
                 unique_id = hash(element_instance)
                 # Create a DataFrame for the new row
                 new_row_df = pd.DataFrame({
-                    'Type': [p_type],
-                    'Subtype': [p_subtype],
+                    'Type': [regex.p_type],
+                    'Subtype': [regex.p_subtype],
                     'Element': [element_instance],
-                    'Position': [position] if p_type == "Block" else [None]
+                    'Position': [position] if regex.p_type == "Block" else [None]
                 }, index=[unique_id])  # Set the index to the unique ID
 
                 # Concatenate the new row DataFrame with the existing DataFrame
@@ -221,7 +209,8 @@ class File:
 
                 # Replace the extracted text within the full match with the marker
                 text_with_markers = full_match.replace(
-                    extracted_text, f"<@%{p_type}|{p_subtype}|{unique_id}%@>"
+                    extracted_text,
+                    f"<@%{regex.p_type}|{regex.p_subtype}|{unique_id}%@>"
                 )
 
             else:
@@ -229,15 +218,8 @@ class File:
 
             return text_with_markers
 
-        for regex in self.regex_settings.regexes:
-            pattern = regex["pattern"]
-            p_type = regex["p_type"]
-            p_subtype = regex["p_subtype"]
-            flag_names = regex["flags"]
-            flags = 0
-            for flag_name in flag_names:
-                flags |= getattr(re, flag_name)
-            compiled_pattern = re.compile(pattern, flags)
+        for regex in self.regex_settings.to_list():
+            compiled_pattern = re.compile(regex.pattern, regex.flags)
             self._marked_text = compiled_pattern.sub(
                 replace_with_marker, self._marked_text)
 
@@ -452,7 +434,7 @@ class File:
         html_content += "<html lang=\"en\">\n<head>\n"
         html_content += "    <meta charset=\"UTF-8\">\n"
         html_content += "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-        html_content += "    <title>Document</title>\n"
+        html_content += "    <title>ORCA</title>\n"
 
         if insert_css:
             html_content += "    <style>\n        " + \
