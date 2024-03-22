@@ -56,7 +56,7 @@ def test_orca_raw_data_extraction(orca_output_file):
     file_path = os.path.join("tests", "orca_test_outputs", orca_output_file)
 
     orca_file = op.File(file_path)
-    data = orca_file.get_data(extract_raw=True)
+    data = orca_file.get_data(extract_only_raw=True)
 
     assert isinstance(
         data, pd.DataFrame), f"Expected data to be a pandas DataFrame, but got {type(data)}"
@@ -67,6 +67,8 @@ def test_orca_raw_data_extraction(orca_output_file):
     # Assert that the DataFrame contains more than just column names (at least one row of data)
     assert len(
         data.index) > 0, "Expected data DataFrame to have at least one row of data"
+
+    assert 'RawData' in data.columns, "Expected `RawData` column"
 
 
 @pytest.mark.parametrize("orca_output_file", [f for f in os.listdir("tests/orca_test_outputs") if not os.path.isdir(os.path.join("tests", "orca_test_outputs", f))])
@@ -85,6 +87,9 @@ def test_orca_data_extraction(orca_output_file):
     # Assert that the DataFrame contains more than just column names (at least one row of data)
     assert len(
         data.index) > 0, "Expected data DataFrame to have at least one row of data"
+
+    assert 'RawData' in data.columns, "Expected `RawData` column"
+    assert 'ExtractedData' in data.columns, "Expected `ExtractedData` column"
 
 
 @pytest.mark.parametrize("orca_output_file", [f for f in os.listdir("tests/orca_test_outputs") if not os.path.isdir(os.path.join("tests", "orca_test_outputs", f))])

@@ -200,5 +200,5 @@ class Data:
             str: A string summarizing the OrcaData contents and comment.
         """
         data_summary = ', '.join(
-            f'{key}: {len(self.data[key])} items' for key in self.data)
+            f'`{key}`' for key in self.data)
         return f'OrcaData with items: {data_summary}. Comment: {self.comment}'

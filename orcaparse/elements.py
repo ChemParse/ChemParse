@@ -24,6 +24,9 @@ class Element:
     def __init__(self, raw_data: str) -> None:
         self.raw_data = raw_data
 
+    def readable_name(self):
+        return None
+
     def get_structure(self) -> dict[Self, tuple | None]:
         '''
             Structure in a form of nested list
@@ -113,6 +116,15 @@ class Block(Element):
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return Element.process_invalid_name(self.raw_data), None, self.raw_data
+
+    def readable_name(self) -> str:
+        return self.extract_name_header_and_body()[0]
+
+    def header(self) -> str | None:
+        return self.extract_name_header_and_body()[1]
+
+    def body(self) -> str:
+        return self.extract_name_header_and_body()[2]
 
     @staticmethod
     def header_preformat(header_raw: str) -> str:
@@ -221,8 +233,10 @@ class BlockUnrecognizedFormat(Block):
 @AvailableBlocks.register_block
 class BlockIcon(Block):
     p_subtype: str = 'icon'
-    readable_name = 'Icon'
     data_available: bool = True
+
+    def readable_name(self) -> str:
+        return 'Icon'
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return 'Orca Icon', None, self.raw_data

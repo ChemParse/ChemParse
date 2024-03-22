@@ -4,7 +4,7 @@ import warnings
 from typing import Dict, Optional, Type
 
 import pandas as pd
-from typing_extensions import Self
+from typing_extensions import Self, Iterable
 
 from .data import Data
 from .elements import AvailableBlocks, Block, Element, Spacer
@@ -269,7 +269,7 @@ class File:
                 f"An unexpected error occurred while extracting data from {orca_element}: {e}, returning None instead of data.\n Raw context of the element is {orca_element.raw_data}")
             return None
 
-    def search_elements(self, element_type: type[Element] = None, readable_name: str = None, raw_data_substring: str = None) -> pd.DataFrame:
+    def search_elements(self, element_type: type[Element] | None = None, readable_name: str | None = None, raw_data_substring: str | Iterable[str] | None = None) -> pd.DataFrame:
         """
         Searches for OrcaElement instances based on various criteria.
 
@@ -283,32 +283,44 @@ class File:
         """
         self.initialize()
         blocks_copy = self._blocks.copy()
+        blocks_copy['ReadableName'] = blocks_copy['Element'].apply(
+            lambda x: x.readable_name())
+        blocks_copy['RawData'] = blocks_copy['Element'].apply(
+            lambda x: self.extract_raw_data_errors_to_none(x))
 
         if element_type is not None:
             blocks_copy = blocks_copy[blocks_copy['Element'].apply(
                 lambda x: isinstance(x, element_type))]
 
         if readable_name is not None:
-            blocks_copy['ReadableName'] = blocks_copy['Element'].apply(
-                lambda x: x.readable_name)
+
             blocks_copy = blocks_copy[blocks_copy['ReadableName']
                                       == readable_name]
 
         if raw_data_substring is not None:
-            matches = blocks_copy['Element'].apply(
-                lambda x: raw_data_substring in x.raw_data)
+            def contains_all_substrings(x_raw_data, substrings):
+                # If substrings is a string, convert it to a list for uniformity
+                if isinstance(substrings, str):
+                    substrings = [substrings]
+
+                # Check if all elements in substrings are in x_raw_data
+                return all(substring in x_raw_data for substring in substrings)
+
+            # Filter rows where all substrings are present in the RawData
+            matches = blocks_copy['RawData'].apply(
+                lambda x: contains_all_substrings(x, raw_data_substring))
             blocks_copy = blocks_copy[matches]
 
         return blocks_copy
 
-    def get_data(self, extract_raw: bool = False, element_type: type[Element] = None, readable_name: str = None, raw_data_substring: str = None) -> pd.DataFrame:
+    def get_data(self, extract_only_raw: bool = False, element_type: type[Element] = None, readable_name: str = None, raw_data_substring: str = None) -> pd.DataFrame:
         """
         Retrieves and extracts data or raw data strings from OrcaElement instances based on specified search criteria and extraction type.
 
         This method first searches for OrcaElement instances based on the provided search criteria, which can include the element's type, readable name, or a substring of its raw data. After filtering the elements, it extracts either raw data strings or processed data from them, depending on the 'extract_raw' flag.
 
         Parameters:
-            extract_raw (bool, optional): Determines the type of data to extract. If True, raw data strings are extracted. If False, processed data is extracted. Defaults to False.
+            extract_ony_raw (bool, optional): Determines if `ExtractedData` will be additionally created. If True, it will not. Raw data is stored in `RawData`. Defaults to False.
             element_type (type[Element], optional): The class type of the OrcaElements to filter by. Only elements that are instances of this type or derived from it will be included. Defaults to None, which skips this filter.
             readable_name (str, optional): The exact name to match against the 'readable_name' attribute of OrcaElements. Only elements with a matching readable name are included. Defaults to None, which skips this filter.
             raw_data_substring (str, optional): A substring to search for within the 'raw_data' attribute of OrcaElements. Only elements whose raw data contains this substring are included. Defaults to None, which skips this filter.
@@ -318,16 +330,11 @@ class File:
         """
         blocks = self.search_elements(element_type=element_type,
                                       readable_name=readable_name, raw_data_substring=raw_data_substring)
-        if extract_raw:
-            # Implement the logic to extract raw data from blocks
-            extracted_data = blocks['Element'].apply(
-                lambda x: self.extract_raw_data_errors_to_none(x))
-        else:
+        if not extract_only_raw:
             # Implement the logic to extract processed data from blocks
             extracted_data = blocks['Element'].apply(
                 lambda x: self.extract_data_errors_to_none(x))
-
-        blocks['ExtractedData'] = extracted_data
+            blocks['ExtractedData'] = extracted_data
         return blocks
 
     def create_html(self, css_content: str | None = None, js_content: str | None = None, insert_css: bool = True, insert_js: bool = True, insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True) -> str:
