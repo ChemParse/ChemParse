@@ -33,7 +33,7 @@ class Element:
     def data(self) -> Data:
         warnings.warn(
             (f"No procedure for analyzing the data found in type `{self.p_type}`"
-             f" subtype `{self.p_subtype}`, returning the raw data: {self.raw_data}")
+             f" subtype `{self.p_subtype}`, returning the raw data:\n{self.raw_data}")
         )
         return Data(data={'raw data': self.raw_data},
                     comment=("No procedure for analyzing the data found, `raw data` collected.\n"
@@ -196,7 +196,7 @@ class BlockWithStandardHeader(Block):
             return readable_name, header_raw, body_raw
         else:
             warnings.warn(
-                f'No header found in {self.raw_data}, and that is really weird as it was extracted based on the idea that there is a header in it')
+                f'No header found in\n{self.raw_data}\n, and that is really weird as it was extracted based on the idea that there is a header in it')
             # If no match is found, put everything into header
             return Element.process_invalid_name(self.raw_data), None, self.raw_data
 
