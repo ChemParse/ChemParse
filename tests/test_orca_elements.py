@@ -11,7 +11,8 @@ test_data = pd.read_csv("tests/extraction_sample.csv")
 @pytest.mark.parametrize("subtype, raw_data", test_data.values)
 def test_blocks(subtype, raw_data):
     # Ensure the subtype exists in AvailableBlocks
-    assert subtype in AvailableBlocks.blocks, f"{subtype} is not a registered block type."
+    assert (subtype in AvailableBlocks.blocks,
+            f"{subtype} is not a registered block type.")
 
     # Instantiate the block using the corresponding class from AvailableBlocks
     block_class = AvailableBlocks.blocks[subtype]

@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
     - '**.py'
+  push:
+    paths:
+      - '**.py'
 
 jobs:
   autopep8-check:

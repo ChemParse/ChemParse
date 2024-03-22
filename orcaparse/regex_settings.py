@@ -144,7 +144,8 @@ class RegexBlueprint:
         regex_requests = []
         for name in self.order:
             text = self.pattern_texts[name]
-            pattern = f"{self.pattern_structure['beginning']}{text}{self.pattern_structure['ending']}"
+            pattern = (f"{self.pattern_structure['beginning']}"
+                       f"{text}{self.pattern_structure['ending']}")
             regex_request = RegexRequest(
                 p_type="Block",
                 p_subtype=name,
@@ -262,7 +263,8 @@ class RegexBlueprint:
         result = "  " * depth + "RegexBlueprint:\n"
         for name in self.order:
             text = self.pattern_texts.get(name, '')
-            pattern = f"{self.pattern_structure['beginning']}{text}{self.pattern_structure['ending']}"
+            pattern = (f"{self.pattern_structure['beginning']}"
+                       f"{text}{self.pattern_structure['ending']}")
             result += "  " * (depth + 1) + f"{name}: Pattern: {pattern}\n"
         return result
 
