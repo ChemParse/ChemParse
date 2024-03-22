@@ -145,8 +145,8 @@ class Block(Element):
 
 
 @AvailableBlocks.register_block
-class BlockUnrecognizedWithHeader(Block):
-    p_subtype: str = 'unrecognized-with-header'
+class BlockWithStandardHeader(Block):
+    p_subtype: str = 'default-with-header'
 
     def __init__(self, raw_data: str, position: tuple | None = None) -> None:
         super().__init__(raw_data=raw_data, position=position)
@@ -160,11 +160,11 @@ class BlockUnrecognizedWithHeader(Block):
 
         if match:
             # Header is the content between the first and second header delimiters
-            header_raw = match.group(1)
 
             # Body is the content after the second header delimiter
             # The end of the header delimiter is marked by the start of the body_raw
             body_start = match.end(1)
+            header_raw = self.raw_data[:body_start]
             body_raw = self.raw_data[body_start:]
 
             readable_lines = []
@@ -178,7 +178,7 @@ class BlockUnrecognizedWithHeader(Block):
                 if not re.match(r"^[ \t]*[-*#=]*[ \t]*$", line):
                     # Extract the central text if the line is surrounded by a maximum of one special symbol on each side
                     central_text_match = re.match(
-                        r"^[ \t]*[-*#=]{,1}(.*?)[ \t]*[-*#=]{,1}[ \t]*$", line)
+                        r"^[ \t]*[-*#=]{,1}[ \t]*(.*?)[ \t]*[-*#=]{,1}[ \t]*$", line)
                     if central_text_match:
                         # Check that something was found and collect the first group result
                         central_text = central_text_match.group(1).strip()
@@ -199,6 +199,11 @@ class BlockUnrecognizedWithHeader(Block):
                 f'No header found in {self.raw_data}, and that is really weird as it was extracted based on the idea that there is a header in it')
             # If no match is found, put everything into header
             return Element.process_invalid_name(self.raw_data), None, self.raw_data
+
+
+@AvailableBlocks.register_block
+class BlockUnrecognizedWithHeader(BlockWithStandardHeader):
+    p_subtype: str = 'unrecognized-with-header'
 
 
 @AvailableBlocks.register_block
@@ -244,6 +249,9 @@ class BlockAllRightsReserved(Block):
 class BlockFinalSinglePointEnergy(Block):
     p_subtype: str = 'final-single-point-energy'
     data_available: bool = True
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'FINAL SINGLE POINT ENERGY', None, self.raw_data
 
     def data(self) -> Data:
         '''
@@ -304,156 +312,177 @@ class BlockScfConverged(Block):
         return Data(data=result, comment='bool for `Success` of the extraction and int for amount of `Cycles`')
 
 
-# class BlockDipoleMoment(Block):
-#     p_subtype: str = 'dipole-moment'
-#     data_available: bool = True
+@AvailableBlocks.register_block
+class BlockDipoleMoment(BlockWithStandardHeader):
+    p_subtype: str = 'dipole-moment'
+    data_available: bool = True
 
-#     def data(self) -> dict:
-#         # Initialize the result dictionary
-#         result = {}
+    def data(self) -> dict:
+        # Initialize the result dictionary
+        result = {}
 
-#         # Define regex pattern for lines with "text: 3 numbers"
-#         pattern_three_numbers = r"([a-zA-Z \(\).]+):\s*(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)[ \t]*\n"
-#         # Define regex pattern for lines with "text: 1 number"
-#         pattern_one_number = r"([a-zA-Z \(\).]+):\s*(-?\d+\.\d+)[ \t]*(?:\n|\Z)"
+        # Define regex pattern for lines with "text: 3 numbers"
+        pattern_three_numbers = r"([a-zA-Z \(\).]+):\s*(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)[ \t]*\n"
+        # Define regex pattern for lines with "text: 1 number"
+        pattern_one_number = r"([a-zA-Z \(\).]+):\s*(-?\d+\.\d+)[ \t]*(?:\n|\Z)"
 
-#         # Find all matches for the three-number pattern
-#         matches_three_numbers = re.findall(
-#             pattern_three_numbers, self.raw_data)
-#         for match in matches_three_numbers:
-#             label, x, y, z = match
-#             result[label.strip()] = np.array([float(x), float(y), float(z)])
+        # Find all matches for the three-number pattern
+        matches_three_numbers = re.findall(
+            pattern_three_numbers, self.raw_data)
+        for match in matches_three_numbers:
+            label, x, y, z = match
+            result[label.strip()] = np.array([float(x), float(y), float(z)])
 
-#         # Find all matches for the one-number pattern
-#         matches_one_number = re.findall(pattern_one_number, self.raw_data)
-#         for match in matches_one_number:
-#             label, value = match
-#             if "(Debye)" in label:
-#                 unit = "Debye"
-#             else:
-#                 unit = "a.u."
-#             result[label.strip()] = float(
-#                 value)*ureg.debye if unit == "Debye" else float(value)
+        # Find all matches for the one-number pattern
+        matches_one_number = re.findall(pattern_one_number, self.raw_data)
+        for match in matches_one_number:
+            label, value = match
+            if "(Debye)" in label:
+                unit = "Debye"
+            else:
+                unit = "a.u."
+            result[label.strip()] = float(
+                value)*ureg.debye if unit == "Debye" else float(value)
 
-#         return result
-
-
-# class BlockOrbitalEnergies(Block):
-#     p_subtype: str = 'orbital-energies'
-#     data_available: bool = True
-
-#     def data(self) -> dict[str, pd.DataFrame]:
-#         # Define regex pattern for extracting orbital data lines
-#         pattern_orbital_data = r"\s*(\d+)\s+([0-1]\.\d{4})\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s*"
-
-#         # Split the raw data into lines
-#         lines = self.raw_data.split('\n')
-
-#         # Initialize containers for spin up and spin down data
-#         spin_up_data = []
-#         spin_down_data = []
-
-#         # Flag to switch between spin up and spin down data collection
-#         collecting_spin_down = False
-
-#         # Iterate over lines to fill spin_up_data and spin_down_data
-#         for line in lines:
-#             if "SPIN UP ORBITALS" in line:
-#                 collecting_spin_down = False
-#                 continue
-#             elif "SPIN DOWN ORBITALS" in line:
-#                 collecting_spin_down = True
-#                 continue
-
-#             match = re.match(pattern_orbital_data, line)
-#             if match:
-#                 # Extract orbital data
-#                 no, occ, e_eh, e_ev = match.groups()
-#                 data_row = [int(no), float(occ), float(
-#                     e_eh) * ureg.Eh, float(e_ev) * ureg.eV]
-
-#                 # Append to the correct list based on the current section
-#                 if collecting_spin_down:
-#                     spin_down_data.append(data_row)
-#                 else:
-#                     spin_up_data.append(data_row)
-
-#         # Convert lists to pandas DataFrames
-#         columns = ['NO', 'OCC', 'E(Eh)', 'E(eV)']
-#         spin_up_df = pd.DataFrame(spin_up_data, columns=columns)
-#         spin_down_df = pd.DataFrame(spin_down_data, columns=columns)
-
-#         # Return a dictionary containing both DataFrames
-#         return {'Spin Up': spin_up_df, 'Spin Down': spin_down_df}
+        return Data(data=result, comment='Numpy arrays of contributions, total dipole moment and pint object of `Magnitude (Debye)`.\nThe magnitude of the magnitude in Debye can be extracted from pint with .magnitude method')
 
 
-# class BlockTerminatedNormally(Block):
-#     p_subtype: str = 'terminated-normally'
-#     data_available: bool = True
+@AvailableBlocks.register_block
+class BlockOrbitalEnergies(BlockWithStandardHeader):
+    p_subtype: str = 'orbital-energies'
+    data_available: bool = True
 
-#     def data(self) -> bool:
-#         '''
-#         returns True meaning that the block exists
-#         '''
-#         return True
+    def data(self) -> dict[str, pd.DataFrame]:
+        # Define regex pattern for extracting orbital data lines
+        pattern_orbital_data = r"\s*(\d+)\s+([0-1]\.\d{4})\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s*"
+
+        # Split the raw data into lines
+        lines = self.raw_data.split('\n')
+
+        # Initialize containers for spin up and spin down data
+        spin_up_data = []
+        spin_down_data = []
+
+        # Flag to switch between spin up and spin down data collection
+        collecting_spin_down = False
+
+        # Iterate over lines to fill spin_up_data and spin_down_data
+        for line in lines:
+            if "SPIN UP ORBITALS" in line:
+                collecting_spin_down = False
+                continue
+            elif "SPIN DOWN ORBITALS" in line:
+                collecting_spin_down = True
+                continue
+
+            match = re.match(pattern_orbital_data, line)
+            if match:
+                # Extract orbital data
+                no, occ, e_eh, e_ev = match.groups()
+                data_row = [int(no), float(occ), float(
+                    e_eh) * ureg.Eh, float(e_ev) * ureg.eV]
+
+                # Append to the correct list based on the current section
+                if collecting_spin_down:
+                    spin_down_data.append(data_row)
+                else:
+                    spin_up_data.append(data_row)
+
+        # Convert lists to pandas DataFrames
+        columns = ['NO', 'OCC', 'E(Eh)', 'E(eV)']
+        spin_up_df = pd.DataFrame(spin_up_data, columns=columns)
+        spin_down_df = pd.DataFrame(spin_down_data, columns=columns)
+
+        # Return a dictionary containing both DataFrames
+        return Data(data={'Spin Up': spin_up_df, 'Spin Down': spin_down_df}, comment='Pandas DataFrames `Spin Up` and `Spin Down`. Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.')
 
 
-# class BlockTotalRunTime(Block):
-#     p_subtype: str = 'total-run-time'
-#     data_available: bool = True
+@AvailableBlocks.register_block
+class BlockTerminatedNormally(Block):
+    p_subtype: str = 'terminated-normally'
+    data_available: bool = True
 
-#     def data(self):
-#         # Define the regex pattern to match the total run time
-#         pattern = r"TOTAL RUN TIME:\s*(\d+)\s*days\s*(\d+)\s*hours\s*(\d+)\s*minutes\s*(\d+)\s*seconds\s*(\d+)\s*msec"
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'ORCA TERMINATED NORMALLY', None, self.raw_data
 
-#         # Search for the pattern in self.raw_data
-#         match = re.search(pattern, self.raw_data)
-
-#         # Check if a match is found
-#         if match:
-#             # Extract the components of the total run time
-#             days, hours, minutes, seconds, msec = match.groups()
-
-#             # Convert the extracted values to integers and milliseconds to seconds
-#             days = int(days)
-#             hours = int(hours)
-#             minutes = int(minutes)
-#             # Convert milliseconds to seconds
-#             seconds = int(seconds) + int(msec) / 1000.0
-
-#             # Create a timedelta object representing the total run time
-#             run_time = timedelta(days=days, hours=hours,
-#                                  minutes=minutes, seconds=seconds)
-
-#             return run_time
-#         else:
-#             # Return None or raise an exception if no total run time data is found
-#             return None
+    def data(self) -> bool:
+        '''
+        returns True meaning that the block exists
+        '''
+        return Data(data={'Termination status': True}, comment='`Termination status` is always `True`, otherwise you wound`t find this block.')
 
 
-# class BlockTimingsForIndividualModules(Block):
-#     p_subtype: str = 'timings-for-individual-modules'
-#     data_available: bool = True
+@AvailableBlocks.register_block
+class BlockTotalRunTime(Block):
+    p_subtype: str = 'total-run-time'
+    data_available: bool = True
 
-#     def data(self):
-#         # Initialize a dictionary to store the results
-#         timings_dict = {}
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'TOTAL RUN TIME', None, self.raw_data
 
-#         # Define the regex pattern to match each module's timing information
-#         pattern = r"([a-zA-Z ]+)\s+\.\.\.\s+([\d\.]+) sec"
+    def data(self):
+        # Define the regex pattern to match the total run time
+        pattern = r"TOTAL RUN TIME:\s*(\d+)\s*days\s*(\d+)\s*hours\s*(\d+)\s*minutes\s*(\d+)\s*seconds\s*(\d+)\s*msec"
 
-#         # Find all matches in self.raw_data
-#         matches = re.findall(pattern, self.raw_data)
+        # Search for the pattern in self.raw_data
+        match = re.search(pattern, self.raw_data)
 
-#         # Process each match
-#         for module_name, time_sec in matches:
-#             # Convert time in seconds to a float
-#             time_sec = float(time_sec)
+        # Check if a match is found
+        if match:
+            # Extract the components of the total run time
+            days, hours, minutes, seconds, msec = match.groups()
 
-#             # Convert time in seconds to a timedelta object
-#             module_time = timedelta(seconds=time_sec)
+            # Convert the extracted values to integers and milliseconds to seconds
+            days = int(days)
+            hours = int(hours)
+            minutes = int(minutes)
+            # Convert milliseconds to seconds
+            seconds = int(seconds) + int(msec) / 1000.0
 
-#             # Add the module name and timedelta to the dictionary
-#             timings_dict[module_name.strip()] = module_time
+            # Create a timedelta object representing the total run time
+            run_time = timedelta(days=days, hours=hours,
+                                 minutes=minutes, seconds=seconds)
 
-#         return timings_dict
+            return Data(data={'Run Time': run_time}, comment='`Run Time` is timedelta object')
+        else:
+            # Return None or raise an exception if no total run time data is found
+            return None
+
+
+@AvailableBlocks.register_block
+class BlockTimingsForIndividualModules(Block):
+    p_subtype: str = 'timings-for-individual-modules'
+    data_available: bool = True
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        match = re.search(
+            '^([ \\t]*Timings for individual modules:[ \\t]*)\\n', self.raw_data)
+
+        body_start = match.end(1)
+        header_raw = self.raw_data[:body_start]
+        body_raw = self.raw_data[body_start:]
+
+        return 'Timings for individual modules', header_raw, body_raw
+
+    def data(self):
+        # Initialize a dictionary to store the results
+        timings_dict = {}
+
+        # Define the regex pattern to match each module's timing information
+        pattern = r"([a-zA-Z ]+)\s+\.\.\.\s+([\d\.]+) sec"
+
+        # Find all matches in self.raw_data
+        matches = re.findall(pattern, self.raw_data)
+
+        # Process each match
+        for module_name, time_sec in matches:
+            # Convert time in seconds to a float
+            time_sec = float(time_sec)
+
+            # Convert time in seconds to a timedelta object
+            module_time = timedelta(seconds=time_sec)
+
+            # Add the module name and timedelta to the dictionary
+            timings_dict[module_name.strip()] = module_time
+
+        return Data(data=timings_dict, comment='Timings for different modules as timedelta objects')
