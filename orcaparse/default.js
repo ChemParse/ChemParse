@@ -1,9 +1,15 @@
 //TOC
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const toc = document.querySelector('.toc');
+
+    // Create and add the TOC title
+    const tocTitle = document.createElement('h2');
+    tocTitle.textContent = 'TOC';
+    toc.appendChild(tocTitle);
+
     let blockId = 0; // Initialize a block ID counter
 
-    document.querySelectorAll('div[data-p-type="block"]').forEach(function(element) {
+    document.querySelectorAll('div[data-p-type="block"]').forEach(function (element) {
         const readableName = element.getAttribute('readable-name');
         const startLine = element.getAttribute('start-line');
         const dataAvailable = element.getAttribute('data_available');
@@ -56,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.querySelectorAll('.toc-entry').forEach(function(entry) {
-        entry.addEventListener('click', function() {
+    document.querySelectorAll('.toc-entry').forEach(function (entry) {
+        entry.addEventListener('click', function () {
             const targetId = this.dataset.targetId;
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
@@ -69,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // comment sidebar
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     const mainContentArea = document.querySelector('.content');
     const sidebarCommentBlocks = [];
@@ -77,12 +83,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const computedStyles = getComputedStyle(document.documentElement);
 
     const dataBlocks = document.querySelectorAll('div[data-p-type="block"]');
-    dataBlocks.forEach(function(dataBlock, index) {
+    dataBlocks.forEach(function (dataBlock, index) {
         const isDataAvailable = dataBlock.getAttribute('data_available');
         const blockType = dataBlock.getAttribute('data-p-subtype');
         const startLineOfBlock = dataBlock.getAttribute('start-line');
         const endLineOfBlock = dataBlock.getAttribute('finish-line');
-        
+
         const commentBlockContainer = document.createElement('div');
         commentBlockContainer.classList.add('comment-section');
 
@@ -136,20 +142,20 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebarCommentBlocks[index] = { element: commentBlockContainer, initialTop: dataBlock.offsetTop };
     });
 
-    mainContentArea.addEventListener('scroll', function() {
+    mainContentArea.addEventListener('scroll', function () {
         const scrolledTopPosition = this.scrollTop;
-        sidebarCommentBlocks.forEach(function(sidebarBlock) {
+        sidebarCommentBlocks.forEach(function (sidebarBlock) {
             sidebarBlock.element.style.top = `${sidebarBlock.initialTop - scrolledTopPosition}px`;
         });
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const sidebar = document.querySelector('.comment-sidebar');
     let maxWidth = 30; // Start with a minimum width in case there are no text blocks or they are very small
 
     const commentSections = sidebar.querySelectorAll('.comment-section');
-    commentSections.forEach(function(section) {
+    commentSections.forEach(function (section) {
         const textBlock = section.querySelector('.text-block');
         if (textBlock) {
             // Ensure the element is visible to get accurate measurements

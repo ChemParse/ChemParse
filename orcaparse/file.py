@@ -446,7 +446,7 @@ class File:
         if insert_left_sidebar:
             html_content += "        <div class=\"sidebar\">\n"
             html_content += "            <!-- Left sidebar content (TOC) -->\n"
-            html_content += "            <div class=\"toc\">\n                <h2>TOC</h2>\n                <!-- JavaScript will populate this area -->\n            </div>\n"
+            html_content += "            <div class=\"toc\">\n    <!-- JavaScript will populate this area -->\n</div>"
             html_content += "        </div>\n"
 
         if insert_colorcomment_sidebar:
