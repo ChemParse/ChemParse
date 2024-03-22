@@ -209,7 +209,8 @@ class File:
 
                 # Replace the extracted text within the full match with the marker
                 text_with_markers = full_match.replace(
-                    extracted_text, f"<@%{regex.p_type}|{regex.p_subtype}|{unique_id}%@>"
+                    extracted_text,
+                    f"<@%{regex.p_type}|{regex.p_subtype}|{unique_id}%@>"
                 )
 
             else:
