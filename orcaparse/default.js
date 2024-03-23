@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const unavailableColor = styles.getPropertyValue('--comment-unavailable-color').trim();
             const errorColor = styles.getPropertyValue('--comment-error-color').trim();
 
-            if (pSubtype === 'unrecognized-format') {
+            if (pSubtype === 'unknown') {
                 colorBlock.style.backgroundColor = errorColor;
             } else {
                 if (dataAvailable === "1") {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const colorForUnavailable = computedStyles.getPropertyValue('--comment-unavailable-color').trim();
         const colorForError = computedStyles.getPropertyValue('--comment-error-color').trim();
 
-        if (blockType === 'unrecognized-format') {
+        if (blockType === 'unknown') {
             indicatorColorBlock.style.backgroundColor = colorForError;
             commentBlockContainer.title = "Block looks incorrectly formatted";
         } else {
