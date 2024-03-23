@@ -104,16 +104,7 @@ class File:
         6. Updates the _blocks DataFrame with new rows containing the element data, type, subtype, and its position within the text.
         7. Replaces identified patterns in the text with markers that include the type, subtype, and unique ID of the extracted elements.
 
-        The method employs a nested function, replace_with_marker, which is called for each regex match. This function:
-        - Extracts the necessary data from each match.
-        - Handles potential issues such as marker overlap.
-        - Generates a unique identifier for each element.
-        - Instantiates OrcaElements or falls back to a default if necessary.
-        - Updates the _blocks DataFrame and the marked text.
-
-        Another nested function, find_substring_positions, is used to locate the position of each extracted element within the original text, aiding in accurate data extraction and element instantiation.
-
-        Upon completion, the text is fully processed, with all elements identified and instantiated, and the original text is updated with markers indicating the positions of these elements.
+        Upon completion, the text is fully processed, with all elements identified.
         """
         self._blocks = pd.DataFrame(
             columns=['Type', 'Subtype', 'Element', 'Position'])

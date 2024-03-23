@@ -103,6 +103,32 @@ class RegexRequest:
         return re.compile(self.pattern, self.flags)
 
     def apply(self, text: str, original_text: str | None = None) -> tuple[str, dict[str, dict]]:
+        """
+            Processes the input text using regular expressions to identify and replace specified patterns
+            with unique markers, while also creating corresponding element instances based on the identified patterns.
+
+            This method compiles a pattern using the instance's `compile` method, then iterates over all matches
+            in the `text`. For each match, it:
+            - Extracts the relevant text and information.
+            - Ensures unique identification and non-overlap of markers.
+            - Dynamically instantiates elements based on the pattern's subtype or falls back to a default type if necessary.
+            - Updates a dictionary with the instantiated elements and their positions in the text.
+
+            Nested functions within this method include:
+            - `replace_with_marker`: Called for each regex match to handle the replacement of text with a marker and instantiation of the corresponding element.
+            - `find_substring_positions`: Locates all occurrences of a substring within a given text, used to find the exact position of matched patterns in the original text.
+
+            Parameters:
+            - text (str): The text to be processed.
+            - original_text (str, optional): The original text before any processing, used for accurate position mapping. Defaults to `None`, in which case `text` is used as the original text.
+
+            Returns:
+            - tuple[str, dict[str, dict]]: A tuple containing the processed text with markers and a dictionary of elements keyed by their unique identifiers. Each dictionary entry contains the instantiated element and its position in the original text.
+
+            Raises:
+            - Warnings for various edge cases, such as multiple matches for a pattern in the original text, or when a pattern subtype is not recognized and a default is used instead.
+        """
+
         original_text = original_text or text
         compiled_pattern = self.compile()
 
