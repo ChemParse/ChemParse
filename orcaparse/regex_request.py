@@ -1,13 +1,12 @@
-import json
-import os
 import re
 import warnings
-from typing import Dict, List, Optional, Pattern, Union
+from typing import Pattern, Union
+
 from .elements import AvailableBlocks, Block, Spacer
 
 
 class RegexRequest:
-    def __init__(self, p_type: str, p_subtype: str, pattern: str, flags: List[str], comment: str = '') -> None:
+    def __init__(self, p_type: str, p_subtype: str, pattern: str, flags: list[str], comment: str = '') -> None:
         """
         Initializes a new RegexRequest object.
 
@@ -15,7 +14,7 @@ class RegexRequest:
             p_type (str): The type of the regex request, e.g., 'Block'.
             p_subtype (str): The subtype of the regex request, providing more specific identification.
             pattern (str): The regex pattern.
-            flags (List[str]): A list of strings representing regex flags, e.g., ['MULTILINE', 'IGNORECASE'].
+            flags (list[str]): A list of strings representing regex flags, e.g., ['MULTILINE', 'IGNORECASE'].
             comment (str): An optional comment describing the regex request.
         """
         self.p_type = p_type
@@ -24,12 +23,12 @@ class RegexRequest:
         self.comment = comment
         self.flags = self._compile_flags(flags)
 
-    def _compile_flags(self, flag_names: List[str]) -> int:
+    def _compile_flags(self, flag_names: list[str]) -> int:
         """
         Compiles a list of flag names into a single integer representing the combined flags.
 
         Args:
-            flag_names (List[str]): A list of flag names as strings.
+            flag_names (list[str]): A list of flag names as strings.
 
         Returns:
             int: The combined flags as a single integer.

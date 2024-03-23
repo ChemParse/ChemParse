@@ -1,13 +1,13 @@
 import os
 import re
 import warnings
-from typing import Dict, Optional, Type
+from typing import Optional
 
 import pandas as pd
-from typing_extensions import Self, Iterable
+from typing_extensions import Iterable, Self
 
 from .data import Data
-from .elements import AvailableBlocks, Block, Element, Spacer
+from .elements import Element
 from .regex_settings import DEFAULT_REGEX_FILE, RegexSettings
 
 
