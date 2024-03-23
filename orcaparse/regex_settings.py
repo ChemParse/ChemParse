@@ -2,7 +2,7 @@ import json
 import os
 import re
 import warnings
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Pattern, Union
 
 DEFAULT_REGEX_FILE = os.path.join(os.path.dirname(__file__), 'regex.json')
 
@@ -93,6 +93,17 @@ class RegexRequest:
             "comment": self.comment
         }
 
+    def compile(self) -> Pattern:
+        """
+        Compiles the regex pattern with the specified flags and returns a compiled regex pattern object.
+
+        This method allows the user to utilize the compiled pattern object for various regex operations such as `findall`, `search`, `match`, etc.
+
+        Returns:
+            Pattern: A compiled regex pattern object.
+        """
+        return re.compile(self.pattern, self.flags)
+
     def __len__(self) -> int:
         """
         Returns the length of the RegexRequest, which is always 1 for a single request.
@@ -133,17 +144,11 @@ class RegexBlueprint:
         self.pattern_structure = pattern_structure
         self.pattern_texts = pattern_texts
         self.comment = comment
+        self._initialize_items()
 
-    def to_list(self) -> List[RegexRequest]:
-        """
-        Generates a list of RegexRequest objects based on the blueprint.
-
-        Returns:
-            List[RegexRequest]: A list of generated RegexRequest objects following the blueprint's structure.
-        """
-        regex_requests = []
-        for name in self.order:
-            text = self.pattern_texts[name]
+    def _initialize_items(self):
+        self.items: dict[str, RegexRequest] = {}
+        for name, text in self.pattern_texts.items():
             pattern = (f"{self.pattern_structure['beginning']}"
                        f"{text}{self.pattern_structure['ending']}")
             regex_request = RegexRequest(
@@ -153,8 +158,16 @@ class RegexBlueprint:
                 flags=self.pattern_structure['flags'],
                 comment=self.comment
             )
-            regex_requests.append(regex_request)
-        return regex_requests
+            self.items[name] = regex_request
+
+    def to_list(self) -> List[RegexRequest]:
+        """
+        Generates a list of RegexRequest objects based on the blueprint.
+
+        Returns:
+            List[RegexRequest]: A list of generated RegexRequest objects following the blueprint's structure.
+        """
+        return [self.items[name] for name in self.order]
 
     def validate_configuration(self) -> None:
         """
@@ -363,7 +376,7 @@ class RegexSettings:
         """
         ordered_items = []
         for name in self.order:
-            item = self.items.get(name)
+            item = self.items[name]
             if isinstance(item, RegexRequest):
                 ordered_items.append(item)
             elif isinstance(item, (RegexSettings, RegexBlueprint)):

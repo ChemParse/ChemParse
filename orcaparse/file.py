@@ -219,7 +219,7 @@ class File:
             return text_with_markers
 
         for regex in self.regex_settings.to_list():
-            compiled_pattern = re.compile(regex.pattern, regex.flags)
+            compiled_pattern = regex.compile()
             self._marked_text = compiled_pattern.sub(
                 replace_with_marker, self._marked_text)
 

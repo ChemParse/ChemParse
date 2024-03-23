@@ -219,8 +219,8 @@ class BlockUnrecognizedWithHeader(BlockWithStandardHeader):
 
 
 @AvailableBlocks.register_block
-class BlockUnrecognizedFormat(Block):
-    p_subtype: str = 'unrecognized-format'
+class BlockUnknown(Block):
+    p_subtype: str = 'unknown'
 
     def data(self):
         warnings.warn(
