@@ -120,108 +120,13 @@ class File:
         self._marked_text = self.original_text
         self.initialized = True
 
-        def replace_with_marker(match):
-
-            def find_substring_positions(text, substring):
-                # method to search for the block position in the original text
-                positions = [(m.start(), m.end())
-                             for m in re.finditer(re.escape(substring), text)]
-                return positions
-            # The entire matched text
-            full_match = match.group(0)
-
-            # The specific part you want to replace (previously match.group(1))
-            extracted_text = match.group(1)
-
-            if '<@%' in extracted_text or '%@>' in extracted_text:
-                warnings.warn(
-                    f'Attempt to replace the marker in {regex.p_type, regex.p_subtype}:{extracted_text}')
-                return full_match
-
-            if regex.p_type == 'Block':
-
-                # Find all positions of the extracted text in the original text
-                positions = find_substring_positions(
-                    self.original_text, extracted_text)
-
-                if not positions:
-                    warnings.warn(
-                        f"No match found for the extracted text: '{extracted_text}' in the original text.")
-                    position, start_index, end_index = None, None, None
-
-                elif len(positions) > 1:
-                    warnings.warn(
-                        f"Multiple matches found for the extracted text: '{extracted_text}' in the original text. Using the first match.")
-                    start_index, end_index = positions[0]
-                else:
-                    start_index, end_index = positions[0]
-
-                if start_index is not None and end_index is not None:
-                    start_line = self.original_text.count(
-                        '\n', 0, start_index) + 1
-                    end_line = self.original_text.count('\n', 0, end_index) + 1
-                    # Tuple containing start and end lines
-                    position = (start_line, end_line)
-
-            # Dynamically instantiate the class based on p_subtype or fall back to OrcaDefaultBlock
-            class_name = regex.p_subtype  # Directly use p_subtype as class name
-            if class_name in AvailableBlocks.blocks:
-                if regex.p_type == "Block":
-                    # Create an instance of the class, block have position parameter
-                    element_instance = AvailableBlocks.blocks[class_name](
-                        extracted_text, position=position)
-                else:
-                    # Create an instance of the class, block have position parameter
-                    element_instance = AvailableBlocks.blocks[class_name](
-                        extracted_text)
-            elif regex.p_type == "Spacer":
-                element_instance = Spacer(extracted_text)
-            elif regex.p_type == "Block":
-                # Fall back to OrcaDefaultBlock and raise a warning
-                warnings.warn(
-                    (f"Subtype `{regex.p_subtype}`"
-                        f" not recognized. Falling back to OrcaBlock.")
-                )
-                element_instance = Block(
-                    extracted_text, position=position)
-
-            else:
-                # Handle other types or raise a generic warning
-                warnings.warn(
-                    (f"Subtype `{regex.p_subtype}`"
-                        f" not recognized and type `{regex.p_type}`"
-                        f" does not have a default.")
-                )
-                element_instance = None
-
-            if element_instance:
-                unique_id = hash(element_instance)
-                # Create a DataFrame for the new row
-                new_row_df = pd.DataFrame({
-                    'Type': [regex.p_type],
-                    'Subtype': [regex.p_subtype],
-                    'Element': [element_instance],
-                    'Position': [position] if regex.p_type == "Block" else [None]
-                }, index=[unique_id])  # Set the index to the unique ID
-
-                # Concatenate the new row DataFrame with the existing DataFrame
-                self._blocks = pd.concat([self._blocks, new_row_df])
-
-                # Replace the extracted text within the full match with the marker
-                text_with_markers = full_match.replace(
-                    extracted_text,
-                    f"<@%{regex.p_type}|{regex.p_subtype}|{unique_id}%@>"
-                )
-
-            else:
-                text_with_markers = full_match
-
-            return text_with_markers
-
         for regex in self.regex_settings.to_list():
-            compiled_pattern = regex.compile()
-            self._marked_text = compiled_pattern.sub(
-                replace_with_marker, self._marked_text)
+            self._marked_text, new_blocks = regex.apply(
+                self._marked_text, self.original_text)
+            new_blocks_df = pd.DataFrame.from_dict(new_blocks, orient="index")
+            new_blocks_df['Type'] = regex.p_type
+            new_blocks_df['Subtype'] = regex.p_subtype
+            self._blocks = pd.concat([self._blocks, new_blocks_df])
 
     @staticmethod
     def extract_raw_data_errors_to_none(orca_element: Element) -> str | None:
