@@ -81,17 +81,17 @@
     },
     "BlueprintBlockWithSingeLineHeader": {
       "order": [
-        "RotationalSpectrum"
+        "BlockRotationalSpectrum"
       ],
       "pattern_structure": {
-        "beginning": "^([ \\t]*[-*#=]{7,}[ \\t]*$\\n[ \\t]*[-*#=]?[ \\t]*",
-        "ending": "[ \\t]*[-*#=]?[ \\t]*\\n[ \\t]*[-*#=]{7,}[ \\t]*$\\n(?:(?!^.*<@%.*%@>.*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*))?)*)",
+        "beginning": "^((?:[ \\t]*[-*#=]{7,}[ \\t]*\\n)(?:[ \\t]*[-*#=]?[ \\t]*",
+        "ending": "[ \\t]*[-*#=]?[ \\t]*\\n)(?:[ \\t]*[-*#=]{7,}[ \\t]*\\n)(?:(?!^.*<@%.*%@>.*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*))?)*)",
         "flags": [
           "MULTILINE"
         ]
       },
       "pattern_texts": {
-        "RotationalSpectrum": "Rotational spectrum"
+        "BlockRotationalSpectrum": "Rotational spectrum"
       },
       "comment": "Blueprint: Block starts with a line of special characters, followed by the 1 line header and then one more line of special characters. Then text until the special line or the next block"
     },

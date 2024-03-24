@@ -99,6 +99,16 @@ class RegexBlueprint:
             pattern_text (str): The specific text snippet to be inserted into the pattern structure for this new item.
         """
         self.pattern_texts[name] = pattern_text
+        pattern = (f"{self.pattern_structure['beginning']}"
+                   f"{pattern_text}{self.pattern_structure['ending']}")
+        regex_request = RegexRequest(
+            p_type="Block",
+            p_subtype=name,
+            pattern=pattern,
+            flags=self.pattern_structure['flags'],
+            comment=self.comment
+        )
+        self.items[name] = regex_request
         self.order.append(name)
         self.validate_configuration()
 
