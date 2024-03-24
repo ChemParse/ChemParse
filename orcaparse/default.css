@@ -11,13 +11,14 @@
 
     --block-default-color: #121212;
     --block-icon-color: #2264dc;
-    --block-unrecognized-color: #dd0063;
 
     --header-bg-color: transparent;
 
-    --comment-available-color: #517ee7;
-    --comment-unavailable-color: #ffcc00;
     --comment-error-color: #f96208;
+    --comment-unrecognized-color: #ffcc00;
+    --comment-no-class-color: #9dacff;
+    --comment-no-data-possible-color: #4bc0d9;
+    --comment-available-color: #517ee7;
 
     --toc-header-color: #121212;
     --toc-entry-color: #121212;
@@ -67,15 +68,14 @@ body {
 
 
 /* Styling for block elements */
-
-.content div[data-p-type^="spacer"] {
+.content div[python-class-name^="Spacer"] {
     font-size: 1px;
 }
 
 
 /* Styling for block elements */
 
-.content div[data-p-type^="block"] {
+.content .block {
     display: block;
     margin: 2px 0;
     /* Maintain vertical spacing between blocks */
@@ -90,18 +90,18 @@ body {
 }
 
 /* On hover, only change the background color inside the padding area */
-.content div[data-p-type^="block"]:hover {
+.content .block:hover {
     background-color: var(--block-hover-bg-color);
     /* Change background color on hover */
 }
 
 /* Styling for headers within blocks */
-.content div[data-p-type^="block"] h1,
-.content div[data-p-type^="block"] h2,
-.content div[data-p-type^="block"] h3,
-.content div[data-p-type^="block"] h4,
-.content div[data-p-type^="block"] h5,
-.content div[data-p-type^="block"] h6 {
+.content .block h1,
+.content .block h2,
+.content .block h3,
+.content .block h4,
+.content .block h5,
+.content .block h6 {
     font-family: Arial, sans-serif;
     font-size: 16px;
     font-weight: normal;
@@ -114,20 +114,20 @@ body {
     /* Adjust width to account for padding */
 }
 
-.content div[data-p-type^="block"] pre {
+.content .block pre {
     border: none;
     padding: 10px;
     margin: 0;
     overflow-x: hidden;
 }
 
-.content div[data-p-type^="block"] .hr-in-block {
+.content .block .hr-in-block {
     height: 2px;
     border: none;
     background-color: var(--hr-bg-color);
 }
 
-.content div[data-p-type^="block"]:hover .hr-in-block {
+.content .block:hover .hr-in-block {
     background-color: var(--hr-hover-bg-color);
     /* Change hr background color on hover */
 }
@@ -139,18 +139,14 @@ body {
 }
 
 /* Default block styling */
-.content .block-default.block-default {
+.content .block {
     color: var(--block-default-color);
     /* Darker text for better readability */
 }
 
 /* Specific styling for different block subtypes */
-.content .block-icon.block-icon {
+.content .block[python-class-name="BlockIcon"] {
     color: var(--block-icon-color);
-}
-
-.content .block-unrecognized.block-unrecognized {
-    color: var(--block-unrecognized-color);
 }
 
 

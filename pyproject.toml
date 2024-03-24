@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "orcaparse"
-version = "0.1.0"
+version = "0.3.0"
 description = ""
 authors = ["ivan <imtambovtcev@gmail.com>"]
 readme = "README.md"
@@ -10,6 +10,7 @@ python = "^3.10"
 numpy = "^1.26.4"
 pandas = "^2.2.1"
 pint = "^0.23"
+openpyxl = "^3.1.2"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -21,5 +22,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-orca_to_html = "orcaparse.scripts:orca_to_html"
-orca_parse = "orcaparse.scripts:orca_parse"
+orca_to_html = "orcaparse.scripts:orca_to_html_cli"
+orca_parse = "orcaparse.scripts:orca_parse_cli"

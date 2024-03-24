@@ -1,13 +1,13 @@
 import os
 import re
 import warnings
-from typing import Dict, Optional, Type
+from typing import Optional
 
 import pandas as pd
-from typing_extensions import Self
+from typing_extensions import Iterable, Self
 
 from .data import Data
-from .elements import AvailableBlocks, Block, Element, Spacer
+from .elements import Element
 from .regex_settings import DEFAULT_REGEX_FILE, RegexSettings
 
 
@@ -104,124 +104,20 @@ class File:
         6. Updates the _blocks DataFrame with new rows containing the element data, type, subtype, and its position within the text.
         7. Replaces identified patterns in the text with markers that include the type, subtype, and unique ID of the extracted elements.
 
-        The method employs a nested function, replace_with_marker, which is called for each regex match. This function:
-        - Extracts the necessary data from each match.
-        - Handles potential issues such as marker overlap.
-        - Generates a unique identifier for each element.
-        - Instantiates OrcaElements or falls back to a default if necessary.
-        - Updates the _blocks DataFrame and the marked text.
-
-        Another nested function, find_substring_positions, is used to locate the position of each extracted element within the original text, aiding in accurate data extraction and element instantiation.
-
-        Upon completion, the text is fully processed, with all elements identified and instantiated, and the original text is updated with markers indicating the positions of these elements.
+        Upon completion, the text is fully processed, with all elements identified.
         """
         self._blocks = pd.DataFrame(
             columns=['Type', 'Subtype', 'Element', 'Position'])
         self._marked_text = self.original_text
         self.initialized = True
 
-        def replace_with_marker(match):
-
-            def find_substring_positions(text, substring):
-                # method to search for the block position in the original text
-                positions = [(m.start(), m.end())
-                             for m in re.finditer(re.escape(substring), text)]
-                return positions
-            # The entire matched text
-            full_match = match.group(0)
-
-            # The specific part you want to replace (previously match.group(1))
-            extracted_text = match.group(1)
-
-            if '<@%' in extracted_text or '%@>' in extracted_text:
-                warnings.warn(
-                    f'Attempt to replace the marker in {regex.p_type, regex.p_subtype}:{extracted_text}')
-                return full_match
-
-            if regex.p_type == 'Block':
-
-                # Find all positions of the extracted text in the original text
-                positions = find_substring_positions(
-                    self.original_text, extracted_text)
-
-                if not positions:
-                    warnings.warn(
-                        f"No match found for the extracted text: '{extracted_text}' in the original text.")
-                    position, start_index, end_index = None, None, None
-
-                elif len(positions) > 1:
-                    warnings.warn(
-                        f"Multiple matches found for the extracted text: '{extracted_text}' in the original text. Using the first match.")
-                    start_index, end_index = positions[0]
-                else:
-                    start_index, end_index = positions[0]
-
-                if start_index is not None and end_index is not None:
-                    start_line = self.original_text.count(
-                        '\n', 0, start_index) + 1
-                    end_line = self.original_text.count('\n', 0, end_index) + 1
-                    # Tuple containing start and end lines
-                    position = (start_line, end_line)
-
-            # Dynamically instantiate the class based on p_subtype or fall back to OrcaDefaultBlock
-            class_name = regex.p_subtype  # Directly use p_subtype as class name
-            if class_name in AvailableBlocks.blocks:
-                if regex.p_type == "Block":
-                    # Create an instance of the class, block have position parameter
-                    element_instance = AvailableBlocks.blocks[class_name](
-                        extracted_text, position=position)
-                else:
-                    # Create an instance of the class, block have position parameter
-                    element_instance = AvailableBlocks.blocks[class_name](
-                        extracted_text)
-            elif regex.p_type == "Spacer":
-                element_instance = Spacer(extracted_text)
-            elif regex.p_type == "Block":
-                # Fall back to OrcaDefaultBlock and raise a warning
-                warnings.warn(
-                    (f"Subtype `{regex.p_subtype}`"
-                        f" not recognized. Falling back to OrcaBlock.")
-                )
-                element_instance = Block(
-                    extracted_text, position=position)
-
-            else:
-                # Handle other types or raise a generic warning
-                warnings.warn(
-                    (f"Subtype `{regex.p_subtype}`"
-                        f" not recognized and type `{regex.p_type}`"
-                        f" does not have a default.")
-                )
-                element_instance = None
-
-            if element_instance:
-                unique_id = hash(element_instance)
-                # Create a DataFrame for the new row
-                new_row_df = pd.DataFrame({
-                    'Type': [regex.p_type],
-                    'Subtype': [regex.p_subtype],
-                    'Element': [element_instance],
-                    'Position': [position] if regex.p_type == "Block" else [None]
-                }, index=[unique_id])  # Set the index to the unique ID
-
-                # Concatenate the new row DataFrame with the existing DataFrame
-                self._blocks = pd.concat([self._blocks, new_row_df])
-
-                # Replace the extracted text within the full match with the marker
-                text_with_markers = full_match.replace(
-                    extracted_text,
-                    f"<@%{regex.p_type}|{regex.p_subtype}|{unique_id}%@>"
-                )
-
-            else:
-                text_with_markers = full_match
-
-            return text_with_markers
-
         for regex in self.regex_settings.to_list():
-            compiled_pattern = re.compile(regex.pattern, regex.flags)
-            self._marked_text = compiled_pattern.sub(
-                replace_with_marker, self._marked_text)
+            self._marked_text, new_blocks = regex.apply(
+                self._marked_text, self.original_text)
+            new_blocks_df = pd.DataFrame.from_dict(new_blocks, orient="index")
+            new_blocks_df['Type'] = regex.p_type
+            new_blocks_df['Subtype'] = regex.p_subtype
+            self._blocks = pd.concat([self._blocks, new_blocks_df])
 
     @staticmethod
     def extract_raw_data_errors_to_none(orca_element: Element) -> str | None:
@@ -269,65 +165,90 @@ class File:
                 f"An unexpected error occurred while extracting data from {orca_element}: {e}, returning None instead of data.\n Raw context of the element is {orca_element.raw_data}")
             return None
 
-    def search_elements(self, element_type: type[Element] = None, readable_name: str = None, raw_data_substring: str = None) -> pd.DataFrame:
+    def search_elements(self, element_type: type[Element] | None = None, readable_name: str | None = None, raw_data_substring: str | Iterable[str] | None = None, raw_data_not_substring: str | Iterable[str] | None = None) -> pd.DataFrame:
         """
         Searches for OrcaElement instances based on various criteria.
 
         Parameters:
             element_type (type[Element], optional): The class type of the OrcaElement to search for.
             readable_name (str, optional): The exact term to search for in the readable_name attribute.
-            raw_data_substring (str, optional): The substring to search for within the raw_data attribute.
+            raw_data_substring (str, Iterable[str], optional): The substring to search for within the raw_data attribute.
+            raw_data_not_substring (str, Iterable[str], optional): The substring to search the absence of within the raw_data attribute.
 
         Returns:
             pd.DataFrame: A DataFrame containing the filtered OrcaElements based on the provided criteria.
         """
         self.initialize()
         blocks_copy = self._blocks.copy()
+        blocks_copy['ReadableName'] = blocks_copy['Element'].apply(
+            lambda x: x.readable_name())
+        blocks_copy['RawData'] = blocks_copy['Element'].apply(
+            lambda x: self.extract_raw_data_errors_to_none(x))
 
         if element_type is not None:
             blocks_copy = blocks_copy[blocks_copy['Element'].apply(
                 lambda x: isinstance(x, element_type))]
 
         if readable_name is not None:
-            blocks_copy['ReadableName'] = blocks_copy['Element'].apply(
-                lambda x: x.readable_name)
+
             blocks_copy = blocks_copy[blocks_copy['ReadableName']
                                       == readable_name]
 
         if raw_data_substring is not None:
-            matches = blocks_copy['Element'].apply(
-                lambda x: raw_data_substring in x.raw_data)
+            def contains_all_substrings(x_raw_data, substrings):
+                # If substrings is a string, convert it to a list for uniformity
+                if isinstance(substrings, str):
+                    substrings = [substrings]
+
+                # Check if all elements in substrings are in x_raw_data
+                return all(substring in x_raw_data for substring in substrings)
+
+            # Filter rows where all substrings are present in the RawData
+            matches = blocks_copy['RawData'].apply(
+                lambda x: contains_all_substrings(x, raw_data_substring))
+            blocks_copy = blocks_copy[matches]
+
+        if raw_data_not_substring is not None:
+            def contains_no_substrings(x_raw_data, substrings):
+                # If substrings is a string, convert it to a list for uniformity
+                if isinstance(substrings, str):
+                    substrings = [substrings]
+
+                # Check if all elements in substrings are not in x_raw_data
+                return all(substring not in x_raw_data for substring in substrings)
+
+            # Filter rows where all substrings are not present in the RawData
+            matches = blocks_copy['RawData'].apply(
+                lambda x: contains_no_substrings(x, raw_data_not_substring))
             blocks_copy = blocks_copy[matches]
 
         return blocks_copy
 
-    def get_data(self, extract_raw: bool = False, element_type: type[Element] = None, readable_name: str = None, raw_data_substring: str = None) -> pd.DataFrame:
+    def get_data(self, extract_only_raw: bool = False, element_type: type[Element] | None = None, readable_name: str | None = None, raw_data_substring: str | Iterable[str] | None = None, raw_data_not_substring: str | Iterable[str] | None = None) -> pd.DataFrame:
         """
         Retrieves and extracts data or raw data strings from OrcaElement instances based on specified search criteria and extraction type.
 
         This method first searches for OrcaElement instances based on the provided search criteria, which can include the element's type, readable name, or a substring of its raw data. After filtering the elements, it extracts either raw data strings or processed data from them, depending on the 'extract_raw' flag.
 
         Parameters:
-            extract_raw (bool, optional): Determines the type of data to extract. If True, raw data strings are extracted. If False, processed data is extracted. Defaults to False.
-            element_type (type[Element], optional): The class type of the OrcaElements to filter by. Only elements that are instances of this type or derived from it will be included. Defaults to None, which skips this filter.
-            readable_name (str, optional): The exact name to match against the 'readable_name' attribute of OrcaElements. Only elements with a matching readable name are included. Defaults to None, which skips this filter.
-            raw_data_substring (str, optional): A substring to search for within the 'raw_data' attribute of OrcaElements. Only elements whose raw data contains this substring are included. Defaults to None, which skips this filter.
+            extract_ony_raw (bool, optional): Determines if `ExtractedData` will be additionally created. If True, it will not. Raw data is stored in `RawData`. Defaults to False.
+            element_type (type[Element] | None, optional): The class type of the OrcaElements to filter by. Only elements that are instances of this type or derived from it will be included. Defaults to None, which skips this filter.
+            readable_name (str | None, optional): The exact name to match against the 'readable_name' attribute of OrcaElements. Only elements with a matching readable name are included. Defaults to None, which skips this filter.
+            raw_data_substring (str | Iterable[str] | None, optional): A substring to search for within the 'raw_data' attribute of OrcaElements. Only elements whose raw data contains this substring are included. Defaults to None, which skips this filter.
+            raw_data_not_substring (str | Iterable[str] | None, optional): A substring to search for within the 'raw_data' attribute of OrcaElements. The elements whose raw data contains this substring are not included. Defaults to None, which skips this filter.
 
         Returns:
             pd.DataFrame: A DataFrame containing the extracted data or raw data strings from the filtered OrcaElements. The DataFrame includes an 'ExtractedData' column with the extracted information. If no elements match the search criteria, an empty DataFrame is returned.
         """
         blocks = self.search_elements(element_type=element_type,
-                                      readable_name=readable_name, raw_data_substring=raw_data_substring)
-        if extract_raw:
-            # Implement the logic to extract raw data from blocks
-            extracted_data = blocks['Element'].apply(
-                lambda x: self.extract_raw_data_errors_to_none(x))
-        else:
+                                      readable_name=readable_name,
+                                      raw_data_substring=raw_data_substring,
+                                      raw_data_not_substring=raw_data_not_substring)
+        if not extract_only_raw:
             # Implement the logic to extract processed data from blocks
             extracted_data = blocks['Element'].apply(
                 lambda x: self.extract_data_errors_to_none(x))
-
-        blocks['ExtractedData'] = extracted_data
+            blocks['ExtractedData'] = extracted_data
         return blocks
 
     def create_html(self, css_content: str | None = None, js_content: str | None = None, insert_css: bool = True, insert_js: bool = True, insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True) -> str:
@@ -446,7 +367,7 @@ class File:
         if insert_left_sidebar:
             html_content += "        <div class=\"sidebar\">\n"
             html_content += "            <!-- Left sidebar content (TOC) -->\n"
-            html_content += "            <div class=\"toc\">\n                <h2>TOC</h2>\n                <!-- JavaScript will populate this area -->\n            </div>\n"
+            html_content += "            <div class=\"toc\">\n    <!-- JavaScript will populate this area -->\n</div>"
             html_content += "        </div>\n"
 
         if insert_colorcomment_sidebar:

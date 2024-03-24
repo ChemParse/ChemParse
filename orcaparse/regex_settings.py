@@ -2,118 +2,10 @@ import json
 import os
 import re
 import warnings
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Pattern, Union
+from .regex_request import RegexRequest
 
 DEFAULT_REGEX_FILE = os.path.join(os.path.dirname(__file__), 'regex.json')
-
-
-class RegexRequest:
-    def __init__(self, p_type: str, p_subtype: str, pattern: str, flags: List[str], comment: str = '') -> None:
-        """
-        Initializes a new RegexRequest object.
-
-        Args:
-            p_type (str): The type of the regex request, e.g., 'Block'.
-            p_subtype (str): The subtype of the regex request, providing more specific identification.
-            pattern (str): The regex pattern.
-            flags (List[str]): A list of strings representing regex flags, e.g., ['MULTILINE', 'IGNORECASE'].
-            comment (str): An optional comment describing the regex request.
-        """
-        self.p_type = p_type
-        self.p_subtype = p_subtype
-        self.pattern = pattern
-        self.comment = comment
-        self.flags = self._compile_flags(flags)
-
-    def _compile_flags(self, flag_names: List[str]) -> int:
-        """
-        Compiles a list of flag names into a single integer representing the combined flags.
-
-        Args:
-            flag_names (List[str]): A list of flag names as strings.
-
-        Returns:
-            int: The combined flags as a single integer.
-
-        Raises:
-            ValueError: If an invalid flag name is provided.
-        """
-        compiled_flags = 0
-        valid_flags = {
-            "IGNORECASE": re.IGNORECASE,
-            "MULTILINE": re.MULTILINE,
-            "DOTALL": re.DOTALL,
-            "UNICODE": re.UNICODE,
-            "VERBOSE": re.VERBOSE
-        }
-        for flag_name in flag_names:
-            flag = valid_flags.get(flag_name.upper())
-            if flag is not None:
-                compiled_flags |= flag
-            else:
-                raise ValueError(f"Invalid flag: {flag_name}")
-        return compiled_flags
-
-    def _decompile_flags(self) -> list[str]:
-        """
-        Decompile the integer flags into a list of their string representations.
-
-        Returns:
-            list[str]: A list of flag names as strings.
-        """
-        valid_flags = {
-            "IGNORECASE": re.IGNORECASE,
-            "MULTILINE": re.MULTILINE,
-            "DOTALL": re.DOTALL,
-            "UNICODE": re.UNICODE,
-            "VERBOSE": re.VERBOSE
-        }
-        flag_names = [flag_str for flag_str,
-                      flag_val in valid_flags.items() if self.flags & flag_val]
-        return flag_names
-
-    def validate_configuration(self) -> None:
-        """
-        Validates the configuration of the RegexRequest. Currently, this method does not perform any checks.
-        """
-        pass
-
-    def to_dict(self) -> dict[str, Union[str, list[str]]]:
-        """
-        Converts the RegexRequest instance to a dictionary, including string representations for flags.
-
-        Returns:
-            dict[str, Union[str, list[str]]]: A dictionary representation of the RegexRequest.
-        """
-        return {
-            "p_type": self.p_type,
-            "p_subtype": self.p_subtype,
-            "pattern": self.pattern,
-            "flags": self._decompile_flags(),
-            "comment": self.comment
-        }
-
-    def __len__(self) -> int:
-        """
-        Returns the length of the RegexRequest, which is always 1 for a single request.
-
-        Returns:
-            int: The length of the RegexRequest.
-        """
-        return 1
-
-    def __repr__(self) -> str:
-        """
-        Provides a string representation of the RegexRequest.
-
-        Returns:
-            str: A string representation of the RegexRequest.
-        """
-        pattern = self.pattern if len(
-            self.pattern) < 25 else self.pattern[:25] + '...'
-        comment = self.comment if len(
-            self.comment) < 25 else self.comment[:25] + '...'
-        return f"RegexRequest(p_type={self.p_type}, p_subtype={self.p_subtype}, pattern={pattern}, flags={self.flags}, comment={comment})"
 
 
 class RegexBlueprint:
@@ -133,17 +25,11 @@ class RegexBlueprint:
         self.pattern_structure = pattern_structure
         self.pattern_texts = pattern_texts
         self.comment = comment
+        self._initialize_items()
 
-    def to_list(self) -> List[RegexRequest]:
-        """
-        Generates a list of RegexRequest objects based on the blueprint.
-
-        Returns:
-            List[RegexRequest]: A list of generated RegexRequest objects following the blueprint's structure.
-        """
-        regex_requests = []
-        for name in self.order:
-            text = self.pattern_texts[name]
+    def _initialize_items(self):
+        self.items: dict[str, RegexRequest] = {}
+        for name, text in self.pattern_texts.items():
             pattern = (f"{self.pattern_structure['beginning']}"
                        f"{text}{self.pattern_structure['ending']}")
             regex_request = RegexRequest(
@@ -153,8 +39,16 @@ class RegexBlueprint:
                 flags=self.pattern_structure['flags'],
                 comment=self.comment
             )
-            regex_requests.append(regex_request)
-        return regex_requests
+            self.items[name] = regex_request
+
+    def to_list(self) -> List[RegexRequest]:
+        """
+        Generates a list of RegexRequest objects based on the blueprint.
+
+        Returns:
+            List[RegexRequest]: A list of generated RegexRequest objects following the blueprint's structure.
+        """
+        return [self.items[name] for name in self.order]
 
     def validate_configuration(self) -> None:
         """
@@ -205,6 +99,16 @@ class RegexBlueprint:
             pattern_text (str): The specific text snippet to be inserted into the pattern structure for this new item.
         """
         self.pattern_texts[name] = pattern_text
+        pattern = (f"{self.pattern_structure['beginning']}"
+                   f"{pattern_text}{self.pattern_structure['ending']}")
+        regex_request = RegexRequest(
+            p_type="Block",
+            p_subtype=name,
+            pattern=pattern,
+            flags=self.pattern_structure['flags'],
+            comment=self.comment
+        )
+        self.items[name] = regex_request
         self.order.append(name)
         self.validate_configuration()
 
@@ -363,7 +267,7 @@ class RegexSettings:
         """
         ordered_items = []
         for name in self.order:
-            item = self.items.get(name)
+            item = self.items[name]
             if isinstance(item, RegexRequest):
                 ordered_items.append(item)
             elif isinstance(item, (RegexSettings, RegexBlueprint)):

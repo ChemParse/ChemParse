@@ -2,7 +2,7 @@
   "order": [
     "TypeKnownBlocks",
     "TypeDefaultBlocks",
-    "TypeUnknownBlocks",
+    "BlockUnknown",
     "Spacer"
   ],
   "TypeKnownBlocks": {
@@ -10,7 +10,8 @@
       "BlockIcon",
       "BlockShark",
       "BlockWarnings",
-      "BlueprintOneLineHeader",
+      "BlueprintParagraphStartsWith",
+      "BlueprintBlockWithSingeLineHeader",
       "BlockOrbitalBasis",
       "BlockAuxJBasis",
       "BlockInputFile",
@@ -28,12 +29,11 @@
     "BlockIcon": {
       "p_type": "Block",
       "p_subtype": "BlockIcon",
-      "pattern": "^([ \\t]*#,[ \\t]*\\n[ \\t]*###[ \\t]*\\n[ \\t]*####[ \\t]*\\n[ \\t]*#####[ \\t]*\\n.*?)\\n[ \\t]*$",
+      "pattern": "^((?:[ \\t]*#,[ \\t]*\\n[ \\t]*###[ \\t]*\\n[ \\t]*####[ \\t]*\\n[ \\t]*#####[ \\t]*\\n)(?:(?!^.*<@%.*%@>.*$|^[ \\t]*$).*(\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$).*))?)*)",
       "flags": [
-        "MULTILINE",
-        "DOTALL"
+        "MULTILINE"
       ],
-      "comment": "Searching for the fin of orca, assuming that the icon ends at the first empty line"
+      "comment": "Searching for the fin of orca, assuming that the icon ends at the first empty line or block pattern. (?!^.*<@%.*%@>.*$|^[ \\t]*$).* -- not empty or block"
     },
     "BlockShark": {
       "p_type": "Block",
@@ -47,13 +47,13 @@
     "BlockWarnings": {
       "p_type": "Block",
       "p_subtype": "BlockWarnings",
-      "pattern": "^(([ \\t]*={10,}[ \\t]*\\n)[ \\t]*WARNINGS[ \\t]*\n((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\n){,3}([ \\t]*={10,}[ \\t]*\\n)((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)\\n([ \\t]*[-*#=]{7,}[ \\t]*|(<@%))",
+      "pattern": "^(([ \\t]*={10,}[ \\t]*\\n)[ \\t]*WARNINGS[ \\t]*\\n((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n){,3}([ \\t]*={10,}[ \\t]*\\n)((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)\\n([ \\t]*[-*#=]{7,}[ \\t]*|(<@%))",
       "flags": [
         "MULTILINE"
       ],
       "comment": "Starts with ===, then WARNINGS, then up to 3 non-special lines inside of header, then ===, then non-special lines, then one more non-special line, but \\n is outside of the main search bracket. Non-special line is defined by (?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*. Non-special line might be empty. <@% %@> is the internal marker for blocks."
     },
-    "BlueprintOneLineHeader": {
+    "BlueprintParagraphStartsWith": {
       "order": [
         "BlockVersion",
         "BlockContributions",
@@ -64,7 +64,7 @@
       ],
       "pattern_structure": {
         "beginning": "^([ \\t]*",
-        "ending": ".*?\\n([ \\t]*\\S.*\\n)*[ \\t]*\\S.*)$",
+        "ending": ".*?\\n(?:(?!^.*<@%.*%@>.*$|^[ \\t]*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*))?)*)",
         "flags": [
           "MULTILINE"
         ]
@@ -77,7 +77,23 @@
         "BlockLibXc": "Your ORCA version has been built with support for libXC",
         "BlockUses": "This ORCA versions uses"
       },
-      "comment": "Blueprint: Starts with specified text, followed by non-empty lines, then one more non-empty line, but \\n is outside of the main search bracket"
+      "comment": "Blueprint: Paragraph with the line that starts with specified text. First ^ can be replaced with (?:^[ \t]*\n|^.*<@%.*%@>.*\n|^[ \t]*[-*#=]{7,}[ \t]*\n) to ensure that the given text is the beginning of the paragraph"
+    },
+    "BlueprintBlockWithSingeLineHeader": {
+      "order": [
+        "BlockRotationalSpectrum"
+      ],
+      "pattern_structure": {
+        "beginning": "^((?:[ \\t]*[-*#=]{7,}[ \\t]*\\n)(?:[ \\t]*[-*#=]?[ \\t]*",
+        "ending": "[ \\t]*[-*#=]?[ \\t]*\\n)(?:[ \\t]*[-*#=]{7,}[ \\t]*\\n)(?:(?!^.*<@%.*%@>.*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*))?)*)",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockRotationalSpectrum": "Rotational spectrum"
+      },
+      "comment": "Blueprint: Block starts with a line of special characters, followed by the 1 line header and then one more line of special characters. Then text until the special line or the next block"
     },
     "BlockOrbitalBasis": {
       "p_type": "Block",
@@ -100,7 +116,7 @@
     "BlockInputFile": {
       "p_type": "Block",
       "p_subtype": "BlockInputFile",
-      "pattern": "^(([ \\t]*={10,}[ \\t]*\\n)([ \\t]*INPUT FILE[ \\t]*\n)([ \\t]*={10,}[ \\t]*\\n)(.*?\n)*([ \\t]*={10,}[ \\t]*))$",
+      "pattern": "^(([ \\t]*={10,}[ \\t]*\\n)([ \\t]*INPUT FILE[ \\t]*\\n)([ \\t]*={10,}[ \\t]*\\n)(.*?\\n)*([ \\t]*={10,}[ \\t]*))$",
       "flags": [
         "MULTILINE"
       ],
@@ -217,7 +233,9 @@
   "TypeDefaultBlocks": {
     "order": [
       "BlockUnrecognizedWithHeader_1",
-      "BlockUnrecognizedWithHeader_2"
+      "BlockUnrecognizedWithHeader_2",
+      "BlockUnrecognizedNotification",
+      "BlockUnrecognizedMessage"
     ],
     "BlockUnrecognizedWithHeader_1": {
       "p_type": "Block",
@@ -236,14 +254,7 @@
         "MULTILINE"
       ],
       "comment": "This pattern stands for -*#= line followed by no more then 2 non-special lines then -*#= line then non-special lines then -*#= line. Non-special line is defined by (?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*. Non-special line might be empty. <@% %@> is the internal marker for blocks with header. This is the final attempt to recognize the block. Does not work with DOTALL. Is repeated twice cause overlap."
-    }
-  },
-  "TypeUnknownBlocks": {
-    "order": [
-      "BlockUnrecognizedNotification",
-      "BlockUnrecognizedMessage",
-      "BlockUnrecognizedFormat"
-    ],
+    },
     "BlockUnrecognizedNotification": {
       "p_type": "Block",
       "p_subtype": "BlockUnrecognizedNotification",
@@ -261,16 +272,16 @@
         "MULTILINE"
       ],
       "comment": "What's left and looks like a single line message"
-    },
-    "BlockUnrecognizedFormat": {
-      "p_type": "Block",
-      "p_subtype": "BlockUnrecognizedFormat",
-      "pattern": "^(((((?!.*<@%)(?!.*\\*%@>)[^\\s].*[^\\s])\\n)*)((?!.*<@%)(?!.*\\*%@>)[^\\s].*[^\\s]))$",
-      "flags": [
-        "MULTILINE"
-      ],
-      "comment": "I have no clue what that is but it is not empty and is not my marker"
     }
+  },
+  "BlockUnknown": {
+    "p_type": "Block",
+    "p_subtype": "BlockUnknown",
+    "pattern": "^((?:(?!^.*<@%.*%@>.*$|^[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$).*))?)+)$",
+    "flags": [
+      "MULTILINE"
+    ],
+    "comment": "I have no clue what that is but it is not empty and is not my marker"
   },
   "Spacer": {
     "p_type": "Spacer",
