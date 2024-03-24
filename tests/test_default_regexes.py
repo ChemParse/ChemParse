@@ -21,12 +21,12 @@ def extract_raw_text_from_apply_with_check(apply):
 def consistency_check(regex, text, additional_text):
     output = extract_raw_text_from_apply_with_check(
         regex.apply('\n\n'+text+'\n'+additional_text))
-    assert output == text, f'Pattern can not identify the pattern with the {
-        additional_text} after it'
+    assert output == text, (f'Pattern can not identify the block'
+                            f' with the {additional_text} after it')
     output = extract_raw_text_from_apply_with_check(
         regex.apply(additional_text+'\n'+text+'\n'+additional_text+'\n'))
-    assert output == text, f'Pattern can not identify the pattern surrounded by {
-        additional_text}'
+    assert output == text, (f'Pattern can not identify the pattern'
+                            f' surrounded by {additional_text}')
 
 
 # Generate a list of all files in the 'tests/orca_test_outputs' directory
