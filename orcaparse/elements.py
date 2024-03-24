@@ -42,8 +42,7 @@ class Element:
     def to_html(self) -> str:
         data = self.raw_data
         is_block = isinstance(self, Block)
-        class_name = self.__class__.__name__.lower()
-        return (f'<div class="{class_name}" '
+        return (f'<div class="element" '
                 f'python-class-name="{self.__class__.__name__}" '
                 f'is-block="{is_block}"><pre>{data}</pre></div>')
 
@@ -136,7 +135,6 @@ class Block(Element):
         return f'<pre>{body_raw}</pre>'
 
     def to_html(self) -> str:
-        class_name = self.__class__.__name__.lower()
         readable_name, header, body = self.extract_name_header_and_body()
         header_level = max(7-self.depth(), 1)
         header_html = (f'<div class="header"><h{header_level}>'
@@ -149,7 +147,7 @@ class Block(Element):
         line_start, line_finish = self.position or (-1, -1)
         can_extract_data = self.data_available
         is_block = True
-        return (f'<div class="{class_name}" is-block="{is_block}" '
+        return (f'<div class="element block" '
                 f'python-class-name="{self.__class__.__name__}" '
                 f'readable-name="{readable_name}" '
                 f'start-line={line_start} finish-line={line_finish} '

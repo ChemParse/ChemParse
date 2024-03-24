@@ -11,7 +11,6 @@
 
     --block-default-color: #121212;
     --block-icon-color: #2264dc;
-    --block-unrecognized-color: #dd0063;
 
     --header-bg-color: transparent;
 
@@ -76,7 +75,7 @@ body {
 
 /* Styling for block elements */
 
-.content div[is-block^="True"] {
+.content .block {
     display: block;
     margin: 2px 0;
     /* Maintain vertical spacing between blocks */
@@ -91,18 +90,18 @@ body {
 }
 
 /* On hover, only change the background color inside the padding area */
-.content div[is-block^="True"]:hover {
+.content .block:hover {
     background-color: var(--block-hover-bg-color);
     /* Change background color on hover */
 }
 
 /* Styling for headers within blocks */
-.content div[is-block^="True"] h1,
-.content div[is-block^="True"] h2,
-.content div[is-block^="True"] h3,
-.content div[is-block^="True"] h4,
-.content div[is-block^="True"] h5,
-.content div[is-block^="True"] h6 {
+.content .block h1,
+.content .block h2,
+.content .block h3,
+.content .block h4,
+.content .block h5,
+.content .block h6 {
     font-family: Arial, sans-serif;
     font-size: 16px;
     font-weight: normal;
@@ -115,20 +114,20 @@ body {
     /* Adjust width to account for padding */
 }
 
-.content div[is-block^="True"] pre {
+.content .block pre {
     border: none;
     padding: 10px;
     margin: 0;
     overflow-x: hidden;
 }
 
-.content div[is-block^="True"] .hr-in-block {
+.content .block .hr-in-block {
     height: 2px;
     border: none;
     background-color: var(--hr-bg-color);
 }
 
-.content div[is-block^="True"]:hover .hr-in-block {
+.content .block:hover .hr-in-block {
     background-color: var(--hr-hover-bg-color);
     /* Change hr background color on hover */
 }
@@ -140,18 +139,14 @@ body {
 }
 
 /* Default block styling */
-.content .block-default.block-default {
+.content .block {
     color: var(--block-default-color);
     /* Darker text for better readability */
 }
 
 /* Specific styling for different block subtypes */
-.content .block-icon.block-icon {
+.content .block[python-class-name="BlockIcon"] {
     color: var(--block-icon-color);
-}
-
-.content .block-unrecognized.block-unrecognized {
-    color: var(--block-unrecognized-color);
 }
 
 

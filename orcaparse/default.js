@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let blockId = 0; // Initialize a block ID counter
 
-    document.querySelectorAll('div[is-block="True"]').forEach(function (element) {
+    document.querySelectorAll('.block').forEach(function (element) {
         const readableName = element.getAttribute('readable-name');
         const startLine = element.getAttribute('start-line');
         const dataAvailable = element.getAttribute('data_available');
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const computedStyles = getComputedStyle(document.documentElement);
 
-    const dataBlocks = document.querySelectorAll('div[is-block="True"]');
+    const dataBlocks = document.querySelectorAll('.block');
     dataBlocks.forEach(function (dataBlock, index) {
         const isDataAvailable = dataBlock.getAttribute('data_available');
         const pythonClass = dataBlock.getAttribute('python-class-name');

@@ -18,7 +18,6 @@
 
     --block-default-color: #121212;
     --block-icon-color: #2264dc;
-    --block-unrecognized-color: #dd0063;
 
     --header-bg-color: transparent;
 
@@ -83,7 +82,7 @@ body {
 
 /* Styling for block elements */
 
-.content div[is-block^="True"] {
+.content .block {
     display: block;
     margin: 2px 0;
     /* Maintain vertical spacing between blocks */
@@ -98,18 +97,18 @@ body {
 }
 
 /* On hover, only change the background color inside the padding area */
-.content div[is-block^="True"]:hover {
+.content .block:hover {
     background-color: var(--block-hover-bg-color);
     /* Change background color on hover */
 }
 
 /* Styling for headers within blocks */
-.content div[is-block^="True"] h1,
-.content div[is-block^="True"] h2,
-.content div[is-block^="True"] h3,
-.content div[is-block^="True"] h4,
-.content div[is-block^="True"] h5,
-.content div[is-block^="True"] h6 {
+.content .block h1,
+.content .block h2,
+.content .block h3,
+.content .block h4,
+.content .block h5,
+.content .block h6 {
     font-family: Arial, sans-serif;
     font-size: 16px;
     font-weight: normal;
@@ -122,20 +121,20 @@ body {
     /* Adjust width to account for padding */
 }
 
-.content div[is-block^="True"] pre {
+.content .block pre {
     border: none;
     padding: 10px;
     margin: 0;
     overflow-x: hidden;
 }
 
-.content div[is-block^="True"] .hr-in-block {
+.content .block .hr-in-block {
     height: 2px;
     border: none;
     background-color: var(--hr-bg-color);
 }
 
-.content div[is-block^="True"]:hover .hr-in-block {
+.content .block:hover .hr-in-block {
     background-color: var(--hr-hover-bg-color);
     /* Change hr background color on hover */
 }
@@ -147,18 +146,14 @@ body {
 }
 
 /* Default block styling */
-.content .block-default.block-default {
+.content .block {
     color: var(--block-default-color);
     /* Darker text for better readability */
 }
 
 /* Specific styling for different block subtypes */
-.content .block-icon.block-icon {
+.content .block[python-class-name="BlockIcon"] {
     color: var(--block-icon-color);
-}
-
-.content .block-unrecognized.block-unrecognized {
-    color: var(--block-unrecognized-color);
 }
 
 
@@ -287,29 +282,29 @@ body {
             <!-- JavaScript will populate this area -->
         </div>
         <div class="content">
-            <div class="spacer" python-class-name="Spacer" is-block="False"><pre></pre></div>
-<div class="blockunknown" is-block="True" python-class-name="BlockUnknown" readable-name="My start of the message messag..." start-line=2 finish-line=3 data_available=False><div class="data"><pre>My start of the message: message1
+            <div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div>
+<div class="element block" python-class-name="BlockUnknown" readable-name="My start of the message messag..." start-line=2 finish-line=3 data_available=False><div class="data"><pre>My start of the message: message1
 message2</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="spacer" python-class-name="Spacer" is-block="False"><pre></pre></div>
-<div class="blockunrecognizedwithheader" is-block="True" python-class-name="BlockUnrecognizedWithHeader" readable-name="My data" start-line=5 finish-line=10 data_available=False><div class="header"><h6><pre>--------------------
+<div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div>
+<div class="element block" python-class-name="BlockUnrecognizedWithHeader" readable-name="My data" start-line=5 finish-line=10 data_available=False><div class="header"><h6><pre>--------------------
 My data
 --------------------
 </pre></h6></div><hr class="hr-in-block"></hr><div class="data"><pre> 
 My value: 1.234 eV
 </pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="blockunrecognizedwithheader" is-block="True" python-class-name="BlockUnrecognizedWithHeader" readable-name="Another data" start-line=11 finish-line=16 data_available=False><div class="header"><h6><pre>                            ***************************************
+<div class="element block" python-class-name="BlockUnrecognizedWithHeader" readable-name="Another data" start-line=11 finish-line=16 data_available=False><div class="header"><h6><pre>                            ***************************************
                             *            Another data             *
                             ***************************************
 </pre></h6></div><hr class="hr-in-block"></hr><div class="data"><pre>Not my match
 My value: 9.876 eV
 </pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="blockfinalsinglepointenergy" is-block="True" python-class-name="BlockFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=17 finish-line=19 data_available=True><div class="data"><pre>-------------------------   --------------------
+<div class="element block" python-class-name="BlockFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=17 finish-line=19 data_available=True><div class="data"><pre>-------------------------   --------------------
 FINAL SINGLE POINT ENERGY      -440.508559636589
 -------------------------   --------------------</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="spacer" python-class-name="Spacer" is-block="False"><pre>
-</pre></div><div class="spacer" python-class-name="Spacer" is-block="False"><pre></pre></div>
-<div class="blockterminatednormally" is-block="True" python-class-name="BlockTerminatedNormally" readable-name="ORCA TERMINATED NORMALLY" start-line=22 finish-line=22 data_available=True><div class="data"><pre>                             ****ORCA TERMINATED NORMALLY****</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="blocktotalruntime" is-block="True" python-class-name="BlockTotalRunTime" readable-name="TOTAL RUN TIME" start-line=23 finish-line=23 data_available=True><div class="data"><pre>TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec</pre></div></div><hr class = "hr-between-blocks"></hr>
+<div class="element" python-class-name="Spacer" is-block="False"><pre>
+</pre></div><div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div>
+<div class="element block" python-class-name="BlockTerminatedNormally" readable-name="ORCA TERMINATED NORMALLY" start-line=22 finish-line=22 data_available=True><div class="data"><pre>                             ****ORCA TERMINATED NORMALLY****</pre></div></div><hr class = "hr-between-blocks"></hr>
+<div class="element block" python-class-name="BlockTotalRunTime" readable-name="TOTAL RUN TIME" start-line=23 finish-line=23 data_available=True><div class="data"><pre>TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec</pre></div></div><hr class = "hr-between-blocks"></hr>
         </div>
     </div>
     <script>
@@ -324,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let blockId = 0; // Initialize a block ID counter
 
-    document.querySelectorAll('div[is-block="True"]').forEach(function (element) {
+    document.querySelectorAll('.block').forEach(function (element) {
         const readableName = element.getAttribute('readable-name');
         const startLine = element.getAttribute('start-line');
         const dataAvailable = element.getAttribute('data_available');
@@ -403,7 +398,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const computedStyles = getComputedStyle(document.documentElement);
 
-    const dataBlocks = document.querySelectorAll('div[is-block="True"]');
+    const dataBlocks = document.querySelectorAll('.block');
     dataBlocks.forEach(function (dataBlock, index) {
         const isDataAvailable = dataBlock.getAttribute('data_available');
         const pythonClass = dataBlock.getAttribute('python-class-name');
