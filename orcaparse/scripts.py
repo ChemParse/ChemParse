@@ -64,8 +64,10 @@ def orca_to_html_cli():
                  insert_colorcomment_sidebar=args.insert_colorcomment_sidebar)
 
 
-def orca_parse(input_file: str, output_file: str, file_format: str = 'auto', readable_name: Optional[str] = None,
-               raw_data_substrings: list[str] = []):
+def orca_parse(input_file: str, output_file: str, file_format: str = 'auto',
+               readable_name: Optional[str] = None,
+               raw_data_substrings: list[str] = [],
+               raw_data_not_substrings: list[str] = []):
     """
     Exports data from an ORCA output file to various formats based on specified filtering criteria.
 
@@ -77,13 +79,16 @@ def orca_parse(input_file: str, output_file: str, file_format: str = 'auto', rea
         file_format (str): Desired output format ('auto', 'csv', 'json', 'html', 'xlsx'). Defaults to 'auto'.
         readable_name (Optional[str]): Filter elements by their readable name (None by default).
         raw_data_substrings (list[str]): list of substrings to filter elements by their raw data ([] by default).
+        raw_data_not_substrings (list[str]): list of substrings to filter elements by their raw data ([] by default).
 
     The function doesn't return any value but saves the extracted data to the specified output path in the chosen format.
     """
     # Assuming the existence of a `File` class with a `get_data` method as indicated in the original script
     orca_file = File(file_path=input_file)
     data = orca_file.get_data(
-        extract_only_raw=True, readable_name=readable_name, raw_data_substring=raw_data_substrings).drop('Element', axis=1)
+        extract_only_raw=True, readable_name=readable_name,
+        raw_data_substring=raw_data_substrings,
+        raw_data_not_substring=raw_data_not_substrings).drop('Element', axis=1)
     data_sorted = data.sort_values(by='Position')
 
     if file_format == 'auto':
@@ -120,8 +125,11 @@ def orca_parse_cli():
                         help="Filter elements by their readable name.")
     parser.add_argument("--raw_data_substring", action='append', default=[],
                         help="Filter elements by a substring of their raw data. Can be used multiple times.")
+    parser.add_argument("--raw_data_not_substring", action='append', default=[],
+                        help="Filter elements by absence of a substring of their raw data. Can be used multiple times.")
 
     args = parser.parse_args()
 
     orca_parse(input_file=args.input_file, output_file=args.output_file, file_format=args.format,
-               readable_name=args.readable_name, raw_data_substrings=args.raw_data_substring)
+               readable_name=args.readable_name, raw_data_substrings=args.raw_data_substring,
+               raw_data_not_substrings=args.raw_data_not_substring)
