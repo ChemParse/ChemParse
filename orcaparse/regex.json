@@ -11,6 +11,7 @@
       "BlockShark",
       "BlockWarnings",
       "BlueprintParagraphStartsWith",
+      "BlueprintBlockWithSingeLineHeader",
       "BlockOrbitalBasis",
       "BlockAuxJBasis",
       "BlockInputFile",
@@ -63,7 +64,7 @@
       ],
       "pattern_structure": {
         "beginning": "^([ \\t]*",
-        "ending": ".*?\\n([ \\t]*\\S.*\\n)*[ \\t]*\\S.*)$",
+        "ending": ".*?\\n(?:(?!^.*<@%.*%@>.*$|^[ \\t]*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*))?)*)",
         "flags": [
           "MULTILINE"
         ]
@@ -76,7 +77,23 @@
         "BlockLibXc": "Your ORCA version has been built with support for libXC",
         "BlockUses": "This ORCA versions uses"
       },
-      "comment": "Blueprint: Starts with specified text, followed by non-empty lines, then one more non-empty line, but \\n is outside of the main search bracket"
+      "comment": "Blueprint: Paragraph with the line that starts with specified text. First ^ can be replaced with (?:^[ \t]*\n|^.*<@%.*%@>.*\n|^[ \t]*[-*#=]{7,}[ \t]*\n) to ensure that the given text is the beginning of the paragraph"
+    },
+    "BlueprintBlockWithSingeLineHeader": {
+      "order": [
+        "RotationalSpectrum"
+      ],
+      "pattern_structure": {
+        "beginning": "^([ \\t]*[-*#=]{7,}[ \\t]*$\\n[ \\t]*[-*#=]?[ \\t]*",
+        "ending": "[ \\t]*[-*#=]?[ \\t]*\\n[ \\t]*[-*#=]{7,}[ \\t]*$\\n(?:(?!^.*<@%.*%@>.*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*[-*#=]{7,}[ \\t]*$).*))?)*)",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "RotationalSpectrum": "Rotational spectrum"
+      },
+      "comment": "Blueprint: Block starts with a line of special characters, followed by the 1 line header and then one more line of special characters. Then text until the special line or the next block"
     },
     "BlockOrbitalBasis": {
       "p_type": "Block",
@@ -260,7 +277,7 @@
   "BlockUnknown": {
     "p_type": "Block",
     "p_subtype": "BlockUnknown",
-    "pattern": "^(((((?!.*<@%)(?!.*\\*%@>)[^\\s].*[^\\s])\\n)*)((?!.*<@%)(?!.*\\*%@>)[^\\s].*[^\\s]))$",
+    "pattern": "^((?:(?!^.*<@%.*%@>.*$|^[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$).*))?)+)$",
     "flags": [
       "MULTILINE"
     ],
