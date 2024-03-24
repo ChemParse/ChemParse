@@ -160,9 +160,6 @@ class Block(Element):
 
 @AvailableBlocks.register_block
 class BlockWithStandardHeader(Block):
-    def __init__(self, raw_data: str, position: tuple | None = None) -> None:
-        super().__init__(raw_data=raw_data, position=position)
-
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         # Define regex pattern to split header and body
         pattern = r"^(([ \t]*[-*#]{7,}[ \t]*\n)(.*?)(\n[ \t]*[-*#]{7,}[ \t]*\n|$))"
@@ -288,7 +285,7 @@ class BlockFinalSinglePointEnergy(Block):
 
         try:
             energy = float(energy) * ureg.Eh
-            return Data(data={'Energy': energy}, comment='`Energy` in pint format, to extract the value in Eh, use method .magnitude')
+            return Data(data={'Energy': energy}, comment='`Energy` in pint format, to extract the value in Eh, use property .magnitude')
         except ValueError:
             raise ExtractionError(
                 f"Failed to convert the extracted energy {energy} to a floating-point number.")
@@ -360,7 +357,7 @@ class BlockDipoleMoment(BlockWithStandardHeader):
             result[label.strip()] = float(
                 value)*ureg.debye if unit == "Debye" else float(value)
 
-        return Data(data=result, comment='Numpy arrays of contributions, total dipole moment and pint object of `Magnitude (Debye)`.\nThe magnitude of the magnitude in Debye can be extracted from pint with .magnitude method')
+        return Data(data=result, comment='Numpy arrays of contributions, total dipole moment and pint object of `Magnitude (Debye)`.\nThe magnitude of the magnitude in Debye can be extracted from pint with .magnitude property.')
 
 
 @AvailableBlocks.register_block
@@ -409,7 +406,7 @@ class BlockOrbitalEnergies(BlockWithStandardHeader):
         spin_down_df = pd.DataFrame(spin_down_data, columns=columns)
 
         # Return a dictionary containing both DataFrames
-        return Data(data={'Spin Up': spin_up_df, 'Spin Down': spin_down_df}, comment='Pandas DataFrames `Spin Up` and `Spin Down`. Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.')
+        return Data(data={'Spin Up': spin_up_df, 'Spin Down': spin_down_df}, comment='Pandas DataFrames `Spin Up` and `Spin Down`. Energy is represented by pint object. Magnitude cane be extracted with .magnitude property.')
 
 
 @AvailableBlocks.register_block
