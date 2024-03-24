@@ -18,9 +18,6 @@ class ExtractionError(Exception):
 
 
 class Element:
-    p_type: str = 'element'
-    p_subtype: str = 'default'
-
     def __init__(self, raw_data: str) -> None:
         self.raw_data = raw_data
 
@@ -35,18 +32,20 @@ class Element:
 
     def data(self) -> Data:
         warnings.warn(
-            (f"No procedure for analyzing the data found in type `{self.p_type}`"
-             f" subtype `{self.p_subtype}`, returning the raw data:\n{self.raw_data}")
+            (f"No procedure for analyzing the data found in type `{type(self)}`,"
+             f"returning the raw data:\n{self.raw_data}")
         )
         return Data(data={'raw data': self.raw_data},
                     comment=("No procedure for analyzing the data found, `raw data` collected.\n"
                              "Please contribute to the project if you have knowledge on how to extract data from it."))
 
     def to_html(self) -> str:
-        class_name = (f"{self.p_type.lower().replace(' ', '-')}-"
-                      f"{self.p_subtype.lower().replace(' ', '-')}")
         data = self.raw_data
-        return f'<div class="{class_name}" data-p-type="{self.p_type}" data-p-subtype="{self.p_subtype}"><pre>{data}</pre></div>'
+        is_block = isinstance(self, Block)
+        class_name = self.__class__.__name__.lower()
+        return (f'<div class="{class_name}" '
+                f'python-class-name="{self.__class__.__name__}" '
+                f'is-block="{is_block}"><pre>{data}</pre></div>')
 
     def depth(self) -> int:
         return Element.max_depth(self.get_structure())
@@ -61,19 +60,22 @@ class Element:
     def process_invalid_name(input_string: str) -> str:
         # Check if the string contains any letters; if not, return "unknown"
         if not any(char.isalpha() for char in input_string):
-            return "Unknown: " + input_string[:21]
+            cleaned_string = ''.join(
+                char for char in input_string if not char.isspace())
+            return "Unknown: " + cleaned_string[:21] + ('' if len(cleaned_string) < 19 else '...')
 
         # Remove all characters that are not letters or spaces
         cleaned_string = ''.join(
             char for char in input_string if char.isalpha() or char.isspace())
+        single_spaced_text = re.sub(r'\s+', ' ', cleaned_string)
+        if single_spaced_text.startswith(' '):
+            single_spaced_text = single_spaced_text[1:]
 
         # Return the first 30 characters of the cleaned string
-        return cleaned_string[:30]
+        return single_spaced_text[:30] + ('' if len(single_spaced_text) < 28 else '...')
 
 
 class Spacer(Element):
-    p_type: str = 'spacer'
-
     def __init__(self, raw_data: str) -> None:
         super().__init__(raw_data=raw_data)
 
@@ -107,7 +109,6 @@ class AvailableBlocks:
 
 
 class Block(Element):
-    p_type: str = 'block'
     data_available: bool = False
 
     def __init__(self, raw_data: str, position: tuple | None = None) -> None:
@@ -135,9 +136,8 @@ class Block(Element):
         return f'<pre>{body_raw}</pre>'
 
     def to_html(self) -> str:
+        class_name = self.__class__.__name__.lower()
         readable_name, header, body = self.extract_name_header_and_body()
-        class_name = (f"{self.p_type.lower().replace(' ', '-')}-"
-                      f"{self.p_subtype.lower().replace(' ', '-')}")
         header_level = max(7-self.depth(), 1)
         header_html = (f'<div class="header"><h{header_level}>'
                        f'{self.header_preformat(header)}'
@@ -147,9 +147,11 @@ class Block(Element):
                      f'{self.body_preformat(body)}'
                      f'</div>') if body else ''
         line_start, line_finish = self.position or (-1, -1)
-        can_extract_data = 1 if self.data_available else 0
-        return (f'<div class="{class_name}" data-p-type="{self.p_type}" '
-                f'data-p-subtype="{self.p_subtype}" readable-name="{readable_name}" '
+        can_extract_data = self.data_available
+        is_block = True
+        return (f'<div class="{class_name}" is-block="{is_block}" '
+                f'python-class-name="{self.__class__.__name__}" '
+                f'readable-name="{readable_name}" '
                 f'start-line={line_start} finish-line={line_finish} '
                 f'data_available={can_extract_data}>'
                 f'{header_html+body_html}</div>'
@@ -158,8 +160,6 @@ class Block(Element):
 
 @AvailableBlocks.register_block
 class BlockWithStandardHeader(Block):
-    p_subtype: str = 'default-with-header'
-
     def __init__(self, raw_data: str, position: tuple | None = None) -> None:
         super().__init__(raw_data=raw_data, position=position)
 
@@ -215,13 +215,21 @@ class BlockWithStandardHeader(Block):
 
 @AvailableBlocks.register_block
 class BlockUnrecognizedWithHeader(BlockWithStandardHeader):
-    p_subtype: str = 'unrecognized-with-header'
+    pass
+
+
+@AvailableBlocks.register_block
+class BlockUnrecognizedNotification(Block):
+    pass
+
+
+@AvailableBlocks.register_block
+class BlockUnrecognizedMessage(Block):
+    pass
 
 
 @AvailableBlocks.register_block
 class BlockUnknown(Block):
-    p_subtype: str = 'unknown'
-
     def data(self):
         warnings.warn(
             f'The block looks not structured. Please contribute to the project if you have knowledge on how to extract data from it.')
@@ -232,7 +240,6 @@ class BlockUnknown(Block):
 
 @AvailableBlocks.register_block
 class BlockIcon(Block):
-    p_subtype: str = 'icon'
     data_available: bool = True
 
     def readable_name(self) -> str:
@@ -253,15 +260,12 @@ class BlockIcon(Block):
 
 @AvailableBlocks.register_block
 class BlockAllRightsReserved(Block):
-    p_subtype: str = 'all-rights-reserved'
-
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return 'All Rights Reserved', None, self.raw_data
 
 
 @AvailableBlocks.register_block
 class BlockFinalSinglePointEnergy(Block):
-    p_subtype: str = 'final-single-point-energy'
     data_available: bool = True
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
@@ -296,7 +300,6 @@ class BlockFinalSinglePointEnergy(Block):
 
 @AvailableBlocks.register_block
 class BlockScfConverged(Block):
-    p_subtype: str = 'scf-converged'
     data_available: bool = True
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
@@ -328,7 +331,6 @@ class BlockScfConverged(Block):
 
 @AvailableBlocks.register_block
 class BlockDipoleMoment(BlockWithStandardHeader):
-    p_subtype: str = 'dipole-moment'
     data_available: bool = True
 
     def data(self) -> dict:
@@ -363,7 +365,6 @@ class BlockDipoleMoment(BlockWithStandardHeader):
 
 @AvailableBlocks.register_block
 class BlockOrbitalEnergies(BlockWithStandardHeader):
-    p_subtype: str = 'orbital-energies'
     data_available: bool = True
 
     def data(self) -> dict[str, pd.DataFrame]:
@@ -413,7 +414,6 @@ class BlockOrbitalEnergies(BlockWithStandardHeader):
 
 @AvailableBlocks.register_block
 class BlockTerminatedNormally(Block):
-    p_subtype: str = 'terminated-normally'
     data_available: bool = True
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
@@ -428,7 +428,6 @@ class BlockTerminatedNormally(Block):
 
 @AvailableBlocks.register_block
 class BlockTotalRunTime(Block):
-    p_subtype: str = 'total-run-time'
     data_available: bool = True
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
@@ -465,7 +464,6 @@ class BlockTotalRunTime(Block):
 
 @AvailableBlocks.register_block
 class BlockTimingsForIndividualModules(Block):
-    p_subtype: str = 'timings-for-individual-modules'
     data_available: bool = True
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:

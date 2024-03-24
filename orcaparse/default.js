@@ -9,57 +9,63 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let blockId = 0; // Initialize a block ID counter
 
-    document.querySelectorAll('div[data-p-type="block"]').forEach(function (element) {
+    document.querySelectorAll('div[is-block="True"]').forEach(function (element) {
         const readableName = element.getAttribute('readable-name');
         const startLine = element.getAttribute('start-line');
         const dataAvailable = element.getAttribute('data_available');
-        const pSubtype = element.getAttribute('data-p-subtype');
+        const pythonClass = element.getAttribute('python-class-name');
+        element.id = 'block-' + blockId;
 
-        if (readableName && readableName !== 'Unknown') {
-            element.id = 'block-' + blockId;
+        const tocEntry = document.createElement('div');
+        tocEntry.classList.add('toc-entry');
+        tocEntry.dataset.targetId = element.id;
 
-            const tocEntry = document.createElement('div');
-            tocEntry.classList.add('toc-entry');
-            tocEntry.dataset.targetId = element.id;
+        // Create the color block for the TOC entry
+        const colorBlock = document.createElement('div');
+        colorBlock.classList.add('color-block');
 
-            // Create the color block for the TOC entry
-            const colorBlock = document.createElement('div');
-            colorBlock.classList.add('color-block');
+        // Set the color of the block based on the same conditions as the main content
+        const styles = getComputedStyle(document.documentElement);
+        const colorForError = styles.getPropertyValue('--comment-error-color').trim();
+        const colorForUnrecognized = styles.getPropertyValue('--comment-unrecognized-color').trim();
+        const colorForNoClass = styles.getPropertyValue('--comment-no-class-color').trim();
+        const colorForNoDataPossible = styles.getPropertyValue('--comment-no-data-possible-color').trim();
+        const colorForAvailable = styles.getPropertyValue('--comment-available-color').trim();
 
-            // Set the color of the block based on the same conditions as the main content
-            const styles = getComputedStyle(document.documentElement);
-            const availableColor = styles.getPropertyValue('--comment-available-color').trim();
-            const unavailableColor = styles.getPropertyValue('--comment-unavailable-color').trim();
-            const errorColor = styles.getPropertyValue('--comment-error-color').trim();
-
-            if (pSubtype === 'unknown') {
-                colorBlock.style.backgroundColor = errorColor;
+        if (pythonClass === 'BlockUnknown') {
+            colorBlock.style.backgroundColor = colorForError;
+        } else {
+            if (['BlockUnrecognizedWithHeader', 'BlockUnrecognizedNotification', 'BlockUnrecognizedMessage'].includes(pythonClass)) {
+                colorBlock.style.backgroundColor = colorForUnrecognized;
+            } else if (pythonClass === 'Block') {
+                colorBlock.style.backgroundColor = colorForNoClass;
             } else {
-                if (dataAvailable === "1") {
-                    colorBlock.style.backgroundColor = availableColor;
+                if (dataAvailable === "True") {
+                    colorBlock.style.backgroundColor = colorForAvailable;
                 } else {
-                    colorBlock.style.backgroundColor = unavailableColor;
+                    colorBlock.style.backgroundColor = colorForNoDataPossible;
                 }
             }
-
-            // Style the color block (you can adjust these styles as needed)
-            colorBlock.style.width = '10px';
-            colorBlock.style.height = '10px';
-            colorBlock.style.marginRight = '5px';
-            colorBlock.style.display = 'inline-block';
-            colorBlock.style.verticalAlign = 'middle';
-
-            const entryText = startLine ? `Line ${startLine}: ${readableName}` : readableName;
-            const textNode = document.createTextNode(entryText);
-
-            // Append the color block and text to the TOC entry
-            tocEntry.appendChild(colorBlock);
-            tocEntry.appendChild(textNode);
-
-            toc.appendChild(tocEntry);
-
-            blockId++;
         }
+
+        // Style the color block (you can adjust these styles as needed)
+        colorBlock.style.width = '10px';
+        colorBlock.style.height = '10px';
+        colorBlock.style.marginRight = '5px';
+        colorBlock.style.display = 'inline-block';
+        colorBlock.style.verticalAlign = 'middle';
+
+        const entryText = startLine ? `Line ${startLine}: ${readableName}` : readableName;
+        const textNode = document.createTextNode(entryText);
+
+        // Append the color block and text to the TOC entry
+        tocEntry.appendChild(colorBlock);
+        tocEntry.appendChild(textNode);
+
+        toc.appendChild(tocEntry);
+
+        blockId++;
+
     });
 
     document.querySelectorAll('.toc-entry').forEach(function (entry) {
@@ -82,10 +88,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const computedStyles = getComputedStyle(document.documentElement);
 
-    const dataBlocks = document.querySelectorAll('div[data-p-type="block"]');
+    const dataBlocks = document.querySelectorAll('div[is-block="True"]');
     dataBlocks.forEach(function (dataBlock, index) {
         const isDataAvailable = dataBlock.getAttribute('data_available');
-        const blockType = dataBlock.getAttribute('data-p-subtype');
+        const pythonClass = dataBlock.getAttribute('python-class-name');
         const startLineOfBlock = dataBlock.getAttribute('start-line');
         const endLineOfBlock = dataBlock.getAttribute('finish-line');
 
@@ -114,22 +120,35 @@ document.addEventListener('DOMContentLoaded', function () {
         textContainer.appendChild(bottomText);
 
 
-        const colorForAvailable = computedStyles.getPropertyValue('--comment-available-color').trim();
-        const colorForUnavailable = computedStyles.getPropertyValue('--comment-unavailable-color').trim();
         const colorForError = computedStyles.getPropertyValue('--comment-error-color').trim();
+        const colorForUnrecognized = computedStyles.getPropertyValue('--comment-unrecognized-color').trim();
+        const colorForNoClass = computedStyles.getPropertyValue('--comment-no-class-color').trim();
+        const colorForNoDataPossible = computedStyles.getPropertyValue('--comment-no-data-possible-color').trim();
+        const colorForAvailable = computedStyles.getPropertyValue('--comment-available-color').trim();
 
-        if (blockType === 'unknown') {
+        if (pythonClass === 'BlockUnknown') {
             indicatorColorBlock.style.backgroundColor = colorForError;
             commentBlockContainer.title = "Block looks incorrectly formatted";
         } else {
-            if (isDataAvailable === "1") {
-                indicatorColorBlock.style.backgroundColor = colorForAvailable;
-                commentBlockContainer.title = "Data available"; // Tooltip text
+            if (pythonClass === 'BlockUnrecognizedWithHeader' || pythonClass === 'BlockUnrecognizedNotification' || pythonClass === 'BlockUnrecognizedMessage') {
+                indicatorColorBlock.style.backgroundColor = colorForUnrecognized;
+                commentBlockContainer.title = "Block recognized by general pattern: " + pythonClass + ". Contribute to make this block recognizable.";
             } else {
-                indicatorColorBlock.style.backgroundColor = colorForUnavailable;
-                commentBlockContainer.title = "Raw data available"; // Tooltip text
+                if (pythonClass === 'Block') {
+                    indicatorColorBlock.style.backgroundColor = colorForNoClass;
+                    commentBlockContainer.title = "Block was recognized by specific pattern, but there is no class for it to extract the data. Contribute if you know how to extract the data from this block.";
+                } else {
+                    if (isDataAvailable === "True") {
+                        indicatorColorBlock.style.backgroundColor = colorForAvailable;
+                        commentBlockContainer.title = "Data available for class: " + pythonClass;
+                    } else {
+                        indicatorColorBlock.style.backgroundColor = colorForNoDataPossible;
+                        commentBlockContainer.title = "Class: " + pythonClass + " has no data available. Contribute if you know how to extract the data from this block.";
+                    }
+                }
             }
         }
+
 
         // Append the indicator color block and text container to the comment block container
         commentBlockContainer.appendChild(indicatorColorBlock);
