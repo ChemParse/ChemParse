@@ -8,7 +8,7 @@ from typing_extensions import Iterable, Self
 
 from .data import Data
 from .elements import Element
-from .regex_settings import DEFAULT_ORCA_REGEX_SETTINGS, RegexSettings
+from .regex_settings import DEFAULT_ORCA_REGEX_SETTINGS, DEFAULT_GPAW_REGEX_SETTINGS, RegexSettings
 
 
 class File:
@@ -20,7 +20,7 @@ class File:
         Args:
             file_path (str): Path to the file to be processed.
             regex_settings (Optional[RegexSettings]): Custom regex settings for pattern processing. Defaults to None.
-            mode (str): Mode of the file. Defaults to 'ORCA'.
+            mode (str): Mode of the file. Defaults to 'ORCA', can be 'ORCA' or 'GPAW'.
 
         Attributes:
             file_path (str): Path to the input file.
@@ -29,11 +29,21 @@ class File:
             original_text (str): The original text read from the file.
             _blocks (pd.DataFrame): DataFrame containing processed elements.
             _marked_text (str): The text with markers after processing patterns.
-            mode (str): Mode of the file, e.g., 'ORCA'.
+            mode (str): Mode of the file, e.g., 'ORCA' or 'GPAW'.
         """
         self.mode: str = mode
         self.file_path: str = file_path
-        self.regex_settings: RegexSettings = regex_settings or DEFAULT_ORCA_REGEX_SETTINGS
+        if regex_settings is None:
+            if mode == 'ORCA':
+                self.regex_settings = DEFAULT_ORCA_REGEX_SETTINGS
+            elif mode == 'GPAW':
+                self.regex_settings = DEFAULT_GPAW_REGEX_SETTINGS
+            else:
+                raise ValueError(
+                    f"Invalid mode '{mode}'. Must be 'ORCA' or 'GPAW'.")
+        else:
+            self.regex_settings: RegexSettings = regex_settings
+
         self.initialized: bool = False
 
         # Reading the content of the file.

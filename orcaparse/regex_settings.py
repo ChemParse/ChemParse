@@ -404,3 +404,8 @@ DEFAULT_ORCA_REGEX_FILE = os.path.join(
     os.path.dirname(__file__), 'orca_regex.json')
 DEFAULT_ORCA_REGEX_SETTINGS: RegexSettings = RegexSettings(
     settings_file=DEFAULT_ORCA_REGEX_FILE)
+
+DEFAULT_GPAW_REGEX_FILE = os.path.join(
+    os.path.dirname(__file__), 'gpaw_regex.json')
+DEFAULT_GPAW_REGEX_SETTINGS: RegexSettings = RegexSettings(
+    settings_file=DEFAULT_GPAW_REGEX_FILE)

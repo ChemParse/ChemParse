@@ -1,0 +1,39 @@
+{
+  "order": [
+    "TypeKnownBlocks",
+    "BlockUnknown",
+    "Spacer"
+  ],
+  "TypeKnownBlocks": {
+    "order": [
+      "BlockIcon"
+    ],
+    "BlockIcon": {
+      "p_type": "Block",
+      "p_subtype": "BlockIcon",
+      "pattern": "^((?:[ \\t]*___ ___ ___ _ _ _[ \\t]*\\n)(?:(?!^.*<@%.*%@>.*$|^[ \\t]*$).*(\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$).*))?)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Searching for the fin of orca, assuming that the icon ends at the first empty line or block pattern. (?!^.*<@%.*%@>.*$|^[ \\t]*$).* -- not empty or block"
+    }
+  },
+  "BlockUnknown": {
+    "p_type": "Block",
+    "p_subtype": "BlockUnknown",
+    "pattern": "^((?:(?!^.*<@%.*%@>.*$|^[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$).*))?)+)$",
+    "flags": [
+      "MULTILINE"
+    ],
+    "comment": "I have no clue what that is but it is not empty and is not my marker"
+  },
+  "Spacer": {
+    "p_type": "Spacer",
+    "p_subtype": "Spacer",
+    "pattern": "^(\\s*)$",
+    "flags": [
+      "MULTILINE"
+    ],
+    "comment": "Just some empty lines, may have tabs and spaces"
+  }
+}
