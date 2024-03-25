@@ -5,8 +5,6 @@ import warnings
 from typing import Dict, List, Optional, Pattern, Union
 from .regex_request import RegexRequest
 
-DEFAULT_REGEX_FILE = os.path.join(os.path.dirname(__file__), 'regex.json')
-
 
 class RegexBlueprint:
     def __init__(self, order: List[str], pattern_structure: Dict[str, str], pattern_texts: Dict[str, str], comment: str) -> None:
@@ -400,3 +398,9 @@ class RegexSettings:
 
     def __str__(self) -> str:
         return self.tree()
+
+
+DEFAULT_ORCA_REGEX_FILE = os.path.join(
+    os.path.dirname(__file__), 'orca_regex.json')
+DEFAULT_ORCA_REGEX_SETTINGS: RegexSettings = RegexSettings(
+    settings_file=DEFAULT_ORCA_REGEX_FILE)

@@ -1,12 +1,12 @@
 import pytest
 
-from orcaparse.regex_settings import (DEFAULT_REGEX_FILE, RegexBlueprint,
+from orcaparse.regex_settings import (DEFAULT_ORCA_REGEX_FILE, RegexBlueprint,
                                       RegexRequest, RegexSettings)
 
 
 @pytest.fixture
 def regex_settings():
-    return RegexSettings(settings_file=DEFAULT_REGEX_FILE)
+    return RegexSettings(settings_file=DEFAULT_ORCA_REGEX_FILE)
 
 
 def test_regex_settings_initialization(regex_settings):

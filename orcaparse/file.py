@@ -8,21 +8,19 @@ from typing_extensions import Iterable, Self
 
 from .data import Data
 from .elements import Element
-from .regex_settings import DEFAULT_REGEX_FILE, RegexSettings
+from .regex_settings import DEFAULT_ORCA_REGEX_SETTINGS, RegexSettings
 
 
 class File:
-    # Load default settings for all instances of OrcaFile.
-    default_regex_settings: RegexSettings = RegexSettings(
-        settings_file=DEFAULT_REGEX_FILE)
 
-    def __init__(self, file_path: str, regex_settings: Optional[RegexSettings] = None) -> None:
+    def __init__(self, file_path: str, regex_settings: Optional[RegexSettings] = None, mode: str = 'ORCA') -> None:
         """
         Initializes the OrcaFile instance.
 
         Args:
             file_path (str): Path to the file to be processed.
             regex_settings (Optional[RegexSettings]): Custom regex settings for pattern processing. Defaults to None.
+            mode (str): Mode of the file. Defaults to 'ORCA'.
 
         Attributes:
             file_path (str): Path to the input file.
@@ -31,9 +29,11 @@ class File:
             original_text (str): The original text read from the file.
             _blocks (pd.DataFrame): DataFrame containing processed elements.
             _marked_text (str): The text with markers after processing patterns.
+            mode (str): Mode of the file, e.g., 'ORCA'.
         """
+        self.mode: str = mode
         self.file_path: str = file_path
-        self.regex_settings: RegexSettings = regex_settings or File.default_regex_settings
+        self.regex_settings: RegexSettings = regex_settings or DEFAULT_ORCA_REGEX_SETTINGS
         self.initialized: bool = False
 
         # Reading the content of the file.

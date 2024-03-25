@@ -6,7 +6,7 @@ import re
 
 block_marker = '<@%Spacer|Spacer|7986898590462%@>'
 
-rs = op.RegexSettings(op.DEFAULT_REGEX_FILE)
+rs = op.DEFAULT_ORCA_REGEX_SETTINGS
 known_regexes = (rs.items["TypeKnownBlocks"].to_list() +
                  rs.items["TypeDefaultBlocks"].to_list())
 
