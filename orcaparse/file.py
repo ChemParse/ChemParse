@@ -53,7 +53,8 @@ class File:
         # Initializing the DataFrame to store OrcaElements.
         self._blocks: pd.DataFrame = pd.DataFrame(
             columns=['Type', 'Subtype', 'Element', 'Position'])
-        self._marked_text: str = self.original_text
+        self._marked_text: list[tuple[tuple[int, int], Element]] = [
+            ((0, len(self.original_text)), self.original_text)]
 
     def get_structure(self) -> dict[Self, tuple | None]:
         '''
@@ -77,7 +78,7 @@ class File:
         self.initialize()
         return self._blocks
 
-    def get_marked_text(self) -> str:
+    def get_marked_text(self) -> list[tuple[int, Element]]:
         """
         Returns the text with markers after processing patterns.
 
@@ -118,12 +119,13 @@ class File:
         """
         self._blocks = pd.DataFrame(
             columns=['Type', 'Subtype', 'Element', 'Position'])
-        self._marked_text = self.original_text
+        self._marked_text: list[tuple[tuple[int, int], Element]] = [
+            ((0, len(self.original_text)), self.original_text)]
         self.initialized = True
 
         for regex in self.regex_settings.to_list():
             self._marked_text, new_blocks = regex.apply(
-                self._marked_text, self.original_text)
+                self._marked_text)
             new_blocks_df = pd.DataFrame.from_dict(new_blocks, orient="index")
             new_blocks_df['Type'] = regex.p_type
             new_blocks_df['Subtype'] = regex.p_subtype
@@ -195,16 +197,16 @@ class File:
         blocks_copy['RawData'] = blocks_copy['Element'].apply(
             lambda x: self.extract_raw_data_errors_to_none(x))
 
-        if element_type is not None:
+        if element_type is not None and len(blocks_copy) > 0:
             blocks_copy = blocks_copy[blocks_copy['Element'].apply(
                 lambda x: isinstance(x, element_type))]
 
-        if readable_name is not None:
+        if readable_name is not None and len(blocks_copy) > 0:
 
             blocks_copy = blocks_copy[blocks_copy['ReadableName']
                                       == readable_name]
 
-        if raw_data_substring is not None:
+        if raw_data_substring is not None and len(blocks_copy) > 0:
             def contains_all_substrings(x_raw_data, substrings):
                 # If substrings is a string, convert it to a list for uniformity
                 if isinstance(substrings, str):
@@ -218,7 +220,7 @@ class File:
                 lambda x: contains_all_substrings(x, raw_data_substring))
             blocks_copy = blocks_copy[matches]
 
-        if raw_data_not_substring is not None:
+        if raw_data_not_substring is not None and len(blocks_copy) > 0:
             def contains_no_substrings(x_raw_data, substrings):
                 # If substrings is a string, convert it to a list for uniformity
                 if isinstance(substrings, str):
@@ -314,51 +316,8 @@ class File:
         # Process the text to ensure all elements are captured
         processed_text = self.get_marked_text()
 
-        # Function to replace markers with corresponding HTML
-        def replace_marker_with_html(match: re.Match) -> str:
-            """
-            Generates a complete HTML document from the processed text, incorporating optional CSS and JavaScript content and conditional elements like sidebars.
-
-            This method operates with several key steps and additional flexibility provided by boolean flags to include or exclude specific parts of the HTML structure:
-            1. It first checks the 'insert_css' and 'insert_js' flags. If True, the method ensures that CSS and JavaScript content are set, either to the provided arguments or to default values.
-            2. The method then retrieves the processed text with markers using the `get_marked_text` method.
-            3. A nested function `replace_marker_with_html` is defined to handle the replacement of each marker within the text with the corresponding HTML content generated from the associated OrcaElement. This function extracts the type, subtype, and unique ID from each marker, retrieves the corresponding OrcaElement from the _blocks DataFrame using the unique ID, and calls the `to_html` method on the OrcaElement to generate its HTML representation.
-            4. A regular expression is used to find all markers in the processed text, and the `replace_marker_with_html` function is applied to replace each marker with its HTML content.
-            5. The full HTML document is assembled using the provided or default CSS and JavaScript, along with the body content that now includes the HTML representations of the OrcaElements. The inclusion of the left sidebar (TOC) and the color-comment sidebar is controlled by the 'insert_left_sidebar' and 'insert_colorcomment_sidebar' flags, respectively.
-
-            Parameters:
-                css_content (str | None): Optional CSS content to include in the <style> tag of the HTML document. If None and 'insert_css' is True, a default CSS content is used.
-                js_content (str | None): Optional JavaScript content to include in a <script> tag at the end of the document. If None and 'insert_js' is True, default JavaScript content is used.
-                insert_css (bool): Flag to determine whether CSS content (provided or default) should be included in the HTML document. Default is True.
-                insert_js (bool): Flag to determine whether JavaScript content (provided or default) should be included at the end of the HTML document. Default is True.
-                insert_left_sidebar (bool): Flag to determine whether a left sidebar for the Table of Contents (TOC) should be included in the HTML document. Default is True.
-                insert_colorcomment_sidebar (bool): Flag to determine whether a comment sidebar for additional annotations should be included in the HTML document. Default is True.
-
-            Returns:
-                str: A string containing the complete HTML document.
-
-            Raises:
-                Exception: If an OrcaElement referenced by a marker cannot be found in the _blocks DataFrame, an exception is raised.
-
-            Note:
-                The HTML document includes a structure with a container div, optionally a sidebar for a table of contents (TOC), optionally a comment sidebar for additional annotations, and a content area where the main body content is placed. The TOC and comment sidebar are populated by the provided JavaScript if included.
-            """
-            # Extract pattern type, subtype, and unique ID from the marker
-            p_type, p_subtype, unique_id = match.groups()
-            unique_id = int(unique_id)
-
-            # Retrieve the corresponding OrcaElement
-            if unique_id in self._blocks.index:
-                element: Element = self._blocks.loc[unique_id, 'Element']
-                # Convert the OrcaElement to HTML
-                return element.to_html()
-            else:
-                raise IndexError(f'Failed to find the element {unique_id}')
-
-        # Use a regex to find and replace all markers in the processed text
-        marker_regex = re.compile(r'<@%([^|]+)\|([^|]+)\|([^%]+)%@>')
-        body_content = marker_regex.sub(
-            replace_marker_with_html, processed_text)
+        body_content = ''.join(element[1].to_html()
+                               for element in processed_text)
 
         # Construct the full HTML Document with CSS and JS if requested
         html_content = "<!DOCTYPE html>\n"
