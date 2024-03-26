@@ -145,7 +145,11 @@ body {
 }
 
 /* Specific styling for different block subtypes */
-.content .block[python-class-name="BlockIcon"] {
+.content .block[python-class-name="BlockOrcaIcon"] {
+    color: var(--block-icon-color);
+}
+
+.content .block[python-class-name="BlockGpawIcon"] {
     color: var(--block-icon-color);
 }
 
