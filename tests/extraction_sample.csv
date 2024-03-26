@@ -1,5 +1,5 @@
 Subtype,RawData
-BlockAllRightsReserved,"                  #######################################################
+BlockOrcaAllRightsReserved,"                  #######################################################
                   #                        -***-                        #
                   #          Department of theory and spectroscopy      #
                   #    Directorship and core code : Frank Neese         #
@@ -11,7 +11,7 @@ BlockAllRightsReserved,"                  ######################################
                   #                  All rights reserved                #
                   #                        -***-                        #
                   #######################################################"
-BlockDipoleMoment,"-------------
+BlockOrcaDipoleMoment,"-------------
 DIPOLE MOMENT
 -------------
                                 X             Y             Z
@@ -22,10 +22,10 @@ Total Dipole Moment    :      0.00003      -0.00044      -3.80686
                         -----------------------------------------
 Magnitude (a.u.)       :      3.80686
 Magnitude (Debye)      :      9.67628"
-BlockFinalSinglePointEnergy,"-------------------------   --------------------
+BlockOrcaFinalSinglePointEnergy,"-------------------------   --------------------
 FINAL SINGLE POINT ENERGY      -440.508559636589
 -------------------------   --------------------"
-BlockIcon,"                                            #,                                       
+BlockOrcaIcon,"                                            #,                                       
                                             ###                                      
                                             ####                                     
                                             #####                                    
@@ -50,7 +50,7 @@ BlockIcon,"                                            #,
             ##       ##  #######   ##           ,######,      #####,   #    #        
             '#,     ,#'  ##    ##  '#,     ,#' ,#      #,     #,   #   #,  ,#        
              '#######'   ##     ##  '#######'  #'      '#     '####' # '####'.alpha  "
-BlockOrbitalEnergies,"----------------
+BlockOrcaOrbitalEnergies,"----------------
 ORBITAL ENERGIES
 ----------------
                  SPIN UP ORBITALS
@@ -156,19 +156,19 @@ ORBITAL ENERGIES
   46   0.0000       0.017158         0.4669 
   47   0.0000       0.018454         0.5022 
   48   0.0000       0.024428         0.6647 "
-BlockScfConverged,"               *****************************************************
+BlockOrcaScfConverged,"               *****************************************************
                *                     SUCCESS                       *
                *           SCF CONVERGED AFTER  33 CYCLES          *
                *****************************************************"
-BlockTerminatedNormally,                             ****ORCA TERMINATED NORMALLY****
-BlockTimingsForIndividualModules,"Timings for individual modules:
+BlockOrcaTerminatedNormally,                             ****ORCA TERMINATED NORMALLY****
+BlockOrcaTimingsForIndividualModules,"Timings for individual modules:
 
 Sum of individual times          ...       24.036 sec (=   0.401 min)
 GTO integral calculation         ...        8.080 sec (=   0.135 min)  33.6 %
 SCF iterations                   ...       15.956 sec (=   0.266 min)  66.4 %"
-BlockTotalRunTime,TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec
-BlockUnknown,*These are the orbitals as used from here on.
-BlockUnrecognizedWithHeader,"                                 *****************
+BlockOrcaTotalRunTime,TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec
+BlockOrcaUnknown,*These are the orbitals as used from here on.
+BlockOrcaUnrecognizedWithHeader,"                                 *****************
                                  * O   R   C   A *
                                  *****************
 "

@@ -2,51 +2,51 @@
   "order": [
     "TypeKnownBlocks",
     "TypeDefaultBlocks",
-    "BlockUnknown",
+    "BlockOrcaUnknown",
     "Spacer"
   ],
   "TypeKnownBlocks": {
     "order": [
-      "BlockIcon",
-      "BlockShark",
-      "BlockWarnings",
+      "BlockOrcaIcon",
+      "BlockOrcaShark",
+      "BlockOrcaWarnings",
       "BlueprintParagraphStartsWith",
       "BlueprintBlockWithSingeLineHeader",
-      "BlockOrbitalBasis",
-      "BlockAuxJBasis",
-      "BlockInputFile",
-      "BlockAllRightsReserved",
+      "BlockOrcaOrbitalBasis",
+      "BlockOrcaAuxJBasis",
+      "BlockOrcaInputFile",
+      "BlockOrcaAllRightsReserved",
       "PatternScf",
-      "BlockScfConverged",
-      "BlockFinalSinglePointEnergy",
-      "BlockTerminatedNormally",
-      "BlockOrbitalEnergies",
-      "BlockDipoleMoment",
-      "BlockTotalRunTime",
-      "BlockSuggestedCitations",
-      "BlockTimingsForIndividualModules"
+      "BlockOrcaScfConverged",
+      "BlockOrcaFinalSinglePointEnergy",
+      "BlockOrcaTerminatedNormally",
+      "BlockOrcaOrbitalEnergies",
+      "BlockOrcaDipoleMoment",
+      "BlockOrcaTotalRunTime",
+      "BlockOrcaSuggestedCitations",
+      "BlockOrcaTimingsForIndividualModules"
     ],
-    "BlockIcon": {
+    "BlockOrcaIcon": {
       "p_type": "Block",
-      "p_subtype": "BlockIcon",
+      "p_subtype": "BlockOrcaIcon",
       "pattern": "^((?:[ \\t]*#,[ \\t]*\\n[ \\t]*###[ \\t]*\\n[ \\t]*####[ \\t]*\\n[ \\t]*#####[ \\t]*\\n)(?:(?!^.*<@%.*%@>.*$|^[ \\t]*$).*(\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$).*))?)*)",
       "flags": [
         "MULTILINE"
       ],
       "comment": "Searching for the fin of orca, assuming that the icon ends at the first empty line or block pattern. (?!^.*<@%.*%@>.*$|^[ \\t]*$).* -- not empty or block"
     },
-    "BlockShark": {
+    "BlockOrcaShark": {
       "p_type": "Block",
-      "p_subtype": "BlockShark",
+      "p_subtype": "BlockOrcaShark",
       "pattern": "^(([ \\t]*-{50,}[ \\t]*\\n)((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*[ \\t]*- I N T E G R A L  F E E D E R -[ \\t]*\\n((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*([ \\t]*-{50,}[ \\t]*))$",
       "flags": [
         "MULTILINE"
       ],
       "comment": "Non-special line is defined by (?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*. <@% %@> is the internal marker for blocks."
     },
-    "BlockWarnings": {
+    "BlockOrcaWarnings": {
       "p_type": "Block",
-      "p_subtype": "BlockWarnings",
+      "p_subtype": "BlockOrcaWarnings",
       "pattern": "^(([ \\t]*={10,}[ \\t]*\\n)[ \\t]*WARNINGS[ \\t]*\\n((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n){,3}([ \\t]*={10,}[ \\t]*\\n)((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)\\n([ \\t]*[-*#=]{7,}[ \\t]*|(<@%))",
       "flags": [
         "MULTILINE"
@@ -55,12 +55,12 @@
     },
     "BlueprintParagraphStartsWith": {
       "order": [
-        "BlockVersion",
-        "BlockContributions",
-        "BlockAcknowledgement",
-        "BlockLibint2",
-        "BlockLibXc",
-        "BlockUses"
+        "BlockOrcaVersion",
+        "BlockOrcaContributions",
+        "BlockOrcaAcknowledgement",
+        "BlockOrcaLibint2",
+        "BlockOrcaLibXc",
+        "BlockOrcaUses"
       ],
       "pattern_structure": {
         "beginning": "^([ \\t]*",
@@ -70,18 +70,18 @@
         ]
       },
       "pattern_texts": {
-        "BlockVersion": "Program Version",
-        "BlockContributions": "With contributions from",
-        "BlockAcknowledgement": "We gratefully acknowledge",
-        "BlockLibint2": "Your calculation uses the libint2",
-        "BlockLibXc": "Your ORCA version has been built with support for libXC",
-        "BlockUses": "This ORCA versions uses"
+        "BlockOrcaVersion": "Program Version",
+        "BlockOrcaContributions": "With contributions from",
+        "BlockOrcaAcknowledgement": "We gratefully acknowledge",
+        "BlockOrcaLibint2": "Your calculation uses the libint2",
+        "BlockOrcaLibXc": "Your ORCA version has been built with support for libXC",
+        "BlockOrcaUses": "This ORCA versions uses"
       },
       "comment": "Blueprint: Paragraph with the line that starts with specified text. First ^ can be replaced with (?:^[ \t]*\n|^.*<@%.*%@>.*\n|^[ \t]*[-*#=]{7,}[ \t]*\n) to ensure that the given text is the beginning of the paragraph"
     },
     "BlueprintBlockWithSingeLineHeader": {
       "order": [
-        "BlockRotationalSpectrum"
+        "BlockOrcaRotationalSpectrum"
       ],
       "pattern_structure": {
         "beginning": "^((?:[ \\t]*[-*#=]{7,}[ \\t]*\\n)(?:[ \\t]*[-*#=]?[ \\t]*",
@@ -91,40 +91,40 @@
         ]
       },
       "pattern_texts": {
-        "BlockRotationalSpectrum": "Rotational spectrum"
+        "BlockOrcaRotationalSpectrum": "Rotational spectrum"
       },
       "comment": "Blueprint: Block starts with a line of special characters, followed by the 1 line header and then one more line of special characters. Then text until the special line or the next block"
     },
-    "BlockOrbitalBasis": {
+    "BlockOrcaOrbitalBasis": {
       "p_type": "Block",
-      "p_subtype": "BlockOrbitalBasis",
+      "p_subtype": "BlockOrcaOrbitalBasis",
       "pattern": "^(([ \\t]*-{3,} Orbital basis set information -{3,}[ \\t]*\\n)((?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)$",
       "flags": [
         "MULTILINE"
       ],
       "comment": "Starts with Orbital basis set information, then non-empty non-special lines, then one more non-special line, but \\n is outside of the main search bracket. Non-special line is defined by (?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*. <@% %@> is the internal marker for blocks."
     },
-    "BlockAuxJBasis": {
+    "BlockOrcaAuxJBasis": {
       "p_type": "Block",
-      "p_subtype": "BlockAuxJBasis",
+      "p_subtype": "BlockOrcaAuxJBasis",
       "pattern": "^(([ \\t]*-{3,} AuxJ basis set information -{3,}[ \\t]*\\n)((?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)$",
       "flags": [
         "MULTILINE"
       ],
       "comment": "Starts with Orbital basis set information, then non-empty non-special lines, then one more non-special line, but \\n is outside of the main search bracket. Non-special line is defined by (?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*. <@% %@> is the internal marker for blocks."
     },
-    "BlockInputFile": {
+    "BlockOrcaInputFile": {
       "p_type": "Block",
-      "p_subtype": "BlockInputFile",
+      "p_subtype": "BlockOrcaInputFile",
       "pattern": "^(([ \\t]*={10,}[ \\t]*\\n)([ \\t]*INPUT FILE[ \\t]*\\n)([ \\t]*={10,}[ \\t]*\\n)(.*?\\n)*([ \\t]*={10,}[ \\t]*))$",
       "flags": [
         "MULTILINE"
       ],
       "comment": "Header then wait till === line will reappear"
     },
-    "BlockAllRightsReserved": {
+    "BlockOrcaAllRightsReserved": {
       "p_type": "Block",
-      "p_subtype": "BlockAllRightsReserved",
+      "p_subtype": "BlockOrcaAllRightsReserved",
       "pattern": "^([ \\t]*#{40,}[ t]*\\n([ \\t]*#[^#\\n]+#[ \\t]*\\n)+[ \\t]*#[ \\t]*All rights reserved[ \\t]*#[ \\t]*\\n([ \\t]*#[^#\\n]+#[ \\t]*\\n)+[ \\t]*#{40,}[ \\t]*)$",
       "flags": [
         "MULTILINE",
@@ -134,21 +134,21 @@
     },
     "PatternScf": {
       "order": [
-        "BlockScf",
-        "BlockSoscf"
+        "BlockOrcaScf",
+        "BlockOrcaSoscf"
       ],
-      "BlockScf": {
+      "BlockOrcaScf": {
         "p_type": "Block",
-        "p_subtype": "BlockScf",
+        "p_subtype": "BlockOrcaScf",
         "pattern": "^(([ \\t]*-{10,}S-C-F-{10,}[ \\t]*\\n)(?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n([ \\t]*-{20,}[ \\t]*\\n)((?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)$",
         "flags": [
           "MULTILINE"
         ],
         "comment": "Header then non-special non-empty lines"
       },
-      "BlockSoscf": {
+      "BlockOrcaSoscf": {
         "p_type": "Block",
-        "p_subtype": "BlockSoscf",
+        "p_subtype": "BlockOrcaSoscf",
         "pattern": "^(([ \\t]*-{10,}S-O-S-C-F-{10,}[ \\t]*\\n)(?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n([ \\t]*-{20,}[ \\t]*\\n)((?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)$",
         "flags": [
           "MULTILINE"
@@ -156,9 +156,9 @@
         "comment": "Header then non-special non-empty lines"
       }
     },
-    "BlockScfConverged": {
+    "BlockOrcaScfConverged": {
       "p_type": "Block",
-      "p_subtype": "BlockScfConverged",
+      "p_subtype": "BlockOrcaScfConverged",
       "pattern": "^([ \\t]*\\*{40,}[ \\t]*\\n([ \\t]*\\*[^\\*\\n]+\\*[ \\t]*\\n)*[ \\t]*\\*[ \\t]*SCF CONVERGED AFTER\\s+\\d+\\s+CYCLES[ \\t]*\\*[ \\t]*\\n([ \\t]*\\*[^\\*\\n]*\\*[ \\t]*\\n)*[ \\t]*\\*{40,}[ \\t]*)$",
       "flags": [
         "MULTILINE",
@@ -166,63 +166,63 @@
       ],
       "comment": ""
     },
-    "BlockFinalSinglePointEnergy": {
+    "BlockOrcaFinalSinglePointEnergy": {
       "p_type": "Block",
-      "p_subtype": "BlockFinalSinglePointEnergy",
+      "p_subtype": "BlockOrcaFinalSinglePointEnergy",
       "pattern": "^(-{25}\\s+-{20}\\nFINAL SINGLE POINT ENERGY\\s+-?\\d+\\.\\d+\\n-{25}\\s+-{20})$",
       "flags": [
         "MULTILINE"
       ],
       "comment": "This pattern matches the final single point energy block in an ORCA output file. It looks for a line of 25 dashes, followed by a line with FINAL SINGLE POINT ENERGY, and then the energy value represented by an optional minus sign followed by one or more digits, a period, and more digits. This is encapsulated within a pattern of dashes that frame the title and the value."
     },
-    "BlockTerminatedNormally": {
+    "BlockOrcaTerminatedNormally": {
       "p_type": "Block",
-      "p_subtype": "BlockTerminatedNormally",
+      "p_subtype": "BlockOrcaTerminatedNormally",
       "pattern": "^([ \\t]*\\*{4}ORCA TERMINATED NORMALLY\\*{4}[ \\t]*)\\n",
       "flags": [
         "MULTILINE"
       ],
       "comment": ""
     },
-    "BlockOrbitalEnergies": {
+    "BlockOrcaOrbitalEnergies": {
       "p_type": "Block",
-      "p_subtype": "BlockOrbitalEnergies",
+      "p_subtype": "BlockOrcaOrbitalEnergies",
       "pattern": "^([ \\t]*-{10,}[ \\t]*\\n[ \\t]*ORBITAL ENERGIES[ \\t]*\\n[ \\t]*-{10,}[ \\t]*\\n([ \\t]*\\n){,2}[ \\t]*SPIN UP ORBITALS[ \\t]*\\n([ \\t]*\\n){,1}([ \\t]*NO[ \\t]+OCC[ \\t]+E\\(Eh\\)[ \\t]+E\\(eV\\)[ \\t]*\\n)([ \\t]*\\d+[ \\t]+[0-1]\\.\\d{4}[ \\t]+-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]*\\n)*([ \\t]*\\n){,2}[ \\t]*SPIN DOWN ORBITALS[ \\t]*\\n([ \\t]*NO[ \\t]+OCC[ \\t]+E\\(Eh\\)[ \\t]+E\\(eV\\)[ \\t]*\\n)(([ \\t]*\\d+[ \\t]+[0-1]\\.\\d{4}[ \\t]+-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]*\\n)*)[ \\t]*\\d+[ \\t]+[0-1]\\.\\d{4}[ \\t]+-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]*)$",
       "flags": [
         "MULTILINE"
       ],
       "comment": ""
     },
-    "BlockDipoleMoment": {
+    "BlockOrcaDipoleMoment": {
       "p_type": "Block",
-      "p_subtype": "BlockDipoleMoment",
+      "p_subtype": "BlockOrcaDipoleMoment",
       "pattern": "^(([ \\t]*-{10,}[ \\t]*\\n[ \\t]*DIPOLE MOMENT[ \\t]*\\n[ \\t]*-{10,}[ \\t]*\\n)([ \\t]*X[ \\t]+Y[ \\t]+Z[ \\t]*\\n)(([ \\t]*[a-zA-Z\\.\\,() ]+:[ \\t]*-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]*\\n))*(([ \\t]*-{10,}[ \\t]*\\n))(([ \\t]*[a-zA-Z\\.\\,() ]+:[ \\t]*-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]*\\n))(([ \\t]*-{10,}[ \\t]*\\n))([ \\t]*[a-zA-Z\\.,\\(\\)\\s]+[ \\t]*:[ \\t]*(-?\\d+\\.\\d+)[ \\t]*\\n)*[ \\t]*[a-zA-Z\\.,\\(\\)\\s]+[ \\t]*:[ \\t]*(-?\\d+\\.\\d+)[ \\t]*)$",
       "flags": [
         "MULTILINE"
       ],
       "comment": ""
     },
-    "BlockTotalRunTime": {
+    "BlockOrcaTotalRunTime": {
       "p_type": "Block",
-      "p_subtype": "BlockTotalRunTime",
+      "p_subtype": "BlockOrcaTotalRunTime",
       "pattern": "^([ \\t]*TOTAL RUN TIME:\\s*(\\d+)\\s*days\\s*(\\d+)\\s*hours\\s*(\\d+)\\s*minutes\\s*(\\d+)\\s*seconds\\s*(\\d+)\\s*msec[ \\t]*)$",
       "flags": [
         "MULTILINE"
       ],
       "comment": "This pattern captures the total runtime block in an ORCA output, displaying the computation time in days, hours, minutes, seconds, and milliseconds. Each time unit is followed by its respective label (e.g., days, hours), and the values can be any number of digits."
     },
-    "BlockSuggestedCitations": {
+    "BlockOrcaSuggestedCitations": {
       "p_type": "Block",
-      "p_subtype": "BlockSuggestedCitations",
+      "p_subtype": "BlockOrcaSuggestedCitations",
       "pattern": "^(([ \\t]*-{10,}[ \\t]*\\n)([ \\t]*SUGGESTED CITATIONS FOR THIS RUN[ \\t]*\\n)([ \\t]*-{10,}[ \\t]*\\n)(.*?\\n)*([ \\t]*List of optional additional citations[ \\t]*\\n)[ \\t]*\\n((?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)$",
       "flags": [
         "MULTILINE"
       ],
       "comment": "Assumes that List of optional additional citation will be present in the citations block. It is followed by empty line and then nonempty non-special lines.  Non-empty non-special line is defined by (?!^[ \\t]*$)(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*. <@% %@> is the internal marker for blocks."
     },
-    "BlockTimingsForIndividualModules": {
+    "BlockOrcaTimingsForIndividualModules": {
       "p_type": "Block",
-      "p_subtype": "BlockTimingsForIndividualModules",
+      "p_subtype": "BlockOrcaTimingsForIndividualModules",
       "pattern": "^([ \\t]*Timings for individual modules:[ \\t]*\\n([ \\t]*\\n){,4}([a-zA-Z ]+\\s+\\.\\.\\.\\s+[\\d\\.]+ sec.*?\\n)*([a-zA-Z ]+\\s+\\.\\.\\.\\s+[\\d\\.]+ sec.*?))$",
       "flags": [
         "MULTILINE"
@@ -232,41 +232,41 @@
   },
   "TypeDefaultBlocks": {
     "order": [
-      "BlockUnrecognizedWithHeader_1",
-      "BlockUnrecognizedWithHeader_2",
-      "BlockUnrecognizedNotification",
-      "BlockUnrecognizedMessage"
+      "BlockOrcaUnrecognizedWithHeader_1",
+      "BlockOrcaUnrecognizedWithHeader_2",
+      "BlockOrcaUnrecognizedNotification",
+      "BlockOrcaUnrecognizedMessage"
     ],
-    "BlockUnrecognizedWithHeader_1": {
+    "BlockOrcaUnrecognizedWithHeader_1": {
       "p_type": "Block",
-      "p_subtype": "BlockUnrecognizedWithHeader",
+      "p_subtype": "BlockOrcaUnrecognizedWithHeader",
       "pattern": "^(([ \\t]*[-*#]{7,}[ \\t]*\\n)((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n){1,2}\\2((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)\\n([ \\t]*[-*#=]{7,}[ \\t]*|(<@%))",
       "flags": [
         "MULTILINE"
       ],
       "comment": "This pattern stands for -*#= line followed by no more then 2 non-special lines then -*#= line then non-special lines then -*#= line. Non-special line is defined by (?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*. Non-special line might be empty. <@% %@> is the internal marker for blocks. This is the final attempt to recognize the blocks with headers. Does not work with DOTALL. Is repeated twice cause overlap."
     },
-    "BlockUnrecognizedWithHeader_2": {
+    "BlockOrcaUnrecognizedWithHeader_2": {
       "p_type": "Block",
-      "p_subtype": "BlockUnrecognizedWithHeader",
+      "p_subtype": "BlockOrcaUnrecognizedWithHeader",
       "pattern": "^(([ \\t]*[-*#]{7,}[ \\t]*\\n)((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n){1,2}\\2((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n)*(?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*)\\n([ \\t]*[-*#=]{7,}[ \\t]*|(<@%))",
       "flags": [
         "MULTILINE"
       ],
       "comment": "This pattern stands for -*#= line followed by no more then 2 non-special lines then -*#= line then non-special lines then -*#= line. Non-special line is defined by (?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*. Non-special line might be empty. <@% %@> is the internal marker for blocks with header. This is the final attempt to recognize the block. Does not work with DOTALL. Is repeated twice cause overlap."
     },
-    "BlockUnrecognizedNotification": {
+    "BlockOrcaUnrecognizedNotification": {
       "p_type": "Block",
-      "p_subtype": "BlockUnrecognizedNotification",
+      "p_subtype": "BlockOrcaUnrecognizedNotification",
       "pattern": "^(([ \\t]*[-*#]{7,}[ \\t]*)\\n((?!.*[-*#=]{7,})(?!.*<@%)(?!.*%@>)(?:(?!\\n).)*\\n){1,2}\\2)$",
       "flags": [
         "MULTILINE"
       ],
       "comment": "What's left and looks like a notification"
     },
-    "BlockUnrecognizedMessage": {
+    "BlockOrcaUnrecognizedMessage": {
       "p_type": "Block",
-      "p_subtype": "BlockUnrecognizedMessage",
+      "p_subtype": "BlockOrcaUnrecognizedMessage",
       "pattern": "^([ \\t]*[-*#=]+[ \\t]*[^ \\t\\n*#=].*[-*#=]+[ \\t]*)$",
       "flags": [
         "MULTILINE"
@@ -274,9 +274,9 @@
       "comment": "What's left and looks like a single line message"
     }
   },
-  "BlockUnknown": {
+  "BlockOrcaUnknown": {
     "p_type": "Block",
-    "p_subtype": "BlockUnknown",
+    "p_subtype": "BlockOrcaUnknown",
     "pattern": "^((?:(?!^.*<@%.*%@>.*$|^[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$).*))?)+)$",
     "flags": [
       "MULTILINE"

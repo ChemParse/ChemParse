@@ -6,7 +6,7 @@ from .file import File
 
 
 def orca_to_html(input_file: str, output_file: str, insert_css: bool = True, insert_js: bool = True,
-                 insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True):
+                 insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True, mode: str = 'ORCA'):
     """
     Converts an ORCA output file to an HTML document, optionally including CSS, JavaScript, a left sidebar (TOC),
     and a color-comment sidebar.
@@ -18,11 +18,12 @@ def orca_to_html(input_file: str, output_file: str, insert_css: bool = True, ins
         insert_js (bool): Flag to include JavaScript in the HTML output. Included by default.
         insert_left_sidebar (bool): Flag to include a left sidebar (TOC) in the HTML output. Included by default.
         insert_colorcomment_sidebar (bool): Flag to include a color-comment sidebar in the HTML output. Included by default.
+        mode (str): Mode of the input file ('ORCA' or 'GPAW'). Defaults to 'ORCA'.
 
     This function does not return any value but outputs the converted HTML file to the specified output path.
     """
     # Assuming the existence of a `File` class and its `save_as_html` method as in the original script
-    orca_file = File(file_path=input_file)
+    orca_file = File(file_path=input_file, mode=mode)
     orca_file.save_as_html(
         output_file_path=output_file,
         insert_css=insert_css,
@@ -55,19 +56,24 @@ def orca_to_html_cli():
                         help="Exclude a left sidebar (TOC) from the HTML output. Included by default.")
     parser.add_argument("--insert_colorcomment_sidebar", action="store_false", default=True,
                         help="Exclude a color-comment sidebar from the HTML output. Included by default.")
+    parser.add_argument("--mode", choices=['ORCA', 'GPAW'], default='ORCA',
+                        help="Mode of the input file ('ORCA' or 'GPAW'). Defaults to 'ORCA'.")
 
     args = parser.parse_args()
 
     orca_to_html(input_file=args.input_file, output_file=args.output_file,
                  insert_css=args.insert_css, insert_js=args.insert_js,
                  insert_left_sidebar=args.insert_left_sidebar,
-                 insert_colorcomment_sidebar=args.insert_colorcomment_sidebar)
+                 insert_colorcomment_sidebar=args.insert_colorcomment_sidebar,
+                 mode=args.mode
+                 )
 
 
 def orca_parse(input_file: str, output_file: str, file_format: str = 'auto',
                readable_name: Optional[str] = None,
                raw_data_substrings: list[str] = [],
-               raw_data_not_substrings: list[str] = []):
+               raw_data_not_substrings: list[str] = [],
+               mode: str = 'ORCA'):
     """
     Exports data from an ORCA output file to various formats based on specified filtering criteria.
 
@@ -80,16 +86,17 @@ def orca_parse(input_file: str, output_file: str, file_format: str = 'auto',
         readable_name (Optional[str]): Filter elements by their readable name (None by default).
         raw_data_substrings (list[str]): list of substrings to filter elements by their raw data ([] by default).
         raw_data_not_substrings (list[str]): list of substrings to filter elements by their raw data ([] by default).
+        mode (str): Mode of the input file ('ORCA' or 'GPAW'). Defaults to 'ORCA'.
 
     The function doesn't return any value but saves the extracted data to the specified output path in the chosen format.
     """
     # Assuming the existence of a `File` class with a `get_data` method as indicated in the original script
-    orca_file = File(file_path=input_file)
+    orca_file = File(file_path=input_file, mode=mode)
     data = orca_file.get_data(
         extract_only_raw=True, readable_name=readable_name,
         raw_data_substring=raw_data_substrings,
         raw_data_not_substring=raw_data_not_substrings).drop('Element', axis=1)
-    data_sorted = data.sort_values(by='Position')
+    data_sorted = data.sort_values(by='CharPosition')
 
     if file_format == 'auto':
         file_format = os.path.splitext(output_file)[-1][1:]
@@ -127,9 +134,11 @@ def orca_parse_cli():
                         help="Filter elements by a substring of their raw data. Can be used multiple times.")
     parser.add_argument("--raw_data_not_substring", action='append', default=[],
                         help="Filter elements by absence of a substring of their raw data. Can be used multiple times.")
+    parser.add_argument("--mode", choices=['ORCA', 'GPAW'], default='ORCA',
+                        help="Mode of the input file ('ORCA' or 'GPAW'). Defaults to 'ORCA'.")
 
     args = parser.parse_args()
 
     orca_parse(input_file=args.input_file, output_file=args.output_file, file_format=args.format,
                readable_name=args.readable_name, raw_data_substrings=args.raw_data_substring,
-               raw_data_not_substrings=args.raw_data_not_substring)
+               raw_data_not_substrings=args.raw_data_not_substring, mode=args.mode)

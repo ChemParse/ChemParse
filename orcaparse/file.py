@@ -52,7 +52,7 @@ class File:
 
         # Initializing the DataFrame to store OrcaElements.
         self._blocks: pd.DataFrame = pd.DataFrame(
-            columns=['Type', 'Subtype', 'Element', 'Position'])
+            columns=['Type', 'Subtype', 'Element', 'CharPosition' 'LinePosition'])
         self._marked_text: list[tuple[tuple[int, int], tuple[int, int], str | Element]] = [
             ((0, len(self.original_text)),
              (1, self.original_text.count('\n') + 1), self.original_text)
@@ -120,7 +120,7 @@ class File:
         Upon completion, the text is fully processed, with all elements identified.
         """
         self._blocks = pd.DataFrame(
-            columns=['Type', 'Subtype', 'Element', 'Position'])
+            columns=['Type', 'Subtype', 'Element', 'CharPosition', 'LinePosition'])
         self._marked_text: list[tuple[tuple[int, int], tuple[int, int], str | Element]] = [
             ((0, len(self.original_text)),
              (1, self.original_text.count('\n') + 1), self.original_text)
@@ -130,7 +130,7 @@ class File:
 
         for regex in self.regex_settings.to_list():
             self._marked_text, new_blocks = regex.apply(
-                self._marked_text)
+                self._marked_text, mode=self.mode)
             new_blocks_df = pd.DataFrame.from_dict(new_blocks, orient="index")
             new_blocks_df['Type'] = regex.p_type
             new_blocks_df['Subtype'] = regex.p_subtype

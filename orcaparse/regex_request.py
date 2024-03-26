@@ -2,7 +2,9 @@ import re
 import warnings
 from typing import Pattern, Union
 
-from .elements import AvailableBlocks, Block, Element, Spacer
+from .elements import Block, Element, Spacer
+from .orca_elements import AvailableBlocksOrca
+from .gpaw_elements import AvailableBlocksGpaw
 
 
 class RegexRequest:
@@ -102,18 +104,27 @@ class RegexRequest:
         """
         return re.compile(self.pattern, self.flags)
 
-    def apply(self, marked_text: list[tuple[tuple[int, int], tuple[int, int], Element]] | str) -> tuple[str, dict[str, dict]]:
+    def apply(self, marked_text: list[tuple[tuple[int, int], tuple[int, int], Element]] | str, mode: str = 'ORCA', collect_line_position: bool = True) -> tuple[str, dict[str, dict]]:
         """
         Apply the regular expression pattern to the marked text and extract elements.
 
         Args:
             marked_text (list[tuple[tuple[int, int], tuple[int, int], Element]] | str): The marked text to apply the pattern to.
                 It can be either a list of tuples containing the position, line numbers, and element, or a string.
+            mode (str): The mode to use for element extraction, either 'ORCA' or 'GPAW'.
+            collect_line_position (bool): A flag indicating whether to collect line positions for the extracted elements.
 
         Returns:
             tuple[str, dict[str, dict]]: A tuple containing the modified marked text and a dictionary
                 of extracted elements with their positions.
         """
+        if mode == 'ORCA':
+            AB = AvailableBlocksOrca
+        elif mode == 'GPAW':
+            AB = AvailableBlocksGpaw
+        else:
+            raise ValueError(f"Mode '{mode}' is not recognized.")
+
         if isinstance(marked_text, str):
             marked_text = [
                 ((0, len(marked_text)), (1, marked_text.count('\n') + 1), marked_text)]
@@ -149,19 +160,25 @@ class RegexRequest:
                 block_position = (
                     char_pos[0] + match.start(), char_pos[0] + match.end())
                 # Calculate the updated line position for the current block
-                current_line_pos = update_line_pos(match.start(), match.end())
+                if collect_line_position:
+                    current_line_pos = update_line_pos(
+                        match.start(), match.end())
+                else:
+                    current_line_pos = None
                 # Use group(1) for the extracted text
                 extracted_text = match.group(1)
 
+                # print(f"Extracted text: {extracted_text}")
+
                 if self.p_type == "Block":
-                    if self.p_subtype in AvailableBlocks.blocks:
+                    if self.p_subtype in AB.blocks:
                         # Create an instance of the class with position parameter
-                        element_instance = AvailableBlocks.blocks[self.p_subtype](
+                        element_instance = AB.blocks[self.p_subtype](
                             extracted_text, char_position=block_position, line_position=current_line_pos)
                     else:
                         warnings.warn(
                             (f"Subtype `{self.p_subtype}`"
-                                f" not recognized. Falling back to OrcaBlock.")
+                                f" not recognized. Falling back to Block.")
                         )
                         element_instance = Block(
                             extracted_text, char_position=block_position, line_position=current_line_pos)

@@ -1,26 +1,36 @@
 {
   "order": [
     "TypeKnownBlocks",
-    "BlockUnknown",
+    "BlockGpawUnknown",
     "Spacer"
   ],
   "TypeKnownBlocks": {
     "order": [
-      "BlockIcon"
+      "BlockGpawIcon",
+      "BlockGpawDipole"
     ],
-    "BlockIcon": {
+    "BlockGpawIcon": {
       "p_type": "Block",
-      "p_subtype": "BlockIcon",
+      "p_subtype": "BlockGpawIcon",
       "pattern": "^((?:[ \\t]*___ ___ ___ _ _ _[ \\t]*\\n)(?:.*?\\n)*?)(?=[ \\\\t]*$)",
       "flags": [
         "MULTILINE"
       ],
       "comment": "Searching for the first line of gpaw icon, assuming that the icon ends at the first empty line or block pattern."
+    },
+    "BlockGpawDipole": {
+      "p_type": "Block",
+      "p_subtype": "BlockGpawDipole",
+      "pattern": "^(Dipole moment:.*?\\n)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Dipole moment"
     }
   },
-  "BlockUnknown": {
+  "BlockGpawUnknown": {
     "p_type": "Block",
-    "p_subtype": "BlockUnknown",
+    "p_subtype": "BlockGpawUnknown",
     "pattern": "^((?:(?!^[ \\t]*$).*(?:\\n(?=(?!^[ \\t]*$).*))?)+)\\n",
     "flags": [
       "MULTILINE"
