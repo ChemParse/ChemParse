@@ -28,7 +28,7 @@ class File:
             initialized (bool): Flag indicating whether the instance has been initialized.
             original_text (str): The original text read from the file.
             _blocks (pd.DataFrame): DataFrame containing processed elements.
-            _marked_text (str): The text with markers after processing patterns.
+            _marked_text (list[tuple[tuple[int, int], tuple[int, int], str|Element]]): List of marked text segments. First tuple - char_position, second - line_position, third - text | Element.
             mode (str): Mode of the file, e.g., 'ORCA' or 'GPAW'.
         """
         self.mode: str = mode
@@ -53,8 +53,10 @@ class File:
         # Initializing the DataFrame to store OrcaElements.
         self._blocks: pd.DataFrame = pd.DataFrame(
             columns=['Type', 'Subtype', 'Element', 'Position'])
-        self._marked_text: list[tuple[tuple[int, int], Element]] = [
-            ((0, len(self.original_text)), self.original_text)]
+        self._marked_text: list[tuple[tuple[int, int], tuple[int, int], str | Element]] = [
+            ((0, len(self.original_text)),
+             (1, self.original_text.count('\n') + 1), self.original_text)
+        ]
 
     def get_structure(self) -> dict[Self, tuple | None]:
         '''
@@ -78,7 +80,7 @@ class File:
         self.initialize()
         return self._blocks
 
-    def get_marked_text(self) -> list[tuple[int, Element]]:
+    def get_marked_text(self) -> list[tuple[tuple[int, int], tuple[int, int], Element]]:
         """
         Returns the text with markers after processing patterns.
 
@@ -119,8 +121,11 @@ class File:
         """
         self._blocks = pd.DataFrame(
             columns=['Type', 'Subtype', 'Element', 'Position'])
-        self._marked_text: list[tuple[tuple[int, int], Element]] = [
-            ((0, len(self.original_text)), self.original_text)]
+        self._marked_text: list[tuple[tuple[int, int], tuple[int, int], str | Element]] = [
+            ((0, len(self.original_text)),
+             (1, self.original_text.count('\n') + 1), self.original_text)
+        ]
+
         self.initialized = True
 
         for regex in self.regex_settings.to_list():
@@ -316,7 +321,7 @@ class File:
         # Process the text to ensure all elements are captured
         processed_text = self.get_marked_text()
 
-        body_content = ''.join(element[1].to_html()
+        body_content = ''.join(element[2].to_html()
                                for element in processed_text)
 
         # Construct the full HTML Document with CSS and JS if requested

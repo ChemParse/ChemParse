@@ -11,17 +11,17 @@
     "BlockIcon": {
       "p_type": "Block",
       "p_subtype": "BlockIcon",
-      "pattern": "^((?:[ \\t]*___ ___ ___ _ _ _[ \\t]*\\n)(?:(?!^.*<@%.*%@>.*$|^[ \\t]*$).*(\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$).*))?)*)",
+      "pattern": "^((?:[ \\t]*___ ___ ___ _ _ _[ \\t]*\\n)(?:.*?\\n)*?)(?=[ \\\\t]*$)",
       "flags": [
         "MULTILINE"
       ],
-      "comment": "Searching for the fin of orca, assuming that the icon ends at the first empty line or block pattern. (?!^.*<@%.*%@>.*$|^[ \\t]*$).* -- not empty or block"
+      "comment": "Searching for the first line of gpaw icon, assuming that the icon ends at the first empty line or block pattern."
     }
   },
   "BlockUnknown": {
     "p_type": "Block",
     "p_subtype": "BlockUnknown",
-    "pattern": "^((?:(?!^.*<@%.*%@>.*$|^[ \\t]*$).*(?:\\n(?=(?!^.*<@%.*%@>.*$|^[ \\t]*$).*))?)+)$",
+    "pattern": "^((?:(?!^[ \\t]*$).*(?:\\n(?=(?!^[ \\t]*$).*))?)+)\\n",
     "flags": [
       "MULTILINE"
     ],
@@ -30,7 +30,7 @@
   "Spacer": {
     "p_type": "Spacer",
     "p_subtype": "Spacer",
-    "pattern": "^(\\s*)$",
+    "pattern": "^(\\s*)\\n",
     "flags": [
       "MULTILINE"
     ],

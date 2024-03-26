@@ -16,7 +16,7 @@ class ExtractionError(Exception):
 
 
 class Element:
-    def __init__(self, raw_data: str) -> None:
+    def __init__(self, raw_data: str, char_position: tuple[int, int] | None = None, line_position: tuple[int, int] | None = None) -> None:
         """
         Initialize an Element with raw data.
 
@@ -24,6 +24,8 @@ class Element:
             raw_data (str): The raw string data associated with this element.
         """
         self.raw_data = raw_data
+        self.char_position = char_position
+        self.line_position = line_position
 
     def readable_name(self):
         """
@@ -141,17 +143,6 @@ class Element:
 
 
 class Spacer(Element):
-    def __init__(self, raw_data: str) -> None:
-        """
-        Initialize a Spacer with raw data.
-
-        A Spacer is a subclass of Element intended to represent a space or separator within a document structure. It inherits all functionality from the Element class but can be extended with additional behavior specific to spacers.
-
-        Args:
-            raw_data (str): The raw string data associated with this spacer.
-        """
-        super().__init__(raw_data=raw_data)
-
     def data(self) -> None:
         """
         Override the data method to return None for a Spacer.
@@ -224,17 +215,6 @@ class Block(Element):
         position (tuple | None): The position of the block within the larger data structure, typically as a line number range.
     """
     data_available: bool = False
-
-    def __init__(self, raw_data: str, position: tuple | None = None) -> None:
-        """
-        Initialize a Block with raw data and an optional position.
-
-        Args:
-            raw_data (str): The raw text content of the block.
-            position (tuple | None): An optional tuple indicating the start and end lines of the block within the source. Defaults to None.
-        """
-        super().__init__(raw_data=raw_data)
-        self.position: tuple | None = position
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         """
@@ -318,7 +298,7 @@ class Block(Element):
         body_html = (f'<div class="data">'
                      f'{self.body_preformat(body)}'
                      f'</div>') if body else ''
-        line_start, line_finish = self.position or (-1, -1)
+        line_start, line_finish = self.line_position or (-1, -1)
         can_extract_data = self.data_available
         is_block = True
         return (f'<div class="element block" '
