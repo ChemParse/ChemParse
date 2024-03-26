@@ -6,6 +6,9 @@ from .elements import Block, Element, Spacer
 from .orca_elements import AvailableBlocksOrca
 from .gpaw_elements import AvailableBlocksGpaw
 
+from tqdm import tqdm
+import time
+
 
 class RegexRequest:
     def __init__(self, p_type: str, p_subtype: str, pattern: str, flags: list[str], comment: str = '') -> None:
@@ -104,7 +107,7 @@ class RegexRequest:
         """
         return re.compile(self.pattern, self.flags)
 
-    def apply(self, marked_text: list[tuple[tuple[int, int], tuple[int, int], Element]] | str, mode: str = 'ORCA', collect_line_position: bool = True) -> tuple[str, dict[str, dict]]:
+    def apply(self, marked_text: list[tuple[tuple[int, int], tuple[int, int], Element]] | str, mode: str = 'ORCA', collect_line_position: bool = True, show_progress: bool = False) -> tuple[str, dict[str, dict]]:
         """
         Apply the regular expression pattern to the marked text and extract elements.
 
@@ -113,6 +116,7 @@ class RegexRequest:
                 It can be either a list of tuples containing the position, line numbers, and element, or a string.
             mode (str): The mode to use for element extraction, either 'ORCA' or 'GPAW'.
             collect_line_position (bool): A flag indicating whether to collect line positions for the extracted elements.
+            show_progress (bool): A flag indicating whether to show a progress bar during the extraction process.
 
         Returns:
             tuple[str, dict[str, dict]]: A tuple containing the modified marked text and a dictionary
@@ -132,103 +136,155 @@ class RegexRequest:
         compiled_pattern = self.compile()
         elements_dict = {}
 
-        def break_block(block):
-            char_pos, line_pos, text = block
-            result = []
-            last_match_end = 0  # Tracks the end of the last match
+        total_chars = marked_text[-1][0][1]
 
-            def count_newlines(text_segment):
-                return text_segment.count('\n')
+        # Added prefix_text parameter
+        def with_progress_bar(show_progress: bool, refresh_interval: float = 2, prefix_text: str = f"Processing {self.p_subtype}:"):
+            def decorator(func):
+                if not show_progress:
+                    return func
 
-            def update_line_pos(start, end):
-                # Calculate new line start position by adding the number of newlines up to the start of the block
-                new_line_start = line_pos[0] + count_newlines(text[:start])
-                # Calculate new line end position by adding the number of newlines within the block
-                new_line_end = new_line_start + count_newlines(text[start:end])
-                return (new_line_start, new_line_end)
+                def wrapper(*args, **kwargs):
+                    nonlocal total_chars  # Assuming total_chars is defined in the outer scope
+                    # Set prefix text using desc parameter
+                    pbar = tqdm(total=total_chars, desc=prefix_text)
 
-            for match in compiled_pattern.finditer(text):
-                if match.start() > last_match_end:
-                    text_between_matches = text[last_match_end:match.start()]
-                    # Adjust both start and end positions for the text between matches
-                    interim_line_pos = update_line_pos(
-                        last_match_end, match.start())
-                    result.append(
-                        ((char_pos[0] + last_match_end, char_pos[0] + match.start()), interim_line_pos, text_between_matches))
+                    last_update_time = time.time()
 
-                # Adjust the position for the current match using a tuple
-                block_position = (
-                    char_pos[0] + match.start(), char_pos[0] + match.end())
-                # Calculate the updated line position for the current block
-                if collect_line_position:
-                    current_line_pos = update_line_pos(
-                        match.start(), match.end())
-                else:
-                    current_line_pos = None
-                # Use group(1) for the extracted text
-                extracted_text = match.group(1)
+                    # Added optional block_position
+                    def update_progress(current_char_pos, block_position=None):
+                        nonlocal last_update_time
+                        current_time = time.time()
+                        if current_time - last_update_time >= refresh_interval:
+                            pbar.n = current_char_pos
+                            if block_position:  # Update postfix text if provided
+                                pbar.set_postfix_str(
+                                    f'Current block position: {block_position}')
+                            pbar.refresh()
+                            last_update_time = current_time
 
-                # print(f"Extracted text: {extracted_text}")
+                    kwargs['progress_callback'] = update_progress
+                    result = func(*args, **kwargs)
+                    pbar.n = total_chars  # Ensure the progress bar completes if not already
+                    pbar.refresh()
+                    pbar.close()
+                    return result
 
-                if self.p_type == "Block":
-                    if self.p_subtype in AB.blocks:
-                        # Create an instance of the class with position parameter
-                        element_instance = AB.blocks[self.p_subtype](
-                            extracted_text, char_position=block_position, line_position=current_line_pos)
+                return wrapper
+            return decorator
+
+        @with_progress_bar(show_progress=show_progress, refresh_interval=2, prefix_text=f"Processing {self.p_subtype}")
+        def process_marked_text(marked_text, progress_callback=None):
+            def break_block(block, progress_callback=None):
+                char_pos, line_pos, text = block
+                result = []
+                last_match_end = 0  # Tracks the end of the last match
+
+                def count_newlines(text_segment):
+                    return text_segment.count('\n')
+
+                def update_line_pos(start, end):
+                    # Calculate new line start position by adding the number of newlines up to the start of the block
+                    new_line_start = line_pos[0] + count_newlines(text[:start])
+                    # Calculate new line end position by adding the number of newlines within the block
+                    new_line_end = new_line_start + \
+                        count_newlines(text[start:end])
+                    return (new_line_start, new_line_end)
+
+                for match in compiled_pattern.finditer(text):
+                    if match.start() > last_match_end:
+                        text_between_matches = text[last_match_end:match.start(
+                        )]
+                        # Adjust both start and end positions for the text between matches
+                        interim_line_pos = update_line_pos(
+                            last_match_end, match.start())
+                        result.append(
+                            ((char_pos[0] + last_match_end, char_pos[0] + match.start()), interim_line_pos, text_between_matches))
+
+                    # Adjust the position for the current match using a tuple
+                    block_position = (
+                        char_pos[0] + match.start(), char_pos[0] + match.end())
+                    # Update the progress bar via the callback, if provided
+                    if progress_callback:
+                        # Use the progress_callback to update the progress
+                        progress_callback(
+                            block_position[1], block_position=char_pos)
+                    # Calculate the updated line position for the current block
+                    if collect_line_position:
+                        current_line_pos = update_line_pos(
+                            match.start(), match.end())
                     else:
-                        warnings.warn(
-                            (f"Subtype `{self.p_subtype}`"
-                                f" not recognized. Falling back to Block.")
-                        )
-                        element_instance = Block(
+                        current_line_pos = None
+                    # Use group(1) for the extracted text
+                    extracted_text = match.group(1)
+
+                    # print(f"Extracted text: {extracted_text}")
+
+                    if self.p_type == "Block":
+                        if self.p_subtype in AB.blocks:
+                            # Create an instance of the class with position parameter
+                            element_instance = AB.blocks[self.p_subtype](
+                                extracted_text, char_position=block_position, line_position=current_line_pos)
+                        else:
+                            warnings.warn(
+                                (f"Subtype `{self.p_subtype}`"
+                                    f" not recognized. Falling back to Block.")
+                            )
+                            element_instance = Block(
+                                extracted_text, char_position=block_position, line_position=current_line_pos)
+                    elif self.p_type == "Spacer":
+                        element_instance = Spacer(
                             extracted_text, char_position=block_position, line_position=current_line_pos)
-                elif self.p_type == "Spacer":
-                    element_instance = Spacer(
-                        extracted_text, char_position=block_position, line_position=current_line_pos)
 
-                if element_instance:
-                    # Add the element instance to the result, using the block position tuple
-                    result.append(
-                        (block_position, current_line_pos, element_instance))
-                    # Update the last match end position
-                    last_match_end = match.end()
-                    elements_dict[hash(element_instance)] = {
-                        'Element': element_instance, 'CharPosition': block_position, 'LinePosition': current_line_pos}
+                    if element_instance:
+                        # Add the element instance to the result, using the block position tuple
+                        result.append(
+                            (block_position, current_line_pos, element_instance))
+                        # Update the last match end position
+                        last_match_end = match.end()
+                        elements_dict[hash(element_instance)] = {
+                            'Element': element_instance, 'CharPosition': block_position, 'LinePosition': current_line_pos}
 
-            # Handle any remaining text after the last match
-            if last_match_end < len(text):
-                remaining_text = text[last_match_end:]
-                # Adjust both start and end positions for the remaining text
-                remaining_text_position = (
-                    char_pos[0] + last_match_end, char_pos[0] + len(text))
-                # Calculate the line position for the remaining text
-                remaining_line_pos = update_line_pos(last_match_end, len(text))
-                result.append((remaining_text_position,
-                              remaining_line_pos, remaining_text))
+                # Handle any remaining text after the last match
+                if last_match_end < len(text):
+                    remaining_text = text[last_match_end:]
+                    # Adjust both start and end positions for the remaining text
+                    remaining_text_position = (
+                        char_pos[0] + last_match_end, char_pos[0] + len(text))
+                    # Calculate the line position for the remaining text
+                    remaining_line_pos = update_line_pos(
+                        last_match_end, len(text))
+                    result.append((remaining_text_position,
+                                   remaining_line_pos, remaining_text))
 
-            return result
+                return result
 
-        i = 0
-        while i < len(marked_text):
-            # Assuming the structure is [(tuple, tuple, str/Element)]
-            if isinstance(marked_text[i][2], str):
-                result = break_block(marked_text[i])
-                if result:
-                    # Remove the original item
-                    del marked_text[i]
+            i = 0
+            while i < len(marked_text):
+                # Assuming the structure is [(tuple, tuple, str/Element)]
+                if isinstance(marked_text[i][2], str):
+                    result = break_block(
+                        marked_text[i], progress_callback=progress_callback)
+                    if result:
+                        # Remove the original item
+                        del marked_text[i]
 
-                    # Insert the new items from 'result' at position 'i'
-                    for item in reversed(result):
-                        marked_text.insert(i, item)
+                        # Insert the new items from 'result' at position 'i'
+                        for item in reversed(result):
+                            marked_text.insert(i, item)
 
-                    # Increment 'i' by the number of new items inserted
-                    i += len(result)
+                        # Increment 'i' by the number of new items inserted
+                        i += len(result)
+                    else:
+                        # No blocks found, move to the next item
+                        i += 1
                 else:
-                    # No blocks found, move to the next item
+                    # The item is not a string, move to the next item
                     i += 1
-            else:
-                # The item is not a string, move to the next item
-                i += 1
+
+            return marked_text
+
+        marked_text = process_marked_text(marked_text)
 
         return marked_text, elements_dict
 
