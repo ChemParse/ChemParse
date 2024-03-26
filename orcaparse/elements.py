@@ -261,7 +261,7 @@ class Block(Element):
                 f'<hr class = "hr-between-blocks"></hr>')
 
 
-class AvailableBlocks:
+class AvailableBlocksGeneral:
     """
     A registry for managing different types of block elements.
 

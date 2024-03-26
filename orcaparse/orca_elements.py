@@ -6,11 +6,11 @@ import numpy as np
 import pandas as pd
 
 from .data import Data
-from .elements import AvailableBlocks, Block, Element, ExtractionError
+from .elements import AvailableBlocksGeneral, Block, Element, ExtractionError
 from .units_and_constants import ureg
 
 
-class AvailableBlocksOrca(AvailableBlocks):
+class AvailableBlocksOrca(AvailableBlocksGeneral):
     blocks: dict[str, type[Element]] = {}
 
 
