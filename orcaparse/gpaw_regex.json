@@ -31,7 +31,7 @@
   "BlockGpawUnknown": {
     "p_type": "Block",
     "p_subtype": "BlockGpawUnknown",
-    "pattern": "^((?:(?!^[ \\t]*$).*(?:\\n(?=(?!^[ \\t]*$).*))?)+)\\n",
+    "pattern": "((?:^[ \\t]*\\S.*\\n)+)",
     "flags": [
       "MULTILINE"
     ],
@@ -40,7 +40,7 @@
   "Spacer": {
     "p_type": "Spacer",
     "p_subtype": "Spacer",
-    "pattern": "^(\\s*)\\n",
+    "pattern": "^(\\s*\\n)",
     "flags": [
       "MULTILINE"
     ],

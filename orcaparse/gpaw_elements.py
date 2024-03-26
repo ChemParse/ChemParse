@@ -35,6 +35,16 @@ class BlockGpawIcon(Block):
 
 
 @AvailableBlocksGpaw.register_block
+class BlockGpawDipole(Block):
+    def data(self) -> Data:
+        numbers = re.findall(r"[-+]?\d*\.\d+|\d+", self.raw_data)
+        # Convert extracted numbers to a numpy array of floats
+        dipole_moment = np.array(numbers, dtype=float)
+        return Data(data={'Dipole Moment': dipole_moment},
+                    comment="`Dipole Moment` numpy array in |e|*Ang")
+
+
+@AvailableBlocksGpaw.register_block
 class BlockGpawUnknown(Block):
     def data(self):
         warnings.warn(
