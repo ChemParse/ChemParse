@@ -152,7 +152,11 @@ body {
 }
 
 /* Specific styling for different block subtypes */
-.content .block[python-class-name="BlockIcon"] {
+.content .block[python-class-name="BlockOrcaIcon"] {
+    color: var(--block-icon-color);
+}
+
+.content .block[python-class-name="BlockGpawIcon"] {
     color: var(--block-icon-color);
 }
 
@@ -282,29 +286,27 @@ body {
             <!-- JavaScript will populate this area -->
         </div>
         <div class="content">
-            <div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div>
-<div class="element block" python-class-name="BlockUnknown" readable-name="My start of the message messag..." start-line=2 finish-line=3 data_available=False><div class="data"><pre>My start of the message: message1
-message2</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div>
-<div class="element block" python-class-name="BlockUnrecognizedWithHeader" readable-name="My data" start-line=5 finish-line=10 data_available=False><div class="header"><h6><pre>--------------------
+            <div class="element" python-class-name="Spacer" is-block="False"><pre>
+</pre></div><div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div><div class="element block" python-class-name="BlockOrcaUnknown" readable-name="My start of the message messag..." start-line=2 finish-line=3 data_available=False><div class="data"><pre>My start of the message: message1
+message2</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" is-block="False"><pre>
+
+</pre></div><div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div><div class="element block" python-class-name="BlockOrcaUnrecognizedWithHeader" readable-name="My data" start-line=5 finish-line=11 data_available=False><div class="header"><h6><pre>--------------------
 My data
 --------------------
 </pre></h6></div><hr class="hr-in-block"></hr><div class="data"><pre> 
 My value: 1.234 eV
-</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element block" python-class-name="BlockUnrecognizedWithHeader" readable-name="Another data" start-line=11 finish-line=16 data_available=False><div class="header"><h6><pre>                            ***************************************
-                            *            Another data             *
-                            ***************************************
-</pre></h6></div><hr class="hr-in-block"></hr><div class="data"><pre>Not my match
-My value: 9.876 eV
-</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element block" python-class-name="BlockFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=17 finish-line=19 data_available=True><div class="data"><pre>-------------------------   --------------------
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" is-block="False"><pre>
+</pre></div><div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div><div class="element block" python-class-name="BlockOrcaUnrecognizedMessage" readable-name="Another data " start-line=12 finish-line=12 data_available=False><div class="data"><pre>                            *            Another data             *</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" is-block="False"><pre>
+</pre></div><div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div><div class="element block" python-class-name="BlockOrcaUnknown" readable-name="Not my match My value eV" start-line=13 finish-line=15 data_available=False><div class="data"><pre>                            ***************************************
+Not my match
+My value: 9.876 eV</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" is-block="False"><pre>
+
+</pre></div><div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div><div class="element block" python-class-name="BlockOrcaFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=17 finish-line=19 data_available=True><div class="data"><pre>-------------------------   --------------------
 FINAL SINGLE POINT ENERGY      -440.508559636589
--------------------------   --------------------</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element" python-class-name="Spacer" is-block="False"><pre>
-</pre></div><div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div>
-<div class="element block" python-class-name="BlockTerminatedNormally" readable-name="ORCA TERMINATED NORMALLY" start-line=22 finish-line=22 data_available=True><div class="data"><pre>                             ****ORCA TERMINATED NORMALLY****</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element block" python-class-name="BlockTotalRunTime" readable-name="TOTAL RUN TIME" start-line=23 finish-line=23 data_available=True><div class="data"><pre>TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec</pre></div></div><hr class = "hr-between-blocks"></hr>
+-------------------------   --------------------</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" is-block="False"><pre>
+
+
+</pre></div><div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div><div class="element block" python-class-name="BlockOrcaTerminatedNormally" readable-name="ORCA TERMINATED NORMALLY" start-line=22 finish-line=23 data_available=True><div class="data"><pre>                             ****ORCA TERMINATED NORMALLY****</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaTotalRunTime" readable-name="TOTAL RUN TIME" start-line=23 finish-line=23 data_available=True><div class="data"><pre>TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec</pre></div></div><hr class = "hr-between-blocks"></hr>
         </div>
     </div>
     <script>
@@ -342,10 +344,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const colorForNoDataPossible = styles.getPropertyValue('--comment-no-data-possible-color').trim();
         const colorForAvailable = styles.getPropertyValue('--comment-available-color').trim();
 
-        if (pythonClass === 'BlockUnknown') {
+        if (pythonClass === 'BlockOrcaUnknown' || pythonClass === 'BlockGpawUnknown') {
             colorBlock.style.backgroundColor = colorForError;
         } else {
-            if (['BlockUnrecognizedWithHeader', 'BlockUnrecognizedNotification', 'BlockUnrecognizedMessage'].includes(pythonClass)) {
+            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage', 'BlockGpawUnrecognizedWithHeader', 'BlockGpawUnrecognizedNotification', 'BlockGpawUnrecognizedMessage'].includes(pythonClass)) {
                 colorBlock.style.backgroundColor = colorForUnrecognized;
             } else if (pythonClass === 'Block') {
                 colorBlock.style.backgroundColor = colorForNoClass;
@@ -436,11 +438,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const colorForNoDataPossible = computedStyles.getPropertyValue('--comment-no-data-possible-color').trim();
         const colorForAvailable = computedStyles.getPropertyValue('--comment-available-color').trim();
 
-        if (pythonClass === 'BlockUnknown') {
+        if (pythonClass === 'BlockOrcaUnknown' || pythonClass === 'BlockGpawUnknown') {
             indicatorColorBlock.style.backgroundColor = colorForError;
             commentBlockContainer.title = "Block looks incorrectly formatted";
         } else {
-            if (pythonClass === 'BlockUnrecognizedWithHeader' || pythonClass === 'BlockUnrecognizedNotification' || pythonClass === 'BlockUnrecognizedMessage') {
+            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage', 'BlockGpawUnrecognizedWithHeader', 'BlockGpawUnrecognizedNotification', 'BlockGpawUnrecognizedMessage'].includes(pythonClass)) {
                 indicatorColorBlock.style.backgroundColor = colorForUnrecognized;
                 commentBlockContainer.title = "Block recognized by general pattern: " + pythonClass + ". Contribute to make this block recognizable.";
             } else {
