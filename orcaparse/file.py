@@ -147,8 +147,12 @@ class File:
                 unknown_blocks[hash(unknown_block)] = {
                     'Element': unknown_block, 'CharPosition': char_position, 'LinePosition': line_position}
 
-        self._blocks = pd.concat([self._blocks, pd.DataFrame.from_dict(
-            unknown_blocks, orient="index")])
+        unknown_blocks_df = pd.DataFrame.from_dict(
+            unknown_blocks, orient="index")
+        unknown_blocks_df['Type'] = 'Block'
+        unknown_blocks_df['Subtype'] = 'BlockUnknown'
+
+        self._blocks = pd.concat([self._blocks, unknown_blocks_df])
 
     @staticmethod
     def extract_raw_data_errors_to_none(orca_element: Element) -> str | None:
