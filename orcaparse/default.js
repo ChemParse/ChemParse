@@ -48,12 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Style the color block (you can adjust these styles as needed)
-        colorBlock.style.width = '10px';
-        colorBlock.style.height = '10px';
-        colorBlock.style.marginRight = '5px';
-        colorBlock.style.display = 'inline-block';
-        colorBlock.style.verticalAlign = 'middle';
 
         const entryText = startLine ? `Line ${startLine}: ${readableName}` : readableName;
         const textNode = document.createTextNode(entryText);

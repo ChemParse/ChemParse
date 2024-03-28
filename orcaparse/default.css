@@ -69,7 +69,7 @@ body {
 
 /* Styling for block elements */
 .content div[python-class-name^="Spacer"] {
-    font-size: 1px;
+    font-size: 0px;
 }
 
 
@@ -116,13 +116,15 @@ body {
 
 .content .block pre {
     border: none;
-    padding: 10px;
+    padding: 5px;
     margin: 0;
     overflow-x: hidden;
 }
 
 .content .block .hr-in-block {
     height: 2px;
+    margin: 0;
+    padding: 0;
     border: none;
     background-color: var(--hr-bg-color);
 }
@@ -134,6 +136,8 @@ body {
 
 .content .hr-between-blocks {
     height: 0;
+    margin: 0;
+    padding: 1px;
     border: none;
     background-color: transparent;
 }
@@ -208,7 +212,10 @@ body {
     /* Makes the element a circle */
     margin-right: 5px;
     /* Space between the circle and the text */
+    display: inline-block;
+    vertical-align: middle;
 }
+
 
 /* Left comment-sidebar for color-comment sections */
 .comment-sidebar {

@@ -69,6 +69,19 @@ class Element:
                     comment=("No procedure for analyzing the data found, `raw data` collected.\n"
                              "Please contribute to the project if you have knowledge on how to extract data from it."))
 
+    @staticmethod
+    def data_preformat(data_raw: str) -> str:
+        """
+        Format the raw body content for HTML display.
+
+        Args:
+            body_raw (str): The raw body text to be formatted.
+
+        Returns:
+            str: The formatted body text wrapped in HTML <pre> tags.
+        """
+        return f'<pre>{data_raw}</pre>'
+
     def to_html(self) -> str:
         """
         Generate an HTML representation of the element.
@@ -84,7 +97,7 @@ class Element:
         return (f'<div class="element" '
                 f'python-class-name="{self.__class__.__name__}" '
                 f'start-line={line_start} finish-line={line_finish} '
-                f'is-block="{is_block}"><pre>{data}</pre></div>')
+                f'is-block="{is_block}">\n{self.data_preformat(data)}</div>')
 
     def depth(self) -> int:
         """
@@ -155,6 +168,19 @@ class Spacer(Element):
             None: Indicating that there is no data associated with this Spacer.
         """
         return None
+
+    @staticmethod
+    def data_preformat(data_raw: str) -> str:
+        """
+        Format the raw body content for HTML display.
+
+        Args:
+            body_raw (str): The raw body text to be formatted.
+
+        Returns:
+            str: spacer with \\n replaced by <br>
+        """
+        return data_raw.replace('\n', '<br>')
 
 
 class Block(Element):
@@ -244,11 +270,11 @@ class Block(Element):
         """
         readable_name, header, body = self.extract_name_header_and_body()
         header_level = max(7-self.depth(), 1)
-        header_html = (f'<div class="header"><h{header_level}>'
+        header_html = (f'<div class="header"><h{header_level}>\n'
                        f'{self.header_preformat(header)}'
                        f'</h{header_level}></div>'
                        f'<hr class="hr-in-block"></hr>') if header else ''
-        body_html = (f'<div class="data">'
+        body_html = (f'<div class="data">\n'
                      f'{self.body_preformat(body)}'
                      f'</div>') if body else ''
         line_start, line_finish = self.line_position or (-1, -1)
