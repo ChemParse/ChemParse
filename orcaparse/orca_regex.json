@@ -146,7 +146,7 @@
         "BlockOrcaSoscf"
       ],
       "pattern_structure": {
-        "beginning": "^((?:(?:[ \\t]*([\\-\\*\\#\\=]){7,})[ \\t]*",
+        "beginning": "^((?:(?:[ \\t]*([\\-\\*\\#\\=]){5,})[ \\t]*",
         "ending": "[ \\t]*\\2{7,}\\n)(?:(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n){1,2}(?:\\2*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n)*)",
         "flags": [
           "MULTILINE"
@@ -178,7 +178,18 @@
     }
   },
   "TypeDefaultBlocks": {
-    "order": []
+    "order": [
+      "BlockOrcaUnrecognizedWithHeader"
+    ],
+    "BlockOrcaUnrecognizedWithHeader": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaUnrecognizedWithHeader",
+      "pattern": "(([ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n){1,3}\\2(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Special, from 1 to 3 non-special not-empty lines , the same special line, non-special lines till the next block"
+    }
   },
   "Spacer": {
     "p_type": "Spacer",
