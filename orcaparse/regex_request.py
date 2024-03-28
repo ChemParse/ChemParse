@@ -206,7 +206,7 @@ class RegexRequest:
 
                     return result
 
-                def convert_to_element(item, elements_dict, progress_callback=None):
+                def convert_to_element(item, elements_dict, compiled_pattern, progress_callback=None):
                     if progress_callback:
                         progress_callback(item[0][1], block_position=item[0])
                     if compiled_pattern.fullmatch(item[2]):
@@ -235,7 +235,29 @@ class RegexRequest:
 
                     return item
 
-                text_list = compiled_pattern.split(text)
+                def split_by_full_matches(text, compiled_pattern):
+                    segments = []
+                    start = 0
+
+                    for match in compiled_pattern.finditer(text):
+                        # Add the text leading up to the match (if any)
+                        if match.start() > start:
+                            segments.append(text[start:match.start()])
+
+                        # Add the matched text
+                        segments.append(match.group())
+
+                        # Update the start position for the next iteration
+                        start = match.end()
+
+                    # Add any remaining text after the last match
+                    if start < len(text):
+                        segments.append(text[start:])
+
+                    return segments
+
+                # split by full matches instead of re split to allow the internal groups in regex
+                text_list = split_by_full_matches(text, compiled_pattern)
 
                 if len(text_list) == 1:
                     return None, elements_dict
@@ -244,7 +266,7 @@ class RegexRequest:
                     text_list, progress_callback=progress_callback)
 
                 text_list = [convert_to_element(
-                    item, elements_dict, progress_callback=progress_callback) for item in text_list]
+                    item, elements_dict, compiled_pattern, progress_callback=progress_callback) for item in text_list]
 
                 return text_list, elements_dict
 
