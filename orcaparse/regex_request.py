@@ -259,9 +259,6 @@ class RegexRequest:
                 # split by full matches instead of re split to allow the internal groups in regex
                 text_list = split_by_full_matches(text, compiled_pattern)
 
-                if len(text_list) == 1:
-                    return None, elements_dict
-
                 text_list = convert_to_tuples(
                     text_list, progress_callback=progress_callback)
 
