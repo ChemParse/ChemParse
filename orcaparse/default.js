@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const colorForNoDataPossible = styles.getPropertyValue('--comment-no-data-possible-color').trim();
         const colorForAvailable = styles.getPropertyValue('--comment-available-color').trim();
 
-        if (pythonClass === 'BlockOrcaUnknown' || pythonClass === 'BlockGpawUnknown') {
+        if (pythonClass === 'BlockUnknown') {
             colorBlock.style.backgroundColor = colorForError;
         } else {
-            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage', 'BlockGpawUnrecognizedWithHeader', 'BlockGpawUnrecognizedNotification', 'BlockGpawUnrecognizedMessage'].includes(pythonClass)) {
+            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage'].includes(pythonClass)) {
                 colorBlock.style.backgroundColor = colorForUnrecognized;
             } else if (pythonClass === 'Block') {
                 colorBlock.style.backgroundColor = colorForNoClass;
@@ -126,11 +126,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const colorForNoDataPossible = computedStyles.getPropertyValue('--comment-no-data-possible-color').trim();
         const colorForAvailable = computedStyles.getPropertyValue('--comment-available-color').trim();
 
-        if (pythonClass === 'BlockOrcaUnknown' || pythonClass === 'BlockGpawUnknown') {
+        if (pythonClass === 'BlockUnknown') {
             indicatorColorBlock.style.backgroundColor = colorForError;
             commentBlockContainer.title = "Block looks incorrectly formatted";
         } else {
-            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage', 'BlockGpawUnrecognizedWithHeader', 'BlockGpawUnrecognizedNotification', 'BlockGpawUnrecognizedMessage'].includes(pythonClass)) {
+            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage'].includes(pythonClass)) {
                 indicatorColorBlock.style.backgroundColor = colorForUnrecognized;
                 commentBlockContainer.title = "Block recognized by general pattern: " + pythonClass + ". Contribute to make this block recognizable.";
             } else {

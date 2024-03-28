@@ -80,8 +80,10 @@ class Element:
         """
         data = self.raw_data
         is_block = isinstance(self, Block)
+        line_start, line_finish = self.line_position or (-1, -1)
         return (f'<div class="element" '
                 f'python-class-name="{self.__class__.__name__}" '
+                f'start-line={line_start} finish-line={line_finish} '
                 f'is-block="{is_block}"><pre>{data}</pre></div>')
 
     def depth(self) -> int:
@@ -308,3 +310,12 @@ class AvailableBlocksGeneral:
         block_name = block_cls.__name__
         cls.blocks[block_name] = block_cls
         return block_cls
+
+
+class BlockUnknown(Block):
+    def data(self):
+        warnings.warn(
+            f'The block looks not structured. Please contribute to the project if you have knowledge on how to extract data from it.')
+        return Data(data={'raw data': self.raw_data},
+                    comment=("No procedure for analyzing the data found, furthermore, the block looks not structured `raw data` collected.\n"
+                             "Please contribute to the project if you have knowledge on how to extract data from it."))

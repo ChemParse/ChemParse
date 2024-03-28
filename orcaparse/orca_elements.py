@@ -101,16 +101,6 @@ class BlockOrcaUnrecognizedMessage(Block):
 
 
 @AvailableBlocksOrca.register_block
-class BlockOrcaUnknown(Block):
-    def data(self):
-        warnings.warn(
-            f'The block looks not structured. Please contribute to the project if you have knowledge on how to extract data from it.')
-        return Data(data={'raw data': self.raw_data},
-                    comment=("No procedure for analyzing the data found, furthermore, the block looks not structured `raw data` collected.\n"
-                             "Please contribute to the project if you have knowledge on how to extract data from it."))
-
-
-@AvailableBlocksOrca.register_block
 class BlockOrcaIcon(Block):
     data_available: bool = True
 

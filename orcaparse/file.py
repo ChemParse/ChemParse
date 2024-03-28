@@ -7,7 +7,7 @@ import pandas as pd
 from typing_extensions import Iterable, Self
 
 from .data import Data
-from .elements import Element
+from .elements import Element, BlockUnknown
 from .regex_settings import DEFAULT_ORCA_REGEX_SETTINGS, DEFAULT_GPAW_REGEX_SETTINGS, RegexSettings
 
 
@@ -135,6 +135,20 @@ class File:
             new_blocks_df['Type'] = regex.p_type
             new_blocks_df['Subtype'] = regex.p_subtype
             self._blocks = pd.concat([self._blocks, new_blocks_df])
+
+        unknown_blocks = {}
+
+        for i, (char_position, line_position, block) in enumerate(self._marked_text):
+            if isinstance(block, str):
+                unknown_block = BlockUnknown(
+                    block, char_position=char_position, line_position=line_position)
+                self._marked_text[i] = (
+                    char_position, line_position, unknown_block)
+                unknown_blocks[hash(unknown_block)] = {
+                    'Element': unknown_block, 'CharPosition': char_position, 'LinePosition': line_position}
+
+        self._blocks = pd.concat([self._blocks, pd.DataFrame.from_dict(
+            unknown_blocks, orient="index")])
 
     @staticmethod
     def extract_raw_data_errors_to_none(orca_element: Element) -> str | None:
