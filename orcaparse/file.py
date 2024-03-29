@@ -7,8 +7,9 @@ import pandas as pd
 from typing_extensions import Iterable, Self
 
 from .data import Data
-from .elements import Element, BlockUnknown
-from .regex_settings import DEFAULT_ORCA_REGEX_SETTINGS, DEFAULT_GPAW_REGEX_SETTINGS, RegexSettings
+from .elements import BlockUnknown, Element
+from .regex_settings import (DEFAULT_GPAW_REGEX_SETTINGS,
+                             DEFAULT_ORCA_REGEX_SETTINGS, RegexSettings)
 
 
 class File:

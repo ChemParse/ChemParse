@@ -1,13 +1,13 @@
 import re
+import time
 import warnings
 from typing import Pattern, Union
 
-from .elements import Block, Element, Spacer
-from .orca_elements import AvailableBlocksOrca
-from .gpaw_elements import AvailableBlocksGpaw
-
 from tqdm import tqdm
-import time
+
+from .elements import Block, Element, Spacer
+from .gpaw_elements import AvailableBlocksGpaw
+from .orca_elements import AvailableBlocksOrca
 
 
 class RegexRequest:
