@@ -1,0 +1,830 @@
+Type,Subtype,CharPosition,LinePosition,ReadableName,RawData
+Block,BlockGpawIcon,"(1, 119)","(3, 8)",Icon,"  ___ ___ ___ _ _ _  
+ |   |   |_  | | | | 
+ | | | | | . | | | | 
+ |__ |  _|___|_____|  21.6.1b1
+ |___|_|             
+"
+Block,BlockGpawUnrecognized,"(121, 881)","(11, 27)",User aaaacompute Date Tue May ...,"User:   aaaa@compute-38
+Date:   Tue May 31 15:53:07 2022
+Arch:   x86_64
+Pid:    565337
+Python: 3.8.9
+gpaw:   /users/home/aaaa/gpaw/gpaw (53c191c1ec)
+_gpaw:  /users/home/aaaa/gpaw/build/lib.linux-x86_64-3.8/
+        _gpaw.cpython-38-x86_64-linux-gnu.so (9df7473142)
+ase:    /users/home/aaaa/ase/ase (version 3.23.0b1-ea3e9bb75d)
+numpy:  /users/home/bbbb/spack/opt/spack/linux-centos8-cascadelake/gcc-9.3.0/py-numpy-1.20.2-dgf27bhjua75jm66wbtas3vnjet4dzqg/lib/python3.8/site-packages/numpy (version 1.20.2)
+scipy:  /users/home/bbbb/spack/opt/spack/linux-centos8-cascadelake/gcc-9.3.0/py-scipy-1.6.2-5mj6sw3rf63wmprfl3ofjpi64tayycfh/lib/python3.8/site-packages/scipy (version 1.6.2)
+libxc:  4.3.4
+units:  Angstrom and eV
+cores: 64
+OpenMP: False
+OMP_NUM_THREADS: 1
+"
+Block,BlockGpawUnrecognized,"(883, 897)","(30, 31)",Initialize ,"Initialize ...
+"
+Block,BlockGpawUnrecognized,"(899, 1349)","(34, 51)",Csetup name Carbon id aadbdfcc...,"C-setup:
+  name: Carbon
+  id: 4aa54d4b901d75f77cc0ea3eec22967b
+  Z: 6.0
+  valence: 4
+  core: 2
+  charge: 0.0
+  file: /users/home/aaaa/gpaw-setups-0.9.20000/C.PBE.gz
+  compensation charges: gauss, rc=0.20, lmax=2
+  cutoffs: 1.14(filt), 1.14(core),
+  valence states:
+                energy  radius
+    2s(2.00)   -13.751   0.635
+    2p(2.00)    -5.284   0.635
+    *s          13.461   0.635
+    *p          21.927   0.635
+    *d           0.000   0.635
+"
+Block,BlockGpawUnrecognized,"(1351, 1941)","(54, 67)",LCAO basis set for C Name augc...,"  LCAO basis set for C:
+    Name: aug-cc-pVDZ_PBE.sz
+    File: /users/home/aaaa/gpaw-setups-0.9.20000/C.aug-cc-pVDZ_PBE.sz.basis
+    Number of radial functions: 8
+    Number of spherical harmonics: 22
+      l=0, rc=5.5938 Bohr: 2s-sz confined orbital
+      l=1, rc=6.8750 Bohr: 2p-sz confined orbital
+      l=0, rc=7.5781 Bohr: NGTO(s,+1.000*0.160)
+      l=0, rc=13.1250 Bohr: NGTO(s,+1.000*0.047)
+      l=1, rc=7.7500 Bohr: NGTO(p,+1.000*0.152)
+      l=1, rc=13.9688 Bohr: NGTO(p,+1.000*0.040)
+      l=2, rc=4.4844 Bohr: NGTO(d,+1.000*0.550)
+      l=2, rc=8.0625 Bohr: NGTO(d,+1.000*0.151)
+"
+Block,BlockGpawUnrecognized,"(1943, 2395)","(70, 87)",Nsetup name Nitrogen id fbeaae...,"N-setup:
+  name: Nitrogen
+  id: f7500608b86eaa90eef8b1d9a670dc53
+  Z: 7.0
+  valence: 5
+  core: 2
+  charge: 0.0
+  file: /users/home/aaaa/gpaw-setups-0.9.20000/N.PBE.gz
+  compensation charges: gauss, rc=0.18, lmax=2
+  cutoffs: 1.11(filt), 0.96(core),
+  valence states:
+                energy  radius
+    2s(2.00)   -18.583   0.603
+    2p(3.00)    -7.089   0.529
+    *s           8.629   0.603
+    *p          20.123   0.529
+    *d           0.000   0.577
+"
+Block,BlockGpawUnrecognized,"(2397, 2987)","(90, 103)",LCAO basis set for N Name augc...,"  LCAO basis set for N:
+    Name: aug-cc-pVDZ_PBE.sz
+    File: /users/home/aaaa/gpaw-setups-0.9.20000/N.aug-cc-pVDZ_PBE.sz.basis
+    Number of radial functions: 8
+    Number of spherical harmonics: 22
+      l=0, rc=4.8594 Bohr: 2s-sz confined orbital
+      l=1, rc=6.0625 Bohr: 2p-sz confined orbital
+      l=0, rc=6.5000 Bohr: NGTO(s,+1.000*0.225)
+      l=0, rc=11.6562 Bohr: NGTO(s,+1.000*0.061)
+      l=1, rc=6.5781 Bohr: NGTO(p,+1.000*0.218)
+      l=1, rc=12.0781 Bohr: NGTO(p,+1.000*0.056)
+      l=2, rc=3.7500 Bohr: NGTO(d,+1.000*0.817)
+      l=2, rc=6.6719 Bohr: NGTO(d,+1.000*0.230)
+"
+Block,BlockGpawUnrecognized,"(2989, 3379)","(106, 121)",Hsetup name Hydrogen id ddeffe...,"H-setup:
+  name: Hydrogen
+  id: d65de229564ff8ea4db303e23b6d1ecf
+  Z: 1.0
+  valence: 1
+  core: 0
+  charge: 0.0
+  file: /users/home/aaaa/gpaw-setups-0.9.20000/H.PBE.gz
+  compensation charges: gauss, rc=0.15, lmax=2
+  cutoffs: 0.85(filt), 0.53(core),
+  valence states:
+                energy  radius
+    1s(1.00)    -6.494   0.476
+    *s          20.717   0.476
+    *p           0.000   0.476
+"
+Block,BlockGpawUnrecognized,"(3381, 3823)","(124, 134)",LCAO basis set for H Name augc...,"  LCAO basis set for H:
+    Name: aug-cc-pVDZ_PBE.sz
+    File: /users/home/aaaa/gpaw-setups-0.9.20000/H.aug-cc-pVDZ_PBE.sz.basis
+    Number of radial functions: 5
+    Number of spherical harmonics: 9
+      l=0, rc=6.6406 Bohr: 1s-sz confined orbital
+      l=0, rc=8.5625 Bohr: NGTO(s,+1.000*0.122)
+      l=0, rc=16.0625 Bohr: NGTO(s,+1.000*0.030)
+      l=1, rc=3.8125 Bohr: NGTO(p,+1.000*0.727)
+      l=1, rc=8.0000 Bohr: NGTO(p,+1.000*0.141)
+"
+Block,BlockGpawUnrecognized,"(3825, 3856)","(137, 138)",Reference energy ,"Reference energy: -10231.780790
+"
+Block,BlockGpawUnrecognized,"(3858, 3911)","(141, 143)",Spinpolarized calculation Magn...,"Spin-polarized calculation.
+Magnetic moment: 0.000000
+"
+Block,BlockGpawUnrecognized,"(3913, 4329)","(146, 153)",Convergence criteria Maximum t...,"Convergence criteria:
+ Maximum [total energy] change in last 3 cyles: 0.0005 eV / electron
+ Maximum integral of absolute [dens]ity change: 0.0001 electrons / valence electron
+ Maximum integral of absolute [eigenst]ate change: 4e-08 eV^2 / valence electron
+ Maximum number of scf [iter]ations: 1000
+ (Square brackets indicate name in SCF output, whereas a 'c' in
+ the SCF output indicates the quantity has converged.)
+"
+Block,BlockGpawUnrecognized,"(4331, 4394)","(156, 157)",Occupation numbers Uniform dis...,"Occupation numbers: Uniform distribution of occupation numbers 
+"
+Block,BlockGpawUnrecognized,"(4396, 4696)","(160, 167)",Eigensolver Direct minimisatio...,"Eigensolver
+   Direct minimisation using exponential transformation.
+       Search direction: Limited-memory SR1P algorithm
+       Line search: step size equals one
+       Preconditioning: True
+       WARNING: do not use it for metals as occupation numbers are
+                not found variationally
+"
+Block,BlockGpawUnrecognized,"(4700, 4856)","(171, 177)",Density mixing Method differen...,"Density mixing:
+  Method: difference
+  Backend: no-mixing
+  Linear mixing parameter: 0
+  Mixing with 0 old densities
+  Damping of long wave oscillations: 0 
+"
+Block,BlockGpawUnrecognized,"(4858, 4908)","(180, 181)",XC parameters PBE with nearest...,"XC parameters: PBE with 2 nearest neighbor stencil
+"
+Block,BlockGpawUnrecognized,"(4910, 5509)","(184, 204)",Memory estimate Process memory...,"Memory estimate:
+  Process memory now: 667.91 MiB
+Attribute error: AttributeError(""'ETDM' object has no attribute 'estimate_memory'"")
+Some object probably lacks estimate_memory() method
+Memory breakdown may be incomplete
+  Calculator: 21.53 MiB
+    Density: 9.34 MiB
+      Arrays: 9.09 MiB
+      Localized functions: 0.25 MiB
+      Mixer: 0.00 MiB
+    Hamiltonian: 6.78 MiB
+      Arrays: 6.76 MiB
+      XC: 0.00 MiB
+      Poisson: 0.00 MiB
+      vbar: 0.02 MiB
+    Wavefunctions: 5.41 MiB
+      C [qnM]: 0.48 MiB
+      S, T [2 x qmm]: 0.97 MiB
+      P [aqMi]: 0.00 MiB
+      BasisFunctions: 3.96 MiB
+"
+Block,BlockGpawUnrecognized,"(5511, 5573)","(207, 209)",Total number of cores used Dom...,"Total number of cores used: 64
+Domain decomposition: 4 x 4 x 4
+"
+Block,BlockGpawUnrecognized,"(5575, 5721)","(212, 217)",Number of atoms Number of atom...,"Number of atoms: 15
+Number of atomic orbitals: 252
+Number of bands in calculation: 252
+Number of valence electrons: 44
+Bands to converge: occupied
+"
+Block,BlockGpawUnrecognized,"(5723, 5738)","(220, 221)",initialized ,"... initialized
+"
+Block,BlockGpawUnrecognized,"(5740, 5984)","(224, 231)",Input parameters occupations n...,"Input parameters:
+  occupations: {name: mom,
+                numbers: [[1. 1. 1. ... 0. 0. 0.]
+ [1. 1. 1. ... 0. 0. 0.]],
+                update_numbers: True,
+                use_fixed_occupations: False,
+                use_projections: True}
+"
+Block,BlockGpawUnrecognized,"(5986, 6095)","(234, 236)",Excitedstate calculation with ...,"Excited-state calculation with Maximum Overlap Method
+  Gaussian smearing of holes and excited electrons: off
+"
+Block,BlockGpawUnrecognized,"(6097, 6111)","(239, 240)",Initialize ,"Initialize ...
+"
+Block,BlockGpawUnrecognized,"(6113, 6563)","(243, 260)",Csetup name Carbon id aadbdfcc...,"C-setup:
+  name: Carbon
+  id: 4aa54d4b901d75f77cc0ea3eec22967b
+  Z: 6.0
+  valence: 4
+  core: 2
+  charge: 0.0
+  file: /users/home/aaaa/gpaw-setups-0.9.20000/C.PBE.gz
+  compensation charges: gauss, rc=0.20, lmax=2
+  cutoffs: 1.14(filt), 1.14(core),
+  valence states:
+                energy  radius
+    2s(2.00)   -13.751   0.635
+    2p(2.00)    -5.284   0.635
+    *s          13.461   0.635
+    *p          21.927   0.635
+    *d           0.000   0.635
+"
+Block,BlockGpawUnrecognized,"(6565, 7155)","(263, 276)",LCAO basis set for C Name augc...,"  LCAO basis set for C:
+    Name: aug-cc-pVDZ_PBE.sz
+    File: /users/home/aaaa/gpaw-setups-0.9.20000/C.aug-cc-pVDZ_PBE.sz.basis
+    Number of radial functions: 8
+    Number of spherical harmonics: 22
+      l=0, rc=5.5938 Bohr: 2s-sz confined orbital
+      l=1, rc=6.8750 Bohr: 2p-sz confined orbital
+      l=0, rc=7.5781 Bohr: NGTO(s,+1.000*0.160)
+      l=0, rc=13.1250 Bohr: NGTO(s,+1.000*0.047)
+      l=1, rc=7.7500 Bohr: NGTO(p,+1.000*0.152)
+      l=1, rc=13.9688 Bohr: NGTO(p,+1.000*0.040)
+      l=2, rc=4.4844 Bohr: NGTO(d,+1.000*0.550)
+      l=2, rc=8.0625 Bohr: NGTO(d,+1.000*0.151)
+"
+Block,BlockGpawUnrecognized,"(7157, 7609)","(279, 296)",Nsetup name Nitrogen id fbeaae...,"N-setup:
+  name: Nitrogen
+  id: f7500608b86eaa90eef8b1d9a670dc53
+  Z: 7.0
+  valence: 5
+  core: 2
+  charge: 0.0
+  file: /users/home/aaaa/gpaw-setups-0.9.20000/N.PBE.gz
+  compensation charges: gauss, rc=0.18, lmax=2
+  cutoffs: 1.11(filt), 0.96(core),
+  valence states:
+                energy  radius
+    2s(2.00)   -18.583   0.603
+    2p(3.00)    -7.089   0.529
+    *s           8.629   0.603
+    *p          20.123   0.529
+    *d           0.000   0.577
+"
+Block,BlockGpawUnrecognized,"(7611, 8201)","(299, 312)",LCAO basis set for N Name augc...,"  LCAO basis set for N:
+    Name: aug-cc-pVDZ_PBE.sz
+    File: /users/home/aaaa/gpaw-setups-0.9.20000/N.aug-cc-pVDZ_PBE.sz.basis
+    Number of radial functions: 8
+    Number of spherical harmonics: 22
+      l=0, rc=4.8594 Bohr: 2s-sz confined orbital
+      l=1, rc=6.0625 Bohr: 2p-sz confined orbital
+      l=0, rc=6.5000 Bohr: NGTO(s,+1.000*0.225)
+      l=0, rc=11.6562 Bohr: NGTO(s,+1.000*0.061)
+      l=1, rc=6.5781 Bohr: NGTO(p,+1.000*0.218)
+      l=1, rc=12.0781 Bohr: NGTO(p,+1.000*0.056)
+      l=2, rc=3.7500 Bohr: NGTO(d,+1.000*0.817)
+      l=2, rc=6.6719 Bohr: NGTO(d,+1.000*0.230)
+"
+Block,BlockGpawUnrecognized,"(8203, 8593)","(315, 330)",Hsetup name Hydrogen id ddeffe...,"H-setup:
+  name: Hydrogen
+  id: d65de229564ff8ea4db303e23b6d1ecf
+  Z: 1.0
+  valence: 1
+  core: 0
+  charge: 0.0
+  file: /users/home/aaaa/gpaw-setups-0.9.20000/H.PBE.gz
+  compensation charges: gauss, rc=0.15, lmax=2
+  cutoffs: 0.85(filt), 0.53(core),
+  valence states:
+                energy  radius
+    1s(1.00)    -6.494   0.476
+    *s          20.717   0.476
+    *p           0.000   0.476
+"
+Block,BlockGpawUnrecognized,"(8595, 9037)","(333, 343)",LCAO basis set for H Name augc...,"  LCAO basis set for H:
+    Name: aug-cc-pVDZ_PBE.sz
+    File: /users/home/aaaa/gpaw-setups-0.9.20000/H.aug-cc-pVDZ_PBE.sz.basis
+    Number of radial functions: 5
+    Number of spherical harmonics: 9
+      l=0, rc=6.6406 Bohr: 1s-sz confined orbital
+      l=0, rc=8.5625 Bohr: NGTO(s,+1.000*0.122)
+      l=0, rc=16.0625 Bohr: NGTO(s,+1.000*0.030)
+      l=1, rc=3.8125 Bohr: NGTO(p,+1.000*0.727)
+      l=1, rc=8.0000 Bohr: NGTO(p,+1.000*0.141)
+"
+Block,BlockGpawUnrecognized,"(9039, 9070)","(346, 347)",Reference energy ,"Reference energy: -10231.780790
+"
+Block,BlockGpawUnrecognized,"(9072, 9125)","(350, 352)",Spinpolarized calculation Magn...,"Spin-polarized calculation.
+Magnetic moment: 0.000000
+"
+Block,BlockGpawUnrecognized,"(9127, 9543)","(355, 362)",Convergence criteria Maximum t...,"Convergence criteria:
+ Maximum [total energy] change in last 3 cyles: 0.0005 eV / electron
+ Maximum integral of absolute [dens]ity change: 0.0001 electrons / valence electron
+ Maximum integral of absolute [eigenst]ate change: 4e-08 eV^2 / valence electron
+ Maximum number of scf [iter]ations: 1000
+ (Square brackets indicate name in SCF output, whereas a 'c' in
+ the SCF output indicates the quantity has converged.)
+"
+Block,BlockGpawUnrecognized,"(9545, 9701)","(365, 371)",Density mixing Method differen...,"Density mixing:
+  Method: difference
+  Backend: no-mixing
+  Linear mixing parameter: 0
+  Mixing with 0 old densities
+  Damping of long wave oscillations: 0 
+"
+Block,BlockGpawUnrecognized,"(9703, 9753)","(374, 375)",XC parameters PBE with nearest...,"XC parameters: PBE with 2 nearest neighbor stencil
+"
+Block,BlockGpawUnrecognized,"(9755, 10354)","(378, 398)",Memory estimate Process memory...,"Memory estimate:
+  Process memory now: 667.91 MiB
+Attribute error: AttributeError(""'ETDM' object has no attribute 'estimate_memory'"")
+Some object probably lacks estimate_memory() method
+Memory breakdown may be incomplete
+  Calculator: 21.53 MiB
+    Density: 9.34 MiB
+      Arrays: 9.09 MiB
+      Localized functions: 0.25 MiB
+      Mixer: 0.00 MiB
+    Hamiltonian: 6.78 MiB
+      Arrays: 6.76 MiB
+      XC: 0.00 MiB
+      Poisson: 0.00 MiB
+      vbar: 0.02 MiB
+    Wavefunctions: 5.41 MiB
+      C [qnM]: 0.48 MiB
+      S, T [2 x qmm]: 0.97 MiB
+      P [aqMi]: 0.00 MiB
+      BasisFunctions: 3.96 MiB
+"
+Block,BlockGpawUnrecognized,"(10356, 10418)","(401, 403)",Total number of cores used Dom...,"Total number of cores used: 64
+Domain decomposition: 4 x 4 x 4
+"
+Block,BlockGpawUnrecognized,"(10420, 10566)","(406, 411)",Number of atoms Number of atom...,"Number of atoms: 15
+Number of atomic orbitals: 252
+Number of bands in calculation: 252
+Number of valence electrons: 44
+Bands to converge: occupied
+"
+Block,BlockGpawUnrecognized,"(10568, 10583)","(414, 415)",initialized ,"... initialized
+"
+Block,BlockGpawUnrecognized,"(10585, 10624)","(418, 419)",Initializing positiondependent...,"Initializing position-dependent things.
+"
+Block,BlockGpawUnrecognized,"(10626, 13225)","(422, 462)",N C H C H C C H C C H C N H H ...,"           .-------------------------------------------------.  
+          /|                                                 |  
+         / |                                                 |  
+        /  |                                                 |  
+       /   |                                                 |  
+      /    |                                                 |  
+     /     |                                                 |  
+    /      |                                                 |  
+   /       |                                                 |  
+  /        |                                                 |  
+ *         |                                                 |  
+ |         |                                                 |  
+ |         |                                                 |  
+ |         |                                                 |  
+ |         |                                                 |  
+ |         |                   N                             |  
+ |         |                   C                             |  
+ |         |                                                 |  
+ |         |              H    C    H                        |  
+ |         |                C     C                          |  
+ |         |                                                 |  
+ |         |              H C     C H                        |  
+ |         |                   C                             |  
+ |         |                   N                             |  
+ |         |                 H   H                           |  
+ |         |                                                 |  
+ |         |                                                 |  
+ |         |                                                 |  
+ |         |                                                 |  
+ |         .-------------------------------------------------.  
+ |        /                                                 /   
+ |       /                                                 /    
+ |      /                                                 /     
+ |     /                                                 /      
+ |    /                                                 /       
+ |   /                                                 /        
+ |  /                                                 /         
+ | /                                                 /          
+ |/                                                 /           
+ *-------------------------------------------------*            
+"
+Block,BlockGpawUnrecognized,"(13227, 14377)","(465, 481)",Positions C C C C C C C N N H ...,"Positions:
+   0 C     10.141980    8.000000    9.877455    ( 0.0000,  0.0000,  0.0000)
+   1 C     11.347603    8.000000   10.593804    ( 0.0000,  0.0000,  0.0000)
+   2 C      8.936357    8.000000   10.593804    ( 0.0000,  0.0000,  0.0000)
+   3 C     10.141980    8.000000   12.685958    ( 0.0000,  0.0000,  0.0000)
+   4 C     11.345070    8.000000   11.976037    ( 0.0000,  0.0000,  0.0000)
+   5 C      8.938889    8.000000   11.976037    ( 0.0000,  0.0000,  0.0000)
+   6 C     10.141980    8.000000   14.111284    ( 0.0000,  0.0000,  0.0000)
+   7 N     10.141980    8.000000    8.511916    ( 0.0000,  0.0000,  0.0000)
+   8 N     10.141980    8.000000   15.274432    ( 0.0000,  0.0000,  0.0000)
+   9 H     12.283960    8.000000   10.058482    ( 0.0000,  0.0000,  0.0000)
+  10 H      8.000000    8.000000   10.058482    ( 0.0000,  0.0000,  0.0000)
+  11 H     12.278292    8.000000   12.514728    ( 0.0000,  0.0000,  0.0000)
+  12 H      8.005668    8.000000   12.514728    ( 0.0000,  0.0000,  0.0000)
+  13 H      9.283776    8.000000    8.000000    ( 0.0000,  0.0000,  0.0000)
+  14 H     11.000184    8.000000    8.000000    ( 0.0000,  0.0000,  0.0000)
+"
+Block,BlockGpawUnrecognized,"(14379, 14673)","(484, 489)",Unit cell periodic x y z point...,"Unit cell:
+           periodic     x           y           z      points  spacing
+  1. axis:    no    20.283960    0.000000    0.000000   136     0.1491
+  2. axis:    no     0.000000   16.000000    0.000000   108     0.1481
+  3. axis:    no     0.000000    0.000000   23.274432   156     0.1492
+"
+Block,BlockGpawUnrecognized,"(14675, 14762)","(492, 494)",Lengths Angles ,"  Lengths:  20.283960  16.000000  23.274432
+  Angles:   90.000000  90.000000  90.000000
+"
+Block,BlockGpawUnrecognized,"(14764, 14804)","(497, 498)",Effective grid spacing dv ,"Effective grid spacing dv^(1/3) = 0.1488
+"
+Block,BlockGpawUnrecognized,"(14806, 15532)","(501, 515)",iter time total logchange magm...,"iter     time        total  log10-change:  magmom 
+                    energy  eigst   dens           
+   1 15:53:12   -96.120747  +0.08  -1.78    +0.0000
+   2 15:53:14   -96.168118  -0.16  -2.03    +0.0000
+   3 15:53:16   -96.234818  -1.48  -2.27    +0.0000
+   4 15:53:18   -96.236707  -1.76  -3.35    +0.0000
+   5 15:53:19   -96.226106c -0.86  -2.47    +0.0000
+   6 15:53:21   -96.239880c -2.69  -2.60    +0.0000
+   7 15:53:23   -96.240103c -4.04  -3.43    +0.0000
+   8 15:53:25   -96.240102c -3.99  -5.39c   +0.0000
+   9 15:53:27   -96.240116c -5.18  -4.09c   +0.0000
+  10 15:53:29   -96.240117c -6.41  -4.61c   +0.0000
+  11 15:53:31   -96.240117c -6.89  -5.61c   +0.0000
+  12 15:53:33   -96.240117c -7.61c -5.40c   +0.0000
+"
+Block,BlockGpawUnrecognized,"(15534, 15584)","(518, 519)",Occupied states converged afte...,"Occupied states converged after 13 e/g evaluations
+"
+Block,BlockGpawUnrecognized,"(15586, 15616)","(522, 523)",Converged after iterations ,"Converged after 12 iterations.
+"
+Block,BlockGpawDipole,"(15618, 15673)","(434, 435)",Dipole moment eAng ,"Dipole moment: (-0.000000, 0.000000, -1.948262) |e|*Ang
+"
+Block,BlockGpawUnrecognized,"(15675, 16382)","(438, 455)",Total magnetic moment Local ma...,"Total magnetic moment: (0.000000, 0.000000, 0.000001)
+Local magnetic moments:
+   0 C  ( 0.000000,  0.000000,  0.088469)
+   1 C  ( 0.000000,  0.000000, -0.056876)
+   2 C  ( 0.000000,  0.000000, -0.056876)
+   3 C  ( 0.000000,  0.000000, -0.014706)
+   4 C  ( 0.000000,  0.000000,  0.050157)
+   5 C  ( 0.000000,  0.000000,  0.050157)
+   6 C  ( 0.000000,  0.000000,  0.022042)
+   7 N  ( 0.000000,  0.000000, -0.111194)
+   8 N  ( 0.000000,  0.000000, -0.000895)
+   9 H  ( 0.000000,  0.000000,  0.001346)
+  10 H  ( 0.000000,  0.000000,  0.001346)
+  11 H  ( 0.000000,  0.000000, -0.001274)
+  12 H  ( 0.000000,  0.000000, -0.001274)
+  13 H  ( 0.000000,  0.000000,  0.001690)
+  14 H  ( 0.000000,  0.000000,  0.001690)
+"
+Block,BlockGpawUnrecognized,"(16384, 16461)","(458, 459)",Energy contributions relative ...,"Energy contributions relative to reference atoms: (reference = -10231.780790)
+"
+Block,BlockGpawUnrecognized,"(16463, 16705)","(462, 471)",Kinetic Potential External XC ...,"Kinetic:       +111.119958
+Potential:     -114.654058
+External:        +0.000000
+XC:             -93.096053
+Entropy (-ST):   +0.000000
+Local:           +0.390037
+--------------------------
+Free energy:    -96.240117
+Extrapolated:   -96.240117
+"
+Block,BlockGpawUnrecognized,"(16707, 30454)","(474, 729)",Spin contamination electrons U...,"Spin contamination: 0.651158 electrons
+                   Up                     Down
+ Band  Eigenvalues  Occupancy  Eigenvalues  Occupancy
+    0    -24.42908    1.00000    -24.57211    1.00000
+    1    -22.16252    1.00000    -22.18228    1.00000
+    2    -21.55401    1.00000    -21.60131    1.00000
+    3    -19.15063    1.00000    -19.19201    1.00000
+    4    -19.10920    1.00000    -19.10168    1.00000
+    5    -16.27019    1.00000    -16.17861    1.00000
+    6    -16.06651    1.00000    -16.09074    1.00000
+    7    -14.10863    1.00000    -14.18465    1.00000
+    8    -13.98088    1.00000    -13.97334    1.00000
+    9    -13.60204    1.00000    -13.58739    1.00000
+   10    -11.49083    1.00000    -11.49256    1.00000
+   11    -11.22789    1.00000    -11.22521    1.00000
+   12    -10.79945    1.00000    -10.80285    1.00000
+   13    -10.42588    1.00000    -10.49494    1.00000
+   14     -9.96996    1.00000     -9.95142    1.00000
+   15     -9.12143    1.00000     -9.15982    1.00000
+   16     -8.89434    1.00000     -8.88258    1.00000
+   17     -7.96205    1.00000     -7.93987    1.00000
+   18     -7.63217    1.00000     -7.70758    1.00000
+   19     -7.60777    1.00000     -7.63606    1.00000
+   20     -6.83964    1.00000     -6.83082    1.00000
+   21     -5.58787    0.00000     -5.81907    1.00000
+   22     -1.88916    1.00000     -1.69114    0.00000
+   23     -1.63997    0.00000     -1.60657    0.00000
+   24     -1.28489    0.00000     -1.26151    0.00000
+   25     -0.50133    0.00000     -0.44567    0.00000
+   26     -0.36502    0.00000     -0.28524    0.00000
+   27      0.22185    0.00000      0.28238    0.00000
+   28      0.36982    0.00000      0.44838    0.00000
+   29      0.49686    0.00000      0.54160    0.00000
+   30      0.50881    0.00000      0.64008    0.00000
+   31      0.78386    0.00000      0.80930    0.00000
+   32      1.17240    0.00000      1.21148    0.00000
+   33      1.19705    0.00000      1.25095    0.00000
+   34      1.28262    0.00000      1.36580    0.00000
+   35      1.63041    0.00000      1.64688    0.00000
+   36      1.64156    0.00000      1.71628    0.00000
+   37      1.66784    0.00000      1.76991    0.00000
+   38      2.09181    0.00000      2.12319    0.00000
+   39      2.21304    0.00000      2.26745    0.00000
+   40      2.27419    0.00000      2.31693    0.00000
+   41      2.46053    0.00000      2.51321    0.00000
+   42      2.54419    0.00000      2.67072    0.00000
+   43      2.66209    0.00000      2.72041    0.00000
+   44      2.70151    0.00000      2.73425    0.00000
+   45      2.75058    0.00000      2.82996    0.00000
+   46      2.87382    0.00000      2.98696    0.00000
+   47      2.94806    0.00000      3.00089    0.00000
+   48      3.11836    0.00000      3.19509    0.00000
+   49      3.33529    0.00000      3.35890    0.00000
+   50      3.39915    0.00000      3.48734    0.00000
+   51      3.46225    0.00000      3.49919    0.00000
+   52      4.05103    0.00000      4.11545    0.00000
+   53      4.21178    0.00000      4.25568    0.00000
+   54      4.31899    0.00000      4.45578    0.00000
+   55      4.39987    0.00000      4.46997    0.00000
+   56      4.56891    0.00000      4.61176    0.00000
+   57      4.65473    0.00000      4.72033    0.00000
+   58      4.76144    0.00000      4.81646    0.00000
+   59      5.11898    0.00000      5.18880    0.00000
+   60      5.77200    0.00000      5.82491    0.00000
+   61      5.82471    0.00000      5.86035    0.00000
+   62      5.83273    0.00000      5.87661    0.00000
+   63      6.04786    0.00000      6.07029    0.00000
+   64      6.06268    0.00000      6.12555    0.00000
+   65      6.13505    0.00000      6.20903    0.00000
+   66      6.21438    0.00000      6.27039    0.00000
+   67      6.45379    0.00000      6.50488    0.00000
+   68      6.54071    0.00000      6.60758    0.00000
+   69      6.68841    0.00000      6.76361    0.00000
+   70      6.86723    0.00000      6.91671    0.00000
+   71      7.04844    0.00000      7.09753    0.00000
+   72      7.18542    0.00000      7.22798    0.00000
+   73      7.19358    0.00000      7.24421    0.00000
+   74      7.51706    0.00000      7.53880    0.00000
+   75      7.58613    0.00000      7.64616    0.00000
+   76      7.86524    0.00000      7.90413    0.00000
+   77      8.03358    0.00000      8.07406    0.00000
+   78      8.06059    0.00000      8.13139    0.00000
+   79      8.26378    0.00000      8.35312    0.00000
+   80      8.39965    0.00000      8.40370    0.00000
+   81      8.70859    0.00000      8.79974    0.00000
+   82      9.03431    0.00000      9.09665    0.00000
+   83      9.06697    0.00000      9.10912    0.00000
+   84      9.30250    0.00000      9.32545    0.00000
+   85      9.84392    0.00000      9.86476    0.00000
+   86      9.86893    0.00000      9.91705    0.00000
+   87     10.22209    0.00000     10.25128    0.00000
+   88     10.40607    0.00000     10.44877    0.00000
+   89     10.45593    0.00000     10.47382    0.00000
+   90     10.53360    0.00000     10.60572    0.00000
+   91     10.82517    0.00000     10.84064    0.00000
+   92     11.12654    0.00000     11.15405    0.00000
+   93     11.57250    0.00000     11.56040    0.00000
+   94     11.85486    0.00000     11.86365    0.00000
+   95     12.25461    0.00000     12.25246    0.00000
+   96     12.40091    0.00000     12.41388    0.00000
+   97     12.56296    0.00000     12.71932    0.00000
+   98     13.04372    0.00000     13.06023    0.00000
+   99     13.40500    0.00000     13.41627    0.00000
+  100     13.43746    0.00000     13.46124    0.00000
+  101     13.51242    0.00000     13.52014    0.00000
+  102     13.77677    0.00000     13.85467    0.00000
+  103     14.13860    0.00000     14.23559    0.00000
+  104     14.38448    0.00000     14.41667    0.00000
+  105     14.49595    0.00000     14.53424    0.00000
+  106     14.52179    0.00000     14.59063    0.00000
+  107     14.67053    0.00000     14.66354    0.00000
+  108     14.77165    0.00000     14.80692    0.00000
+  109     15.18604    0.00000     15.25126    0.00000
+  110     15.33025    0.00000     15.34343    0.00000
+  111     15.46149    0.00000     15.56758    0.00000
+  112     15.75910    0.00000     15.76937    0.00000
+  113     16.04494    0.00000     16.05352    0.00000
+  114     16.14746    0.00000     16.15566    0.00000
+  115     16.15510    0.00000     16.22107    0.00000
+  116     16.28780    0.00000     16.29619    0.00000
+  117     16.33312    0.00000     16.37387    0.00000
+  118     16.61114    0.00000     16.61316    0.00000
+  119     16.63652    0.00000     16.65585    0.00000
+  120     17.36511    0.00000     17.39222    0.00000
+  121     18.06888    0.00000     18.03629    0.00000
+  122     18.13340    0.00000     18.11619    0.00000
+  123     18.54705    0.00000     18.53587    0.00000
+  124     18.85066    0.00000     18.87061    0.00000
+  125     18.93667    0.00000     18.89991    0.00000
+  126     19.05050    0.00000     18.93835    0.00000
+  127     19.10840    0.00000     19.06132    0.00000
+  128     19.19959    0.00000     19.08674    0.00000
+  129     19.40984    0.00000     19.43467    0.00000
+  130     19.77189    0.00000     19.84118    0.00000
+  131     19.84054    0.00000     19.88941    0.00000
+  132     19.93693    0.00000     20.00457    0.00000
+  133     20.03476    0.00000     20.07767    0.00000
+  134     20.66056    0.00000     20.81997    0.00000
+  135     21.16763    0.00000     21.18604    0.00000
+  136     21.64575    0.00000     21.63956    0.00000
+  137     21.80762    0.00000     21.81441    0.00000
+  138     22.00253    0.00000     21.95439    0.00000
+  139     22.02016    0.00000     22.05328    0.00000
+  140     22.45351    0.00000     22.44994    0.00000
+  141     22.80507    0.00000     22.82770    0.00000
+  142     22.81831    0.00000     22.89040    0.00000
+  143     22.88867    0.00000     22.95249    0.00000
+  144     23.76795    0.00000     23.81279    0.00000
+  145     24.23818    0.00000     24.26353    0.00000
+  146     24.85091    0.00000     24.86731    0.00000
+  147     25.07730    0.00000     25.13748    0.00000
+  148     25.81726    0.00000     25.91713    0.00000
+  149     26.38322    0.00000     26.42242    0.00000
+  150     26.58515    0.00000     26.58302    0.00000
+  151     27.45202    0.00000     27.49557    0.00000
+  152     27.84324    0.00000     27.84718    0.00000
+  153     28.23862    0.00000     28.28997    0.00000
+  154     28.39385    0.00000     28.34149    0.00000
+  155     29.02499    0.00000     29.01777    0.00000
+  156     30.04396    0.00000     30.07664    0.00000
+  157     30.76644    0.00000     30.79881    0.00000
+  158     31.73711    0.00000     31.83554    0.00000
+  159     32.51281    0.00000     32.48723    0.00000
+  160     33.19355    0.00000     33.19536    0.00000
+  161     33.20768    0.00000     33.19806    0.00000
+  162     33.95957    0.00000     33.96675    0.00000
+  163     34.07166    0.00000     34.00973    0.00000
+  164     34.15090    0.00000     34.17958    0.00000
+  165     34.63772    0.00000     34.67928    0.00000
+  166     35.98165    0.00000     35.94199    0.00000
+  167     36.47831    0.00000     36.48142    0.00000
+  168     36.56313    0.00000     36.59279    0.00000
+  169     37.00367    0.00000     36.96195    0.00000
+  170     37.63717    0.00000     37.63686    0.00000
+  171     37.77430    0.00000     37.73015    0.00000
+  172     38.05252    0.00000     38.02451    0.00000
+  173     38.35126    0.00000     38.34899    0.00000
+  174     38.48443    0.00000     38.46467    0.00000
+  175     38.53012    0.00000     38.50385    0.00000
+  176     38.96380    0.00000     38.99709    0.00000
+  177     39.14927    0.00000     39.22308    0.00000
+  178     39.27166    0.00000     39.22549    0.00000
+  179     39.47737    0.00000     39.46028    0.00000
+  180     39.56646    0.00000     39.65241    0.00000
+  181     40.08933    0.00000     40.19024    0.00000
+  182     40.61036    0.00000     40.60863    0.00000
+  183     41.32982    0.00000     41.33485    0.00000
+  184     41.54394    0.00000     41.59720    0.00000
+  185     41.79052    0.00000     41.80842    0.00000
+  186     41.83355    0.00000     41.93549    0.00000
+  187     42.31440    0.00000     42.32047    0.00000
+  188     42.61395    0.00000     42.65517    0.00000
+  189     42.75662    0.00000     42.79497    0.00000
+  190     43.05967    0.00000     43.06209    0.00000
+  191     43.66921    0.00000     43.70947    0.00000
+  192     43.95725    0.00000     43.92812    0.00000
+  193     44.03344    0.00000     44.07210    0.00000
+  194     44.68173    0.00000     44.73113    0.00000
+  195     45.10422    0.00000     45.07013    0.00000
+  196     45.31646    0.00000     45.33419    0.00000
+  197     46.05694    0.00000     46.06459    0.00000
+  198     47.16171    0.00000     47.14160    0.00000
+  199     47.25888    0.00000     47.29027    0.00000
+  200     47.84025    0.00000     47.82892    0.00000
+  201     47.96605    0.00000     47.98560    0.00000
+  202     48.63974    0.00000     48.65097    0.00000
+  203     49.16180    0.00000     49.17684    0.00000
+  204     49.24067    0.00000     49.21445    0.00000
+  205     49.70924    0.00000     49.79729    0.00000
+  206     49.83917    0.00000     49.81084    0.00000
+  207     50.68702    0.00000     50.73212    0.00000
+  208     51.48268    0.00000     51.46999    0.00000
+  209     51.61334    0.00000     51.65690    0.00000
+  210     52.39669    0.00000     52.36226    0.00000
+  211     52.45361    0.00000     52.41748    0.00000
+  212     52.93777    0.00000     52.88724    0.00000
+  213     53.28556    0.00000     53.27219    0.00000
+  214     53.58916    0.00000     53.59549    0.00000
+  215     53.85819    0.00000     53.83368    0.00000
+  216     54.08168    0.00000     53.97094    0.00000
+  217     54.48824    0.00000     54.45987    0.00000
+  218     54.81160    0.00000     54.78635    0.00000
+  219     55.00995    0.00000     55.00430    0.00000
+  220     56.62677    0.00000     56.62670    0.00000
+  221     56.97135    0.00000     56.99476    0.00000
+  222     57.97282    0.00000     58.03969    0.00000
+  223     58.85837    0.00000     58.89912    0.00000
+  224     59.55298    0.00000     59.54249    0.00000
+  225     59.87321    0.00000     59.83002    0.00000
+  226     60.70234    0.00000     60.64882    0.00000
+  227     60.72872    0.00000     60.69663    0.00000
+  228     61.94880    0.00000     61.95187    0.00000
+  229     62.14292    0.00000     62.14757    0.00000
+  230     62.89875    0.00000     62.88189    0.00000
+  231     62.90438    0.00000     62.93345    0.00000
+  232     64.40142    0.00000     64.13692    0.00000
+  233     65.41449    0.00000     65.42703    0.00000
+  234     66.58297    0.00000     66.35944    0.00000
+  235     67.77291    0.00000     67.77849    0.00000
+  236     68.43288    0.00000     68.45163    0.00000
+  237     68.84575    0.00000     68.84223    0.00000
+  238     69.23438    0.00000     69.22376    0.00000
+  239     70.50865    0.00000     70.48048    0.00000
+  240     71.68303    0.00000     71.73329    0.00000
+  241     72.61623    0.00000     72.62052    0.00000
+  242     74.12400    0.00000     74.06691    0.00000
+  243     74.83029    0.00000     74.84826    0.00000
+  244     75.76554    0.00000     75.76329    0.00000
+  245     78.02740    0.00000     78.01697    0.00000
+  246     79.87576    0.00000     79.87807    0.00000
+  247     81.59782    0.00000     81.62746    0.00000
+  248     81.85757    0.00000     81.83158    0.00000
+  249     83.60243    0.00000     83.51849    0.00000
+  250     87.94628    0.00000     87.90765    0.00000
+  251     95.86929    0.00000     95.86901    0.00000
+"
+Block,BlockGpawUnrecognized,"(30456, 30472)","(732, 733)",Fermi level inf ,"Fermi level: inf
+"
+Block,BlockGpawUnrecognized,"(30474, 30509)","(736, 737)",Writing to abnesmgpw modeall ...,"Writing to abn_esm.gpw (mode='all')
+"
+Block,BlockGpawUnrecognized,"(30511, 37211)","(740, 846)",Timing incl excl Basic WFS set...,"Timing:                               incl.     excl.
+------------------------------------------------------------
+Basic WFS set positions:              0.001     0.000   0.0% |
+ Redistribute:                        0.000     0.000   0.0% |
+Basis functions set positions:        0.031     0.031   0.1% |
+LCAO WFS Initialize:                  0.333     0.014   0.0% |
+ Hamiltonian:                         0.319     0.001   0.0% |
+  Atomic:                             0.000     0.000   0.0% |
+   XC Correction:                     0.000     0.000   0.0% |
+  Calculate atomic Hamiltonians:      0.000     0.000   0.0% |
+  Communicate:                        0.031     0.031   0.1% |
+  Hartree integrate/restrict:         0.015     0.015   0.0% |
+  Poisson:                            0.073     0.003   0.0% |
+   Communicate from 1D:               0.014     0.014   0.0% |
+   Communicate from 2D:               0.014     0.014   0.0% |
+   Communicate to 1D:                 0.013     0.013   0.0% |
+   Communicate to 2D:                 0.015     0.015   0.0% |
+   FFT 1D:                            0.005     0.005   0.0% |
+   FFT 2D:                            0.009     0.009   0.0% |
+  XC 3D grid:                         0.197     0.197   0.5% |
+  vbar:                               0.002     0.002   0.0% |
+P tci:                                0.000     0.000   0.0% |
+Redistribute:                         0.000     0.000   0.0% |
+SCF-cycle:                           26.509     0.092   0.3% |
+ Density:                             0.732     0.000   0.0% |
+  Atomic density matrices:            0.715     0.715   2.0% ||
+  Mix:                                0.016     0.016   0.0% |
+  Multipole moments:                  0.000     0.000   0.0% |
+  Normalize:                          0.000     0.000   0.0% |
+  Pseudo density:                     0.001     0.000   0.0% |
+   Calculate density matrix:          0.001     0.001   0.0% |
+   Construct density:                 0.000     0.000   0.0% |
+   Symmetrize density:                0.000     0.000   0.0% |
+ Direct Minimisation step:           24.536     0.004   0.0% |
+  Broadcast gradients:                0.004     0.004   0.0% |
+  Calculate gradients:               10.506     0.015   0.0% |
+   Construct Gradient Matrix:         0.070     0.044   0.1% |
+    Residual:                         0.026     0.026   0.1% |
+   DenseAtomicCorrection:             0.001     0.001   0.0% |
+   Distribute overlap matrix:        10.415    10.415  28.9% |-----------|
+   Potential matrix:                  0.005     0.005   0.0% |
+  Density:                            9.567     0.000   0.0% |
+   Atomic density matrices:           9.374     9.374  26.0% |---------|
+   Mix:                               0.177     0.177   0.5% |
+   Multipole moments:                 0.002     0.002   0.0% |
+   Normalize:                         0.002     0.002   0.0% |
+   Pseudo density:                    0.012     0.004   0.0% |
+    Calculate density matrix:         0.006     0.006   0.0% |
+    Construct density:                0.002     0.002   0.0% |
+    Symmetrize density:               0.000     0.000   0.0% |
+  Get Search Direction:               0.019     0.019   0.1% |
+  Hamiltonian:                        4.172     0.013   0.0% |
+   Atomic:                            0.003     0.003   0.0% |
+    XC Correction:                    0.000     0.000   0.0% |
+   Calculate atomic Hamiltonians:     0.004     0.004   0.0% |
+   Communicate:                       0.403     0.403   1.1% |
+   Hartree integrate/restrict:        0.192     0.192   0.5% |
+   New Kinetic Energy:                0.009     0.002   0.0% |
+    Pseudo part:                      0.006     0.006   0.0% |
+   Poisson:                           0.984     0.037   0.1% |
+    Communicate from 1D:              0.202     0.202   0.6% |
+    Communicate from 2D:              0.188     0.188   0.5% |
+    Communicate to 1D:                0.172     0.172   0.5% |
+    Communicate to 2D:                0.207     0.207   0.6% |
+    FFT 1D:                           0.070     0.070   0.2% |
+    FFT 2D:                           0.107     0.107   0.3% |
+   XC 3D grid:                        2.545     2.545   7.1% |--|
+   vbar:                              0.020     0.020   0.1% |
+  Preconditioning::                   0.013     0.013   0.0% |
+  Unitary rotation:                   0.252     0.027   0.1% |
+   Broadcast u_nn:                    0.003     0.003   0.0% |
+   Calculate projections:             0.001     0.001   0.0% |
+   Pade Approximants:                 0.221     0.221   0.6% |
+ Get canonical representation:        0.808     0.004   0.0% |
+  Calculate projections:              0.000     0.000   0.0% |
+  DenseAtomicCorrection:              0.000     0.000   0.0% |
+  Diagonalize and rotate:             0.018     0.018   0.1% |
+  Distribute overlap matrix:          0.785     0.785   2.2% ||
+  Potential matrix:                   0.000     0.000   0.0% |
+  Sort WFS:                           0.000     0.000   0.0% |
+ Hamiltonian:                         0.327     0.001   0.0% |
+  Atomic:                             0.000     0.000   0.0% |
+   XC Correction:                     0.000     0.000   0.0% |
+  Calculate atomic Hamiltonians:      0.000     0.000   0.0% |
+  Communicate:                        0.031     0.031   0.1% |
+  Hartree integrate/restrict:         0.014     0.014   0.0% |
+  New Kinetic Energy:                 0.001     0.000   0.0% |
+   Pseudo part:                       0.000     0.000   0.0% |
+  Poisson:                            0.075     0.003   0.0% |
+   Communicate from 1D:               0.015     0.015   0.0% |
+   Communicate from 2D:               0.014     0.014   0.0% |
+   Communicate to 1D:                 0.013     0.013   0.0% |
+   Communicate to 2D:                 0.016     0.016   0.0% |
+   FFT 1D:                            0.005     0.005   0.0% |
+   FFT 2D:                            0.009     0.009   0.0% |
+  XC 3D grid:                         0.203     0.203   0.6% |
+  vbar:                               0.002     0.002   0.0% |
+ Orthonormalize:                      0.013     0.000   0.0% |
+  Orthonormalize:                     0.013     0.013   0.0% |
+ST tci:                               0.005     0.005   0.0% |
+Set symmetry:                         0.000     0.000   0.0% |
+TCI: Evaluate splines:                0.504     0.504   1.4% ||
+mktci:                                0.003     0.003   0.0% |
+Other:                                8.675     8.675  24.1% |---------|
+------------------------------------------------------------
+Total:                                         36.061 100.0%
+"
+Block,BlockGpawUnrecognized,"(37213, 37243)","(849, 850)",Date Tue May ,"Date: Tue May 31 15:53:42 2022
+"

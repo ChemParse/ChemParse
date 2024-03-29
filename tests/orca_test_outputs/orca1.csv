@@ -1734,19 +1734,23 @@ Finished LeanSCF after  12.7 sec
 Maximum memory used throughout the entire LEANSCF-calculation: 38.6 MB
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(73754, 73958)","(1743, 1747)",ORCA property calculations,"                            ***************************************
+Block,BlockOrcaFinalSinglePointEnergy,"(73605, 73751)","(1715, 1718)",FINAL SINGLE POINT ENERGY,"-------------------------   --------------------
+FINAL SINGLE POINT ENERGY      -440.508559636589
+-------------------------   --------------------
+"
+Block,BlockOrcaUnrecognizedWithHeader,"(73754, 73958)","(1722, 1726)",ORCA property calculations,"                            ***************************************
                             *     ORCA property calculations      *
                             ***************************************
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(73959, 74155)","(1748, 1754)",Active property flags,"                                    ---------------------
+Block,BlockOrcaUnrecognizedWithHeader,"(73959, 74155)","(1727, 1733)",Active property flags,"                                    ---------------------
                                     Active property flags
                                     ---------------------
    (+) Dipole Moment
 
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(74156, 74926)","(1755, 1770)",ORCA ELECTRIC PROPERTIES CALCULATION,"------------------------------------------------------------------------------
+Block,BlockOrcaUnrecognizedWithHeader,"(74156, 74926)","(1734, 1749)",ORCA ELECTRIC PROPERTIES CALCULATION,"------------------------------------------------------------------------------
                        ORCA ELECTRIC PROPERTIES CALCULATION
 ------------------------------------------------------------------------------
 
@@ -1762,7 +1766,7 @@ Electron density                                ... orca.scfp
 The origin for moment calculation is the CENTER OF MASS  = (19.160971, 19.080780 22.599358)
 
 "
-Block,BlockOrcaDipoleMoment,"(74927, 75436)","(1745, 1756)",DIPOLE MOMENT,"-------------
+Block,BlockOrcaDipoleMoment,"(74927, 75436)","(1747, 1758)",DIPOLE MOMENT,"-------------
 DIPOLE MOMENT
 -------------
                                 X             Y             Z
@@ -1774,7 +1778,7 @@ Total Dipole Moment    :      0.00003      -0.00044      -3.80686
 Magnitude (a.u.)       :      3.80686
 Magnitude (Debye)      :      9.67628
 "
-Block,BlockOrcaRotationalSpectrum,"(75440, 75806)","(1761, 1774)",Rotational spectrum Rotational...,"--------------------
+Block,BlockOrcaRotationalSpectrum,"(75440, 75806)","(1763, 1776)",Rotational spectrum Rotational...,"--------------------
 Rotational spectrum 
 --------------------
  
@@ -1788,7 +1792,7 @@ x,y,z [Debye]:    -9.676280    -0.000065     0.001128
  
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(75807, 79173)","(1775, 1845)",SUGGESTED CITATIONS FOR THIS RUN,"--------------------------------
+Block,BlockOrcaUnrecognizedWithHeader,"(75807, 79173)","(1777, 1847)",SUGGESTED CITATIONS FOR THIS RUN,"--------------------------------
 SUGGESTED CITATIONS FOR THIS RUN
 --------------------------------
 

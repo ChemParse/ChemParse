@@ -97,7 +97,6 @@ def test_default_regex_known(regex, orca_output_file):
 def test_default_output_parsing(orca_output_file):
     expected_result = pd.read_csv(orca_output_file[:-4] + ".csv")
 
-    # Assuming op.File() is a valid method for reading your file
     file = op.File(orca_output_file)
     data = file.get_data(extract_only_raw=True)
     data = data.drop(columns=['Element'])
@@ -148,3 +147,9 @@ def test_default_output_parsing(orca_output_file):
 
         # Raise an AssertionError with the detailed message
         raise AssertionError(diff_message) from None
+
+
+@pytest.mark.parametrize("orca_output_file", orca_output_files)
+def test_default_get_data(orca_output_file):
+    file = op.File(orca_output_file)
+    data = file.get_data()
