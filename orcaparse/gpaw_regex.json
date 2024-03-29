@@ -1,7 +1,7 @@
 {
   "order": [
     "TypeKnownBlocks",
-    "BlockGpawUnknown",
+    "TypeDefaultBlocks",
     "Spacer"
   ],
   "TypeKnownBlocks": {
@@ -12,7 +12,7 @@
     "BlockGpawIcon": {
       "p_type": "Block",
       "p_subtype": "BlockGpawIcon",
-      "pattern": "^((?:[ \\t]*___ ___ ___ _ _ _[ \\t]*\\n)(?:.*?\\n)*?)(?=[ \\\\t]*$)",
+      "pattern": "^((?:[ \\t]*___ ___ ___ _ _ _[ \\t]*\\n)(?:^(?!^[ \\t]*$).*\\n)*)",
       "flags": [
         "MULTILINE"
       ],
@@ -28,14 +28,19 @@
       "comment": "Dipole moment"
     }
   },
-  "BlockGpawUnknown": {
-    "p_type": "Block",
-    "p_subtype": "BlockGpawUnknown",
-    "pattern": "((?:^[ \\t]*\\S.*\\n)+)",
-    "flags": [
-      "MULTILINE"
+  "TypeDefaultBlocks": {
+    "order": [
+      "BlockGpawUnrecognized"
     ],
-    "comment": "I have no clue what that is but it is not empty and is not my marker"
+    "BlockGpawUnrecognized": {
+      "p_type": "Block",
+      "p_subtype": "BlockGpawUnrecognized",
+      "pattern": "((?:^(?!^[ \\t]*$).*\\n)+)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Paragraph"
+    }
   },
   "Spacer": {
     "p_type": "Spacer",
