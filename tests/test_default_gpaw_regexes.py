@@ -1,10 +1,11 @@
-import pandas as pd
-import pytest
-import orcaparse as op
 import os
 import re
 from itertools import zip_longest
 
+import pandas as pd
+import pytest
+
+import orcaparse as op
 
 rs = op.DEFAULT_GPAW_REGEX_SETTINGS
 known_gpaw_regexes = (rs.items["TypeKnownBlocks"].to_list() +
