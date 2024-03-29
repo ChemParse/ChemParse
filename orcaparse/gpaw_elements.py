@@ -36,6 +36,8 @@ class BlockGpawIcon(Block):
 
 @AvailableBlocksGpaw.register_block
 class BlockGpawDipole(Block):
+    data_available: bool = True
+
     def data(self) -> Data:
         numbers = re.findall(r"[-+]?\d*\.\d+|\d+", self.raw_data)
         # Convert extracted numbers to a numpy array of floats
