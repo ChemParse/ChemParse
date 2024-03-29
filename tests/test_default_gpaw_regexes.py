@@ -54,8 +54,9 @@ def regex_check(gpaw_out, regex):
     for match, anchor_match in zip_longest(matches, anchor_matches, fillvalue=None):
         if match is None or anchor_match is None:
             raise ValueError(
-                f"The number of matches in the anchor pattern and the original pattern"
-                f" do not match,\n{match = }\n{anchor_match = }"
+                f"The number of matches in the anchor pattern "
+                f"and the original pattern "
+                f"do not match,\n{match = }\n{anchor_match = }"
             )
         # The entire matched text
         full_match = match.group(0)
