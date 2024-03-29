@@ -54,7 +54,8 @@ def regex_check(orca_out, regex):
     for match, anchor_match in zip_longest(matches, anchor_matches, fillvalue=None):
         if match is None or anchor_match is None:
             raise ValueError(
-                f"The number of matches in the anchor pattern and the original pattern do not match,\n{match = }\n{anchor_match = }"
+                f"The number of matches in the anchor pattern and the original pattern"
+                f" do not match,\n{match = }\n{anchor_match = }"
             )
         # The entire matched text
         full_match = match.group(0)
@@ -144,7 +145,8 @@ def test_default_output_parsing(orca_output_file):
             expected_result, keep_shape=True, keep_equal=False)
 
         # Format a message detailing the differences
-        diff_message = f"Data does not match expected result for {orca_output_file}. Differences found:\n{differences}"
+        diff_message = (f"Data does not match expected result for {orca_output_file}. "
+                        f"Differences found:\n{differences}")
 
         # Raise an AssertionError with the detailed message
         raise AssertionError(diff_message) from None
