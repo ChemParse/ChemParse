@@ -2,7 +2,8 @@ import pandas as pd
 import pytest
 
 from orcaparse import Data
-from orcaparse.elements import AvailableBlocks, ExtractionError
+from orcaparse.elements import ExtractionError
+from orcaparse.orca_elements import AvailableBlocksOrca
 
 # Load the test data from the CSV file
 test_data = pd.read_csv("tests/extraction_sample.csv")
@@ -10,12 +11,12 @@ test_data = pd.read_csv("tests/extraction_sample.csv")
 
 @pytest.mark.parametrize("subtype, raw_data", test_data.values)
 def test_blocks(subtype, raw_data):
-    # Ensure the subtype exists in AvailableBlocks
-    assert (subtype in AvailableBlocks.blocks,
+    # Ensure the subtype exists in AvailableBlocksOrca
+    assert (subtype in AvailableBlocksOrca.blocks,
             f"{subtype} is not a registered block type.")
 
-    # Instantiate the block using the corresponding class from AvailableBlocks
-    block_class = AvailableBlocks.blocks[subtype]
+    # Instantiate the block using the corresponding class from AvailableBlocksOrca
+    block_class = AvailableBlocksOrca.blocks[subtype]
     block_instance = block_class(raw_data)
 
     # Test the 'data' method if it's supposed to return a Data object or specific data format

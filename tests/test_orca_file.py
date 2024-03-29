@@ -45,7 +45,7 @@ def test_orca_marked_text(orca_output_file):
     marked_text = orca_file.get_marked_text()
     # Assert that blocks is an instance of pd.DataFrame
     assert isinstance(
-        marked_text, str), f"Expected marked_text to be string, but got {type(marked_text)}"
+        marked_text, list), f"Expected marked_text to be string, but got {type(marked_text)}"
 
     # Assert that the DataFrame contains more than just column names (at least one row of data)
     assert len(marked_text) > 0, "Expected marked_text not to be empty"

@@ -1,0 +1,54 @@
+{
+  "order": [
+    "TypeKnownBlocks",
+    "TypeDefaultBlocks",
+    "Spacer"
+  ],
+  "TypeKnownBlocks": {
+    "order": [
+      "BlockGpawIcon",
+      "BlockGpawDipole"
+    ],
+    "BlockGpawIcon": {
+      "p_type": "Block",
+      "p_subtype": "BlockGpawIcon",
+      "pattern": "^((?:[ \\t]*___ ___ ___ _ _ _[ \\t]*\\n)(?:^(?!^[ \\t]*$).*\\n)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Searching for the first line of gpaw icon, assuming that the icon ends at the first empty line or block pattern."
+    },
+    "BlockGpawDipole": {
+      "p_type": "Block",
+      "p_subtype": "BlockGpawDipole",
+      "pattern": "^(Dipole moment:.*?\\n)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Dipole moment"
+    }
+  },
+  "TypeDefaultBlocks": {
+    "order": [
+      "BlockGpawUnrecognized"
+    ],
+    "BlockGpawUnrecognized": {
+      "p_type": "Block",
+      "p_subtype": "BlockGpawUnrecognized",
+      "pattern": "((?:^(?!^[ \\t]*$).*\\n)+)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Paragraph"
+    }
+  },
+  "Spacer": {
+    "p_type": "Spacer",
+    "p_subtype": "Spacer",
+    "pattern": "^(\\s*\\n)",
+    "flags": [
+      "MULTILINE"
+    ],
+    "comment": "Just some empty lines, may have tabs and spaces"
+  }
+}

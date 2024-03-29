@@ -1,0 +1,223 @@
+{
+  "order": [
+    "TypeKnownBlocks",
+    "TypeDefaultBlocks",
+    "Spacer"
+  ],
+  "TypeKnownBlocks": {
+    "order": [
+      "BlockOrcaTotalRunTime",
+      "BlockOrcaTerminatedNormally",
+      "BlockOrcaFinalSinglePointEnergy",
+      "BlockOrcaDipoleMoment",
+      "BlockOrcaInputFile",
+      "BlockOrcaShark",
+      "BlockOrcaWarnings",
+      "BlueprintParagraphStartsWith",
+      "BlueprintBlockWithSingeLineHeader",
+      "BlueprintBlockWithInlineHeader",
+      "BlueprintBlockNote",
+      "BlueprintBlockSCF",
+      "BlockOrcaScfConverged",
+      "BlockOrcaIcon"
+    ],
+    "BlockOrcaTotalRunTime": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaTotalRunTime",
+      "pattern": "^([ \\t]*TOTAL RUN TIME:\\s*(?:\\d+)\\s*days\\s*(?:\\d+)\\s*hours\\s*(?:\\d+)\\s*minutes\\s*(?:\\d+)\\s*seconds\\s*(?:\\d+)\\s*msec[ \\t]*\\n)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "This pattern captures the total runtime block in an ORCA output, displaying the computation time in days, hours, minutes, seconds, and milliseconds. Each time unit is followed by its respective label (e.g., days, hours), and the values can be any number of digits."
+    },
+    "BlockOrcaTerminatedNormally": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaTerminatedNormally",
+      "pattern": "^([ \\t]*\\*{4}ORCA TERMINATED NORMALLY\\*{4}[ \\t]*\\n)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "This pattern captures the ORCA termination message block in an ORCA output, which indicates that the ORCA calculation terminated normally. The block starts with four asterisks, followed by the message 'ORCA TERMINATED NORMALLY', and ends with four asterisks. The block may contain leading and trailing spaces or tabs."
+    },
+    "BlockOrcaFinalSinglePointEnergy": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaFinalSinglePointEnergy",
+      "pattern": "^((-{20,}\\s+-{15,}\\n)[ \\t]*FINAL SINGLE POINT ENERGY[ \\t]+-?\\d+\\.\\d+\\n\\2)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "This pattern matches the final single point energy block in an ORCA output file. It looks for a line of 25 dashes, followed by a line with FINAL SINGLE POINT ENERGY, and then the energy value represented by an optional minus sign followed by one or more digits, a period, and more digits. This is encapsulated within a pattern of dashes that frame the title and the value."
+    },
+    "BlockOrcaDipoleMoment": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaDipoleMoment",
+      "pattern": "^(([ \\t]*-{10,}[ \\t]*\\n[ \\t]*DIPOLE MOMENT[ \\t]*\\n[ \\t]*-{10,}[ \\t]*\\n)([ \\t]*X[ \\t]+Y[ \\t]+Z[ \\t]*\\n)(([ \\t]*[a-zA-Z\\.\\,() ]+:[ \\t]*-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]*\\n))*(([ \\t]*-{10,}[ \\t]*\\n))(([ \\t]*[a-zA-Z\\.\\,() ]+:[ \\t]*-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]*\\n))(([ \\t]*-{10,}[ \\t]*\\n))([ \\t]*[a-zA-Z\\.,\\(\\)\\s]+[ \\t]*:[ \\t]*(-?\\d+\\.\\d+)[ \\t]*\\n)*[ \\t]*[a-zA-Z\\.,\\(\\)\\s]+[ \\t]*:[ \\t]*(-?\\d+\\.\\d+)[ \\t]*\\n)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Equal signs around the INPUT FILE, then any nonspecial line until the equal signs again."
+    },
+    "BlockOrcaInputFile": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaInputFile",
+      "pattern": "^((?:[ \\t]*={10,}[ \\t]*\\n)(?:[ \\t]*INPUT FILE[ \\t]*\\n)(?:[ \\t]*={10,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)*?(?:[ \\t]*={10,}[ \\t]*\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Equal signs around the INPUT FILE, then any nonspecial line until the equal signs again."
+    },
+    "BlockOrcaShark": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaShark",
+      "pattern": "^((?:[ \\t]*-{50,}[ \\t]*\\n)(?:(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)*?)(?:^[ \\t]*- I N T E G R A L  F E E D E R -[ \\t]*\\n)(?:(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)*?)(?:[ \\t]*-{50,}[ \\t]*\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Starts with line of  --- and ends with line of ---,\n    contains the text 'INTEGRAL FEEDER' somewhere in the middle.\n    TODO: is ORCA STARTUP CALCULATIONS part of shark message?"
+    },
+    "BlockOrcaWarnings": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaWarnings",
+      "pattern": "^((?:[ \\t]*\\={5,}[ \\t]*\\n)(?:[ \\t]*WARNINGS[ \\t]*\\n)(?:.*?\\n){0,2}?(?:[ \\t]*\\={5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "WARNINGS, should capture the empty lines, but not the last line of equal signs."
+    },
+    "BlueprintParagraphStartsWith": {
+      "order": [
+        "BlockOrcaVersion",
+        "BlockOrcaContributions",
+        "BlockOrcaAcknowledgement",
+        "BlockOrcaLibint2",
+        "BlockOrcaLibXc",
+        "BlockOrcaUses"
+      ],
+      "pattern_structure": {
+        "beginning": "^([ \\t]*",
+        "ending": ".*?\\n(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n)*)",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockOrcaVersion": "Program Version",
+        "BlockOrcaContributions": "With contributions from",
+        "BlockOrcaAcknowledgement": "We gratefully acknowledge",
+        "BlockOrcaLibint2": "Your calculation uses the libint2",
+        "BlockOrcaLibXc": "Your ORCA version has been built with support for libXC",
+        "BlockOrcaUses": "This ORCA versions uses"
+      },
+      "comment": "Blueprint: Paragraph with the line that starts with specified text."
+    },
+    "BlueprintBlockWithSingeLineHeader": {
+      "order": [
+        "BlockOrcaRotationalSpectrum"
+      ],
+      "pattern_structure": {
+        "beginning": "^((?:^[ \\t]*[\\-\\*\\#\\=]{5,}.*\\n)(?:[ \\t]*",
+        "ending": "[ \\t]*\\n)(?:^[ \\t]*[\\-\\*\\#\\=]{5,}.*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)*)",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockOrcaRotationalSpectrum": "Rotational spectrum"
+      },
+      "comment": "Blueprint: Block starts with a line of special characters, followed by the 1 line header and then one more line of special characters. Then text until the special line or the next block"
+    },
+    "BlueprintBlockWithInlineHeader": {
+      "order": [
+        "BlockOrcaOrbitalBasis",
+        "BlockOrcaAuxJBasis"
+      ],
+      "pattern_structure": {
+        "beginning": "^((?:^[ \\t]*([\\-\\*\\#\\=]+)[ \\t]*",
+        "ending": "[ \\t]*\\2[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n)*)",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockOrcaOrbitalBasis": "Orbital basis set information",
+        "BlockOrcaAuxJBasis": "AuxJ basis set information"
+      },
+      "comment": "Blueprint: Block starts a few [\\-\\*\\#\\=] elements, followed by header, then followed by the same group of elements. Then text until the special line or the next block"
+    },
+    "BlueprintBlockNote": {
+      "order": [
+        "BlockOrcaAllRightsReserved"
+      ],
+      "pattern_structure": {
+        "beginning": "^((?:[ \\t]*(([\\-\\*\\#\\=]){5,})[ \\t]*\\n)(?:^[ \\t]*\\3(?!\\3).*\\3[ \\t]*\\n)*?(^[ \\t]*\\3[ \\t]*",
+        "ending": "[ \\t]*\\3[ \\t]*\\n)(?:^[ \\t]*\\3(?!\\3).*\\3[ \\t]*\\n)*?(?:[ \\t]*\\2[ \\t]*\\n))",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockOrcaAllRightsReserved": "All rights reserved"
+      },
+      "comment": "Blueprint: Note (one of the lines is given) in a surrounding line of special characters"
+    },
+    "BlueprintBlockSCF": {
+      "order": [
+        "BlockOrcaScf",
+        "BlockOrcaSoscf"
+      ],
+      "pattern_structure": {
+        "beginning": "^((?:(?:[ \\t]*([\\-\\*\\#\\=]){5,})[ \\t]*",
+        "ending": "[ \\t]*\\2{7,}\\n)(?:(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n){1,2}(?:\\2*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n)*)",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockOrcaScf": "S-C-F",
+        "BlockOrcaSoscf": "S-O-S-C-F"
+      },
+      "comment": "Blueprint: Note (one of the lines is given) in a surrounding line of special characters"
+    },
+    "BlockOrcaScfConverged": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaScfConverged",
+      "pattern": "^((?:[ \\t]*\\*{5,}[ \\t]*\\n)(?:^[ \\t]*\\*(?!\\*).*?\\*[ \\t]*\\n)(?:^[ \\t]*\\*[ \\t]*SCF CONVERGED AFTER[ \\t]*\\d+[ \\t]*CYCLES[ \\t]*\\*[ \\t]*\\n)(?:[ \\t]*\\*{5,}[ \\t]*\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Note, but with CF CONVERGED AFTER[ \t]*\\d+[ \t]*CYCLES inside"
+    },
+    "BlockOrcaIcon": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaIcon",
+      "pattern": "^((?:^[ \\t]*#,[ \\t]*\\n[ \\t]*###[ \\t]*\\n[ \\t]*####[ \\t]*\\n[ \\t]*#####[ \\t]*\\n)(?:(?:(?!^[ \\t]*$).*\\n)*))$",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Unsafe as can ignore the start of the next block, should better be searched after the other blocks. Searching for the first line of Orca icon, assuming that the icon ends at the first empty line."
+    }
+  },
+  "TypeDefaultBlocks": {
+    "order": [
+      "BlockOrcaUnrecognizedWithHeader"
+    ],
+    "BlockOrcaUnrecognizedWithHeader": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaUnrecognizedWithHeader",
+      "pattern": "(([ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n){1,3}\\2(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Special, from 1 to 3 non-special not-empty lines , the same special line, non-special lines till the next block"
+    }
+  },
+  "Spacer": {
+    "p_type": "Spacer",
+    "p_subtype": "Spacer",
+    "pattern": "^(\\s*\\n)",
+    "flags": [
+      "MULTILINE"
+    ],
+    "comment": "Just some empty lines, may have tabs and spaces"
+  }
+}

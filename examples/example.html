@@ -76,7 +76,7 @@ body {
 
 /* Styling for block elements */
 .content div[python-class-name^="Spacer"] {
-    font-size: 1px;
+    font-size: 0px;
 }
 
 
@@ -123,13 +123,15 @@ body {
 
 .content .block pre {
     border: none;
-    padding: 10px;
+    padding: 5px;
     margin: 0;
     overflow-x: hidden;
 }
 
 .content .block .hr-in-block {
     height: 2px;
+    margin: 0;
+    padding: 0;
     border: none;
     background-color: var(--hr-bg-color);
 }
@@ -141,6 +143,8 @@ body {
 
 .content .hr-between-blocks {
     height: 0;
+    margin: 0;
+    padding: 1px;
     border: none;
     background-color: transparent;
 }
@@ -152,7 +156,11 @@ body {
 }
 
 /* Specific styling for different block subtypes */
-.content .block[python-class-name="BlockIcon"] {
+.content .block[python-class-name="BlockOrcaIcon"] {
+    color: var(--block-icon-color);
+}
+
+.content .block[python-class-name="BlockGpawIcon"] {
     color: var(--block-icon-color);
 }
 
@@ -211,7 +219,10 @@ body {
     /* Makes the element a circle */
     margin-right: 5px;
     /* Space between the circle and the text */
+    display: inline-block;
+    vertical-align: middle;
 }
+
 
 /* Left comment-sidebar for color-comment sections */
 .comment-sidebar {
@@ -282,29 +293,37 @@ body {
             <!-- JavaScript will populate this area -->
         </div>
         <div class="content">
-            <div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div>
-<div class="element block" python-class-name="BlockUnknown" readable-name="My start of the message messag..." start-line=2 finish-line=3 data_available=False><div class="data"><pre>My start of the message: message1
-message2</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div>
-<div class="element block" python-class-name="BlockUnrecognizedWithHeader" readable-name="My data" start-line=5 finish-line=10 data_available=False><div class="header"><h6><pre>--------------------
+            <div class="element" python-class-name="Spacer" start-line=1 finish-line=2 is-block="False">
+<br></div><div class="element block" python-class-name="BlockUnknown" readable-name="My start of the message messag..." start-line=3 finish-line=5 data_available=False><div class="data">
+<pre>My start of the message: message1
+message2
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" start-line=6 finish-line=7 is-block="False">
+<br></div><div class="element block" python-class-name="BlockOrcaUnrecognizedWithHeader" readable-name="My data" start-line=6 finish-line=12 data_available=False><div class="header"><h6>
+<pre>--------------------
 My data
 --------------------
-</pre></h6></div><hr class="hr-in-block"></hr><div class="data"><pre> 
+</pre></h6></div><hr class="hr-in-block"></hr><div class="data">
+<pre> 
 My value: 1.234 eV
-</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element block" python-class-name="BlockUnrecognizedWithHeader" readable-name="Another data" start-line=11 finish-line=16 data_available=False><div class="header"><h6><pre>                            ***************************************
+
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaUnrecognizedWithHeader" readable-name="Another data" start-line=13 finish-line=19 data_available=False><div class="header"><h6>
+<pre>                            ***************************************
                             *            Another data             *
                             ***************************************
-</pre></h6></div><hr class="hr-in-block"></hr><div class="data"><pre>Not my match
+</pre></h6></div><hr class="hr-in-block"></hr><div class="data">
+<pre>Not my match
 My value: 9.876 eV
-</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element block" python-class-name="BlockFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=17 finish-line=19 data_available=True><div class="data"><pre>-------------------------   --------------------
+
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=18 finish-line=21 data_available=True><div class="data">
+<pre>-------------------------   --------------------
 FINAL SINGLE POINT ENERGY      -440.508559636589
--------------------------   --------------------</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element" python-class-name="Spacer" is-block="False"><pre>
-</pre></div><div class="element" python-class-name="Spacer" is-block="False"><pre></pre></div>
-<div class="element block" python-class-name="BlockTerminatedNormally" readable-name="ORCA TERMINATED NORMALLY" start-line=22 finish-line=22 data_available=True><div class="data"><pre>                             ****ORCA TERMINATED NORMALLY****</pre></div></div><hr class = "hr-between-blocks"></hr>
-<div class="element block" python-class-name="BlockTotalRunTime" readable-name="TOTAL RUN TIME" start-line=23 finish-line=23 data_available=True><div class="data"><pre>TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec</pre></div></div><hr class = "hr-between-blocks"></hr>
+-------------------------   --------------------
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" start-line=22 finish-line=24 is-block="False">
+<br><br></div><div class="element block" python-class-name="BlockOrcaTerminatedNormally" readable-name="ORCA TERMINATED NORMALLY" start-line=23 finish-line=24 data_available=True><div class="data">
+<pre>                             ****ORCA TERMINATED NORMALLY****
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaTotalRunTime" readable-name="TOTAL RUN TIME" start-line=24 finish-line=25 data_available=True><div class="data">
+<pre>TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec
+</pre></div></div><hr class = "hr-between-blocks"></hr>
         </div>
     </div>
     <script>
@@ -345,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (pythonClass === 'BlockUnknown') {
             colorBlock.style.backgroundColor = colorForError;
         } else {
-            if (['BlockUnrecognizedWithHeader', 'BlockUnrecognizedNotification', 'BlockUnrecognizedMessage'].includes(pythonClass)) {
+            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage'].includes(pythonClass)) {
                 colorBlock.style.backgroundColor = colorForUnrecognized;
             } else if (pythonClass === 'Block') {
                 colorBlock.style.backgroundColor = colorForNoClass;
@@ -358,12 +377,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Style the color block (you can adjust these styles as needed)
-        colorBlock.style.width = '10px';
-        colorBlock.style.height = '10px';
-        colorBlock.style.marginRight = '5px';
-        colorBlock.style.display = 'inline-block';
-        colorBlock.style.verticalAlign = 'middle';
 
         const entryText = startLine ? `Line ${startLine}: ${readableName}` : readableName;
         const textNode = document.createTextNode(entryText);
@@ -440,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function () {
             indicatorColorBlock.style.backgroundColor = colorForError;
             commentBlockContainer.title = "Block looks incorrectly formatted";
         } else {
-            if (pythonClass === 'BlockUnrecognizedWithHeader' || pythonClass === 'BlockUnrecognizedNotification' || pythonClass === 'BlockUnrecognizedMessage') {
+            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage'].includes(pythonClass)) {
                 indicatorColorBlock.style.backgroundColor = colorForUnrecognized;
                 commentBlockContainer.title = "Block recognized by general pattern: " + pythonClass + ". Contribute to make this block recognizable.";
             } else {

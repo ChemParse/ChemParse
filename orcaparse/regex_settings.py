@@ -3,9 +3,8 @@ import os
 import re
 import warnings
 from typing import Dict, List, Optional, Pattern, Union
-from .regex_request import RegexRequest
 
-DEFAULT_REGEX_FILE = os.path.join(os.path.dirname(__file__), 'regex.json')
+from .regex_request import RegexRequest
 
 
 class RegexBlueprint:
@@ -205,18 +204,19 @@ class RegexSettings:
 
         self.validate_configuration()
 
-    def add_item(self, name: str, item: Union[RegexRequest, 'RegexSettings']) -> None:
+    def add_item(self, name: str, item: Union[RegexRequest, 'RegexSettings'], rewrite: bool = False) -> None:
         """
         Adds an item (RegexRequest or nested RegexSettings) to the settings.
 
         Args:
             name (str): The name/key associated with the item.
             item (Union[RegexRequest, 'RegexSettings']): The item to add, which can be a RegexRequest or another RegexSettings instance.
+            rewrite (bool): Whether to overwrite an existing item with the same name. Defaults to False.
 
         Raises:
             ValueError: If the name already exists in the items.
         """
-        if name in self.items:
+        if name in self.items and not rewrite:
             raise ValueError(f"Item with name '{name}' already exists.")
         self.items[name] = item
         if name not in self.order:
@@ -400,3 +400,14 @@ class RegexSettings:
 
     def __str__(self) -> str:
         return self.tree()
+
+
+DEFAULT_ORCA_REGEX_FILE = os.path.join(
+    os.path.dirname(__file__), 'orca_regex.json')
+DEFAULT_ORCA_REGEX_SETTINGS: RegexSettings = RegexSettings(
+    settings_file=DEFAULT_ORCA_REGEX_FILE)
+
+DEFAULT_GPAW_REGEX_FILE = os.path.join(
+    os.path.dirname(__file__), 'gpaw_regex.json')
+DEFAULT_GPAW_REGEX_SETTINGS: RegexSettings = RegexSettings(
+    settings_file=DEFAULT_GPAW_REGEX_FILE)

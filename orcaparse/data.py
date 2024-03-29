@@ -92,14 +92,6 @@ class Data:
         """
         return key in self.data
 
-    def __len__(self) -> int:
-        """Return the number of items in the data dictionary.
-
-        Returns:
-            int: The number of items.
-        """
-        return len(self.data)
-
     def __delitem__(self, key: str) -> None:
         """Delete an item by key from the data dictionary.
 

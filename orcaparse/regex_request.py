@@ -1,8 +1,13 @@
 import re
+import time
 import warnings
 from typing import Pattern, Union
 
-from .elements import AvailableBlocks, Block, Spacer
+from tqdm import tqdm
+
+from .elements import Block, Element, Spacer
+from .gpaw_elements import AvailableBlocksGpaw
+from .orca_elements import AvailableBlocksOrca
 
 
 class RegexRequest:
@@ -102,134 +107,196 @@ class RegexRequest:
         """
         return re.compile(self.pattern, self.flags)
 
-    def apply(self, text: str, original_text: str | None = None) -> tuple[str, dict[str, dict]]:
+    def apply(self, marked_text: list[tuple[tuple[int, int], tuple[int, int], Element]] | str, mode: str = 'ORCA', show_progress: bool = False) -> tuple[str, dict[str, dict]]:
         """
-            Processes the input text using regular expressions to identify and replace specified patterns
-            with unique markers, while also creating corresponding element instances based on the identified patterns.
+        Apply the regular expression pattern to the marked text and extract elements.
 
-            This method compiles a pattern using the instance's `compile` method, then iterates over all matches
-            in the `text`. For each match, it:
-            - Extracts the relevant text and information.
-            - Ensures unique identification and non-overlap of markers.
-            - Dynamically instantiates elements based on the pattern's subtype or falls back to a default type if necessary.
-            - Updates a dictionary with the instantiated elements and their positions in the text.
+        Args:
+            marked_text (list[tuple[tuple[int, int], tuple[int, int], Element]] | str): The marked text to apply the pattern to.
+                It can be either a list of tuples containing the position, line numbers, and element, or a string.
+            mode (str): The mode to use for element extraction, either 'ORCA' or 'GPAW'.
+            show_progress (bool): A flag indicating whether to show a progress bar during the extraction process.
 
-            Nested functions within this method include:
-            - `replace_with_marker`: Called for each regex match to handle the replacement of text with a marker and instantiation of the corresponding element.
-            - `find_substring_positions`: Locates all occurrences of a substring within a given text, used to find the exact position of matched patterns in the original text.
-
-            Parameters:
-            - text (str): The text to be processed.
-            - original_text (str, optional): The original text before any processing, used for accurate position mapping. Defaults to `None`, in which case `text` is used as the original text.
-
-            Returns:
-            - tuple[str, dict[str, dict]]: A tuple containing the processed text with markers and a dictionary of elements keyed by their unique identifiers. Each dictionary entry contains the instantiated element and its position in the original text.
-
-            Raises:
-            - Warnings for various edge cases, such as multiple matches for a pattern in the original text, or when a pattern subtype is not recognized and a default is used instead.
+        Returns:
+            tuple[str, dict[str, dict]]: A tuple containing the modified marked text and a dictionary
+                of extracted elements with their positions.
         """
+        if mode == 'ORCA':
+            AB = AvailableBlocksOrca
+        elif mode == 'GPAW':
+            AB = AvailableBlocksGpaw
+        else:
+            raise ValueError(f"Mode '{mode}' is not recognized.")
 
-        original_text = original_text or text
+        if isinstance(marked_text, str):
+            marked_text = [
+                ((0, len(marked_text)), (1, marked_text.count('\n') + 1), marked_text)]
+
         compiled_pattern = self.compile()
-
         elements_dict = {}
 
-        def replace_with_marker(match):
+        total_chars = marked_text[-1][0][1]
 
-            def find_substring_positions(text, substring):
-                # method to search for the block position in the original text
-                positions = [(m.start(), m.end())
-                             for m in re.finditer(re.escape(substring), text)]
-                return positions
-            # The entire matched text
-            full_match = match.group(0)
+        # Added prefix_text parameter
+        def with_progress_bar(show_progress: bool, refresh_interval: float = 2, prefix_text: str = f"Processing {self.p_subtype}:"):
+            def decorator(func):
+                if not show_progress:
+                    return func
 
-            # The specific part you want to replace (previously match.group(1))
-            extracted_text = match.group(1)
+                def wrapper(*args, **kwargs):
+                    nonlocal total_chars  # Assuming total_chars is defined in the outer scope
+                    # Set prefix text using desc parameter
+                    pbar = tqdm(total=total_chars, desc=prefix_text)
 
-            if '<@%' in extracted_text or '%@>' in extracted_text:
-                warnings.warn(
-                    f'Attempt to replace the marker in {self.p_type, self.p_subtype}:{extracted_text}')
-                return full_match
+                    last_update_time = time.time()
 
-            if self.p_type == 'Block':
+                    # Added optional block_position
+                    def update_progress(current_char_pos, block_position=None):
+                        nonlocal last_update_time
+                        current_time = time.time()
+                        if current_time - last_update_time >= refresh_interval:
+                            pbar.n = current_char_pos
+                            if block_position:  # Update postfix text if provided
+                                pbar.set_postfix_str(
+                                    f'Current block position: {block_position}')
+                            pbar.refresh()
+                            last_update_time = current_time
 
-                # Find all positions of the extracted text in the original text
-                positions = find_substring_positions(
-                    original_text, extracted_text)
+                    kwargs['progress_callback'] = update_progress
+                    result = func(*args, **kwargs)
+                    pbar.n = total_chars  # Ensure the progress bar completes if not already
+                    pbar.refresh()
+                    pbar.close()
+                    return result
 
-                if not positions:
-                    warnings.warn(
-                        f"No match found for the extracted text: '{extracted_text}' in the original text.")
-                    position, start_index, end_index = None, None, None
+                return wrapper
+            return decorator
 
-                elif len(positions) > 1:
-                    warnings.warn(
-                        f"Multiple matches found for the extracted text: '{extracted_text}' in the original text. Using the first match.")
-                    start_index, end_index = positions[0]
+        @with_progress_bar(show_progress=show_progress, refresh_interval=2, prefix_text=f"Processing {self.p_subtype}")
+        def process_marked_text(marked_text, elements_dict, progress_callback=None):
+            def break_block(block, elements_dict, progress_callback=None):
+                char_pos, line_pos, text = block
+                result = []
+                last_match_end = 0  # Tracks the end of the last match
+
+                def convert_to_tuples(text_list, progress_callback=None):
+                    result = []
+                    # Start from the first character
+                    current_char_pos = char_pos[0]
+                    current_line_pos = line_pos[0]  # Start from the first line
+
+                    for item in text_list:
+                        if item is None or len(item) == 0:
+                            continue
+                        char_start = current_char_pos
+                        # -1 because end is inclusive
+                        char_end = current_char_pos + len(item) - 1
+
+                        # Count the lines in the current segment
+                        lines_in_item = item.count('\n')
+                        line_start = current_line_pos
+                        line_end = current_line_pos + lines_in_item
+
+                        # Update for the next iteration
+                        current_char_pos = char_end + 1
+                        current_line_pos = line_end + 1 if lines_in_item > 0 else current_line_pos
+
+                        result.append(
+                            ((char_start, char_end), (line_start, line_end), item))
+
+                    return result
+
+                def convert_to_element(item, elements_dict, compiled_pattern, progress_callback=None):
+                    if progress_callback:
+                        progress_callback(item[0][1], block_position=item[0])
+                    if compiled_pattern.fullmatch(item[2]):
+                        char_pos, line_pos, extracted_text = item
+
+                        if self.p_type == "Block":
+                            if self.p_subtype in AB.blocks:
+                                # Create an instance of the class with position parameter
+                                element_instance = AB.blocks[self.p_subtype](
+                                    extracted_text, char_position=char_pos, line_position=line_pos)
+                            else:
+                                warnings.warn(
+                                    (f"Subtype `{self.p_subtype}`"
+                                        f" not recognized. Falling back to Block.")
+                                )
+                                element_instance = Block(
+                                    extracted_text, char_position=char_pos, line_position=line_pos)
+                        elif self.p_type == "Spacer":
+                            element_instance = Spacer(
+                                extracted_text, char_position=char_pos, line_position=line_pos)
+
+                        elements_dict[hash(element_instance)] = {
+                            'Element': element_instance, 'CharPosition': char_pos, 'LinePosition': line_pos}
+
+                        return (char_pos, line_pos, element_instance)
+
+                    return item
+
+                def split_by_full_matches(text, compiled_pattern):
+                    segments = []
+                    start = 0
+
+                    for match in compiled_pattern.finditer(text):
+                        # Add the text leading up to the match (if any)
+                        if match.start() > start:
+                            segments.append(text[start:match.start()])
+
+                        # Add the matched text
+                        segments.append(match.group())
+
+                        # Update the start position for the next iteration
+                        start = match.end()
+
+                    # Add any remaining text after the last match
+                    if start < len(text):
+                        segments.append(text[start:])
+
+                    return segments
+
+                # split by full matches instead of re split to allow the internal groups in regex
+                text_list = split_by_full_matches(text, compiled_pattern)
+
+                text_list = convert_to_tuples(
+                    text_list, progress_callback=progress_callback)
+
+                text_list = [convert_to_element(
+                    item, elements_dict, compiled_pattern, progress_callback=progress_callback) for item in text_list]
+
+                return text_list, elements_dict
+
+            i = 0
+            while i < len(marked_text):
+                # Assuming the structure is [(tuple, tuple, str/Element)]
+                if isinstance(marked_text[i][2], str):
+                    result, elements_dict = break_block(
+                        marked_text[i], elements_dict, progress_callback=progress_callback)
+                    if result:
+                        # Remove the original item
+                        del marked_text[i]
+
+                        # Insert the new items from 'result' at position 'i'
+                        # for item in reversed(result):
+                        #     marked_text.insert(i, item)
+                        marked_text[i:i] = result
+
+                        # Increment 'i' by the number of new items inserted
+                        i += len(result)
+                    else:
+                        # No blocks found, move to the next item
+                        i += 1
                 else:
-                    start_index, end_index = positions[0]
+                    # The item is not a string, move to the next item
+                    i += 1
 
-                if start_index is not None and end_index is not None:
-                    start_line = original_text.count(
-                        '\n', 0, start_index) + 1
-                    end_line = original_text.count('\n', 0, end_index) + 1
-                    # Tuple containing start and end lines
-                    position = (start_line, end_line)
-            else:
-                position = None
+            return marked_text, elements_dict
 
-            # Dynamically instantiate the class based on p_subtype or fall back to OrcaDefaultBlock
-            class_name = self.p_subtype  # Directly use p_subtype as class name
-            if class_name in AvailableBlocks.blocks:
-                if self.p_type == "Block":
-                    # Create an instance of the class, block have position parameter
-                    element_instance = AvailableBlocks.blocks[class_name](
-                        extracted_text, position=position)
-                else:
-                    # Create an instance of the class, block have position parameter
-                    element_instance = AvailableBlocks.blocks[class_name](
-                        extracted_text)
-            elif self.p_type == "Spacer":
-                element_instance = Spacer(extracted_text)
-            elif self.p_type == "Block":
-                # Fall back to OrcaDefaultBlock and raise a warning
-                warnings.warn(
-                    (f"Subtype `{self.p_subtype}`"
-                        f" not recognized. Falling back to OrcaBlock.")
-                )
-                element_instance = Block(
-                    extracted_text, position=position)
+        marked_text, elements_dict = process_marked_text(
+            marked_text=marked_text, elements_dict=elements_dict)
 
-            else:
-                # Handle other types or raise a generic warning
-                warnings.warn(
-                    (f"Subtype `{self.p_subtype}`"
-                        f" not recognized and type `{self.p_type}`"
-                        f" does not have a default.")
-                )
-                element_instance = None
-
-            if element_instance:
-                unique_id = hash(element_instance)
-                elements_dict[unique_id] = {
-                    'Element': element_instance, 'Position': position}
-
-                # Replace the extracted text within the full match with the marker
-                text_with_markers = full_match.replace(
-                    extracted_text,
-                    f"<@%{self.p_type}|{self.p_subtype}|{unique_id}%@>"
-                )
-
-            else:
-                text_with_markers = full_match
-
-            return text_with_markers
-
-        text = compiled_pattern.sub(
-            replace_with_marker, text)
-
-        return text, elements_dict
+        return marked_text, elements_dict
 
     def __len__(self) -> int:
         """
