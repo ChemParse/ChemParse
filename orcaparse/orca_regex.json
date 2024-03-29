@@ -7,6 +7,8 @@
   "TypeKnownBlocks": {
     "order": [
       "BlockOrcaTotalRunTime",
+      "BlockOrcaTerminatedNormally",
+      "BlockOrcaFinalSinglePointEnergy",
       "BlockOrcaDipoleMoment",
       "BlockOrcaInputFile",
       "BlockOrcaShark",
@@ -22,11 +24,29 @@
     "BlockOrcaTotalRunTime": {
       "p_type": "Block",
       "p_subtype": "BlockOrcaTotalRunTime",
+      "pattern": "^([ \\t]*TOTAL RUN TIME:\\s*(?:\\d+)\\s*days\\s*(?:\\d+)\\s*hours\\s*(?:\\d+)\\s*minutes\\s*(?:\\d+)\\s*seconds\\s*(?:\\d+)\\s*msec[ \\t]*\\n)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "This pattern captures the total runtime block in an ORCA output, displaying the computation time in days, hours, minutes, seconds, and milliseconds. Each time unit is followed by its respective label (e.g., days, hours), and the values can be any number of digits."
+    },
+    "BlockOrcaTerminatedNormally": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaTerminatedNormally",
       "pattern": "^([ \\t]*\\*{4}ORCA TERMINATED NORMALLY\\*{4}[ \\t]*\\n)",
       "flags": [
         "MULTILINE"
       ],
       "comment": "This pattern captures the ORCA termination message block in an ORCA output, which indicates that the ORCA calculation terminated normally. The block starts with four asterisks, followed by the message 'ORCA TERMINATED NORMALLY', and ends with four asterisks. The block may contain leading and trailing spaces or tabs."
+    },
+    "BlockOrcaFinalSinglePointEnergy": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaFinalSinglePointEnergy",
+      "pattern": "^((-{20,}\\s+-{15,}\\n)[ \\t]*FINAL SINGLE POINT ENERGY[ \\t]+-?\\d+\\.\\d+\\n\\2)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "This pattern matches the final single point energy block in an ORCA output file. It looks for a line of 25 dashes, followed by a line with FINAL SINGLE POINT ENERGY, and then the energy value represented by an optional minus sign followed by one or more digits, a period, and more digits. This is encapsulated within a pattern of dashes that frame the title and the value."
     },
     "BlockOrcaDipoleMoment": {
       "p_type": "Block",

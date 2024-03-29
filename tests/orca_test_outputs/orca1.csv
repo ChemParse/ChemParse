@@ -1859,5 +1859,7 @@ Sum of individual times          ...       24.036 sec (=   0.401 min)
 GTO integral calculation         ...        8.080 sec (=   0.135 min)  33.6 %
 SCF iterations                   ...       15.956 sec (=   0.266 min)  66.4 %
 "
-Block,BlockOrcaTotalRunTime,"(79174, 79235)","(1842, 1843)",TOTAL RUN TIME,"                             ****ORCA TERMINATED NORMALLY****
+Block,BlockOrcaTerminatedNormally,"(79174, 79235)","(1842, 1843)",ORCA TERMINATED NORMALLY,"                             ****ORCA TERMINATED NORMALLY****
+"
+Block,BlockOrcaTotalRunTime,"(79236, 79296)","(1843, 1844)",TOTAL RUN TIME,"TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec
 "
