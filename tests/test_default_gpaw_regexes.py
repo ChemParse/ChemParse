@@ -56,7 +56,8 @@ def regex_check(gpaw_out, regex):
             raise ValueError(
                 f"The number of matches in the anchor pattern "
                 f"and the original pattern "
-                f"do not match,\n{match = }\n{anchor_match = }"
+                f"do not match,\nmatch:\n{match}\n"
+                f"anchor_match:\n{anchor_match}"
             )
         # The entire matched text
         full_match = match.group(0)
