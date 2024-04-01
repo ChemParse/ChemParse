@@ -13,15 +13,44 @@ from .regex_settings import (DEFAULT_GPAW_REGEX_SETTINGS,
 
 
 class File:
+    """
+    Represents a file to be processed by OrcaParser.
 
-    def __init__(self, file_path: str, regex_settings: Optional[RegexSettings] = None, mode: str = 'ORCA') -> None:
+    This class provides functionality to process a file, extract elements, and generate an HTML representation of the file content.
+
+    Attributes:
+
+    file_path (str): The path to the input file.
+    regex_settings (RegexSettings): The regex settings used for pattern processing.
+    initialized (bool): A flag indicating whether the instance has been initialized.
+    original_text (str): The original text read from the file.
+    _blocks (pd.DataFrame): A DataFrame containing processed elements.
+    _marked_text (list[tuple[tuple[int, int], tuple[int, int], str | Element]]): A list of marked text segments.
+
+    Methods:
+
+    get_structure(): Returns the structure of the OrcaFile instance.
+    depth(): Returns the depth of the OrcaFile instance.
+    get_blocks(): Returns the DataFrame containing all processed blocks.
+    get_marked_text(): Returns the text with markers after processing patterns.
+    initialize(): Initializes the instance by processing patterns if not already done.
+    process_patterns(): Processes patterns in the text to identify blocks and elements.
+    extract_raw_data_errors_to_none(): Attempts to extract raw data from an OrcaElement, handling any errors by returning None.
+    extract_data_errors_to_none(): Attempts to extract data from an OrcaElement, handling any errors by returning None.
+    search_elements(): Searches for OrcaElement instances based on various criteria.
+    get_data(): Retrieves and extracts data or raw data strings from OrcaElement instances based on specified search criteria and extraction type.
+    create_html(): Generates a complete HTML document from the processed text, incorporating optional CSS and JavaScript content.
+    save_as_html(): Generates an HTML document from the OrcaFile instance with customizable options and saves it to the specified file path.
+    """
+
+    def __init__(self, file_path: str, regex_settings: Optional[RegexSettings | None] = None, mode: Optional[str] = 'ORCA') -> None:
         """
         Initializes the OrcaFile instance.
 
-        Args:
+        Parameters:
             file_path (str): Path to the file to be processed.
-            regex_settings (Optional[RegexSettings]): Custom regex settings for pattern processing. Defaults to None.
-            mode (str): Mode of the file. Defaults to 'ORCA', can be 'ORCA' or 'GPAW'.
+            regex_settings (RegexSettings, optional): Custom regex settings for pattern processing. Defaults to None.
+            mode (str, optional): Mode of the file. Defaults to 'ORCA', can be 'ORCA' or 'GPAW'.
 
         Attributes:
             file_path (str): Path to the input file.
@@ -33,7 +62,8 @@ class File:
             mode (str): Mode of the file, e.g., 'ORCA' or 'GPAW'.
         """
         self.mode: str = mode
-        self.file_path: str = file_path
+        """ Mode of the file, e.g., 'ORCA' or 'GPAW'."""
+
         if regex_settings is None:
             if mode == 'ORCA':
                 self.regex_settings = DEFAULT_ORCA_REGEX_SETTINGS
@@ -43,33 +73,45 @@ class File:
                 raise ValueError(
                     f"Invalid mode '{mode}'. Must be 'ORCA' or 'GPAW'.")
         else:
-            self.regex_settings: RegexSettings = regex_settings
+            self.regex_settings = regex_settings
+
+        self.regex_settings: RegexSettings
+        """ Regex settings used for pattern processing."""
 
         self.initialized: bool = False
+        """ Flag indicating whether the instance has been initialized."""
 
         # Reading the content of the file.
-        with open(self.file_path, "r") as file:
+        with open(file_path, "r") as file:
             self.original_text: str = file.read()
 
         # Initializing the DataFrame to store OrcaElements.
         self._blocks: pd.DataFrame = pd.DataFrame(
             columns=['Type', 'Subtype', 'Element', 'CharPosition' 'LinePosition'])
+        """ 
+        DataFrame containing processed elements.
+        Columns: `Type`, `Subtype`, `Element`, `CharPosition`, `LinePosition`.
+        """
         self._marked_text: list[tuple[tuple[int, int], tuple[int, int], str | Element]] = [
             ((0, len(self.original_text)),
              (1, self.original_text.count('\n') + 1), self.original_text)
         ]
+        """ List of marked text segments. First tuple - char_position, second - line_position, third - text | Element."""
 
     def get_structure(self) -> dict[Self, tuple | None]:
-        '''
-            Structure in a form of nested dict
-        '''
+        """
+        Returns the structure of the OrcaFile instance.
+
+        Returns:
+            dict[Self, tuple | None]: the structure of the OrcaFile instance.
+        """
         blocks = self.get_blocks()
         return [self, list(blocks['Element'].apply(lambda x: x.get_structure()))]
 
     def depth(self) -> int:
         return Element.max_depth(self.get_structure())
 
-    def get_blocks(self, show_progress: bool = False) -> pd.DataFrame:
+    def get_blocks(self, show_progress: Optional[bool] = False) -> pd.DataFrame:
         """
         Returns the DataFrame containing all processed blocks.
 
@@ -81,11 +123,14 @@ class File:
         self.initialize(show_progress=show_progress)
         return self._blocks
 
-    def get_marked_text(self, show_progress: bool = False) -> list[tuple[tuple[int, int], tuple[int, int], Element]]:
+    def get_marked_text(self, show_progress: Optional[bool] = False) -> list[tuple[tuple[int, int], tuple[int, int], Element]]:
         """
         Returns the text with markers after processing patterns.
 
         Ensures initialization has occurred before returning the marked text.
+
+        Parameters:
+            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
 
         Returns:
             str: The marked text.
@@ -93,8 +138,11 @@ class File:
         self.initialize(show_progress=show_progress)
         return self._marked_text
 
-    def initialize(self, show_progress: bool = False) -> None:
+    def initialize(self, show_progress: Optional[bool] = False) -> None:
         """
+        Parameters:
+            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
+
         Initializes the instance by processing patterns if not already done.
 
         This method sets `self.initialized` to True after processing to avoid redundant initializations.
@@ -103,22 +151,12 @@ class File:
             self.process_patterns(show_progress=show_progress)
             self.initialized = True
 
-    def process_patterns(self, show_progress=False):
+    def process_patterns(self, show_progress: Optional[bool] = False):
         """
-        Processes the regex patterns defined in the OrcaFile's regex settings to identify, extract, and
-        instantiate OrcaElements from the file's text. It updates the internal _blocks DataFrame with the
-        extracted elements and their metadata, and replaces identified patterns in the text with unique markers.
+        Processes patterns in the text to identify blocks and elements.
 
-        This method performs several steps:
-        1. Resets the _blocks DataFrame to ensure it's ready for new data.
-        2. Iterates over each regex pattern defined in the file's regex settings.
-        3. Uses each pattern to search through the original text, identifying matches.
-        4. For each match, extracts relevant data and uses it to instantiate the corresponding OrcaElement subclass.
-        5. Generates a unique ID for each extracted element and uses it to replace the original text with a marker.
-        6. Updates the _blocks DataFrame with new rows containing the element data, type, subtype, and its position within the text.
-        7. Replaces identified patterns in the text with markers that include the type, subtype, and unique ID of the extracted elements.
-
-        Upon completion, the text is fully processed, with all elements identified.
+        Parameters:
+            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
         """
         self._blocks = pd.DataFrame(
             columns=['Type', 'Subtype', 'Element', 'CharPosition', 'LinePosition'])
@@ -260,7 +298,14 @@ class File:
 
         return blocks_copy
 
-    def get_data(self, extract_only_raw: bool = False, element_type: type[Element] | None = None, readable_name: str | None = None, raw_data_substring: str | Iterable[str] | None = None, raw_data_not_substring: str | Iterable[str] | None = None, show_progress: bool = False) -> pd.DataFrame:
+    def get_data(self, extract_only_raw: Optional[bool] = False,
+                 element_type: Optional[type[Element] | None] = None,
+                 readable_name: Optional[str | None] = None,
+                 raw_data_substring: Optional[str |
+                                              Iterable[str] | None] = None,
+                 raw_data_not_substring: Optional[str |
+                                                  Iterable[str] | None] = None,
+                 show_progress: Optional[bool] = False) -> pd.DataFrame:
         """
         Retrieves and extracts data or raw data strings from OrcaElement instances based on specified search criteria and extraction type.
 
@@ -289,7 +334,13 @@ class File:
             blocks['ExtractedData'] = extracted_data
         return blocks
 
-    def create_html(self, css_content: str | None = None, js_content: str | None = None, insert_css: bool = True, insert_js: bool = True, insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True, show_progress: bool = False) -> str:
+    def create_html(self, css_content: Optional[str | None] = None,
+                    js_content: Optional[str | None] = None,
+                    insert_css: Optional[bool] = True,
+                    insert_js: Optional[bool] = True,
+                    insert_left_sidebar: Optional[bool] = True,
+                    insert_colorcomment_sidebar: Optional[bool] = True,
+                    show_progress: Optional[bool] = False) -> str:
         """
         Generates a complete HTML document from the processed text, incorporating optional CSS and JavaScript content.
 
@@ -307,10 +358,15 @@ class File:
         that now includes the HTML representations of the OrcaElements.
 
         Parameters:
-            css_content (str | None): Optional CSS content to include in the <style> tag of the HTML document. If None,
+            css_content (str or None, optional): Optional CSS content to include in the <style> tag of the HTML document. If None,
                                     a default CSS content is used.
-            js_content (str | None): Optional JavaScript content to include in a <script> tag at the end of the document.
+            js_content (str or None, optional): Optional JavaScript content to include in a <script> tag at the end of the document.
                                     If None, default JavaScript content is used.
+            insert_css (bool, optional): Specifies whether CSS content should be included in the HTML document. Defaults to True.
+            insert_js (bool, optional): Specifies whether JavaScript content should be included in the HTML document. Defaults to True.
+            insert_left_sidebar (bool, optional): Specifies whether a left sidebar for the Table of Contents (TOC) should be included in the HTML document. Defaults to True.
+            insert_colorcomment_sidebar (bool, optional): Specifies whether a comment sidebar for additional annotations should be included in the HTML document. Defaults to True.
+            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
 
         Returns:
             str: A string containing the complete HTML document.
@@ -382,7 +438,12 @@ class File:
 
         return html_content
 
-    def save_as_html(self, output_file_path: str, insert_css: bool = True, insert_js: bool = True, insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True, show_progress=False):
+    def save_as_html(self, output_file_path: str,
+                     insert_css: Optional[bool] = True,
+                     insert_js: Optional[bool] = True,
+                     insert_left_sidebar: Optional[bool] = True,
+                     insert_colorcomment_sidebar: Optional[bool] = True,
+                     show_progress: Optional[bool] = False):
         """
         Generates an HTML document from the OrcaFile instance with customizable options and saves it to the specified file path.
 
@@ -397,6 +458,7 @@ class File:
             insert_js (bool, optional): Specifies whether JavaScript content should be included in the HTML document. Defaults to True.
             insert_left_sidebar (bool, optional): Specifies whether a left sidebar for the Table of Contents (TOC) should be included in the HTML document. Defaults to True.
             insert_colorcomment_sidebar (bool, optional): Specifies whether a comment sidebar for additional annotations should be included in the HTML document. Defaults to True.
+            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
 
         Note:
             This method provides a flexible way to export the content of an OrcaFile instance to a standard HTML format, making it accessible for viewing in web browsers or for further processing with tools that accept HTML input. It allows for the customization of the exported HTML document through parameters that control the inclusion of CSS, JavaScript, and additional structural elements like sidebars.

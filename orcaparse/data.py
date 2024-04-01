@@ -10,8 +10,8 @@ class Data:
     def __init__(self, data: dict | None = None, comment: str = ''):
         """Initialize the OrcaData class with data and an optional comment.
 
-        Args:
-            data (dict | None = None, optional): The main data dictionary to store the parsed data.
+        Parameters:
+            data (dict or None, optional): The main data dictionary to store the parsed data.
             comment (str, optional): An optional comment about the data. Defaults to ''.
         """
         # instead of data or {} it is better to use this to raise error if someone will try to use False or 0 as data
@@ -20,7 +20,9 @@ class Data:
         if not isinstance(data, dict):
             raise TypeError(f'Data should be a dict not {type(data)}')
         self.data: dict = data
+        """ The main data dictionary to store the parsed data. """
         self.comment: str = comment
+        """ Comment about the data. """
 
     def keys(self) -> KeysView[str]:
         """Return a view object that displays a list of the dictionary's keys.
@@ -46,11 +48,11 @@ class Data:
         """
         return self.data.values()
 
-    def __getitem__(self, key) -> dict | None:
+    def __getitem__(self, key: str) -> dict | None:
         """Retrieve items from the data. Supports single keys, iterables of keys, and the ellipsis for all data.
 
-        Args:
-            key: The key or keys to retrieve data for. Supports single keys, iterables of keys, and the ellipsis.
+        Parameters:
+            key (str): The key or keys to retrieve data for. Supports single keys, iterables of keys, and the ellipsis.
 
         Returns:
             The value associated with the key, a dictionary for multiple keys, or None if the key doesn't exist.
@@ -75,7 +77,7 @@ class Data:
     def __setitem__(self, key: str, value) -> None:
         """Set an item in the data dictionary.
 
-        Args:
+        Parameters:
             key (str): The key for the item to set.
             value: The value to set for the given key.
         """
@@ -84,7 +86,7 @@ class Data:
     def __contains__(self, key: str) -> bool:
         """Check if a key exists in the data.
 
-        Args:
+        Parameters:
             key (str): The key to check in the data.
 
         Returns:
@@ -95,7 +97,7 @@ class Data:
     def __delitem__(self, key: str) -> None:
         """Delete an item by key from the data dictionary.
 
-        Args:
+        Parameters:
             key (str): The key of the item to delete.
         """
         del self.data[key]
@@ -103,7 +105,7 @@ class Data:
     def get(self, key: str, default=None) -> None:
         """Safely retrieve an item by key, returning a default value if the key does not exist.
 
-        Args:
+        Parameters:
             key (str): The key of the item to retrieve.
             default (optional): The default value to return if the key does not exist.
 
@@ -123,7 +125,7 @@ class Data:
     def update(self, *args, **kwargs) -> None:
         """Update the dictionary with the key/value pairs from other, overwriting existing keys.
 
-        Args:
+        Parameters:
             *args: A dictionary or an iterable of key/value pairs (as tuples or other iterables of length two).
             **kwargs: Additional key/value pairs to update the dictionary with.
         """
@@ -134,7 +136,7 @@ class Data:
 
         If key is not found, default is returned if given, otherwise KeyError is raised.
 
-        Args:
+        Parameters:
             key (str): The key to remove and return its value.
             default (optional): The value to return if the key is not found.
 
@@ -168,7 +170,7 @@ class Data:
     def setdefault(self, key: str, default=None) -> any:
         """Return the value of the key if it is in the dictionary, otherwise insert it with a default value.
 
-        Args:
+        Parameters:
             key (str): The key to check or insert in the dictionary.
             default (optional): The value to set if the key is not already in the dictionary.
 

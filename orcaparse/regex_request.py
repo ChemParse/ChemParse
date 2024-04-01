@@ -11,11 +11,34 @@ from .orca_elements import AvailableBlocksOrca
 
 
 class RegexRequest:
+    """
+    A class representing a regular expression request.
+
+    This class provides a way to define a regular expression pattern with flags and apply it to marked text to extract elements.
+
+    Attributes:
+        p_type (str): The type of the regex request, e.g., 'Block'.
+        p_subtype (str): The subtype of the regex request, providing more specific identification.
+        pattern (str): The regex pattern.
+        flags (int): The compiled regex flags.
+        comment (str): An optional comment describing the regex request.
+
+    Methods:
+        _compile_flags(flag_names: list[str]) -> int: Compiles a list of flag names into a single integer representing the combined flags.
+        _decompile_flags() -> list[str]: Decompile the integer flags into a list of their string representations.
+        validate_configuration(): Validates the configuration of the RegexRequest.
+        to_dict() -> dict[str, Union[str, list[str]]]: Converts the RegexRequest instance to a dictionary, including string representations for flags.
+        compile() -> Pattern: Compiles the regex pattern with the specified flags and returns a compiled regex pattern object.
+        apply(marked_text: list[tuple[tuple[int, int], tuple[int, int], Element]] | str, mode: str = 'ORCA', show_progress: bool = False) -> tuple[str, dict[str, dict]]: Apply the regular expression pattern to the marked text and extract elements.
+        __len__() -> int: Returns the length of the RegexRequest.
+        __repr__() -> str: Provides a string representation of the RegexRequest.
+    """
+
     def __init__(self, p_type: str, p_subtype: str, pattern: str, flags: list[str], comment: str = '') -> None:
         """
         Initializes a new RegexRequest object.
 
-        Args:
+        Parameters:
             p_type (str): The type of the regex request, e.g., 'Block'.
             p_subtype (str): The subtype of the regex request, providing more specific identification.
             pattern (str): The regex pattern.
@@ -23,16 +46,21 @@ class RegexRequest:
             comment (str): An optional comment describing the regex request.
         """
         self.p_type = p_type
+        """The type of the regex request, e.g., 'Block'."""
         self.p_subtype = p_subtype
+        """The subtype of the regex request, providing more specific identification."""
         self.pattern = pattern
+        """The regex pattern."""
         self.comment = comment
+        """An optional comment describing the regex request."""
         self.flags = self._compile_flags(flags)
+        """The compiled regex flags."""
 
     def _compile_flags(self, flag_names: list[str]) -> int:
         """
         Compiles a list of flag names into a single integer representing the combined flags.
 
-        Args:
+        Parameters:
             flag_names (list[str]): A list of flag names as strings.
 
         Returns:
@@ -111,7 +139,7 @@ class RegexRequest:
         """
         Apply the regular expression pattern to the marked text and extract elements.
 
-        Args:
+        Parameters:
             marked_text (list[tuple[tuple[int, int], tuple[int, int], Element]] | str): The marked text to apply the pattern to.
                 It can be either a list of tuples containing the position, line numbers, and element, or a string.
             mode (str): The mode to use for element extraction, either 'ORCA' or 'GPAW'.
@@ -176,8 +204,6 @@ class RegexRequest:
         def process_marked_text(marked_text, elements_dict, progress_callback=None):
             def break_block(block, elements_dict, progress_callback=None):
                 char_pos, line_pos, text = block
-                result = []
-                last_match_end = 0  # Tracks the end of the last match
 
                 def convert_to_tuples(text_list, progress_callback=None):
                     result = []

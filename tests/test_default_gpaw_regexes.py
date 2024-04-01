@@ -26,7 +26,7 @@ def anchor_pattern_maker(compiled_regex):
     '$' at the end of its pattern, and returns a new compiled regex object
     with the same flags.
 
-    Args:
+    Parameters:
         compiled_regex (re.Pattern): The original compiled regular expression object.
 
     Returns:

@@ -16,16 +16,32 @@ class ExtractionError(Exception):
 
 
 class Element:
+    """
+    Represents a basic element within a structured document.
+
+    An Element is a fundamental unit of data within a structured document. It encapsulates raw data, position information, and methods for extracting and presenting data. Subclasses of Element may provide more specialized functionality for different types of data.
+
+    Attributes:
+        raw_data (str): The raw string data associated with the element.
+        char_position (tuple[int, int] | None): The character position of the element within the larger data structure.
+        line_position (tuple[int, int] | None): The line position of the element within the larger data structure.
+    """
+
     def __init__(self, raw_data: str, char_position: tuple[int, int] | None = None, line_position: tuple[int, int] | None = None) -> None:
         """
         Initialize an Element with raw data.
 
-        Args:
+        Parameters:
             raw_data (str): The raw string data associated with this element.
+            char_position (tuple[int, int] | None): The character position of the element within the larger data structure. Defaults to None.
+            line_position (tuple[int, int] | None): The line position of the element within the larger data structure. Defaults to None.
         """
         self.raw_data = raw_data
+        """str: The raw string data associated with this element."""
         self.char_position = char_position
+        """tuple[int, int] | None: The character position of the element within the larger data structure."""
         self.line_position = line_position
+        """tuple[int, int] | None: The line position of the element within the larger data structure."""
 
     def readable_name(self):
         """
@@ -74,7 +90,7 @@ class Element:
         """
         Format the raw body content for HTML display.
 
-        Args:
+        Parameters:
             body_raw (str): The raw body text to be formatted.
 
         Returns:
@@ -117,7 +133,7 @@ class Element:
 
         This static method assists in calculating the depth of an element's structure.
 
-        Args:
+        Parameters:
             d (list): A nested list representing the structure of an element.
 
         Returns:
@@ -134,7 +150,7 @@ class Element:
 
         This method is used to sanitize input strings that may contain invalid characters or formatting. It ensures the output is suitable for use as a name or identifier.
 
-        Args:
+        Parameters:
             input_string (str): The input string to be processed.
 
         Returns:
@@ -174,7 +190,7 @@ class Spacer(Element):
         """
         Format the raw body content for HTML display.
 
-        Args:
+        Parameters:
             body_raw (str): The raw body text to be formatted.
 
         Returns:
@@ -238,7 +254,7 @@ class Block(Element):
         """
         Format the raw header content for HTML display.
 
-        Args:
+        Parameters:
             header_raw (str): The raw header text to be formatted.
 
         Returns:
@@ -251,7 +267,7 @@ class Block(Element):
         """
         Format the raw body content for HTML display.
 
-        Args:
+        Parameters:
             body_raw (str): The raw body text to be formatted.
 
         Returns:
@@ -279,7 +295,6 @@ class Block(Element):
                      f'</div>') if body else ''
         line_start, line_finish = self.line_position or (-1, -1)
         can_extract_data = self.data_available
-        is_block = True
         return (f'<div class="element block" '
                 f'python-class-name="{self.__class__.__name__}" '
                 f'readable-name="{readable_name}" '
@@ -294,8 +309,9 @@ class AvailableBlocksGeneral:
     A registry for managing different types of block elements.
 
     This class maintains a dictionary of all available block types that can be dynamically extended. New block classes can be registered using the provided class methods, facilitating modularity and extensibility.
+
+    blocks (dict[str, type[Element]]): A dictionary mapping block names to their corresponding block classes.
     """
-    # Dictionary to hold all available block types.
     blocks: dict[str, type[Element]] = {}
 
     @classmethod
@@ -305,7 +321,7 @@ class AvailableBlocksGeneral:
 
         If a block class with the same name is already registered, this method raises a ValueError to prevent unintentional overwrites.
 
-        Args:
+        Parameters:
             block_cls (type[Element]): The block class to be registered.
 
         Returns:
@@ -327,7 +343,7 @@ class AvailableBlocksGeneral:
 
         Unlike `register_block`, this method allows for the redefinition of block types. If a block with the same name already exists, it will be overwritten with the new definition.
 
-        Args:
+        Parameters:
             block_cls (type[Element]): The block class to be registered or redefined.
 
         Returns:
@@ -339,6 +355,10 @@ class AvailableBlocksGeneral:
 
 
 class BlockUnknown(Block):
+    """
+    Represents a block of unknown type.
+    """
+
     def data(self):
         warnings.warn(
             f'The block looks not structured. Please contribute to the project if you have knowledge on how to extract data from it.')

@@ -11,6 +11,9 @@ from .units_and_constants import ureg
 
 
 class AvailableBlocksOrca(AvailableBlocksGeneral):
+    """
+    A class to store all available blocks for ORCA.
+    """
     blocks: dict[str, type[Element]] = {}
 
 
