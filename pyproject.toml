@@ -17,6 +17,7 @@ tqdm = "^4.66.2"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
 lxml = "^5.1.0"
+pdoc3 = "^0.10.0"
 
 [build-system]
 requires = ["poetry-core"]
