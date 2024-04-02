@@ -3,7 +3,8 @@ name: Build and Deploy Sphinx Documentation
 on:
   push:
     branches:
-      - main  # or your default branch
+      - main
+      - github-documentation
 
 jobs:
   build-and-deploy:
