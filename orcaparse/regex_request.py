@@ -12,62 +12,52 @@ from .orca_elements import AvailableBlocksOrca
 
 class RegexRequest:
     """
-    A class representing a regular expression request.
+    Encapsulates a regular expression request for parsing structured text.
 
-    This class provides a way to define a regular expression pattern with flags and apply it to marked text to extract elements.
+    This class defines a regular expression pattern along with associated metadata to identify and extract specific elements from text. It allows for the application of the regex pattern to text segments, facilitating the extraction of structured information based on the pattern.
 
-    Attributes:
-        p_type (str): The type of the regex request, e.g., 'Block'.
-        p_subtype (str): The subtype of the regex request, providing more specific identification.
-        pattern (str): The regex pattern.
-        flags (int): The compiled regex flags.
-        comment (str): An optional comment describing the regex request.
-
-    Methods:
-        _compile_flags(flag_names: list[str]) -> int: Compiles a list of flag names into a single integer representing the combined flags.
-        _decompile_flags() -> list[str]: Decompile the integer flags into a list of their string representations.
-        validate_configuration(): Validates the configuration of the RegexRequest.
-        to_dict() -> dict[str, Union[str, list[str]]]: Converts the RegexRequest instance to a dictionary, including string representations for flags.
-        compile() -> Pattern: Compiles the regex pattern with the specified flags and returns a compiled regex pattern object.
-        apply(marked_text: list[tuple[tuple[int, int], tuple[int, int], Element]] | str, mode: str = 'ORCA', show_progress: bool = False) -> tuple[str, dict[str, dict]]: Apply the regular expression pattern to the marked text and extract elements.
-        __len__() -> int: Returns the length of the RegexRequest.
-        __repr__() -> str: Provides a string representation of the RegexRequest.
+    :ivar p_type: The general type of the regex request, often corresponding to a high-level category such as 'Block' or 'Element'.
+    :vartype p_type: str
+    :ivar p_subtype: A more specific identifier within the broader type, providing additional context or classification.
+    :vartype p_subtype: str
+    :ivar pattern: The actual regular expression pattern used for matching text.
+    :vartype pattern: str
+    :ivar flags: The combined regex flags compiled into an integer, determining how the regex pattern is applied.
+    :vartype flags: int
+    :ivar comment: An optional description or note about the purpose or nature of the regex request.
+    :vartype comment: str
     """
 
     def __init__(self, p_type: str, p_subtype: str, pattern: str, flags: list[str], comment: str = '') -> None:
         """
-        Initializes a new RegexRequest object.
+        Initializes a `RegexRequest` instance with a specified pattern, flags, and optional comment.
 
-        Parameters:
-            p_type (str): The type of the regex request, e.g., 'Block'.
-            p_subtype (str): The subtype of the regex request, providing more specific identification.
-            pattern (str): The regex pattern.
-            flags (list[str]): A list of strings representing regex flags, e.g., ['MULTILINE', 'IGNORECASE'].
-            comment (str): An optional comment describing the regex request.
+        :param p_type: The high-level category or type this regex request pertains to, e.g., 'Block'.
+        :type p_type: str
+        :param p_subtype: A more detailed classification within the type, e.g., 'Header' or 'Footer'.
+        :type p_subtype: str
+        :param pattern: The regular expression pattern to be used for text matching.
+        :type pattern: str
+        :param flags: A list of strings representing the regex flags to be applied, such as 'MULTILINE' or 'IGNORECASE'.
+        :type flags: list[str]
+        :param comment: A descriptive note or comment about the regex request, intended to provide clarity or context.
+        :type comment: str, optional
         """
-        self.p_type = p_type
-        """The type of the regex request, e.g., 'Block'."""
-        self.p_subtype = p_subtype
-        """The subtype of the regex request, providing more specific identification."""
-        self.pattern = pattern
-        """The regex pattern."""
-        self.comment = comment
-        """An optional comment describing the regex request."""
-        self.flags = self._compile_flags(flags)
-        """The compiled regex flags."""
+        self.p_type: str = p_type
+        self.p_subtype: str = p_subtype
+        self.pattern: str = pattern
+        self.comment: str = comment
+        self.flags: int = self._compile_flags(flags)
 
     def _compile_flags(self, flag_names: list[str]) -> int:
         """
-        Compiles a list of flag names into a single integer representing the combined flags.
+        Compiles regex flag names into a combined integer representation.
 
-        Parameters:
-            flag_names (list[str]): A list of flag names as strings.
-
-        Returns:
-            int: The combined flags as a single integer.
-
-        Raises:
-            ValueError: If an invalid flag name is provided.
+        :param flag_names: A list of regex flag names to be compiled. Supported flags include 'IGNORECASE', 'MULTILINE', 'DOTALL', 'UNICODE', and 'VERBOSE'.
+        :type flag_names: list[str]
+        :return: The compiled integer value representing the combination of the provided regex flags.
+        :rtype: int
+        :raises ValueError: If an unsupported flag name is included in the input list.
         """
         compiled_flags = 0
         valid_flags = {
@@ -87,10 +77,10 @@ class RegexRequest:
 
     def _decompile_flags(self) -> list[str]:
         """
-        Decompile the integer flags into a list of their string representations.
+        Decompile the combined integer flags into their individual string representations.
 
-        Returns:
-            list[str]: A list of flag names as strings.
+        :return: A list of flag names corresponding to the combined flags integer.
+        :rtype: list[str]
         """
         valid_flags = {
             "IGNORECASE": re.IGNORECASE,
@@ -105,16 +95,18 @@ class RegexRequest:
 
     def validate_configuration(self) -> None:
         """
-        Validates the configuration of the RegexRequest. Currently, this method does not perform any checks.
+        Validates the RegexRequest configuration. Placeholder for future validation logic.
+
+        Currently, this method does not perform any checks and exists as a placeholder for potential future validation requirements.
         """
         pass
 
     def to_dict(self) -> dict[str, Union[str, list[str]]]:
         """
-        Converts the RegexRequest instance to a dictionary, including string representations for flags.
+        Converts the RegexRequest instance to a dictionary, including flag names as strings.
 
-        Returns:
-            dict[str, Union[str, list[str]]]: A dictionary representation of the RegexRequest.
+        :return: A dictionary representation of the RegexRequest, with keys for type, subtype, pattern, flags (as a list of strings), and optional comment.
+        :rtype: dict[str, Union[str, list[str]]]
         """
         return {
             "p_type": self.p_type,
@@ -126,29 +118,32 @@ class RegexRequest:
 
     def compile(self) -> Pattern:
         """
-        Compiles the regex pattern with the specified flags and returns a compiled regex pattern object.
+        Compiles the regex pattern with the specified flags into a regex pattern object.
 
-        This method allows the user to utilize the compiled pattern object for various regex operations such as `findall`, `search`, `match`, etc.
+        This compiled object can be used for various regex operations like `findall`, `search`, `match`, etc., enabling efficient pattern matching.
 
-        Returns:
-            Pattern: A compiled regex pattern object.
+        :return: A compiled regex pattern object, ready for use in pattern matching operations.
+        :rtype: Pattern
         """
         return re.compile(self.pattern, self.flags)
 
     def apply(self, marked_text: list[tuple[tuple[int, int], tuple[int, int], Element]] | str, mode: str = 'ORCA', show_progress: bool = False) -> tuple[str, dict[str, dict]]:
         """
-        Apply the regular expression pattern to the marked text and extract elements.
+        Applies the regex pattern to marked text or a raw string to identify and extract elements based on the pattern.
 
-        Parameters:
-            marked_text (list[tuple[tuple[int, int], tuple[int, int], Element]] | str): The marked text to apply the pattern to.
-                It can be either a list of tuples containing the position, line numbers, and element, or a string.
-            mode (str): The mode to use for element extraction, either 'ORCA' or 'GPAW'.
-            show_progress (bool): A flag indicating whether to show a progress bar during the extraction process.
+        This method iterates over the marked text or processes a string to identify matches to the regex pattern. Extracted elements are then organized based on their positions within the text.
 
-        Returns:
-            tuple[str, dict[str, dict]]: A tuple containing the modified marked text and a dictionary
-                of extracted elements with their positions.
+        :param marked_text: The marked text or raw string to which the regex pattern will be applied. Marked text should be a list of tuples, each containing character positions, line numbers, and an associated `Element`. If a raw string is provided, it will be converted to the marked text.
+        :type marked_text: Union[list[tuple[tuple[int, int], tuple[int, int], Element]], str]
+        :param mode: The operational mode for element extraction, typically indicating the type of data being processed (e.g., 'ORCA' or 'GPAW').
+        :type mode: str
+        :param show_progress: Indicates whether a progress indicator should be shown during the extraction process. Useful for long-running operations.
+        :type show_progress: bool
+
+        :return: A tuple containing the updated marked text and a dictionary mapping extracted elements to their positions.
+        :rtype: tuple[str, dict[str, dict]]
         """
+
         if mode == 'ORCA':
             AB = AvailableBlocksOrca
         elif mode == 'GPAW':
@@ -326,22 +321,26 @@ class RegexRequest:
 
     def __len__(self) -> int:
         """
-        Returns the length of the RegexRequest, which is always 1 for a single request.
+        Returns a constant value representing the conceptual 'length' of a RegexRequest.
 
-        Returns:
-            int: The length of the RegexRequest.
+        Since a RegexRequest encapsulates a single regex pattern and its associated settings, its length is conceptually always 1.
+
+        :return: The constant value 1, representing the 'length' of a RegexRequest.
+        :rtype: int
         """
         return 1
 
     def __repr__(self) -> str:
         """
-        Provides a string representation of the RegexRequest.
+        Generates a concise string representation of the RegexRequest instance.
 
-        Returns:
-            str: A string representation of the RegexRequest.
+        This representation includes the type, subtype, a truncated version of the pattern and comment (if they are too long), and the combined regex flags.
+
+        :return: A string that provides a brief overview of the RegexRequest instance, suitable for debugging and logging purposes.
+        :rtype: str
         """
-        pattern = self.pattern if len(
-            self.pattern) < 25 else self.pattern[:25] + '...'
-        comment = self.comment if len(
-            self.comment) < 25 else self.comment[:25] + '...'
-        return f"RegexRequest(p_type={self.p_type}, p_subtype={self.p_subtype}, pattern={pattern}, flags={self.flags}, comment={comment})"
+        pattern_preview = self.pattern[:22] + \
+            '...' if len(self.pattern) > 25 else self.pattern
+        comment_preview = self.comment[:22] + \
+            '...' if len(self.comment) > 25 else self.comment
+        return f"RegexRequest(p_type='{self.p_type}', p_subtype='{self.p_subtype}', pattern='{pattern_preview}', flags={self.flags}, comment='{comment_preview}')"

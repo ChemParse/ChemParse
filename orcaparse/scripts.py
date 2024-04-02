@@ -6,23 +6,25 @@ from .file import File
 
 
 def orca_to_html(input_file: str, output_file: str, insert_css: bool = True, insert_js: bool = True,
-                 insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True, mode: str = 'ORCA'):
+                 insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True, mode: str = 'ORCA') -> None:
     """
-    Converts an ORCA output file to an HTML document, optionally including CSS, JavaScript, a left sidebar (TOC),
-    and a color-comment sidebar.
+    Converts an ORCA (or GPAW) output file to an HTML document with various optional features like CSS, JavaScript, and sidebars.
 
-    Parameters:
-        input_file (str): Path to the input ORCA file.
-        output_file (str): Path where the HTML file will be saved.
-        insert_css (bool): Flag to include CSS in the HTML output. Included by default.
-        insert_js (bool): Flag to include JavaScript in the HTML output. Included by default.
-        insert_left_sidebar (bool): Flag to include a left sidebar (TOC) in the HTML output. Included by default.
-        insert_colorcomment_sidebar (bool): Flag to include a color-comment sidebar in the HTML output. Included by default.
-        mode (str): Mode of the input file ('ORCA' or 'GPAW'). Defaults to 'ORCA'.
-
-    This function does not return any value but outputs the converted HTML file to the specified output path.
+    :param input_file: The path to the input file, typically an ORCA output file.
+    :type input_file: str
+    :param output_file: The destination path where the HTML file will be saved.
+    :type output_file: str
+    :param insert_css: If `True`, includes default CSS styles in the HTML output.
+    :type insert_css: bool, optional
+    :param insert_js: If `True`, includes JavaScript for interactive elements in the HTML output.
+    :type insert_js: bool, optional
+    :param insert_left_sidebar: If `True`, adds a left sidebar for navigation in the HTML output.
+    :type insert_left_sidebar: bool, optional
+    :param insert_colorcomment_sidebar: If `True`, adds a sidebar for color-coded comments in the HTML output.
+    :type insert_colorcomment_sidebar: bool, optional
+    :param mode: Specifies the processing mode, which can be 'ORCA' or 'GPAW'. Default is 'ORCA'.
+    :type mode: str, optional
     """
-    # Assuming the existence of a `File` class and its `save_as_html` method as in the original script
     orca_file = File(file_path=input_file, mode=mode)
     orca_file.save_as_html(
         output_file_path=output_file,
@@ -33,13 +35,11 @@ def orca_to_html(input_file: str, output_file: str, insert_css: bool = True, ins
     )
 
 
-def orca_to_html_cli():
+def orca_to_html_cli() -> None:
     """
-    Parses command-line arguments to convert an ORCA output file to an HTML document with optional features.
+    CLI entry point for converting an ORCA or GPAW output file to an HTML document. Parses command-line arguments for input and output file paths and optional features.
 
-    This function is the entry point when using the script from the command line. It handles parsing the input and output file paths, as well as optional flags for including CSS, JavaScript, a left sidebar (TOC), and a color-comment sidebar in the generated HTML document.
-
-    The flags for optional features are set to include the features by default. Use '--no-' prefix to exclude a feature (e.g., --no-insert_css).
+    This function facilitates the use of the conversion utility from the command line, allowing users to specify the input and output files as well as toggle optional features like CSS, JavaScript, and sidebars via command-line flags.
     """
     parser = argparse.ArgumentParser(
         description="Convert an ORCA output file to an HTML document with optional features.")
@@ -75,22 +75,25 @@ def orca_parse(input_file: str, output_file: str, file_format: str = 'auto',
                raw_data_not_substrings: list[str] = [],
                mode: str = 'ORCA'):
     """
-    Exports data from an ORCA output file to various formats based on specified filtering criteria.
+    Parses an ORCA (or GPAW) output file and exports filtered data to the specified format.
 
-    The function supports CSV, JSON, HTML, and Excel formats for output, with 'auto' format detection based on the output file extension. It also allows for filtering the ORCA elements by their readable name or substrings of their raw data.
+    This function supports exporting to CSV, JSON, HTML, and Excel formats. The output format can be auto-detected based on the file extension of the output path. Data can be filtered by readable names or the presence/absence of specific substrings in the raw data.
 
-    Parameters:
-        input_file (str): Path to the input ORCA file.
-        output_file (str): Path where the output file will be saved.
-        file_format (str): Desired output format ('auto', 'csv', 'json', 'html', 'xlsx'). Defaults to 'auto'.
-        readable_name (Optional[str]): Filter elements by their readable name (None by default).
-        raw_data_substrings (list[str]): list of substrings to filter elements by their raw data ([] by default).
-        raw_data_not_substrings (list[str]): list of substrings to filter elements by their raw data ([] by default).
-        mode (str): Mode of the input file ('ORCA' or 'GPAW'). Defaults to 'ORCA'.
-
-    The function doesn't return any value but saves the extracted data to the specified output path in the chosen format.
+    :param input_file: The path to the ORCA output file to be processed.
+    :type input_file: str
+    :param output_file: The file path where the exported data will be saved.
+    :type output_file: str
+    :param file_format: The desired output format ('auto', 'csv', 'json', 'html', 'xlsx'). If 'auto', the format is inferred from the output file extension.
+    :type file_format: str, optional
+    :param readable_name: Filters elements by their readable name, if specified.
+    :type readable_name: Optional[str], optional
+    :param raw_data_substrings: Filters elements containing these substrings in their raw data.
+    :type raw_data_substrings: list[str], optional
+    :param raw_data_not_substrings: Filters elements not containing these substrings in their raw data.
+    :type raw_data_not_substrings: list[str], optional
+    :param mode: Specifies the mode of the input file, which can be 'ORCA' or 'GPAW'. Default is 'ORCA'.
+    :type mode: str, optional
     """
-    # Assuming the existence of a `File` class with a `get_data` method as indicated in the original script
     orca_file = File(file_path=input_file, mode=mode)
     data = orca_file.get_data(
         extract_only_raw=True, readable_name=readable_name,
@@ -113,11 +116,9 @@ def orca_parse(input_file: str, output_file: str, file_format: str = 'auto',
 
 def orca_parse_cli():
     """
-    Parses command-line arguments to export data from an ORCA output file to specified formats based on filtering criteria.
+    Command-line interface for the `orca_parse` function, allowing users to export data from an ORCA output file from the terminal.
 
-    The script supports exporting to CSV, JSON, HTML, and Excel formats, with the option to filter ORCA elements by their readable name or substrings of their raw data.
-
-    The function serves as the entry point when the script is executed from the command line, handling the parsing of input and output file paths, output format, and filtering options.
+    This CLI provides options for specifying the input and output file paths, the desired output format, filtering criteria based on readable names and raw data substrings, and the processing mode.
     """
     parser = argparse.ArgumentParser(
         description="Export data from an ORCA output file to specified formats based on filtering criteria.")

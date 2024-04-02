@@ -8,156 +8,141 @@ from typing_extensions import Iterable, Self
 
 from .data import Data
 from .elements import BlockUnknown, Element
-from .regex_settings import (DEFAULT_GPAW_REGEX_SETTINGS,
-                             DEFAULT_ORCA_REGEX_SETTINGS, RegexSettings)
+from .regex_settings import DEFAULT_GPAW_REGEX_SETTINGS, DEFAULT_ORCA_REGEX_SETTINGS, RegexSettings
 
 
 class File:
     """
-    Represents a file to be processed by OrcaParser.
+    Manages the processing of a file within the OrcaParser framework.
 
-    This class provides functionality to process a file, extract elements, and generate an HTML representation of the file content.
+    This class is responsible for parsing a given file, identifying and extracting elements based on predefined regex patterns, and facilitating the generation of an HTML representation of the file's content.
 
-    Attributes:
+    :ivar file_path: The path to the input file being processed.
+    :vartype file_path: str
+    :ivar regex_settings: The regex settings utilized for pattern processing within the file.
+    :vartype regex_settings: RegexSettings
+    :ivar initialized: A flag indicating whether the instance has been properly initialized with file content and regex settings.
+    :vartype initialized: bool
+    :ivar original_text: The original textual content read from the file.
+    :vartype original_text: str
+    :ivar _blocks: A DataFrame storing the processed elements identified within the file.
+    :vartype _blocks: pd.DataFrame
+    :ivar _marked_text: A list of marked text segments, each containing character and line positions alongside the corresponding text or Element object.
+    :vartype _marked_text: list[tuple[tuple[int, int], tuple[int, int], str | Element]]
+    :ivar mode: The operational mode of the file, which may affect regex settings and processing behavior. Common modes include 'ORCA' and 'GPAW'.
+    :vartype mode: str
 
-    file_path (str): The path to the input file.
-    regex_settings (RegexSettings): The regex settings used for pattern processing.
-    initialized (bool): A flag indicating whether the instance has been initialized.
-    original_text (str): The original text read from the file.
-    _blocks (pd.DataFrame): A DataFrame containing processed elements.
-    _marked_text (list[tuple[tuple[int, int], tuple[int, int], str | Element]]): A list of marked text segments.
-
-    Methods:
-
-    get_structure(): Returns the structure of the OrcaFile instance.
-    depth(): Returns the depth of the OrcaFile instance.
-    get_blocks(): Returns the DataFrame containing all processed blocks.
-    get_marked_text(): Returns the text with markers after processing patterns.
-    initialize(): Initializes the instance by processing patterns if not already done.
-    process_patterns(): Processes patterns in the text to identify blocks and elements.
-    extract_raw_data_errors_to_none(): Attempts to extract raw data from an OrcaElement, handling any errors by returning None.
-    extract_data_errors_to_none(): Attempts to extract data from an OrcaElement, handling any errors by returning None.
-    search_elements(): Searches for OrcaElement instances based on various criteria.
-    get_data(): Retrieves and extracts data or raw data strings from OrcaElement instances based on specified search criteria and extraction type.
-    create_html(): Generates a complete HTML document from the processed text, incorporating optional CSS and JavaScript content.
-    save_as_html(): Generates an HTML document from the OrcaFile instance with customizable options and saves it to the specified file path.
+    :param file_path: The path to the file to be processed.
+    :type file_path: str
+    :param regex_settings: Custom regex settings for pattern processing. If not provided, default settings based on the specified mode will be used.
+    :type regex_settings: Optional[RegexSettings], optional
+    :param mode: The processing mode, influencing default regex settings and behavior. Supported modes include 'ORCA' and 'GPAW'.
+    :type mode: Optional[str], optional
+    :raises ValueError: If an invalid mode is specified.
     """
 
     def __init__(self, file_path: str, regex_settings: Optional[RegexSettings | None] = None, mode: Optional[str] = 'ORCA') -> None:
         """
-        Initializes the OrcaFile instance.
+        Initializes a `File` instance for processing.
 
-        Parameters:
-            file_path (str): Path to the file to be processed.
-            regex_settings (RegexSettings, optional): Custom regex settings for pattern processing. Defaults to None.
-            mode (str, optional): Mode of the file. Defaults to 'ORCA', can be 'ORCA' or 'GPAW'.
-
-        Attributes:
-            file_path (str): Path to the input file.
-            regex_settings (RegexSettings): Regex settings used for pattern processing.
-            initialized (bool): Flag indicating whether the instance has been initialized.
-            original_text (str): The original text read from the file.
-            _blocks (pd.DataFrame): DataFrame containing processed elements.
-            _marked_text (list[tuple[tuple[int, int], tuple[int, int], str|Element]]): List of marked text segments. First tuple - char_position, second - line_position, third - text | Element.
-            mode (str): Mode of the file, e.g., 'ORCA' or 'GPAW'.
+        :param file_path: The path to the file to be processed.
+        :type file_path: str
+        :param regex_settings: Custom regex settings for pattern processing. If not provided, default settings based on the specified mode will be used.
+        :type regex_settings: Optional[RegexSettings], optional
+        :param mode: The processing mode, influencing default regex settings and behavior. Supported modes include 'ORCA' and 'GPAW'.
+        :type mode: Optional[str], optional
+        :raises ValueError: If an invalid mode is specified.
         """
         self.mode: str = mode
-        """ Mode of the file, e.g., 'ORCA' or 'GPAW'."""
 
         if regex_settings is None:
             if mode == 'ORCA':
-                self.regex_settings = DEFAULT_ORCA_REGEX_SETTINGS
+                self.regex_settings: RegexSettings = DEFAULT_ORCA_REGEX_SETTINGS
             elif mode == 'GPAW':
-                self.regex_settings = DEFAULT_GPAW_REGEX_SETTINGS
+                self.regex_settings: RegexSettings = DEFAULT_GPAW_REGEX_SETTINGS
             else:
                 raise ValueError(
                     f"Invalid mode '{mode}'. Must be 'ORCA' or 'GPAW'.")
         else:
-            self.regex_settings = regex_settings
-
-        self.regex_settings: RegexSettings
-        """ Regex settings used for pattern processing."""
+            self.regex_settings: RegexSettings = regex_settings
 
         self.initialized: bool = False
-        """ Flag indicating whether the instance has been initialized."""
 
         # Reading the content of the file.
         with open(file_path, "r") as file:
             self.original_text: str = file.read()
 
-        # Initializing the DataFrame to store OrcaElements.
+        # Initializing the DataFrame to store elements.
         self._blocks: pd.DataFrame = pd.DataFrame(
-            columns=['Type', 'Subtype', 'Element', 'CharPosition' 'LinePosition'])
-        """ 
-        DataFrame containing processed elements.
-        Columns: `Type`, `Subtype`, `Element`, `CharPosition`, `LinePosition`.
-        """
+            columns=['Type', 'Subtype', 'Element', 'CharPosition', 'LinePosition'])
+
         self._marked_text: list[tuple[tuple[int, int], tuple[int, int], str | Element]] = [
             ((0, len(self.original_text)),
              (1, self.original_text.count('\n') + 1), self.original_text)
         ]
-        """ List of marked text segments. First tuple - char_position, second - line_position, third - text | Element."""
 
-    def get_structure(self) -> dict[Self, tuple | None]:
+    def get_structure(self) -> dict[Self, list]:
         """
-        Returns the structure of the OrcaFile instance.
+        Retrieves the hierarchical structure of the `File` instance, representing the organization of processed elements.
 
-        Returns:
-            dict[Self, tuple | None]: the structure of the OrcaFile instance.
+        :return: A dictionary mapping the `File` instance to a list of its elements' structures.
+        :rtype: dict[Self, list]
         """
         blocks = self.get_blocks()
-        return [self, list(blocks['Element'].apply(lambda x: x.get_structure()))]
+        return {self: list(blocks['Element'].apply(lambda x: x.get_structure()))}
 
     def depth(self) -> int:
+        """
+        Calculates the maximum depth of nested structures within the `File` instance.
+
+        :return: The maximum depth of nested elements' structures.
+        :rtype: int
+        """
         return Element.max_depth(self.get_structure())
 
     def get_blocks(self, show_progress: Optional[bool] = False) -> pd.DataFrame:
         """
-        Returns the DataFrame containing all processed blocks.
+        Retrieves all processed blocks as a DataFrame, ensuring the file has been initialized.
 
-        Ensures initialization has occurred before returning the blocks.
-
-        Returns:
-            pd.DataFrame: DataFrame containing the processed blocks.
+        :param show_progress: Optionally displays a progress bar during initialization.
+        :type show_progress: Optional[bool], optional
+        :return: A DataFrame containing processed blocks with their metadata.
+        :rtype: pd.DataFrame
         """
         self.initialize(show_progress=show_progress)
         return self._blocks
 
-    def get_marked_text(self, show_progress: Optional[bool] = False) -> list[tuple[tuple[int, int], tuple[int, int], Element]]:
+    def get_marked_text(self, show_progress: Optional[bool] = False) -> list[tuple[tuple[int, int], tuple[int, int], str | Element]]:
         """
-        Returns the text with markers after processing patterns.
+        Retrieves the text segments with associated markers after processing patterns, ensuring the file has been initialized.
 
-        Ensures initialization has occurred before returning the marked text.
-
-        Parameters:
-            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
-
-        Returns:
-            str: The marked text.
+        :param show_progress: Optionally displays a progress bar during initialization.
+        :type show_progress: Optional[bool], optional
+        :return: A list of text segments marked with their character and line positions, alongside the corresponding text or `Element` object.
+        :rtype: list[tuple[tuple[int, int], tuple[int, int], str | Element]]
         """
         self.initialize(show_progress=show_progress)
         return self._marked_text
 
     def initialize(self, show_progress: Optional[bool] = False) -> None:
         """
-        Parameters:
-            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
+        Initializes the `File` instance by processing patterns, if not already done, to identify and categorize text segments.
 
-        Initializes the instance by processing patterns if not already done.
-
-        This method sets `self.initialized` to True after processing to avoid redundant initializations.
+        :param show_progress: Optionally displays a progress bar during the pattern processing phase.
+        :type show_progress: Optional[bool], optional
         """
         if not self.initialized:
             self.process_patterns(show_progress=show_progress)
             self.initialized = True
 
-    def process_patterns(self, show_progress: Optional[bool] = False):
+    def process_patterns(self, show_progress: Optional[bool] = False) -> None:
         """
-        Processes patterns in the text to identify blocks and elements.
+        Identifies and categorizes text segments based on predefined regex patterns, updating the internal storage of blocks and marked text.
 
-        Parameters:
-            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
+        :param show_progress: Optionally displays a progress bar during the processing of regex patterns.
+        :type show_progress: Optional[bool], optional
         """
+        # Resetting the blocks and marked text to ensure a clean state
         self._blocks = pd.DataFrame(
             columns=['Type', 'Subtype', 'Element', 'CharPosition', 'LinePosition'])
         self._marked_text: list[tuple[tuple[int, int], tuple[int, int], str | Element]] = [
@@ -165,8 +150,7 @@ class File:
              (1, self.original_text.count('\n') + 1), self.original_text)
         ]
 
-        self.initialized = True
-
+        # Processing each regex pattern and updating blocks and marked text
         for regex in self.regex_settings.to_list():
             self._marked_text, new_blocks = regex.apply(
                 self._marked_text, mode=self.mode, show_progress=show_progress)
@@ -175,8 +159,8 @@ class File:
             new_blocks_df['Subtype'] = regex.p_subtype
             self._blocks = pd.concat([self._blocks, new_blocks_df])
 
+        # Handling unknown blocks
         unknown_blocks = {}
-
         for i, (char_position, line_position, block) in enumerate(self._marked_text):
             if isinstance(block, str):
                 unknown_block = BlockUnknown(
@@ -196,20 +180,16 @@ class File:
     @staticmethod
     def extract_raw_data_errors_to_none(orca_element: Element) -> str | None:
         """
-        Attempts to extract data from an OrcaElement, handling any errors by returning None.
+        Tries to extract raw data from an `Element`, returning `None` in case of errors.
 
-        This nested function is designed to be applied to each row of the DataFrame, specifically to each
-        OrcaElement in the 'Element' column. It encapsulates the error-handling logic, ensuring that any
-        exceptions raised during data extraction are caught and processed appropriately.
+        This method is designed to handle errors gracefully during the extraction of raw data from an `Element`. If an error occurs, a warning is issued and `None` is returned.
 
-        Parameters:
-            orca_element (OrcaElement): An instance of OrcaElement from which data is to be extracted.
-
-        Returns:
-            The extracted data from the OrcaElement, or None if an error occurred during the extraction process.
+        :param orca_element: An instance of `Element` from which raw data is to be extracted.
+        :type orca_element: Element
+        :return: The extracted raw data from the `Element`, or `None` if an error occurred.
+        :rtype: str | None
         """
         try:
-            # return Data(orca_element.data())
             return orca_element.raw_data
         except Exception as e:
             warnings.warn(
@@ -219,38 +199,38 @@ class File:
     @staticmethod
     def extract_data_errors_to_none(orca_element: Element) -> Data | None:
         """
-        Attempts to extract data from an OrcaElement, handling any errors by returning None.
+        Tries to extract data from an `Element`, handling errors by returning `None`.
 
-        This nested function is designed to be applied to each row of the DataFrame, specifically to each
-        OrcaElement in the 'Element' column. It encapsulates the error-handling logic, ensuring that any
-        exceptions raised during data extraction are caught and processed appropriately.
+        This method encapsulates error handling during data extraction from an `Element`. If an error occurs, the issue is logged, and `None` is returned.
 
-        Parameters:
-            orca_element (OrcaElement): An instance of OrcaElement from which data is to be extracted.
-
-        Returns:
-            The extracted data from the OrcaElement in orcaparse.Data format, or None if an error occurred during the extraction process.
+        :param orca_element: An `Element` instance from which data is to be extracted.
+        :type orca_element: Element
+        :return: The extracted data in `Data` format from the `Element`, or `None` if an error occurred.
+        :rtype: Data | None
         """
         try:
-            # return Data(orca_element.data())
             return orca_element.data()
         except Exception as e:
             warnings.warn(
-                f"An unexpected error occurred while extracting data from {orca_element}: {e}, returning None instead of data.\n Raw context of the element is {orca_element.raw_data}")
+                f"An unexpected error occurred while extracting data from {orca_element}: {e}. Returning None.")
             return None
 
     def search_elements(self, element_type: type[Element] | None = None, readable_name: str | None = None, raw_data_substring: str | Iterable[str] | None = None, raw_data_not_substring: str | Iterable[str] | None = None, show_progress: bool = False) -> pd.DataFrame:
         """
-        Searches for OrcaElement instances based on various criteria.
+        Searches for `Element` instances based on specified criteria, such as element type, readable name, and raw data content.
 
-        Parameters:
-            element_type (type[Element], optional): The class type of the OrcaElement to search for.
-            readable_name (str, optional): The exact term to search for in the readable_name attribute.
-            raw_data_substring (str, Iterable[str], optional): The substring to search for within the raw_data attribute.
-            raw_data_not_substring (str, Iterable[str], optional): The substring to search the absence of within the raw_data attribute.
-
-        Returns:
-            pd.DataFrame: A DataFrame containing the filtered OrcaElements based on the provided criteria.
+        :param element_type: The class type of `Element` to search for, if filtering by type.
+        :type element_type: type[Element] | None, optional
+        :param readable_name: The exact term to search for in the `readable_name` attribute of `Element`.
+        :type readable_name: str | None, optional
+        :param raw_data_substring: The substring(s) to search for within the `raw_data` attribute of `Element`.
+        :type raw_data_substring: str | Iterable[str] | None, optional
+        :param raw_data_not_substring: The substring(s) whose absence within the `raw_data` attribute is required.
+        :type raw_data_not_substring: str | Iterable[str] | None, optional
+        :param show_progress: Whether to display a progress bar during initialization.
+        :type show_progress: bool, optional
+        :return: A DataFrame containing filtered `Element` instances based on the provided criteria.
+        :rtype: pd.DataFrame
         """
         self.initialize(show_progress=show_progress)
         blocks_copy = self._blocks.copy()
@@ -307,20 +287,22 @@ class File:
                                                   Iterable[str] | None] = None,
                  show_progress: Optional[bool] = False) -> pd.DataFrame:
         """
-        Retrieves and extracts data or raw data strings from OrcaElement instances based on specified search criteria and extraction type.
+        Retrieves and extracts data from `Element` instances based on search criteria, with an option to extract raw or processed data.
 
-        This method first searches for OrcaElement instances based on the provided search criteria, which can include the element's type, readable name, or a substring of its raw data. After filtering the elements, it extracts either raw data strings or processed data from them, depending on the 'extract_raw' flag.
-
-        Parameters:
-            extract_ony_raw (bool, optional): Determines if `ExtractedData` will be additionally created. If True, it will not. Raw data is stored in `RawData`. Defaults to False.
-            element_type (type[Element] | None, optional): The class type of the OrcaElements to filter by. Only elements that are instances of this type or derived from it will be included. Defaults to None, which skips this filter.
-            readable_name (str | None, optional): The exact name to match against the 'readable_name' attribute of OrcaElements. Only elements with a matching readable name are included. Defaults to None, which skips this filter.
-            raw_data_substring (str | Iterable[str] | None, optional): A substring to search for within the 'raw_data' attribute of OrcaElements. Only elements whose raw data contains this substring are included. Defaults to None, which skips this filter.
-            raw_data_not_substring (str | Iterable[str] | None, optional): A substring to search for within the 'raw_data' attribute of OrcaElements. The elements whose raw data contains this substring are not included. Defaults to None, which skips this filter.
-            show_progress (bool, optional): Determines if a progress bar is displayed when extracting data from elements. Defaults to False.
-
-        Returns:
-            pd.DataFrame: A DataFrame containing the extracted data or raw data strings from the filtered OrcaElements. The DataFrame includes an 'ExtractedData' column with the extracted information. If no elements match the search criteria, an empty DataFrame is returned.
+        :param extract_only_raw: If True, only raw data will be extracted, bypassing any custom data extraction logic defined in `Element` subclasses.
+        :type extract_only_raw: Optional[bool], optional
+        :param element_type: The type of `Element` to filter by; only elements of this type will be considered.
+        :type element_type: Optional[type[Element]], optional
+        :param readable_name: A filter for elements that have this exact `readable_name`.
+        :type readable_name: Optional[str], optional
+        :param raw_data_substring: A filter for elements whose `raw_data` contains this substring.
+        :type raw_data_substring: Optional[str | Iterable[str]], optional
+        :param raw_data_not_substring: A filter for elements whose `raw_data` does not contain this substring.
+        :type raw_data_not_substring: Optional[str | Iterable[str]], optional
+        :param show_progress: If True, displays a progress bar during the operation.
+        :type show_progress: Optional[bool], optional
+        :return: A DataFrame of the filtered elements with their extracted data.
+        :rtype: pd.DataFrame
         """
         blocks = self.search_elements(element_type=element_type,
                                       readable_name=readable_name,
@@ -342,42 +324,24 @@ class File:
                     insert_colorcomment_sidebar: Optional[bool] = True,
                     show_progress: Optional[bool] = False) -> str:
         """
-        Generates a complete HTML document from the processed text, incorporating optional CSS and JavaScript content.
+        Constructs a complete HTML document from processed text, integrating optional CSS and JavaScript content.
 
-        This method operates in several key steps:
-        1. It first ensures that CSS and JavaScript content are set, either to the provided arguments or to default values.
-        2. The method then retrieves the processed text with markers using the `get_marked_text` method.
-        3. A nested function `replace_marker_with_html` is defined to handle the replacement of each marker within the text
-        with the corresponding HTML content generated from the associated OrcaElement. This function:
-        - Extracts the type, subtype, and unique ID from each marker.
-        - Retrieves the corresponding OrcaElement from the _blocks DataFrame using the unique ID.
-        - Calls the `to_html` method on the OrcaElement to generate its HTML representation.
-        4. A regular expression is used to find all markers in the processed text, and the `replace_marker_with_html` function
-        is applied to replace each marker with its HTML content.
-        5. The full HTML document is assembled using the provided or default CSS and JavaScript, along with the body content
-        that now includes the HTML representations of the OrcaElements.
-
-        Parameters:
-            css_content (str or None, optional): Optional CSS content to include in the <style> tag of the HTML document. If None,
-                                    a default CSS content is used.
-            js_content (str or None, optional): Optional JavaScript content to include in a <script> tag at the end of the document.
-                                    If None, default JavaScript content is used.
-            insert_css (bool, optional): Specifies whether CSS content should be included in the HTML document. Defaults to True.
-            insert_js (bool, optional): Specifies whether JavaScript content should be included in the HTML document. Defaults to True.
-            insert_left_sidebar (bool, optional): Specifies whether a left sidebar for the Table of Contents (TOC) should be included in the HTML document. Defaults to True.
-            insert_colorcomment_sidebar (bool, optional): Specifies whether a comment sidebar for additional annotations should be included in the HTML document. Defaults to True.
-            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
-
-        Returns:
-            str: A string containing the complete HTML document.
-
-        Raises:
-            Exception: If an OrcaElement referenced by a marker cannot be found in the _blocks DataFrame, an exception is raised.
-
-        Note:
-            The HTML document includes a structure with a container div, a sidebar for a table of contents (TOC),
-            a comment sidebar for additional annotations, and a content area where the main body content is placed.
-            The TOC and comment sidebar are expected to be populated by the provided JavaScript.
+        :param css_content: Custom CSS to be included in the HTML document. Defaults to predefined CSS if not provided.
+        :type css_content: Optional[str], optional
+        :param js_content: Custom JavaScript to be included in the HTML document. Defaults to predefined JavaScript if not provided.
+        :type js_content: Optional[str], optional
+        :param insert_css: Determines whether to include CSS content in the HTML document.
+        :type insert_css: Optional[bool], optional
+        :param insert_js: Determines whether to include JavaScript content in the HTML document.
+        :type insert_js: Optional[bool], optional
+        :param insert_left_sidebar: Specifies whether to include a left sidebar for the Table of Contents (TOC) in the HTML document.
+        :type insert_left_sidebar: Optional[bool], optional
+        :param insert_colorcomment_sidebar: Specifies whether to include a comment sidebar for additional annotations in the HTML document.
+        :type insert_colorcomment_sidebar: Optional[bool], optional
+        :param show_progress: Specifies whether to display a progress bar during operation.
+        :type show_progress: Optional[bool], optional
+        :return: The complete HTML document as a string.
+        :rtype: str
         """
         if css_content is None:
             # Get the directory of this file
@@ -445,23 +409,25 @@ class File:
                      insert_colorcomment_sidebar: Optional[bool] = True,
                      show_progress: Optional[bool] = False):
         """
-        Generates an HTML document from the OrcaFile instance with customizable options and saves it to the specified file path.
+        Generates and saves an HTML document based on the processed content of the `File` instance, with customizable display options.
 
-        This method performs the following actions:
-        1. Calls the `create_html` method to generate the complete HTML content based on the processed text, optional CSS and JavaScript content, and conditional inclusion of the left sidebar (TOC) and the color-comment sidebar. The `create_html` method assembles the HTML document, incorporating the specified elements and transforms markers within the text into corresponding HTML elements.
-        2. Opens the specified output file in write mode. If the file does not exist, it will be created; if it already exists, its content will be overwritten.
-        3. Writes the generated HTML content to the file, effectively saving the entire content of the OrcaFile instance as an HTML document at the specified location.
+        This method leverages `create_html` to construct the HTML content, including optional CSS and JavaScript, as well as sidebars for navigation and comments. The complete HTML is then saved to the specified file path.
 
-        Parameters:
-            output_file_path (str): The file path where the HTML document should be saved. This path includes the file name and extension, for example, 'output/document.html'.
-            insert_css (bool, optional): Specifies whether CSS content should be included in the HTML document. Defaults to True.
-            insert_js (bool, optional): Specifies whether JavaScript content should be included in the HTML document. Defaults to True.
-            insert_left_sidebar (bool, optional): Specifies whether a left sidebar for the Table of Contents (TOC) should be included in the HTML document. Defaults to True.
-            insert_colorcomment_sidebar (bool, optional): Specifies whether a comment sidebar for additional annotations should be included in the HTML document. Defaults to True.
-            show_progress (bool, optional): Whether to display a progress bar. Defaults to False.
+        :param output_file_path: The file path, including the name and extension, where the HTML document will be saved. Existing files will be overwritten.
+        :type output_file_path: str
+        :param insert_css: If True, includes CSS content in the HTML document for styling. Defaults to True.
+        :type insert_css: Optional[bool], optional
+        :param insert_js: If True, includes JavaScript content in the HTML document for interactivity. Defaults to True.
+        :type insert_js: Optional[bool], optional
+        :param insert_left_sidebar: If True, includes a left sidebar in the HTML document, typically used for a Table of Contents (TOC). Defaults to True.
+        :type insert_left_sidebar: Optional[bool], optional
+        :param insert_colorcomment_sidebar: If True, includes a sidebar for additional annotations or comments in the HTML document. Defaults to True.
+        :type insert_colorcomment_sidebar: Optional[bool], optional
+        :param show_progress: If True, displays a progress indicator during the HTML content generation process. Defaults to False.
+        :type show_progress: Optional[bool], optional
 
         Note:
-            This method provides a flexible way to export the content of an OrcaFile instance to a standard HTML format, making it accessible for viewing in web browsers or for further processing with tools that accept HTML input. It allows for the customization of the exported HTML document through parameters that control the inclusion of CSS, JavaScript, and additional structural elements like sidebars.
+            This method allows exporting the processed content to an HTML format, facilitating viewing in web browsers or further processing with HTML-compatible tools. The inclusion of CSS and JavaScript enhances the document's appearance and interactivity, while optional sidebars provide navigation and annotation capabilities.
         """
         html_content = self.create_html(insert_css=insert_css, insert_js=insert_js,
                                         insert_left_sidebar=insert_left_sidebar, insert_colorcomment_sidebar=insert_colorcomment_sidebar, show_progress=show_progress)

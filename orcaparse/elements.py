@@ -11,71 +11,74 @@ from .units_and_constants import ureg
 
 
 class ExtractionError(Exception):
-    """Custom exception for energy extraction errors."""
+    """
+    Custom exception class for errors encountered during energy extraction processes.
+
+    This exception is raised when there is a problem with extracting energy-related data from a given source or dataset.
+    """
     pass
 
 
 class Element:
     """
-    Represents a basic element within a structured document.
+    Represents a basic element within a structured document, serving as a fundamental unit of data.
 
-    An Element is a fundamental unit of data within a structured document. It encapsulates raw data, position information, and methods for extracting and presenting data. Subclasses of Element may provide more specialized functionality for different types of data.
+    An `Element` encapsulates raw data, positional information, and provides methods for data extraction and presentation. It acts as a base class for more specialized elements tailored to specific data types or structures within a document.
 
-    Attributes:
-        raw_data (str): The raw string data associated with the element.
-        char_position (tuple[int, int] | None): The character position of the element within the larger data structure.
-        line_position (tuple[int, int] | None): The line position of the element within the larger data structure.
+    :param raw_data: The raw text data associated with the element.
+    :type raw_data: str
+    :param char_position: The character position range (start, end) of the element within the larger data structure, if applicable.
+    :type char_position: tuple[int, int] | None, optional
+    :param line_position: The line position range (start, end) of the element within the larger data structure, if applicable.
+    :type line_position: tuple[int, int] | None, optional
+
+    :ivar raw_data: The raw text data associated with this element.
+    :vartype raw_data: str
+    :ivar char_position: The character position range of the element within the data structure, or `None`.
+    :vartype char_position: tuple[int, int] | None
+    :ivar line_position: The line position range of the element within the data structure, or `None`.
+    :vartype line_position: tuple[int, int] | None
     """
 
     def __init__(self, raw_data: str, char_position: tuple[int, int] | None = None, line_position: tuple[int, int] | None = None) -> None:
         """
-        Initialize an Element with raw data.
-
-        Parameters:
-            raw_data (str): The raw string data associated with this element.
-            char_position (tuple[int, int] | None): The character position of the element within the larger data structure. Defaults to None.
-            line_position (tuple[int, int] | None): The line position of the element within the larger data structure. Defaults to None.
+        Initializes an `Element` instance with raw data and optional positional information.
         """
-        self.raw_data = raw_data
-        """str: The raw string data associated with this element."""
-        self.char_position = char_position
-        """tuple[int, int] | None: The character position of the element within the larger data structure."""
-        self.line_position = line_position
-        """tuple[int, int] | None: The line position of the element within the larger data structure."""
+        self.raw_data: str = raw_data
+        self.char_position: tuple[int, int] | None = char_position
+        self.line_position: tuple[int, int] | None = line_position
 
-    def readable_name(self):
+    def readable_name(self) -> None:
         """
-        Generate a readable name for the element.
+        Generate a readable name for the element based on its data.
 
-        This method should be implemented by subclasses to provide a meaningful name based on the element's data.
+        This method is intended to be overridden by subclasses to provide a meaningful, human-readable name derived from the element's content.
 
-        Returns:
-            None by default, indicating the method has not been implemented. Subclasses should override this.
+        :return: `None` by default, indicating the method has not been implemented. Subclasses should override this method.
+        :rtype: None
         """
         return None
 
     def get_structure(self) -> dict[Self, tuple | None]:
         """
-        Retrieve the structural representation of the element.
+        Retrieve the structural representation of the element as a nested dictionary.
 
-        The structure is intended as a nested list to represent hierarchical relationships within data.
+        This method provides a way to represent the hierarchical relationships within data, where each element can contain nested sub-elements.
 
-        Returns:
-            A dictionary with the element itself as the key and an empty list as the value, indicating no nested structure by default.
+        :return: A dictionary with the element itself as the key and an empty tuple as the value, indicating no nested structure by default.
+        :rtype: dict[Self, tuple | None]
         """
-        return [self, []]
+        return {self: []}
 
     def data(self) -> Data:
         """
         Process the raw data of the element to extract meaningful information.
 
-        This method should be overridden by subclasses to implement specific data extraction logic.
+        This method is designed to be overridden by subclasses to implement specific data extraction logic tailored to the element's structure and content.
 
-        Returns:
-            Data: An instance of the Data class containing 'raw data' as its content, with a comment indicating the absence of specific data extraction procedures.
-
-        Raises:
-            Warning: Indicates that no specific procedure for analyzing the data was found.
+        :return: An instance of the `Data` class containing 'raw data' as its content, accompanied by a comment indicating the absence of specific data extraction procedures.
+        :rtype: Data
+        :raises Warning: Indicates that no specific procedure for analyzing the data was implemented.
         """
         warnings.warn(
             (f"No procedure for analyzing the data found in type `{type(self)}`,"
@@ -88,13 +91,14 @@ class Element:
     @staticmethod
     def data_preformat(data_raw: str) -> str:
         """
-        Format the raw body content for HTML display.
+        Format the raw data for HTML display.
 
-        Parameters:
-            body_raw (str): The raw body text to be formatted.
+        This static method wraps the raw data in HTML <pre> tags for better readability when displayed as HTML.
 
-        Returns:
-            str: The formatted body text wrapped in HTML <pre> tags.
+        :param data_raw: The raw text to be formatted.
+        :type data_raw: str
+        :return: The formatted text wrapped in HTML <pre> tags.
+        :rtype: str
         """
         return f'<pre>{data_raw}</pre>'
 
@@ -102,10 +106,10 @@ class Element:
         """
         Generate an HTML representation of the element.
 
-        This method provides a basic HTML structure for displaying the element's data. Subclasses may override this method for more specialized HTML representations.
+        This method provides a basic HTML structure for displaying the element's data. Subclasses may override this method to provide more specialized HTML representations tailored to the element's specific characteristics.
 
-        Returns:
-            str: A string containing the HTML representation of the element.
+        :return: A string containing the HTML representation of the element, incorporating the preformatted raw data.
+        :rtype: str
         """
         data = self.raw_data
         is_block = isinstance(self, Block)
@@ -119,10 +123,10 @@ class Element:
         """
         Calculate the depth of nested structures within the element.
 
-        This method recursively computes the maximum depth of nested lists representing the structure of the element.
+        This method computes the maximum depth of nested lists representing the hierarchical structure of the element, indicating the complexity of its structure.
 
-        Returns:
-            int: The maximum depth of the element's structure.
+        :return: The maximum depth of the element's nested list structure.
+        :rtype: int
         """
         return Element.max_depth(self.get_structure())
 
@@ -131,13 +135,12 @@ class Element:
         """
         Compute the maximum depth of a nested list structure.
 
-        This static method assists in calculating the depth of an element's structure.
+        This utility method assists in determining the complexity of an element's structural hierarchy by calculating the depth of nested lists.
 
-        Parameters:
-            d (list): A nested list representing the structure of an element.
-
-        Returns:
-            int: The maximum depth of the nested list structure.
+        :param d: A nested list or dictionary representing the structure of an element or a complex data structure.
+        :type d: list | dict
+        :return: The maximum depth of the nested list or dictionary structure.
+        :rtype: int
         """
         if isinstance(d, list) and len(d) > 0:
             return 1 + max(Element.max_depth(v) for v in d)
@@ -146,15 +149,14 @@ class Element:
     @staticmethod
     def process_invalid_name(input_string: str) -> str:
         """
-        Clean and process an input string to generate a valid name.
+        Clean and process an input string to generate a valid name or identifier.
 
-        This method is used to sanitize input strings that may contain invalid characters or formatting. It ensures the output is suitable for use as a name or identifier.
+        This method sanitizes input strings that may contain invalid characters or formatting, ensuring the output is suitable for use as a name or identifier. It handles strings without letters by labeling them as "Unknown" and removes non-alphabetic characters from other strings.
 
-        Parameters:
-            input_string (str): The input string to be processed.
-
-        Returns:
-            str: A cleaned and truncated version of the input string, made suitable for use as a name or identifier.
+        :param input_string: The input string to be processed.
+        :type input_string: str
+        :return: A cleaned and possibly truncated version of the input string, made suitable for use as a name or identifier.
+        :rtype: str
         """
         # Check if the string contains any letters; if not, return "unknown"
         if not any(char.isalpha() for char in input_string):
@@ -176,67 +178,71 @@ class Element:
 class Spacer(Element):
     def data(self) -> None:
         """
-        Override the data method to return None for a Spacer.
+        Indicate that no data is associated with a Spacer element.
 
-        Since a Spacer is intended to represent empty space or a separator, it does not contain meaningful data to be processed or extracted.
+        Overrides the `data` method from the `Element` class to return `None`, reflecting the intended use of a `Spacer` as a representation of empty space or a separator without meaningful data.
 
-        Returns:
-            None: Indicating that there is no data associated with this Spacer.
+        :return: `None`, indicating the absence of data.
+        :rtype: None
         """
         return None
 
     @staticmethod
     def data_preformat(data_raw: str) -> str:
         """
-        Format the raw body content for HTML display.
+        Format raw Spacer content for HTML display by replacing newlines with HTML line breaks.
 
-        Parameters:
-            body_raw (str): The raw body text to be formatted.
-
-        Returns:
-            str: spacer with \\n replaced by <br>
+        :param data_raw: The raw text content of the spacer.
+        :type data_raw: str
+        :return: The formatted content with newlines converted to HTML line breaks.
+        :rtype: str
         """
         return data_raw.replace('\n', '<br>')
 
 
 class Block(Element):
     """
-    Represents a block of data within a structured document.
+    Represents a complex data block within a structured document.
 
-    A Block is an extension of the Element class, intended to encapsulate a more complex structure that may include a name, header, and body. This class provides methods to extract and present these components in various formats, including HTML.
+    Extends the `Element` class to encapsulate a more structured unit of data, potentially including identifiable components such as a name, header, and body. It provides methods to extract and present these components, with a default implementation for name extraction.
 
-    Attributes:
-        data_available (bool): Indicates whether the block contains data that can be extracted. Defaults to False.
-        position (tuple | None): The position of the block within the larger data structure, typically as a line number range.
+    :ivar data_available: Indicates whether the block contains extractable data. Defaults to `False`.
+    :vartype data_available: bool
+    :ivar position: The position of the block within the larger document structure, often expressed as a range of line numbers.
+    :vartype position: tuple | None
     """
     data_available: bool = False
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         """
-        Extract and separate the block's name, header, and body components.
+        Extract the block's name, header, and body components.
 
-        This method provides a basic implementation that simply identifies the block's name using a naming convention. Subclasses should override this method to implement more complex extraction logic.
+        Offers a basic implementation for separating the block's name from its content based on naming conventions. This method is intended to be overridden by subclasses for more specialized extraction logic.
 
-        Returns:
-            tuple[str, str | None, str]: A tuple containing the block's name, header (or None if not applicable), and body.
+        :return: A tuple containing the block's name, optional header, and body content.
+        :rtype: tuple[str, str | None, str]
         """
         return Element.process_invalid_name(self.raw_data), None, self.raw_data
 
     def readable_name(self) -> str:
         """
-        Retrieve a readable name for the block.
+        Generate a readable name for the block based on its content.
 
-        Returns:
-            str: The name of the block, extracted using the `extract_name_header_and_body` method.
+        Utilizes the `extract_name_header_and_body` method to derive a name for the block, suitable for display or identification purposes.
+
+        :return: The extracted name of the block.
+        :rtype: str
         """
         return self.extract_name_header_and_body()[0]
 
     def header(self) -> str | None:
         """
-        Retrieve the header of the block, if present.
+        Retrieve the block's header, if it exists.
 
-        Returns:
-            str | None: The header of the block or None if no header is present. Determined using the `extract_name_header_and_body` method.
+        Uses the `extract_name_header_and_body` method to determine the presence and content of a header within the block.
+
+        :return: The block's header if present, otherwise `None`.
+        :rtype: str | None
         """
         return self.extract_name_header_and_body()[1]
 
@@ -244,8 +250,10 @@ class Block(Element):
         """
         Retrieve the body content of the block.
 
-        Returns:
-            str: The body of the block, determined using the `extract_name_header_and_body` method.
+        Utilizes the `extract_name_header_and_body` method to extract the body of the block, which contains the main content.
+
+        :return: The body content of the block.
+        :rtype: str
         """
         return self.extract_name_header_and_body()[2]
 
@@ -254,11 +262,12 @@ class Block(Element):
         """
         Format the raw header content for HTML display.
 
-        Parameters:
-            header_raw (str): The raw header text to be formatted.
+        This static method wraps the raw header text in HTML <pre> tags to enhance its presentation in HTML format.
 
-        Returns:
-            str: The formatted header text wrapped in HTML <pre> tags.
+        :param header_raw: The raw text of the header.
+        :type header_raw: str
+        :return: The formatted header text, suitable for HTML display.
+        :rtype: str
         """
         return f'<pre>{header_raw}</pre>'
 
@@ -267,11 +276,12 @@ class Block(Element):
         """
         Format the raw body content for HTML display.
 
-        Parameters:
-            body_raw (str): The raw body text to be formatted.
+        This static method wraps the raw body text in HTML <pre> tags to enhance its presentation in HTML format.
 
-        Returns:
-            str: The formatted body text wrapped in HTML <pre> tags.
+        :param body_raw: The raw text of the body.
+        :type body_raw: str
+        :return: The formatted body text, suitable for HTML display.
+        :rtype: str
         """
         return f'<pre>{body_raw}</pre>'
 
@@ -279,10 +289,10 @@ class Block(Element):
         """
         Generate an HTML representation of the block.
 
-        This method constructs the HTML structure for the block, including its name, header (if present), and body. The depth of the block within the document structure is considered when determining the header's level.
+        Constructs an HTML structure for the block, incorporating the name, header (if present), and body. The depth of the block within the document structure influences the header's HTML level.
 
-        Returns:
-            str: A string containing the HTML representation of the block.
+        :return: A string containing the HTML representation of the block, with header and body sections formatted and wrapped in appropriate HTML tags.
+        :rtype: str
         """
         readable_name, header, body = self.extract_name_header_and_body()
         header_level = max(7-self.depth(), 1)
@@ -306,48 +316,45 @@ class Block(Element):
 
 class AvailableBlocksGeneral:
     """
-    A registry for managing different types of block elements.
+    Manages a registry of different types of block elements within a structured document.
 
-    This class maintains a dictionary of all available block types that can be dynamically extended. New block classes can be registered using the provided class methods, facilitating modularity and extensibility.
+    This class provides a dynamic registry for block types, allowing for modular extension of block element capabilities. New block classes can be registered to the system using the class methods provided, enhancing the system's modularity and extensibility.
 
-    blocks (dict[str, type[Element]]): A dictionary mapping block names to their corresponding block classes.
+    :cvar blocks: A mapping of block names to their corresponding block class definitions.
+    :vartype blocks: dict[str, type[Element]]
     """
     blocks: dict[str, type[Element]] = {}
 
     @classmethod
     def register_block(cls, block_cls: type[Element]) -> type[Element]:
         """
-        Decorator to register a new block type in the blocks dictionary.
+        Registers a new block type in the `blocks` registry.
 
-        If a block class with the same name is already registered, this method raises a ValueError to prevent unintentional overwrites.
+        This method acts as a decorator for registering block classes. It raises a `ValueError` if a block class with the same name is already registered, preventing unintentional overwrites.
 
-        Parameters:
-            block_cls (type[Element]): The block class to be registered.
-
-        Returns:
-            type[Element]: The same block class that was passed in, enabling this method to be used as a decorator.
-
-        Raises:
-            ValueError: If a block with the same class name is already registered.
+        :param block_cls: The block class to be registered.
+        :type block_cls: type[Element]
+        :return: The block class, facilitating use as a decorator.
+        :rtype: type[Element]
+        :raises ValueError: If a block with the same class name is already registered.
         """
         block_name = block_cls.__name__
         if block_name in cls.blocks:
-            raise ValueError(f"Block type {block_name} is already defined.")
+            raise ValueError(f"Block type '{block_name}' is already defined.")
         cls.blocks[block_name] = block_cls
         return block_cls
 
     @classmethod
     def rewrite_block(cls, block_cls: type[Element]) -> type[Element]:
         """
-        Decorator to register or overwrite an existing block type in the blocks dictionary.
+        Registers or redefines a block type in the `blocks` registry.
 
-        Unlike `register_block`, this method allows for the redefinition of block types. If a block with the same name already exists, it will be overwritten with the new definition.
+        Unlike `register_block`, this method allows the redefinition of existing block types by overwriting them if necessary. It is used when an update or replacement for an existing block definition is required.
 
-        Parameters:
-            block_cls (type[Element]): The block class to be registered or redefined.
-
-        Returns:
-            type[Element]: The same block class that was passed in, enabling this method to be used as a decorator.
+        :param block_cls: The block class to be registered or redefined.
+        :type block_cls: type[Element]
+        :return: The block class, enabling use as a decorator.
+        :rtype: type[Element]
         """
         block_name = block_cls.__name__
         cls.blocks[block_name] = block_cls
@@ -356,12 +363,22 @@ class AvailableBlocksGeneral:
 
 class BlockUnknown(Block):
     """
-    Represents a block of unknown type.
+    Represents a block of an unrecognized or unknown type within a structured document.
+
+    This class is used as a fallback for blocks that do not match any of the registered block types, allowing for generic handling of unknown or unstructured data.
     """
 
-    def data(self):
+    def data(self) -> Data:
+        """
+        Warns about the unstructured nature of the block and returns its raw data encapsulated in a `Data` instance.
+
+        This method is called when attempting to process an unknown block type, issuing a warning about the lack of a structured extraction process and suggesting contributions for handling such blocks.
+
+        :return: A `Data` instance containing the block's raw data and a comment about its unstructured nature.
+        :rtype: Data
+        """
         warnings.warn(
-            f'The block looks not structured. Please contribute to the project if you have knowledge on how to extract data from it.')
+            "The block looks unstructured. Please contribute to the project if you have knowledge on how to extract data from it.")
         return Data(data={'raw data': self.raw_data},
                     comment=("No procedure for analyzing the data found, furthermore, the block looks not structured `raw data` collected.\n"
                              "Please contribute to the project if you have knowledge on how to extract data from it."))
