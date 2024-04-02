@@ -11,6 +11,9 @@ from .units_and_constants import ureg
 
 
 class AvailableBlocksGpaw(AvailableBlocksGeneral):
+    """
+    A class to store all available blocks for GPAW.
+    """
     blocks: dict[str, type[Element]] = {}
 
 

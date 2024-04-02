@@ -17,6 +17,8 @@ tqdm = "^4.66.2"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
 lxml = "^5.1.0"
+sphinx = "^7.2.6"
+sphinx-rtd-theme = "^2.0.0"
 
 [build-system]
 requires = ["poetry-core"]

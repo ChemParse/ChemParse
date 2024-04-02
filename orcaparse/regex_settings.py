@@ -1,32 +1,108 @@
+from __future__ import annotations
+
 import json
 import os
 import re
 import warnings
-from typing import Dict, List, Optional, Pattern, Union
+from typing import Optional
 
 from .regex_request import RegexRequest
 
 
 class RegexBlueprint:
-    def __init__(self, order: List[str], pattern_structure: Dict[str, str], pattern_texts: Dict[str, str], comment: str) -> None:
+    """
+    A class representing a blueprint for generating multiple RegexRequest objects with a shared structure.
+
+    The RegexBlueprint class is useful for defining a common structure for multiple regex patterns that share a similar format.
+    By defining a blueprint with a pattern structure and a set of pattern texts, you can generate multiple RegexRequest objects
+    with the same structure but different text snippets. This is particularly useful when you have a set of related patterns
+    that follow a consistent format but differ in specific details.
+
+    :param list[str] order: The ordered list of keys that defines the sequence of generated RegexRequest objects.
+    :param dict[str, str] pattern_structure: A dictionary defining the common structure of regex patterns,
+        including `beginning`, `ending`, and `flags` keys.
+    :param dict[str, str] pattern_texts: A dictionary mapping each key in the `order` list to a specific
+        text snippet to be inserted into the pattern structure.
+    :param str comment: A comment or description associated with this blueprint.
+
+    **Attributes**
+
+    .. attribute:: order
+        :type: list[str]
+
+        The ordered list of keys that defines the sequence of generated RegexRequest objects.
+
+    .. attribute:: pattern_structure
+        :type: dict[str, str]
+
+        A dictionary defining the common structure of regex patterns, including 'beginning', 'ending', and 'flags' keys.
+
+    .. attribute:: pattern_texts
+        :type: dict[str, str]
+
+        A dictionary mapping each key in the 'order' list to a specific text snippet to be inserted into the pattern structure.
+
+    .. attribute:: comment
+        :type: str
+
+        A comment or description associated with this blueprint.
+
+    **Examples**
+
+    .. code-block:: python
+
+        import orcaparse as op
+
+        # Define a blueprint for extracting multiple blocks of text from an ORCA output file
+        rb = op.RegexBlueprint(
+            order=[
+                "BlockOrcaVersion",
+                "BlockOrcaContributions",
+            ],
+            pattern_structure={
+                "beginning": r"^([ \\t]*",
+                "ending": r".*?\\n(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n)*)",
+                "flags": ["MULTILINE"],
+            },
+            pattern_texts={
+                "BlockOrcaVersion": "Program Version",
+                "BlockOrcaContributions": "With contributions from"
+            },
+            comment="Blueprint: Paragraph with the line that starts with specified text.",
+        )
+
+        # Generate a list of RegexRequest objects based on the blueprint
+        regex_requests = rb.to_list()
+
+        # Validate the blueprint configuration
+        rb.validate_configuration()
+
+    """
+
+    def __init__(self, order: list[str], pattern_structure: dict[str, str], pattern_texts: dict[str, str], comment: str) -> None:
         """
         Initializes a RegexBlueprint instance, which serves as a template for generating RegexRequest objects.
 
-        Args:
-            order (List[str]): The ordered list of keys that defines the sequence of generated RegexRequest objects.
-            pattern_structure (Dict[str, str]): A dictionary defining the common structure of regex patterns,
+        Parameters:
+            order (list[str]): The ordered list of keys that defines the sequence of generated RegexRequest objects.
+            pattern_structure (dict[str, str]): A dictionary defining the common structure of regex patterns,
                 including 'beginning', 'ending', and 'flags' keys.
-            pattern_texts (Dict[str, str]): A dictionary mapping each key in the 'order' list to a specific
+            pattern_texts (dict[str, str]): A dictionary mapping each key in the 'order' list to a specific
                 text snippet to be inserted into the pattern structure.
             comment (str): A comment or description associated with this blueprint.
         """
-        self.order = order
-        self.pattern_structure = pattern_structure
-        self.pattern_texts = pattern_texts
-        self.comment = comment
+        self.order: list[str] = order
+        self.pattern_structure: dict[str, str] = pattern_structure
+        self.pattern_texts: dict[str, str] = pattern_texts
+        self.comment: str = comment
         self._initialize_items()
 
-    def _initialize_items(self):
+    def _initialize_items(self) -> None:
+        """
+        Initializes the `items` dictionary by creating `RegexRequest` objects for each pattern text defined in the blueprint.
+
+        This method constructs each regex pattern by combining the predefined structure with the specific text snippets, and then initializes `RegexRequest` objects with these patterns.
+        """
         self.items: dict[str, RegexRequest] = {}
         for name, text in self.pattern_texts.items():
             pattern = (f"{self.pattern_structure['beginning']}"
@@ -40,21 +116,22 @@ class RegexBlueprint:
             )
             self.items[name] = regex_request
 
-    def to_list(self) -> List[RegexRequest]:
+    def to_list(self) -> list[RegexRequest]:
         """
-        Generates a list of RegexRequest objects based on the blueprint.
+        Converts the blueprint's items into a list of `RegexRequest` objects ordered according to the blueprint's `order` attribute.
 
-        Returns:
-            List[RegexRequest]: A list of generated RegexRequest objects following the blueprint's structure.
+        :return: An ordered list of `RegexRequest` objects generated from the blueprint.
+        :rtype: list[RegexRequest]
         """
         return [self.items[name] for name in self.order]
 
     def validate_configuration(self) -> None:
         """
-        Validates the blueprint's configuration to ensure consistency and correctness.
+        Checks the blueprint's configuration for consistency and correctness, ensuring all necessary components are correctly defined.
 
-        Raises:
-            ValueError: If any configuration inconsistency or error is found.
+        This includes verifying the presence of each item in the `order` within the `pattern_texts`, the inclusion of required keys in the `pattern_structure`, the validity of specified regex flags, and the correctness of the regex pattern.
+
+        :raises ValueError: If any aspect of the blueprint's configuration is found to be inconsistent or incorrect.
         """
         # Check if all items in 'order' exist in 'pattern_texts'
         for name in self.order:
@@ -91,11 +168,12 @@ class RegexBlueprint:
 
     def add_item(self, name: str, pattern_text: str) -> None:
         """
-        Adds a new pattern text to the blueprint and its corresponding key to the order.
+        Adds a new item to the blueprint, updating the pattern texts, items, and order accordingly.
 
-        Args:
-            name (str): The key name for the new pattern text.
-            pattern_text (str): The specific text snippet to be inserted into the pattern structure for this new item.
+        :param name: The key for the new pattern text.
+        :type name: str
+        :param pattern_text: The text snippet to be inserted into the pattern structure for the new item.
+        :type pattern_text: str
         """
         self.pattern_texts[name] = pattern_text
         pattern = (f"{self.pattern_structure['beginning']}"
@@ -111,12 +189,12 @@ class RegexBlueprint:
         self.order.append(name)
         self.validate_configuration()
 
-    def to_dict(self) -> Dict[str, Union[List[str], Dict[str, Union[str, List[str]]], str]]:
+    def to_dict(self) -> dict[str, list[str] | dict[str, str | list[str]] | str]:
         """
         Converts the RegexBlueprint instance into a dictionary representation.
 
-        Returns:
-            Dict[str, Union[List[str], Dict[str, Union[str, List[str]]], str]]: A dictionary representation of the RegexBlueprint.
+        :return: A dictionary containing the blueprint's ordered keys, pattern structure, pattern texts, and an optional comment.
+        :rtype: dict[str, list[str] | dict[str, str | list[str]] | str]
         """
         return {
             "order": self.order,
@@ -127,41 +205,39 @@ class RegexBlueprint:
 
     def __len__(self) -> int:
         """
-        Returns the number of items defined in the blueprint's order.
+        Returns the count of unique pattern text entries defined in the blueprint.
 
-        Returns:
-            int: The length of the 'order' list.
+        :return: The total number of pattern text entries.
+        :rtype: int
         """
         return len(self.order)
 
     def __repr__(self) -> str:
         """
-        Provides a detailed string representation of the RegexBlueprint instance for debugging.
+        Generates a detailed string representation of the RegexBlueprint instance, including its main components.
 
-        Returns:
-            str: A string representation including the order, pattern structure, pattern texts, and comment.
+        :return: A string representation that includes the blueprint's order, pattern structure, pattern texts, and comment.
+        :rtype: str
         """
         return f"RegexBlueprint(Order: {self.order}, Pattern Structure: {self.pattern_structure}, Pattern Texts: {self.pattern_texts}, Comment: {self.comment})"
 
     def __str__(self) -> str:
         """
-        Returns a string representation of the RegexBlueprint instance, using the tree method to illustrate the structure.
+        Provides a simplified string representation of the RegexBlueprint instance.
 
-        Returns:
-            str: A tree-like string representation of the blueprint.
+        :return: A concise string summary of the blueprint.
+        :rtype: str
         """
         return self.tree()
 
     def tree(self, depth: int = 0) -> str:
         """
-        Generates a string representation of the blueprint hierarchy in a tree-like structure. This method is useful
-        for visualizing the blueprint's pattern structure, pattern texts, and their hierarchical relationships.
+        Generates a tree-like string representation of the blueprint, illustrating the hierarchy of pattern structures and texts.
 
-        Args:
-            depth (int): The current depth in the tree, used for indentation to represent hierarchy levels. Defaults to 0 at the root level.
-
-        Returns:
-            str: A string representation of the regex blueprint in a tree-like structure, showing nested patterns indented according to their depth.
+        :param depth: The initial indentation depth, used to represent hierarchical levels in the output string. The root level starts at 0.
+        :type depth: int
+        :return: A string visualization of the blueprint, with patterns and texts formatted in a hierarchical, tree-like structure.
+        :rtype: str
         """
         result = "  " * depth + "RegexBlueprint:\n"
         for name in self.order:
@@ -173,17 +249,31 @@ class RegexBlueprint:
 
 
 class RegexSettings:
-    def __init__(self, settings_file: Optional[str] = None, items: Optional[Dict[str, Union[RegexRequest, 'RegexSettings']]] = None, order: Optional[List[str]] = None) -> None:
+    """
+    Manages a collection of regex patterns and settings, supporting hierarchical organization and JSON-based configuration.
+
+    This class facilitates the organization, storage, and retrieval of regex patterns and their configurations. It can be directly instantiated with regex patterns and an execution order or loaded from a JSON file containing the configurations.
+
+    :ivar items: A mapping from names to `RegexRequest` objects or nested `RegexSettings`, representing individual regex patterns or groups of patterns.
+    :vartype items: dict[str, RegexRequest | RegexSettings]
+    :ivar order: The order in which the regex patterns or groups should be applied or processed.
+    :vartype order: list[str]
+    """
+
+    items: dict[str, RegexRequest | RegexSettings]
+    order: list[str]
+
+    def __init__(self, settings_file: Optional[str] = None, items: Optional[dict[str, RegexRequest | RegexSettings]] = None, order: Optional[list[str]] = None) -> None:
         """
-        Initializes a RegexSettings instance, which can either load settings from a file or be instantiated with provided items and order.
+        Initializes a `RegexSettings` instance with optional configurations from a file or provided items and order.
 
-        Args:
-            settings_file (Optional[str]): The path to a JSON file containing regex settings. If not provided, an empty or pre-defined configuration is used.
-            items (Optional[Dict[str, Union[RegexRequest, 'RegexSettings']]]): A dictionary of items (RegexRequest objects or nested RegexSettings) keyed by their names.
-            order (Optional[List[str]]): A list of item names specifying the order in which they should be processed.
-
-        Raises:
-            ValueError: If only one of items or order is provided, but not both.
+        :param settings_file: The path to a JSON file containing regex settings. If specified, settings are loaded from this file.
+        :type settings_file: Optional[str], optional
+        :param items: A dictionary mapping names to `RegexRequest` objects or nested `RegexSettings`, specifying the regex patterns and configurations.
+        :type items: Optional[dict[str, RegexRequest | RegexSettings]]
+        :param order: A list of item names defining the order in which the regex patterns or groups should be applied.
+        :type order: Optional[list[str]], optional
+        :raises ValueError: If either `items` or `order` is provided without the other, raising a configuration inconsistency.
         """
         if items is None and order is None:
             if settings_file is not None:
@@ -204,17 +294,17 @@ class RegexSettings:
 
         self.validate_configuration()
 
-    def add_item(self, name: str, item: Union[RegexRequest, 'RegexSettings'], rewrite: bool = False) -> None:
+    def add_item(self, name: str, item: RegexRequest | RegexSettings, rewrite: bool = False) -> None:
         """
-        Adds an item (RegexRequest or nested RegexSettings) to the settings.
+        Adds a new regex pattern or settings group to the `RegexSettings` instance.
 
-        Args:
-            name (str): The name/key associated with the item.
-            item (Union[RegexRequest, 'RegexSettings']): The item to add, which can be a RegexRequest or another RegexSettings instance.
-            rewrite (bool): Whether to overwrite an existing item with the same name. Defaults to False.
-
-        Raises:
-            ValueError: If the name already exists in the items.
+        :param name: The unique name/key for the new item.
+        :type name: str
+        :param item: The `RegexRequest` or `RegexSettings` instance to be added.
+        :type item: Union[RegexRequest, RegexSettings]
+        :param rewrite: If `True`, an existing item with the same name will be overwritten. Defaults to `False`.
+        :type rewrite: bool, optional
+        :raises ValueError: If an item with the same name already exists and `rewrite` is `False`.
         """
         if name in self.items and not rewrite:
             raise ValueError(f"Item with name '{name}' already exists.")
@@ -223,47 +313,40 @@ class RegexSettings:
             self.order.append(name)
         self.validate_configuration()
 
-    def set_order(self, order: List[str]) -> None:
+    def set_order(self, order: list[str]) -> None:
         """
-        Sets the order of items.
+        Defines the processing order for the regex items within this `RegexSettings` instance.
 
-        Args:
-            order (List[str]): A list of item names specifying the order.
-
-        Raises:
-            ValueError: If any name in the order list does not exist in the items.
+        :param order: The sequence of item names, determining the order in which items are processed.
+        :type order: list[str]
+        :raises ValueError: If any name in the provided order does not correspond to an existing item in `self.items`.
         """
-        for name in order:
-            if name not in self.items:
-                raise ValueError(
-                    f"Item with name '{name}' does not exist in items.")
+        if any(name not in self.items for name in order):
+            missing_items = [name for name in order if name not in self.items]
+            raise ValueError(
+                f"Item(s) '{', '.join(missing_items)}' not found in items.")
         self.order = order
-        self.validate_configuration()
 
-    def get_ordered_items(self) -> List[Union[RegexRequest, 'RegexSettings']]:
+    def get_ordered_items(self) -> list[RegexRequest | RegexSettings]:
         """
-        Returns a list of items in the specified order.
+        Retrieves the regex items in the order specified by `self.order`.
 
-        Returns:
-            List[Union[RegexRequest, 'RegexSettings']]: A list of ordered items.
-
-        Raises:
-            ValueError: If any name in the order list does not exist in the items.
+        :return: An ordered list of `RegexRequest` objects and/or `RegexSettings` instances.
+        :rtype: list[RegexRequest | RegexSettings]
+        :raises ValueError: If the order list references names not present in the items dictionary.
         """
-        ordered_items = [self.items[name]
-                         for name in self.order if name in self.items]
-        if len(ordered_items) != len(self.order):
-            missing_items = set(self.order) - set(self.items.keys())
+        if missing_items := [name for name in self.order if name not in self.items]:
             raise ValueError(
                 f"Missing items in 'items': {', '.join(missing_items)}")
-        return ordered_items
+        return [self.items[name] for name in self.order]
 
-    def to_list(self) -> List[Union[RegexRequest, 'RegexSettings']]:
+    def to_list(self) -> list[RegexRequest | RegexSettings]:
         """
-        Flattens the items to a list, expanding nested RegexSettings into their constituent RegexRequest objects.
+        Converts the `RegexSettings` instance to a flattened list of `RegexRequest` objects, including those from nested `RegexSettings`.
 
-        Returns:
-            List[Union[RegexRequest, 'RegexSettings']]: A flattened list of RegexRequest objects and/or RegexSettings instances.
+        :return: A list containing all `RegexRequest` objects and `RegexSettings` instances, expanded in order.
+        :rtype: list[RegexRequest | RegexSettings]
+        :raises TypeError: If an item within `self.items` is neither a `RegexRequest` nor a `RegexSettings` instance.
         """
         ordered_items = []
         for name in self.order:
@@ -278,24 +361,23 @@ class RegexSettings:
 
     def load_settings(self, settings_file: str) -> None:
         """
-        Loads settings from a JSON file and populates the RegexSettings instance based on the file's content.
+        Populates the `RegexSettings` instance with configurations from a specified JSON file.
 
-        Args:
-            settings_file (str): The path to the JSON file containing the settings.
+        :param settings_file: The file path to the JSON file containing regex configurations.
+        :type settings_file: str
         """
         with open(settings_file, "r") as file:
             settings = json.load(file)
             self.parse_settings(settings)
 
-    def parse_settings(self, settings: Dict[str, Union[Dict, List[str]]]) -> None:
+    def parse_settings(self, settings: dict[str, dict | list[str]]) -> None:
         """
-        Parses the given settings to populate this RegexSettings instance with
-        RegexRequest objects, RegexBlueprint objects, or nested RegexSettings objects based on the settings structure.
+        Parses a settings dictionary to populate the `RegexSettings` instance with `RegexRequest`, `RegexBlueprint`, or nested `RegexSettings`.
 
-        :param settings: The settings to parse, typically loaded from a JSON file.
+        :param settings: A dictionary containing the configuration for regex patterns. It may define `RegexRequest` objects directly, specify `RegexBlueprint` configurations, or contain nested `RegexSettings`.
+        :type settings: dict[str, dict| list[str]]
         """
-        self.items: Dict[str, Union[RegexRequest,
-                                    RegexBlueprint, 'RegexSettings']] = {}
+        self.items = {}
         self.order = settings.get('order', [])
 
         for name in self.order:
@@ -334,14 +416,12 @@ class RegexSettings:
 
     def tree(self, depth: int = 0) -> str:
         """
-        Generates a string representation of the settings hierarchy in a tree-like structure.
-        This method is useful for visualizing the nested structure of regex settings and blueprints.
+        Visualizes the regex settings hierarchy as a tree-like structure, showing the nested organization of patterns and groups.
 
-        Args:
-            depth (int): The current depth in the tree, used for indentation to represent hierarchy levels. Defaults to 0 at the root level.
-
-        Returns:
-            str: A string representation of the regex settings in a tree-like structure, showing nested items indented according to their depth.
+        :param depth: The initial indentation level, used to visually represent the depth of nested structures.
+        :type depth: int
+        :return: A string visualization of the settings hierarchy, formatted as an indented tree structure.
+        :rtype: str
         """
         result = "  " * depth + "RegexGroup:\n"
         for name in self.order:
@@ -357,14 +437,10 @@ class RegexSettings:
 
     def validate_configuration(self) -> None:
         """
-        Validates the regex configuration to ensure consistency between 'order' and 'items'.
-        Also recursively validates the configuration of nested RegexSettings instances.
+        Ensures that each item listed in the order is present in the items dictionary and validates nested configurations.
 
-        Raises:
-            ValueError: If an item in 'order' does not have a corresponding entry in 'items'.
-
-        Warns:
-            RuntimeWarning: If there are keys in 'items' not listed in 'order'.
+        :raises ValueError: If an ordered item is missing from the items dictionary.
+        :raises RuntimeWarning: If there are items not included in the order.
         """
         # Check for items in 'order' that are not in 'items'
         for name in self.order:
@@ -378,8 +454,13 @@ class RegexSettings:
                 warnings.warn(
                     f"Warning: Item '{name}' found in 'items' but not listed in 'order'.", RuntimeWarning)
 
-    def to_dict(self) -> Dict[str, Union[Dict, List[str]]]:
-        """Converts the RegexSettings instance and its nested structure to a dictionary."""
+    def to_dict(self) -> dict[str, dict | list[str]]:
+        """
+        Serializes the `RegexSettings` instance, including its nested structure, into a dictionary format suitable for JSON serialization.
+
+        :return: A dictionary representation of the `RegexSettings` instance, capturing the order of items and the nested regex configurations.
+        :rtype: dict[str, dict| list[str]]
+        """
         result = {"order": self.order}
         for name in self.order:
             item = self.items[name]
@@ -388,26 +469,69 @@ class RegexSettings:
         return result
 
     def save_as_json(self, filename: str) -> None:
-        """Saves the RegexSettings instance as a JSON file."""
+        """
+        Exports the `RegexSettings` configuration to a JSON file, preserving the nested structure and order of regex patterns.
+
+        :param filename: The file path where the JSON representation of the regex settings should be saved.
+        :type filename: str
+        """
         with open(filename, 'w') as file:
             json.dump(self.to_dict(), file, indent=4)
 
     def __repr__(self) -> str:
-        return f"RegexGroup(Order: {self.order}, Items: {list(self.items.keys())})"
+        """
+        Generates a concise string representation of the `RegexSettings` instance for debugging and logging.
 
-    def __len__(self) -> str:
+        :return: A string summary of the regex settings, including the order and a list of item keys.
+        :rtype: str
+        """
+        return f"RegexSettings(Order: {self.order}, Items: {list(self.items.keys())})"
+
+    def __len__(self) -> int:
+        """
+        Calculates the cumulative length of all regex items in the settings, considering the length of nested `RegexSettings`.
+
+        :return: The total length of all contained regex items and groups.
+        :rtype: int
+        """
         return sum(len(item) for item in self.items.values())
 
     def __str__(self) -> str:
+        """
+        Provides a human-readable string representation of the `RegexSettings` instance, formatted as a nested tree structure.
+
+        :return: A tree-like string visualization of the regex settings hierarchy.
+        :rtype: str
+        """
         return self.tree()
+
+# Variable Documentation
 
 
 DEFAULT_ORCA_REGEX_FILE = os.path.join(
     os.path.dirname(__file__), 'orca_regex.json')
-DEFAULT_ORCA_REGEX_SETTINGS: RegexSettings = RegexSettings(
+"""
+Path to the default ORCA regex settings JSON file, included with the package.
+:type: str
+"""
+
+DEFAULT_ORCA_REGEX_SETTINGS = RegexSettings(
     settings_file=DEFAULT_ORCA_REGEX_FILE)
+"""
+The pre-loaded `RegexSettings` instance containing the default regex patterns for ORCA output parsing.
+:type: RegexSettings
+"""
 
 DEFAULT_GPAW_REGEX_FILE = os.path.join(
     os.path.dirname(__file__), 'gpaw_regex.json')
-DEFAULT_GPAW_REGEX_SETTINGS: RegexSettings = RegexSettings(
+"""
+Path to the default GPAW regex settings JSON file, included with the package.
+:type: str
+"""
+
+DEFAULT_GPAW_REGEX_SETTINGS = RegexSettings(
     settings_file=DEFAULT_GPAW_REGEX_FILE)
+"""
+The pre-loaded `RegexSettings` instance containing the default regex patterns for GPAW output parsing.
+:type: RegexSettings
+"""
