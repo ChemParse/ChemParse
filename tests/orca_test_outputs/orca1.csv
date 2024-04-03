@@ -1,5 +1,5 @@
 Type,Subtype,CharPosition,LinePosition,ReadableName,RawData
-Block,BlockOrcaUnrecognizedWithHeader,"(1, 154)","(3, 7)",O   R   C   A,"                                 *****************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(1, 154)","(3, 7)",O   R   C   A,"                                 *****************
                                  * O   R   C   A *
                                  *****************
 
@@ -129,7 +129,7 @@ Block,BlockOrcaUses,"(8080, 8505)","(139, 147)",This ORCA versions uses CBLAS ..
         Core in use  :  SkylakeX
    Copyright (c) 2011-2014, The OpenBLAS Project
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(8510, 8733)","(153, 159)",The coordinates will be read from file: gs.xyz,"***************************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(8510, 8733)","(153, 159)",The coordinates will be read from file: gs.xyz,"***************************************
 The coordinates will be read from file: gs.xyz
 ***************************************
 
@@ -184,12 +184,12 @@ NAME = orca.inp
 | 14>                          ****END OF INPUT****
 ================================================================================
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(11456, 11612)","(198, 202)",Single Point Calculation,"                       ****************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(11456, 11612)","(198, 202)",Single Point Calculation,"                       ****************************
                        * Single Point Calculation *
                        ****************************
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(11613, 12555)","(203, 227)",CARTESIAN COORDINATES (ANGSTROEM),"---------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(11613, 12555)","(203, 227)",CARTESIAN COORDINATES (ANGSTROEM),"---------------------------------
 CARTESIAN COORDINATES (ANGSTROEM)
 ---------------------------------
   C     10.139549   10.097114   12.384211
@@ -214,7 +214,7 @@ CARTESIAN COORDINATES (ANGSTROEM)
   H     10.139549    8.741133    8.000000
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(12556, 14090)","(228, 253)",CARTESIAN COORDINATES (A.U.),"----------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(12556, 14090)","(228, 253)",CARTESIAN COORDINATES (A.U.),"----------------------------
 CARTESIAN COORDINATES (A.U.)
 ----------------------------
   NO LB      ZA    FRAG     MASS         X           Y           Z
@@ -240,7 +240,7 @@ CARTESIAN COORDINATES (A.U.)
   19 H     1.0000    0     1.008   19.160971   16.518347   15.117809
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(14091, 15530)","(254, 278)",INTERNAL COORDINATES (ANGSTROEM),"--------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(14091, 15530)","(254, 278)",INTERNAL COORDINATES (ANGSTROEM),"--------------------------------
 INTERNAL COORDINATES (ANGSTROEM)
 --------------------------------
  C      0   0   0     0.000000000000     0.00000000     0.00000000
@@ -265,7 +265,7 @@ INTERNAL COORDINATES (ANGSTROEM)
  H     10   8   7     1.072695102939   125.71181970   180.00000000
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(15531, 16955)","(279, 303)",INTERNAL COORDINATES (A.U.),"---------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(15531, 16955)","(279, 303)",INTERNAL COORDINATES (A.U.),"---------------------------
 INTERNAL COORDINATES (A.U.)
 ---------------------------
  C      0   0   0     0.000000000000     0.00000000     0.00000000
@@ -290,7 +290,7 @@ INTERNAL COORDINATES (A.U.)
  H     10   8   7     2.027099969753   125.71181970   180.00000000
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(16956, 17989)","(304, 333)",BASIS SET INFORMATION,"---------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(16956, 17989)","(304, 333)",BASIS SET INFORMATION,"---------------------
 BASIS SET INFORMATION
 ---------------------
 There are 3 groups of distinct atoms
@@ -320,7 +320,7 @@ Atom  17H    basis set group =>   3
 Atom  18H    basis set group =>   3
 Atom  19H    basis set group =>   3
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(17990, 19098)","(334, 365)",AUXILIARY/J BASIS SET INFORMATION,"---------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(17990, 19098)","(334, 365)",AUXILIARY/J BASIS SET INFORMATION,"---------------------------------
 AUXILIARY/J BASIS SET INFORMATION
 ---------------------------------
 There are 3 groups of distinct atoms
@@ -382,7 +382,7 @@ Block,BlockOrcaShark,"(19657, 21131)","(367, 386)",P O W E R E D B Y O R C A S B
  v1 FN, 2020, v2 2021                                                         
 ------------------------------------------------------------------------------
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(21134, 23819)","(390, 441)",SHARK INTEGRAL PACKAGE,"----------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(21134, 23819)","(390, 441)",SHARK INTEGRAL PACKAGE,"----------------------
 SHARK INTEGRAL PACKAGE
 ----------------------
 
@@ -434,7 +434,7 @@ Calculating RI/J V-Matrix + Cholesky decomp.... done (  0.0 sec)
 Calculating Nuclear repulsion               ... done (  0.0 sec) ENN=    543.566635146257 Eh
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(23820, 24823)","(442, 463)",DFT GRID GENERATION,"-------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(23820, 24823)","(442, 463)",DFT GRID GENERATION,"-------------------
 DFT GRID GENERATION
 -------------------
 
@@ -456,7 +456,7 @@ Total number of batches                      ...     1564
 Average number of points per batch           ...       63
 Average number of grid points per atom       ...     4970
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(24824, 26129)","(464, 494)",SHARK GRID GENERATION,"---------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(24824, 26129)","(464, 494)",SHARK GRID GENERATION,"---------------------
 SHARK GRID GENERATION
 ---------------------
 
@@ -498,7 +498,7 @@ Block,BlockOrcaUnrecognizedWithHeader,"(26418, 26683)","(500, 505)",ORCA GUESS S
 -------------------------------------------------------------------------------
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(26684, 29611)","(506, 574)",SCF SETTINGS,"------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(26684, 29611)","(505, 573)",SCF SETTINGS,"------------
 SCF SETTINGS
 ------------
 Hamiltonian:
@@ -567,7 +567,7 @@ Time for construction of square roots      ...    0.007 sec
 Total time needed                          ...    0.025 sec
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(29612, 30073)","(575, 590)",INITIAL GUESS: MOREAD,"---------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(29612, 30073)","(574, 589)",INITIAL GUESS: MOREAD,"---------------------
 INITIAL GUESS: MOREAD
 ---------------------
 
@@ -583,7 +583,7 @@ Input basis set matches current basis set (good)
 MOs were renormalized
 MOs were reorthogonalized (Cholesky)
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(30074, 30372)","(591, 599)",INITIAL GUESS DONE (   0.1 sec),"                      ------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(30074, 30372)","(590, 598)",INITIAL GUESS DONE (   0.1 sec),"                      ------------------
                       INITIAL GUESS DONE (   0.1 sec)
                       ------------------
              **** ENERGY FILE WAS UPDATED (orca.en.tmp) ****
@@ -592,19 +592,19 @@ Maximum memory used throughout the entire GUESS-calculation: 24.8 MB
 
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(30373, 30661)","(600, 605)",Program running with 48 parallel MPI-processes working on a common directory,"           ************************************************************
+Block,BlockOrcaUnrecognizedWithHeader,"(30373, 30661)","(599, 604)",Program running with 48 parallel MPI-processes working on a common directory,"           ************************************************************
            *        Program running with 48 parallel MPI-processes    *
            *              working on a common directory               *
            ************************************************************
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(30662, 30969)","(606, 611)",ORCA LEAN-SCF memory conserving SCF solver,"-------------------------------------------------------------------------------------------
+Block,BlockOrcaUnrecognizedWithHeader,"(30662, 30969)","(605, 610)",ORCA LEAN-SCF memory conserving SCF solver,"-------------------------------------------------------------------------------------------
                                            ORCA LEAN-SCF
                                      memory conserving SCF solver
 -------------------------------------------------------------------------------------------
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(30970, 31334)","(612, 623)",DELTA-SCF INITIAL CONFIGURATION,"-------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(30970, 31334)","(610, 621)",DELTA-SCF INITIAL CONFIGURATION,"-------------------------------
 DELTA-SCF INITIAL CONFIGURATION
 -------------------------------
 
@@ -672,7 +672,7 @@ Block,BlockOrcaScfConverged,"(35102, 35377)","(666, 670)",SCF convergence messag
                *           SCF CONVERGED AFTER  33 CYCLES          *
                *****************************************************
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(35441, 36433)","(675, 700)",TOTAL SCF ENERGY,"----------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(35441, 36433)","(675, 700)",TOTAL SCF ENERGY,"----------------
 TOTAL SCF ENERGY
 ----------------
 
@@ -698,7 +698,7 @@ E(C)               :       -2.531094716532 Eh
 E(XC)              :      -64.040753659367 Eh       
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(36434, 36702)","(701, 709)",SCF CONVERGENCE,"---------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(36434, 36702)","(701, 709)",SCF CONVERGENCE,"---------------
 SCF CONVERGENCE
 ---------------
 
@@ -707,7 +707,7 @@ SCF CONVERGENCE
   Last RMS-Density change    ...    9.8560e-04  Tolerance :   1.0000e-06
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(36703, 37395)","(710, 727)",UHF SPIN CONTAMINATION,"----------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(36703, 37395)","(710, 727)",UHF SPIN CONTAMINATION,"----------------------
 UHF SPIN CONTAMINATION
 ----------------------
 
@@ -725,7 +725,7 @@ Deviation                       :     1.010807
  From now on, including in the GBW file, the orbitals will be
  sorted by occupation to avoid holes in the occupied space.
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(37396, 42112)","(728, 837)",ORBITAL ENERGIES,"----------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(37396, 42112)","(728, 837)",ORBITAL ENERGIES,"----------------
 ORBITAL ENERGIES
 ----------------
                  SPIN UP ORBITALS
@@ -835,7 +835,7 @@ ORBITAL ENERGIES
 
 *These are the orbitals as used from here on.
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(42113, 46783)","(838, 946)",ORBITAL ENERGIES,"----------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(42113, 46783)","(838, 946)",ORBITAL ENERGIES,"----------------
 ORBITAL ENERGIES
 ----------------
                  SPIN UP ORBITALS
@@ -944,12 +944,12 @@ ORBITAL ENERGIES
 *Only the first 10 virtual orbitals were printed.
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(46784, 46943)","(947, 951)",MULLIKEN POPULATION ANALYSIS,"                    ********************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(46784, 46943)","(947, 951)",MULLIKEN POPULATION ANALYSIS,"                    ********************************
                     * MULLIKEN POPULATION ANALYSIS *
                     ********************************
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(46944, 47829)","(952, 978)",MULLIKEN ATOMIC CHARGES AND SPIN POPULATIONS,"--------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(46944, 47829)","(952, 978)",MULLIKEN ATOMIC CHARGES AND SPIN POPULATIONS,"--------------------------------------------
 MULLIKEN ATOMIC CHARGES AND SPIN POPULATIONS
 --------------------------------------------
    0 C :    0.229752    0.418178
@@ -976,7 +976,7 @@ Sum of atomic charges         :   -0.0000000
 Sum of atomic spin populations:    0.0000000
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(47830, 57712)","(979, 1297)",MULLIKEN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS,"-----------------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(47830, 57712)","(979, 1297)",MULLIKEN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS,"-----------------------------------------------------
 MULLIKEN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS
 -----------------------------------------------------
 CHARGE
@@ -1295,12 +1295,12 @@ SPIN
 
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(57713, 57872)","(1298, 1302)",LOEWDIN POPULATION ANALYSIS,"                     *******************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(57713, 57872)","(1298, 1302)",LOEWDIN POPULATION ANALYSIS,"                     *******************************
                      * LOEWDIN POPULATION ANALYSIS *
                      *******************************
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(57873, 58665)","(1303, 1327)",LOEWDIN ATOMIC CHARGES AND SPIN POPULATIONS,"-------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(57873, 58665)","(1303, 1327)",LOEWDIN ATOMIC CHARGES AND SPIN POPULATIONS,"-------------------------------------------
 LOEWDIN ATOMIC CHARGES AND SPIN POPULATIONS
 -------------------------------------------
    0 C :   -0.266622    0.216051
@@ -1325,7 +1325,7 @@ LOEWDIN ATOMIC CHARGES AND SPIN POPULATIONS
   19 H :    0.004280    0.000812
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(58666, 68545)","(1328, 1646)",LOEWDIN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS,"----------------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(58666, 68545)","(1328, 1646)",LOEWDIN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS,"----------------------------------------------------
 LOEWDIN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS
 ----------------------------------------------------
 CHARGE
@@ -1644,7 +1644,7 @@ SPIN
 
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(68546, 72124)","(1647, 1702)",MAYER POPULATION ANALYSIS,"                      *****************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(68546, 72124)","(1647, 1702)",MAYER POPULATION ANALYSIS,"                      *****************************
                       * MAYER POPULATION ANALYSIS *
                       *****************************
 
@@ -1700,7 +1700,7 @@ B( 10-N , 11-H ) :  -0.2848 B( 10-N , 12-H ) :  -0.2834 B( 10-N , 18-H ) :  -0.1
 B( 10-N , 19-H ) :  -0.1333 
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(72125, 73604)","(1703, 1736)",TIMINGS,"-------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(72125, 73604)","(1703, 1736)",TIMINGS,"-------
 TIMINGS
 -------
 
@@ -1738,19 +1738,19 @@ Block,BlockOrcaFinalSinglePointEnergy,"(73605, 73751)","(1715, 1718)",FINAL SING
 FINAL SINGLE POINT ENERGY      -440.508559636589
 -------------------------   --------------------
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(73754, 73958)","(1722, 1726)",ORCA property calculations,"                            ***************************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(73754, 73958)","(1722, 1726)",ORCA property calculations,"                            ***************************************
                             *     ORCA property calculations      *
                             ***************************************
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(73959, 74155)","(1727, 1733)",Active property flags,"                                    ---------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(73959, 74155)","(1727, 1733)",Active property flags,"                                    ---------------------
                                     Active property flags
                                     ---------------------
    (+) Dipole Moment
 
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(74156, 74926)","(1734, 1749)",ORCA ELECTRIC PROPERTIES CALCULATION,"------------------------------------------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(74156, 74926)","(1734, 1749)",ORCA ELECTRIC PROPERTIES CALCULATION,"------------------------------------------------------------------------------
                        ORCA ELECTRIC PROPERTIES CALCULATION
 ------------------------------------------------------------------------------
 
@@ -1792,7 +1792,7 @@ x,y,z [Debye]:    -9.676280    -0.000065     0.001128
  
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(75807, 79173)","(1777, 1847)",SUGGESTED CITATIONS FOR THIS RUN,"--------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(75807, 79173)","(1777, 1847)",SUGGESTED CITATIONS FOR THIS RUN,"--------------------------------
 SUGGESTED CITATIONS FOR THIS RUN
 --------------------------------
 

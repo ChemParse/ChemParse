@@ -89,6 +89,11 @@ class BlockOrcaWithStandardHeader(Block):
 
 
 @AvailableBlocksOrca.register_block
+class BlockOrcaUnrecognizedWithSingeLineHeader(BlockOrcaWithStandardHeader):
+    pass
+
+
+@AvailableBlocksOrca.register_block
 class BlockOrcaUnrecognizedWithHeader(BlockOrcaWithStandardHeader):
     pass
 
