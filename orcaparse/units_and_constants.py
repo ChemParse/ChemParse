@@ -1,4 +1,5 @@
 from pint import UnitRegistry
 
-# Create a UnitRegistry instance
+
 ureg = UnitRegistry()
+"""Unit registry for pint, use this to define units and constants, do not create a new one"""
