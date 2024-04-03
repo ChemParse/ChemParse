@@ -725,7 +725,7 @@ Deviation                       :     1.010807
  From now on, including in the GBW file, the orbitals will be
  sorted by occupation to avoid holes in the occupied space.
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(37396, 42112)","(728, 837)",ORBITAL ENERGIES,"----------------
+Block,BlockOrcaOrbitalEnergies,"(37396, 42112)","(720, 829)",ORBITAL ENERGIES,"----------------
 ORBITAL ENERGIES
 ----------------
                  SPIN UP ORBITALS
@@ -835,7 +835,7 @@ ORBITAL ENERGIES
 
 *These are the orbitals as used from here on.
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(42113, 46783)","(838, 946)",ORBITAL ENERGIES,"----------------
+Block,BlockOrcaOrbitalEnergies,"(42113, 46783)","(830, 938)",ORBITAL ENERGIES,"----------------
 ORBITAL ENERGIES
 ----------------
                  SPIN UP ORBITALS
@@ -944,12 +944,12 @@ ORBITAL ENERGIES
 *Only the first 10 virtual orbitals were printed.
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(46784, 46943)","(947, 951)",MULLIKEN POPULATION ANALYSIS,"                    ********************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(46784, 46943)","(939, 943)",MULLIKEN POPULATION ANALYSIS,"                    ********************************
                     * MULLIKEN POPULATION ANALYSIS *
                     ********************************
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(46944, 47829)","(952, 978)",MULLIKEN ATOMIC CHARGES AND SPIN POPULATIONS,"--------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(46944, 47829)","(944, 970)",MULLIKEN ATOMIC CHARGES AND SPIN POPULATIONS,"--------------------------------------------
 MULLIKEN ATOMIC CHARGES AND SPIN POPULATIONS
 --------------------------------------------
    0 C :    0.229752    0.418178
@@ -976,7 +976,7 @@ Sum of atomic charges         :   -0.0000000
 Sum of atomic spin populations:    0.0000000
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(47830, 57712)","(979, 1297)",MULLIKEN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS,"-----------------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(47830, 57712)","(971, 1289)",MULLIKEN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS,"-----------------------------------------------------
 MULLIKEN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS
 -----------------------------------------------------
 CHARGE
@@ -1295,12 +1295,12 @@ SPIN
 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(57713, 57872)","(1298, 1302)",LOEWDIN POPULATION ANALYSIS,"                     *******************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(57713, 57872)","(1290, 1294)",LOEWDIN POPULATION ANALYSIS,"                     *******************************
                      * LOEWDIN POPULATION ANALYSIS *
                      *******************************
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(57873, 58665)","(1303, 1327)",LOEWDIN ATOMIC CHARGES AND SPIN POPULATIONS,"-------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(57873, 58665)","(1295, 1319)",LOEWDIN ATOMIC CHARGES AND SPIN POPULATIONS,"-------------------------------------------
 LOEWDIN ATOMIC CHARGES AND SPIN POPULATIONS
 -------------------------------------------
    0 C :   -0.266622    0.216051
@@ -1325,7 +1325,7 @@ LOEWDIN ATOMIC CHARGES AND SPIN POPULATIONS
   19 H :    0.004280    0.000812
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(58666, 68545)","(1328, 1646)",LOEWDIN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS,"----------------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(58666, 68545)","(1320, 1638)",LOEWDIN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS,"----------------------------------------------------
 LOEWDIN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS
 ----------------------------------------------------
 CHARGE
@@ -1644,7 +1644,7 @@ SPIN
 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(68546, 72124)","(1647, 1702)",MAYER POPULATION ANALYSIS,"                      *****************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(68546, 72124)","(1639, 1694)",MAYER POPULATION ANALYSIS,"                      *****************************
                       * MAYER POPULATION ANALYSIS *
                       *****************************
 
@@ -1700,7 +1700,7 @@ B( 10-N , 11-H ) :  -0.2848 B( 10-N , 12-H ) :  -0.2834 B( 10-N , 18-H ) :  -0.1
 B( 10-N , 19-H ) :  -0.1333 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(72125, 73604)","(1703, 1736)",TIMINGS,"-------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(72125, 73604)","(1695, 1728)",TIMINGS,"-------
 TIMINGS
 -------
 

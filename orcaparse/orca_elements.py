@@ -234,55 +234,6 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
 
 
 @AvailableBlocksOrca.register_block
-class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
-    data_available: bool = True
-
-    def data(self) -> dict[str, pd.DataFrame]:
-        # Define regex pattern for extracting orbital data lines
-        pattern_orbital_data = r"\s*(\d+)\s+([0-1]\.\d{4})\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s*"
-
-        # Split the raw data into lines
-        lines = self.raw_data.split('\n')
-
-        # Initialize containers for spin up and spin down data
-        spin_up_data = []
-        spin_down_data = []
-
-        # Flag to switch between spin up and spin down data collection
-        collecting_spin_down = False
-
-        # Iterate over lines to fill spin_up_data and spin_down_data
-        for line in lines:
-            if "SPIN UP ORBITALS" in line:
-                collecting_spin_down = False
-                continue
-            elif "SPIN DOWN ORBITALS" in line:
-                collecting_spin_down = True
-                continue
-
-            match = re.match(pattern_orbital_data, line)
-            if match:
-                # Extract orbital data
-                no, occ, e_eh, e_ev = match.groups()
-                data_row = [int(no), float(occ), float(
-                    e_eh) * ureg.Eh, float(e_ev) * ureg.eV]
-
-                # Append to the correct list based on the current section
-                if collecting_spin_down:
-                    spin_down_data.append(data_row)
-                else:
-                    spin_up_data.append(data_row)
-
-        # Convert lists to pandas DataFrames
-        columns = ['NO', 'OCC', 'E(Eh)', 'E(eV)']
-        spin_up_df = pd.DataFrame(spin_up_data, columns=columns)
-        spin_down_df = pd.DataFrame(spin_down_data, columns=columns)
-
-        # Return a dictionary containing both DataFrames
-        return Data(data={'Spin Up': spin_up_df, 'Spin Down': spin_down_df}, comment='Pandas DataFrames `Spin Up` and `Spin Down`. Energy is represented by pint object. Magnitude cane be extracted with .magnitude property.')
-
-
-@AvailableBlocksOrca.register_block
 class BlockOrcaTerminatedNormally(Block):
     data_available: bool = True
 
@@ -368,3 +319,74 @@ class BlockOrcaTimingsForIndividualModules(Block):
             timings_dict[module_name.strip()] = module_time
 
         return Data(data=timings_dict, comment='Timings for different modules as timedelta objects')
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
+    data_available: bool = True
+
+    def data(self) -> dict[str, pd.DataFrame]:
+        # Define regex pattern for extracting orbital data lines
+        pattern_orbital_data = r"\s*(\d+)\s+([0-1]\.\d{4})\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s*"
+
+        # Split the raw data into lines
+        lines = self.raw_data.split('\n')
+
+        columns = ['NO', 'OCC', 'E(Eh)', 'E(eV)']
+
+        if "SPIN UP ORBITALS" in self.raw_data:
+
+            # Initialize containers for spin up and spin down data
+            spin_up_data = []
+            spin_down_data = []
+
+            # Flag to switch between spin up and spin down data collection
+            collecting_spin_down = False
+
+            # Iterate over lines to fill spin_up_data and spin_down_data
+            for line in lines:
+                if "SPIN UP ORBITALS" in line:
+                    collecting_spin_down = False
+                    continue
+                elif "SPIN DOWN ORBITALS" in line:
+                    collecting_spin_down = True
+                    continue
+
+                match = re.match(pattern_orbital_data, line)
+                if match:
+                    # Extract orbital data
+                    no, occ, e_eh, e_ev = match.groups()
+                    data_row = [int(no), float(occ), float(
+                        e_eh) * ureg.Eh, float(e_ev) * ureg.eV]
+
+                    # Append to the correct list based on the current section
+                    if collecting_spin_down:
+                        spin_down_data.append(data_row)
+                    else:
+                        spin_up_data.append(data_row)
+
+            # Convert lists to pandas DataFrames
+            spin_up_df = pd.DataFrame(spin_up_data, columns=columns)
+            spin_down_df = pd.DataFrame(spin_down_data, columns=columns)
+
+            # Return a dictionary containing both DataFrames
+            return Data(data={'Spin Up': spin_up_df, 'Spin Down': spin_down_df},
+                        comment="""Pandas DataFrames `Spin Up` and `Spin Down` with columns `NO`, `OCC`, `E(Eh)`, `E(eV)`.
+                        `E(Eh)` and `E(eV)` are captured from different columns in the file, but should represent the same quantity unless there is an error in ORCA.
+                        Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.""")
+        else:
+            spin_data = []
+            for line in lines:
+                match = re.match(pattern_orbital_data, line)
+                if match:
+                    # Extract orbital data
+                    no, occ, e_eh, e_ev = match.groups()
+                    data_row = [int(no), float(occ), float(
+                        e_eh) * ureg.Eh, float(e_ev) * ureg.eV]
+                    spin_data.append(data_row)
+
+            spin_df = pd.DataFrame(spin_data, columns=columns)
+
+            return Data(data={'Orbitals': spin_df}, comment="""Pandas DataFrame `Orbitals` with columns `NO`, `OCC`, `E(Eh)`, `E(eV)`.
+                        `E(Eh)` and `E(eV)` are captured from different columns in the file, but should represent the same quantity unless there is an error in ORCA.
+                        Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.""")
