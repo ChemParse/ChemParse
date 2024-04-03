@@ -1,5 +1,6 @@
-import warnings
 from typing import ItemsView, KeysView, ValuesView
+
+from .logging_config import logger
 
 
 class Data:
@@ -80,8 +81,8 @@ class Data:
                 try:
                     result[item] = self.data[item]
                 except KeyError:
-                    warnings.warn(
-                        f"Key '{item}' not found in data.", UserWarning)
+                    logger.warning(
+                        f"Key '{item}' not found in data.")
                     result[item] = None
             return result
 

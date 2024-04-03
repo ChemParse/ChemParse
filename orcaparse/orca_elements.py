@@ -1,5 +1,4 @@
 import re
-import warnings
 from datetime import timedelta
 
 import numpy as np
@@ -7,6 +6,7 @@ import pandas as pd
 
 from .data import Data
 from .elements import AvailableBlocksGeneral, Block, Element, ExtractionError
+from .logging_config import logger
 from .units_and_constants import ureg
 
 
@@ -76,13 +76,13 @@ class BlockOrcaWithStandardHeader(Block):
             readable_name = ' '.join(readable_lines).strip()
 
             if len(readable_name) < 2:
-                warnings.warn(
+                logger.warning(
                     f'No readable name found in the header: {header_raw}')
                 readable_name = Element.process_invalid_name(self.raw_data)
 
             return readable_name, header_raw, body_raw
         else:
-            warnings.warn(
+            logger.warning(
                 f'No header found in\n{self.raw_data}\n, and that is really weird as it was extracted based on the idea that there is a header in it')
             # If no match is found, put everything into header
             return Element.process_invalid_name(self.raw_data), None, self.raw_data

@@ -1,6 +1,5 @@
 import os
 import re
-import warnings
 from typing import Optional
 
 import pandas as pd
@@ -8,7 +7,9 @@ from typing_extensions import Iterable, Self
 
 from .data import Data
 from .elements import BlockUnknown, Element
-from .regex_settings import DEFAULT_GPAW_REGEX_SETTINGS, DEFAULT_ORCA_REGEX_SETTINGS, RegexSettings
+from .logging_config import logger
+from .regex_settings import (DEFAULT_GPAW_REGEX_SETTINGS,
+                             DEFAULT_ORCA_REGEX_SETTINGS, RegexSettings)
 
 
 class File:
@@ -192,7 +193,7 @@ class File:
         try:
             return orca_element.raw_data
         except Exception as e:
-            warnings.warn(
+            logger.warning(
                 f"An unexpected error occurred while extracting raw_data from {orca_element}: {e}, returning None instead of data.\n That is really weird")
             return None
 
@@ -211,7 +212,7 @@ class File:
         try:
             return orca_element.data()
         except Exception as e:
-            warnings.warn(
+            logger.warning(
                 f"An unexpected error occurred while extracting data from {orca_element}: {e}. Returning None.")
             return None
 

@@ -3,9 +3,9 @@ from __future__ import annotations
 import json
 import os
 import re
-import warnings
 from typing import Optional
 
+from .logging_config import logger
 from .regex_request import RegexRequest
 
 
@@ -451,8 +451,8 @@ class RegexSettings:
         for name, item in self.items.items():
             item.validate_configuration()
             if name not in self.order:
-                warnings.warn(
-                    f"Warning: Item '{name}' found in 'items' but not listed in 'order'.", RuntimeWarning)
+                logger.warning(
+                    f"Warning: Item '{name}' found in 'items' but not listed in 'order'.")
 
     def to_dict(self) -> dict[str, dict | list[str]]:
         """
