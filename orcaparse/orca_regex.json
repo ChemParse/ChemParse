@@ -113,7 +113,8 @@
     "BlueprintBlockWithSingeLineHeader": {
       "order": [
         "BlockOrcaRotationalSpectrum",
-        "BlockOrcaOrbitalEnergies"
+        "BlockOrcaOrbitalEnergies",
+        "BlockOrcaTotalScfEnergy"
       ],
       "pattern_structure": {
         "beginning": "^((?:^[ \\t]*[\\-\\*\\#\\=]{5,}.*\\n)(?:[ \\t]*",
@@ -124,7 +125,8 @@
       },
       "pattern_texts": {
         "BlockOrcaRotationalSpectrum": "Rotational spectrum",
-        "BlockOrcaOrbitalEnergies": "ORBITAL ENERGIES"
+        "BlockOrcaOrbitalEnergies": "ORBITAL ENERGIES",
+        "BlockOrcaTotalScfEnergy": "TOTAL SCF ENERGY"
       },
       "comment": "Blueprint: Block starts with a line of special characters, followed by the 1 line header and then one more line of special characters. Then text until the special line or the next block"
     },

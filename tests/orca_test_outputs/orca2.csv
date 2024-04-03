@@ -540,7 +540,7 @@ Block,BlockOrcaScfConverged,"(28564, 28839)","(537, 541)",SCF convergence messag
                *           SCF CONVERGED AFTER  20 CYCLES          *
                *****************************************************
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(28842, 29856)","(545, 572)",TOTAL SCF ENERGY,"----------------
+Block,BlockOrcaTotalScfEnergy,"(28842, 29856)","(543, 570)",TOTAL SCF ENERGY,"----------------
 TOTAL SCF ENERGY
 ----------------
 
@@ -568,7 +568,7 @@ E(XC)              :      -53.568099199649 Eh
 DFET-embed. en.    :        0.000000000000 Eh       
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(29857, 30415)","(573, 586)",SCF CONVERGENCE,"---------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(29857, 30415)","(571, 584)",SCF CONVERGENCE,"---------------
 SCF CONVERGENCE
 ---------------
 

@@ -297,7 +297,7 @@ class BlockOrcaTimingsForIndividualModules(Block):
 
         return 'Timings for individual modules', header_raw, body_raw
 
-    def data(self):
+    def data(self) -> Data:
         # Initialize a dictionary to store the results
         timings_dict = {}
 
@@ -323,9 +323,40 @@ class BlockOrcaTimingsForIndividualModules(Block):
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
-    data_available: bool = True
+    """
+    Block to parse and represent orbital energies from ORCA output.
 
-    def data(self) -> dict[str, pd.DataFrame]:
+    The block captures and stores orbital energies and occupation numbers from ORCA output files.
+
+    **Example of ORCA Output for Orbital Energies:**
+
+    .. code-block:: none
+
+        ----------------
+        ORBITAL ENERGIES
+        ----------------
+        NO   OCC          E(Eh)            E(eV)
+        0   2.0000     -14.038014      -381.9938
+        1   2.0000     -13.986101      -380.5812
+        2   2.0000      -0.200360        -5.4521
+        3   0.0000      -0.065149        -1.7728
+        4   0.0000      -0.060749        -1.6531
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def data(self) -> Data:
+        """
+        Extracts orbital data
+
+        :return: :class:`orcaparse.data.Data` object that contains:
+
+            - :class:`pandas.DataFrame` `Orbitals`
+                that includes the columns `NO`, `OCC`, `E(Eh)`, and `E(eV)`.
+                The `E(Eh)` and `E(eV)` columns represent the same energy values in different units (Hartree and electronvolts, respectively).
+                These values are extracted from the output file and should match unless there's an error in the ORCA output.
+        :rtype: Data
+        """
         # Define regex pattern for extracting orbital data lines
         pattern_orbital_data = r"\s*(\d+)\s+(\d+\.\d{4})\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s*"
 
@@ -390,3 +421,118 @@ class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
             return Data(data={'Orbitals': spin_df}, comment="""Pandas DataFrame `Orbitals` with columns `NO`, `OCC`, `E(Eh)`, `E(eV)`.
                         `E(Eh)` and `E(eV)` are captured from different columns in the file, but should represent the same quantity unless there is an error in ORCA.
                         Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.""")
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
+    """
+    Block to parse and represent orbital energies from ORCA output.
+
+    The block captures and stores orbital energies and occupation numbers from ORCA output files.
+
+    **Example of ORCA Output for Orbital Energies:**
+
+    .. code-block:: none
+
+        ----------------
+        TOTAL SCF ENERGY
+        ----------------
+        Total Energy       :         -379.43011624 Eh          -10324.81837 eV
+
+        Components:
+        Nuclear Repulsion  :          376.82729155 Eh           10253.99191 eV
+        Electronic Energy  :         -756.25740779 Eh          -20578.81027 eV
+        One Electron Energy:        -1258.15590029 Eh          -34236.16258 eV
+        Two Electron Energy:          501.89849250 Eh           13657.35231 eV
+
+        Virial components:
+        Potential Energy   :         -757.03875139 Eh          -20600.07171 eV
+        Kinetic Energy     :          377.60863515 Eh           10275.25335 eV
+        Virial Ratio       :            2.00482373
+
+
+        DFT components:
+        N(Alpha)           :       31.000002566977 electrons
+        N(Beta)            :       31.000002566977 electrons
+        N(Total)           :       62.000005133953 electrons
+        E(X)               :      -51.506470961700 Eh       
+        E(C)               :       -2.061628237949 Eh       
+        E(XC)              :      -53.568099199649 Eh       
+        DFET-embed. en.    :        0.000000000000 Eh      
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def data(self) -> Data:
+        """
+
+        :return: :class:`orcaparse.data.Data` object that contains:
+            - Dictionary with different sections of the block as keys and their values as sub-dictionaries.
+            The values are :class:`pint.Quantity`.If there are more then one value in a line, they are stored in a sub-dictionary with the unit as key.
+            It is expected for the values to represent the same quantity, if they do not, there is an error in ORCA.
+
+            Output blocks example from ORCA 6:
+
+            .. code-block:: none
+
+                {
+                'Total Energy': {'Value in Eh': <Quantity(-379.430116, 'hartree')>, 'Value in eV': <Quantity(-10324.8184, 'electron_volt')>},
+                'Components': {'Nuclear Repulsion': {'Value in Eh': <Quantity(376.827292, 'hartree')>, 'Value in eV': <Quantity(10253.9919, 'electron_volt')>}, 'Electronic Energy': {'Value in Eh': <Quantity(-756.257408, 'hartree')>, 'Value in eV': <Quantity(-20578.8103, 'electron_volt')>}, 'One Electron Energy': {'Value in Eh': <Quantity(-1258.1559, 'hartree')>, 'Value in eV': <Quantity(-34236.1626, 'electron_volt')>}, 'Two Electron Energy': {'Value in Eh': <Quantity(501.898492, 'hartree')>, 'Value in eV': <Quantity(13657.3523, 'electron_volt')>}},
+                'Virial components': {'Potential Energy': {'Value in Eh': <Quantity(-757.038751, 'hartree')>, 'Value in eV': <Quantity(-20600.0717, 'electron_volt')>}, 'Kinetic Energy': {'Value in Eh': <Quantity(377.608635, 'hartree')>, 'Value in eV': <Quantity(10275.2534, 'electron_volt')>}, 'Virial Ratio': 2.00482373},
+                'DFT components': {'N(Alpha)': <Quantity(31.0000026, 'electron')>, 'N(Beta)': <Quantity(31.0000026, 'electron')>, 'N(Total)': <Quantity(62.0000051, 'electron')>, 'E(X)': <Quantity(-51.506471, 'hartree')>, 'E(C)': <Quantity(-2.06162824, 'hartree')>, 'E(XC)': <Quantity(-53.5680992, 'hartree')>, 'DFET-embed. en.': <Quantity(0.0, 'hartree')>}
+                }
+
+        :rtype: Data
+        """
+        data_dict = {}
+        current_section = None
+
+        for line in self.raw_data.split("\n"):
+            line = line.strip()
+            if ":" in line:
+                # Find all number positions and their corresponding values
+                numbers = [
+                    (m.start(0), m.group(0))
+                    for m in re.finditer(r"-?\d+\.?\d*|\d*\.?\d+", line)
+                ]
+
+                if len(numbers) == 0:  # No numbers, so it's a new section
+                    current_section = line.split(":")[0]
+                    data_dict[current_section] = {}
+                else:
+                    key, values = line.split(":", 1)
+                    key = key.strip()  # Remove leading/trailing whitespaces
+                    if len(numbers) == 1:  # Single number, treat it directly
+                        value = ureg.parse_expression(values.strip())
+                        if current_section is not None:
+                            data_dict[current_section][key] = value
+                        else:
+                            data_dict[key] = value
+                    else:  # More than one number, split and process each
+                        value_dict = {}
+                        split = values.split()
+                        assert len(
+                            split) % 2 == 0, f"Odd number of values in {values}"
+                        for i in range(0, len(split), 2):
+                            value = ureg.parse_expression(
+                                split[i]+' '+split[i+1])
+                            unit = split[i+1]
+                            value_dict['Value in '+unit] = value
+
+                        if current_section is not None:
+                            data_dict[current_section][key] = value_dict
+                        else:
+                            data_dict[key] = value_dict
+
+        return Data(data=data_dict, comment="""Dictionary with different sections of the block as keys and their values as sub-dictionaries.
+                    The values are pint objects.If there are more then one value in a line, they are stored in a sub-dictionary with the unit as key.
+                    It is expected for the values to represent the same quantity, if they do not, there is an error in ORCA.
+                    
+                    Output blocks example from for ORCA 6:
+
+                    Total Energy: {'Value in Eh': <Quantity(-379.430116, 'hartree')>, 'Value in eV': <Quantity(-10324.8184, 'electron_volt')>}
+                    Components: {'Nuclear Repulsion': {'Value in Eh': <Quantity(376.827292, 'hartree')>, 'Value in eV': <Quantity(10253.9919, 'electron_volt')>}, 'Electronic Energy': {'Value in Eh': <Quantity(-756.257408, 'hartree')>, 'Value in eV': <Quantity(-20578.8103, 'electron_volt')>}, 'One Electron Energy': {'Value in Eh': <Quantity(-1258.1559, 'hartree')>, 'Value in eV': <Quantity(-34236.1626, 'electron_volt')>}, 'Two Electron Energy': {'Value in Eh': <Quantity(501.898492, 'hartree')>, 'Value in eV': <Quantity(13657.3523, 'electron_volt')>}}
+                    Virial components: {'Potential Energy': {'Value in Eh': <Quantity(-757.038751, 'hartree')>, 'Value in eV': <Quantity(-20600.0717, 'electron_volt')>}, 'Kinetic Energy': {'Value in Eh': <Quantity(377.608635, 'hartree')>, 'Value in eV': <Quantity(10275.2534, 'electron_volt')>}, 'Virial Ratio': 2.00482373}
+                    DFT components: {'N(Alpha)': <Quantity(31.0000026, 'electron')>, 'N(Beta)': <Quantity(31.0000026, 'electron')>, 'N(Total)': <Quantity(62.0000051, 'electron')>, 'E(X)': <Quantity(-51.506471, 'hartree')>, 'E(C)': <Quantity(-2.06162824, 'hartree')>, 'E(XC)': <Quantity(-53.5680992, 'hartree')>, 'DFET-embed. en.': <Quantity(0.0, 'hartree')>}
+                    
+                    """)

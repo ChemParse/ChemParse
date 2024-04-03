@@ -672,7 +672,7 @@ Block,BlockOrcaScfConverged,"(35102, 35377)","(666, 670)",SCF convergence messag
                *           SCF CONVERGED AFTER  33 CYCLES          *
                *****************************************************
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(35441, 36433)","(675, 700)",TOTAL SCF ENERGY,"----------------
+Block,BlockOrcaTotalScfEnergy,"(35441, 36433)","(670, 695)",TOTAL SCF ENERGY,"----------------
 TOTAL SCF ENERGY
 ----------------
 
@@ -698,7 +698,7 @@ E(C)               :       -2.531094716532 Eh
 E(XC)              :      -64.040753659367 Eh       
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(36434, 36702)","(701, 709)",SCF CONVERGENCE,"---------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(36434, 36702)","(696, 704)",SCF CONVERGENCE,"---------------
 SCF CONVERGENCE
 ---------------
 
@@ -707,7 +707,7 @@ SCF CONVERGENCE
   Last RMS-Density change    ...    9.8560e-04  Tolerance :   1.0000e-06
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(36703, 37395)","(710, 727)",UHF SPIN CONTAMINATION,"----------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(36703, 37395)","(705, 722)",UHF SPIN CONTAMINATION,"----------------------
 UHF SPIN CONTAMINATION
 ----------------------
 
