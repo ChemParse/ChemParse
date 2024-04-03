@@ -20,24 +20,36 @@ class AvailableBlocksOrca(AvailableBlocksGeneral):
 @AvailableBlocksOrca.register_block
 class BlockOrcaWithStandardHeader(Block):
     """
-    A specialized type of Block that expects a standard header format.
+    Handles blocks with a standard header format by extending the `Block` class.
 
-    This class extends `Block` to handle cases where blocks of data include a standardized header section, marked by specific delimiter patterns. It provides a customized implementation of the `extract_name_header_and_body` method to parse such headers and separate the block into readable name, header, and body components.
+    This class is designed to process data blocks that come with a standardized header marked by lines of repeating special characters (e.g., '-', '*', '#'). It overrides the `extract_name_header_and_body` method to parse these headers, facilitating the separation of the block into name, header, and body components for easier readability and manipulation.
 
-    The standard header format is expected to be delimited by lines of repeating special characters (e.g., '-', '*', '#') and may contain multiple lines of text that are considered part of the header.
+    Parameters
+    ----------
+    None
+
+    Methods
+    -------
+    extract_name_header_and_body()
+        Parses the block's content to extract the name, header (if present), and body, adhering to a standard header format.
+
+    Raises
+    ------
+    Warning
+        If the block's content does not contain a recognizable header, indicating that the format may not conform to expectations.
     """
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         """
-        Extract the block's name, header, and body based on a standard header format.
+        Identifies and separates the name, header, and body of the block based on a standard header format.
 
-        This method uses regular expressions to identify and separate the header section from the body. It then processes the header to extract a readable name and the header content itself. The remaining text is considered the body of the block.
+        Utilizes regular expressions to discern the header portion from the body, processing the header to extract a distinct name and the header content. The text following the header is treated as the body of the block.
 
-        Returns:
-            tuple[str, str | None, str]: A tuple containing the block's name, header (or None if not applicable), and body.
+        Returns
+        -------
+        tuple[str, str | None, str]
+            The name of the block, the header content (or None if a header is not present), and the body of the block.
 
-        Raises:
-            Warning: If no recognizable header is found, indicating an unexpected format.
         """
         # Define regex pattern to split header and body
         pattern = r"^(([ \t]*[-*#]{7,}[ \t]*\n)(.*?)(\n[ \t]*[-*#]{7,}[ \t]*\n|$))"
@@ -110,6 +122,39 @@ class BlockOrcaUnrecognizedMessage(Block):
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaIcon(Block):
+    """
+    The block captures and stores All rights reserved message from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+                                            #,                                       
+                                            ###                                      
+                                            ####                                     
+                                            #####                                    
+                                            ######                                   
+                                           ########,                                 
+                                     ,,################,,,,,                         
+                               ,,#################################,,                 
+                          ,,##########################################,,             
+                       ,#########################################, ''#####,          
+                    ,#############################################,,   '####,        
+                  ,##################################################,,,,####,       
+                ,###########''''           ''''###############################       
+              ,#####''   ,,,,##########,,,,          '''####'''          '####       
+            ,##' ,,,,###########################,,,                        '##       
+           ' ,,###''''                  '''############,,,                           
+         ,,##''                                '''############,,,,        ,,,,,,###''
+      ,#''                                            '''#######################'''  
+     '                                                          ''''####''''         
+             ,#######,   #######,   ,#######,      ##                                
+            ,#'     '#,  ##    ##  ,#'     '#,    #''#        ######   ,####,        
+            ##       ##  ##   ,#'  ##            #'  '#       #        #'  '#        
+            ##       ##  #######   ##           ,######,      #####,   #    #        
+            '#,     ,#'  ##    ##  '#,     ,#' ,#      #,         ##   #,  ,#        
+             '#######'   ##     ##  '#######'  #'      '#     #####' # '####'        
+    """
     data_available: bool = True
 
     def readable_name(self) -> str:
@@ -130,21 +175,55 @@ class BlockOrcaIcon(Block):
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaAllRightsReserved(Block):
+    """
+    The block captures and stores All rights reserved message from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        #######################################################
+        #                        -***-                        #
+        #          Department of theory and spectroscopy      #
+        #    Directorship and core code : Frank Neese         #
+        #        Max Planck Institute fuer Kohlenforschung    #
+        #                Kaiser Wilhelm Platz 1               #
+        #                 D-45470 Muelheim/Ruhr               #
+        #                      Germany                        #
+        #                                                     #
+        #                  All rights reserved                #
+        #                        -***-                        #
+        #######################################################
+    """
+
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return 'All Rights Reserved', None, self.raw_data
 
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaFinalSinglePointEnergy(Block):
-    data_available: bool = True
+    """
+    The block captures and stores Final single point energy from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        -------------------------   --------------------
+        FINAL SINGLE POINT ENERGY      -379.259324337759
+        -------------------------   --------------------
+    """
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return 'FINAL SINGLE POINT ENERGY', None, self.raw_data
 
     def data(self) -> Data:
-        '''
-        returns FINAL SINGLE POINT ENERGY in Eh
-        '''
+        """
+        :return: :class:`orcaparse.data.Data` object that contains:
+
+            - :class:`pint.Quantity` `Energy`
+        :rtype: Data
+        """
         pattern = r"FINAL SINGLE POINT ENERGY\s+(-?\d+\.\d+)"
 
         # Search for the pattern in the text
@@ -170,12 +249,32 @@ class BlockOrcaFinalSinglePointEnergy(Block):
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaScfConverged(Block):
+    """
+    The block captures and stores SCF convergence message from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        *****************************************************
+        *                     SUCCESS                       *
+        *           SCF CONVERGED AFTER  20 CYCLES          *
+        *****************************************************
+    """
     data_available: bool = True
+    """ Formatted data is available for this block. """
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return 'SCF convergence message', None, self.raw_data
 
     def data(self) -> Data:
+        """
+        :return: :class:`orcaparse.data.Data` object that contains:
+
+            - :class:`bool` for `Success` of the extraction
+            - :class:`int` for amount of `Cycles`
+        :rtype: Data
+        """
         # Check for the presence of "SUCCESS"
         success_match = re.search(r"SUCCESS", self.raw_data)
 
@@ -201,9 +300,36 @@ class BlockOrcaScfConverged(Block):
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
-    data_available: bool = True
+    """
+    The block captures and stores Dipole moment from ORCA output files.
 
-    def data(self) -> dict:
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        -------------
+        DIPOLE MOMENT
+        -------------
+                                        X             Y             Z
+        Electronic contribution:      0.00000       0.00000       4.52836
+        Nuclear contribution   :      0.00000       0.00000      -8.26530
+                                -----------------------------------------
+        Total Dipole Moment    :      0.00000       0.00000      -3.73694
+                                -----------------------------------------
+        Magnitude (a.u.)       :      3.73694
+        Magnitude (Debye)      :      9.49854
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def data(self) -> Data:
+        """
+        :return: :class:`orcaparse.data.Data` object that contains:
+
+            - :class:`numpy.ndarray`'s of contributions
+            - :class:`pint.Quantity` `Magnitude (Debye)` -- total dipole moment. The magnitude in Debye can be extracted from :class:`pint.Quantity` with .magnitude property.
+        :rtype: Data
+        """
         # Initialize the result dictionary
         result = {}
 
@@ -235,26 +361,57 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaTerminatedNormally(Block):
+    """
+    The block captures and stores Termination status from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        ****ORCA TERMINATED NORMALLY****
+    """
     data_available: bool = True
+    """ Formatted data is available for this block. """
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return 'ORCA TERMINATED NORMALLY', None, self.raw_data
 
-    def data(self) -> bool:
-        '''
-        returns True meaning that the block exists
-        '''
+    def data(self) -> Data:
+        """
+        :return: :class:`orcaparse.data.Data` object that contains:
+
+            - :class:`bool` `Termination status`
+                is always `True`, otherwise you wound`t find this block.
+        :rtype: Data
+        """
         return Data(data={'Termination status': True}, comment='`Termination status` is always `True`, otherwise you wound`t find this block.')
 
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaTotalRunTime(Block):
+    """
+    The block captures and stores Total run time from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        TOTAL RUN TIME: 0 days 0 hours 1 minutes 20 seconds 720 msec
+    """
     data_available: bool = True
+    """ Formatted data is available for this block. """
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return 'TOTAL RUN TIME', None, self.raw_data
 
-    def data(self):
+    def data(self) -> Data:
+        """
+        :return: :class:`orcaparse.data.Data` object that contains:
+
+            - :class:`datetime.timedelta` `Run Time`
+                representing the total run time in days, hours, minutes, seconds, and milliseconds.
+        :rtype: Data
+        """
         # Define the regex pattern to match the total run time
         pattern = r"TOTAL RUN TIME:\s*(\d+)\s*days\s*(\d+)\s*hours\s*(\d+)\s*minutes\s*(\d+)\s*seconds\s*(\d+)\s*msec"
 
@@ -324,11 +481,9 @@ class BlockOrcaTimingsForIndividualModules(Block):
 @AvailableBlocksOrca.register_block
 class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
     """
-    Block to parse and represent orbital energies from ORCA output.
-
     The block captures and stores orbital energies and occupation numbers from ORCA output files.
 
-    **Example of ORCA Output for Orbital Energies:**
+    **Example of ORCA Output:**
 
     .. code-block:: none
 
@@ -347,8 +502,6 @@ class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
 
     def data(self) -> Data:
         """
-        Extracts orbital data
-
         :return: :class:`orcaparse.data.Data` object that contains:
 
             - :class:`pandas.DataFrame` `Orbitals`
@@ -426,11 +579,9 @@ class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
 @AvailableBlocksOrca.register_block
 class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
     """
-    Block to parse and represent orbital energies from ORCA output.
+    The block captures and stores Total SCF Energy from ORCA output files.
 
-    The block captures and stores orbital energies and occupation numbers from ORCA output files.
-
-    **Example of ORCA Output for Orbital Energies:**
+    **Example of ORCA Output:**
 
     .. code-block:: none
 
