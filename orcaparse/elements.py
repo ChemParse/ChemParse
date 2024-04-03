@@ -82,7 +82,8 @@ class Element:
         :raises Warning: Indicates that no specific procedure for analyzing the data was implemented.
         """
         logger.warning(
-            f"No procedure for analyzing the data found in type `{type(self).__name__}`, "
+            f"No procedure for analyzing the data "
+            f"found in type `{type(self).__name__}`, "
             f"returning the raw data:\n{self.raw_data}"
         )
         return Data(data={'raw data': self.raw_data},
