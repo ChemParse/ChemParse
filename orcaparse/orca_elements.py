@@ -327,7 +327,7 @@ class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
 
     def data(self) -> dict[str, pd.DataFrame]:
         # Define regex pattern for extracting orbital data lines
-        pattern_orbital_data = r"\s*(\d+)\s+([0-1]\.\d{4})\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s*"
+        pattern_orbital_data = r"\s*(\d+)\s+(\d+\.\d{4})\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s*"
 
         # Split the raw data into lines
         lines = self.raw_data.split('\n')
