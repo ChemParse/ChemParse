@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 from .elements import Block, Element, Spacer
 from .gpaw_elements import AvailableBlocksGpaw
+from .logging_config import logger
 from .orca_elements import AvailableBlocksOrca
 
 
@@ -239,7 +240,7 @@ class RegexRequest:
                                 element_instance = AB.blocks[self.p_subtype](
                                     extracted_text, char_position=char_pos, line_position=line_pos)
                             else:
-                                warnings.warn(
+                                logger.warning(
                                     (f"Subtype `{self.p_subtype}`"
                                         f" not recognized. Falling back to Block.")
                                 )

@@ -7,6 +7,7 @@ import pandas as pd
 from typing_extensions import Self
 
 from .data import Data
+from .logging_config import logger
 from .units_and_constants import ureg
 
 
@@ -80,9 +81,9 @@ class Element:
         :rtype: Data
         :raises Warning: Indicates that no specific procedure for analyzing the data was implemented.
         """
-        warnings.warn(
-            (f"No procedure for analyzing the data found in type `{type(self)}`,"
-             f"returning the raw data:\n{self.raw_data}")
+        logger.warning(
+            f"No procedure for analyzing the data found in type `{type(self).__name__}`, "
+            f"returning the raw data:\n{self.raw_data}"
         )
         return Data(data={'raw data': self.raw_data},
                     comment=("No procedure for analyzing the data found, `raw data` collected.\n"
@@ -377,8 +378,9 @@ class BlockUnknown(Block):
         :return: A `Data` instance containing the block's raw data and a comment about its unstructured nature.
         :rtype: Data
         """
-        warnings.warn(
-            "The block looks unstructured. Please contribute to the project if you have knowledge on how to extract data from it.")
+        logger.warning("The block looks unstructured. "
+                       "Please contribute to the project if you have knowledge"
+                       " on how to extract data from it.")
         return Data(data={'raw data': self.raw_data},
                     comment=("No procedure for analyzing the data found, furthermore, the block looks not structured `raw data` collected.\n"
                              "Please contribute to the project if you have knowledge on how to extract data from it."))
