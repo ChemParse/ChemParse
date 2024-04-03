@@ -687,3 +687,99 @@ class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
                     DFT components: {'N(Alpha)': <Quantity(31.0000026, 'electron')>, 'N(Beta)': <Quantity(31.0000026, 'electron')>, 'N(Total)': <Quantity(62.0000051, 'electron')>, 'E(X)': <Quantity(-51.506471, 'hartree')>, 'E(C)': <Quantity(-2.06162824, 'hartree')>, 'E(XC)': <Quantity(-53.5680992, 'hartree')>, 'DFET-embed. en.': <Quantity(0.0, 'hartree')>}
                     
                     """)
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
+    """
+    The block captures and stores TD-DFT excited states data for singlets from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        --------------------------------
+        TD-DFT EXCITED STATES (SINGLETS)
+        --------------------------------
+        the weight of the individual excitations are printed if larger than 0.01
+
+        STATE  1:  E=   0.154808 au      4.213 eV    33976.3 cm**-1  =   0.000000
+            29a ->  31a  :     0.078253 
+            30a ->  32a  :     0.907469 
+
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def data(self) -> Data:
+        """
+
+        :return: :class:`orcaparse.data.Data` object that contains:
+            - :class:`dict` with states (:class:`int`) as keys, and their respective details as sub-dictionaries. The `Energy (eV)` values are stored as :class:`pint.Quantity`. The `Transitions` are stored in a :class:`list`, with each transition represented as a :class:`dict` containing the `From Orbital` (:class:`str`: number+a|b), `To Orbital` (:class:`str`: number+a|b), and `Coefficient` (:class:`float`).
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {
+                1: {
+                    'Energy (eV)': <Quantity(4.647, 'electron_volt')>,
+                    'Transitions': [
+                            {'From Orbital': '29a', 'To Orbital': '32a', 'Coefficient': 0.055845},
+                            {'From Orbital': '30a', 'To Orbital': '31a', 'Coefficient': 0.906577}
+                        ]
+                    },
+                # Additional states follow the same structure
+                }
+
+        :rtype: Data
+        """
+        states_data = {}
+
+        state_number = None
+        energy_ev = None
+        transitions = []
+
+        # Regular expression to match state lines and extract information
+        state_pattern = re.compile(r"STATE\s+(\d+):.*?(\d+\.\d+)\s+eV")
+
+        # Regular expression to match orbital transitions
+        transition_pattern = re.compile(
+            r"(\d+[ab])\s+->\s+(\d+[ab])\s+:\s+(\d+\.\d+)")
+
+        for line in self.raw_data.split("\n"):
+            # Check if the line is a state line
+            state_match = state_pattern.search(line)
+            if state_match:
+                if state_number is not None:
+                    # Append the previous state's data before starting a new state
+                    states_data[int(state_number)] = {
+                        'Energy (eV)': energy_ev,
+                        'Transitions': transitions
+                    }
+                    transitions = []  # Reset the transitions list for the next state
+
+                # Start capturing data for the new state
+                state_number = int(state_match.group(1))
+                energy_ev = float(state_match.group(2))*ureg.eV
+            else:
+                # If the line is not a state line, check for orbital transitions
+                transition_match = transition_pattern.search(line)
+                if transition_match:
+                    transitions.append({
+                        'From Orbital': transition_match.group(1),
+                        'To Orbital': transition_match.group(2),
+                        'Coefficient': float(transition_match.group(3))
+                    })
+
+        # Append the last state's data
+        if state_number is not None:
+            states_data[int(state_number)] = {
+                'Energy (eV)': energy_ev,
+                'Transitions': transitions
+            }
+
+        return Data(data=states_data, comment="""Collects a dict with keys - integers - STATE numbers, and values - dict with elements: `Energy (eV)` -- pint.
+                    Quantity and, `Transitions`: dict with elements: `From Orbital`: string - number+a|b, `To Orbital`: string - number+a|b, `Coefficient`: float. 
+                    Parsed data example: {1:{'Energy (eV)': <Quantity(4.647, 'electron_volt')>, 'Transitions': [{'From Orbital': '29a', 'To Orbital': '32a', 'Coefficient': 0.055845}, {'From Orbital': '30a', 'To Orbital': '31a', 'Coefficient': 0.906577}]}}
+                    """)
