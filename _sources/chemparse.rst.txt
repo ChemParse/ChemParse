@@ -1,77 +1,77 @@
-orcaparse package
+chemparse package
 =================
 
 Submodules
 ----------
 
-orcaparse.data module
+chemparse.data module
 ---------------------
 
-.. automodule:: orcaparse.data
+.. automodule:: chemparse.data
    :members:
    :undoc-members:
    :show-inheritance:
 
-orcaparse.elements module
+chemparse.elements module
 -------------------------
 
-.. automodule:: orcaparse.elements
+.. automodule:: chemparse.elements
    :members:
    :undoc-members:
    :show-inheritance:
 
-orcaparse.file module
+chemparse.file module
 ---------------------
 
-.. automodule:: orcaparse.file
+.. automodule:: chemparse.file
    :members:
    :undoc-members:
    :show-inheritance:
 
-orcaparse.gpaw\_elements module
+chemparse.gpaw\_elements module
 -------------------------------
 
-.. automodule:: orcaparse.gpaw_elements
+.. automodule:: chemparse.gpaw_elements
    :members:
    :undoc-members:
    :show-inheritance:
 
-orcaparse.orca\_elements module
+chemparse.orca\_elements module
 -------------------------------
 
-.. automodule:: orcaparse.orca_elements
+.. automodule:: chemparse.orca_elements
    :members:
    :undoc-members:
    :show-inheritance:
 
-orcaparse.regex\_request module
+chemparse.regex\_request module
 -------------------------------
 
-.. automodule:: orcaparse.regex_request
+.. automodule:: chemparse.regex_request
    :members:
    :undoc-members:
    :show-inheritance:
 
-orcaparse.regex\_settings module
+chemparse.regex\_settings module
 --------------------------------
 
-.. automodule:: orcaparse.regex_settings
+.. automodule:: chemparse.regex_settings
    :members:
    :undoc-members:
    :show-inheritance:
 
-orcaparse.scripts module
+chemparse.scripts module
 ------------------------
 
-.. automodule:: orcaparse.scripts
+.. automodule:: chemparse.scripts
    :members:
    :undoc-members:
    :show-inheritance:
 
-orcaparse.units\_and\_constants module
+chemparse.units\_and\_constants module
 --------------------------------------
 
-.. automodule:: orcaparse.units_and_constants
+.. automodule:: chemparse.units_and_constants
    :members:
    :undoc-members:
    :show-inheritance:

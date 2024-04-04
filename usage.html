@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Using OrcaParse with Python &mdash; OrcaParse 0.3.0 documentation</title>
+  <title>Using ChemParse with Python &mdash; ChemParse 0.4.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,13 +15,13 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=e259d695"></script>
+        <script src="_static/documentation_options.js?v=6c02275b"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Using OrcaParse from the Command Line" href="scripts.html" />
+    <link rel="next" title="Using ChemParse from the Command Line" href="scripts.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
@@ -34,7 +34,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            OrcaParse
+            ChemParse
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -46,13 +46,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Using OrcaParse with Python</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using ChemParse with Python</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#example-usage">Example Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="scripts.html">Using OrcaParse from the Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Using ChemParse from the Command Line</a></li>
 <li class="toctree-l1"><a class="reference internal" href="html.html">Interactive HTML Output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="orcaparse.html">orcaparse package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemparse.html">chemparse package</a></li>
 </ul>
 
         </div>
@@ -61,7 +61,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">OrcaParse</a>
+          <a href="index.html">ChemParse</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -69,7 +69,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Using OrcaParse with Python</li>
+      <li class="breadcrumb-item active">Using ChemParse with Python</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -79,18 +79,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="using-orcaparse-with-python">
-<h1>Using OrcaParse with Python<a class="headerlink" href="#using-orcaparse-with-python" title="Link to this heading"></a></h1>
-<p>OrcaParse can be seamlessly integrated into Python scripts, enabling the extraction and manipulation of data from ORCA output files using familiar tools like pandas.</p>
+  <section id="using-chemparse-with-python">
+<h1>Using ChemParse with Python<a class="headerlink" href="#using-chemparse-with-python" title="Link to this heading"></a></h1>
+<p>ChemParse can be seamlessly integrated into Python scripts, enabling the extraction and manipulation of data from ORCA output files using familiar tools like pandas.</p>
 <section id="example-usage">
 <h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">orcaparse</span> <span class="k">as</span> <span class="nn">op</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">chemparse</span> <span class="k">as</span> <span class="nn">chp</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
 
 
 <span class="c1"># The main class is File</span>
 
-<span class="n">orca_file</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;example.out&quot;</span><span class="p">)</span>
+<span class="n">orca_file</span> <span class="o">=</span> <span class="n">chp</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;example.out&quot;</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">orca_file</span><span class="p">)</span>
 
 
@@ -182,7 +182,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="scripts.html" class="btn btn-neutral float-right" title="Using OrcaParse from the Command Line" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="scripts.html" class="btn btn-neutral float-right" title="Using ChemParse from the Command Line" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
