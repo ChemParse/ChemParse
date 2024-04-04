@@ -75,11 +75,3 @@ orcaparse.units\_and\_constants module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: orcaparse
-   :members:
-   :undoc-members:
-   :show-inheritance:
