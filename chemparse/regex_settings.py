@@ -535,3 +535,17 @@ DEFAULT_GPAW_REGEX_SETTINGS = RegexSettings(
 The pre-loaded `RegexSettings` instance containing the default regex patterns for GPAW output parsing.
 :type: RegexSettings
 """
+
+DEFAULT_VASP_REGEX_FILE = os.path.join(
+    os.path.dirname(__file__), 'vasp_regex.json')
+"""
+Path to the default VASP regex settings JSON file, included with the package.
+:type: str
+"""
+
+DEFAULT_VASP_REGEX_SETTINGS = RegexSettings(
+    settings_file=DEFAULT_VASP_REGEX_FILE)
+"""
+The pre-loaded `RegexSettings` instance containing the default regex patterns for VASP output parsing.
+:type: RegexSettings
+"""

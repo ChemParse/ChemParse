@@ -9,6 +9,7 @@ from .elements import Block, Element, Spacer
 from .gpaw_elements import AvailableBlocksGpaw
 from .logging_config import logger
 from .orca_elements import AvailableBlocksOrca
+from .vasp_elements import AvailableBlocksVasp
 
 
 class RegexRequest:
@@ -29,7 +30,12 @@ class RegexRequest:
     :vartype comment: str
     """
 
-    def __init__(self, p_type: str, p_subtype: str, pattern: str, flags: list[str], comment: str = '') -> None:
+    def __init__(self,
+                 p_type: str,
+                 p_subtype: str,
+                 pattern: str,
+                 flags: list[str],
+                 comment: str = '') -> None:
         """
         Initializes a `RegexRequest` instance with a specified pattern, flags, and optional comment.
 
@@ -90,8 +96,10 @@ class RegexRequest:
             "UNICODE": re.UNICODE,
             "VERBOSE": re.VERBOSE
         }
-        flag_names = [flag_str for flag_str,
-                      flag_val in valid_flags.items() if self.flags & flag_val]
+        flag_names = [
+            flag_str for flag_str, flag_val in valid_flags.items()
+            if self.flags & flag_val
+        ]
         return flag_names
 
     def validate_configuration(self) -> None:
@@ -128,7 +136,11 @@ class RegexRequest:
         """
         return re.compile(self.pattern, self.flags)
 
-    def apply(self, marked_text: list[tuple[tuple[int, int], tuple[int, int], Element]] | str, mode: str = 'ORCA', show_progress: bool = False) -> tuple[str, dict[str, dict]]:
+    def apply(self,
+              marked_text: list[tuple[tuple[int, int], tuple[int, int],
+                                      Element]] | str,
+              mode: str = 'ORCA',
+              show_progress: bool = False) -> tuple[str, dict[str, dict]]:
         """
         Applies the regex pattern to marked text or a raw string to identify and extract elements based on the pattern.
 
@@ -149,12 +161,14 @@ class RegexRequest:
             AB = AvailableBlocksOrca
         elif mode == 'GPAW':
             AB = AvailableBlocksGpaw
+        elif mode == 'VASP':
+            AB = AvailableBlocksVasp
         else:
             raise ValueError(f"Mode '{mode}' is not recognized.")
 
         if isinstance(marked_text, str):
-            marked_text = [
-                ((0, len(marked_text)), (1, marked_text.count('\n') + 1), marked_text)]
+            marked_text = [((0, len(marked_text)),
+                            (1, marked_text.count('\n') + 1), marked_text)]
 
         compiled_pattern = self.compile()
         elements_dict = {}
@@ -162,7 +176,11 @@ class RegexRequest:
         total_chars = marked_text[-1][0][1]
 
         # Added prefix_text parameter
-        def with_progress_bar(show_progress: bool, refresh_interval: float = 2, prefix_text: str = f"Processing {self.p_subtype}:"):
+        def with_progress_bar(
+                show_progress: bool,
+                refresh_interval: float = 2,
+                prefix_text: str = f"Processing {self.p_subtype}:"):
+
             def decorator(func):
                 if not show_progress:
                     return func
@@ -182,7 +200,8 @@ class RegexRequest:
                             pbar.n = current_char_pos
                             if block_position:  # Update postfix text if provided
                                 pbar.set_postfix_str(
-                                    f'Current block position: {block_position}')
+                                    f'Current block position: {block_position}'
+                                )
                             pbar.refresh()
                             last_update_time = current_time
 
@@ -194,10 +213,16 @@ class RegexRequest:
                     return result
 
                 return wrapper
+
             return decorator
 
-        @with_progress_bar(show_progress=show_progress, refresh_interval=2, prefix_text=f"Processing {self.p_subtype}")
-        def process_marked_text(marked_text, elements_dict, progress_callback=None):
+        @with_progress_bar(show_progress=show_progress,
+                           refresh_interval=2,
+                           prefix_text=f"Processing {self.p_subtype}")
+        def process_marked_text(marked_text,
+                                elements_dict,
+                                progress_callback=None):
+
             def break_block(block, elements_dict, progress_callback=None):
                 char_pos, line_pos, text = block
 
@@ -223,12 +248,15 @@ class RegexRequest:
                         current_char_pos = char_end + 1
                         current_line_pos = line_end + 1 if lines_in_item > 0 else current_line_pos
 
-                        result.append(
-                            ((char_start, char_end), (line_start, line_end), item))
+                        result.append(((char_start, char_end),
+                                       (line_start, line_end), item))
 
                     return result
 
-                def convert_to_element(item, elements_dict, compiled_pattern, progress_callback=None):
+                def convert_to_element(item,
+                                       elements_dict,
+                                       compiled_pattern,
+                                       progress_callback=None):
                     if progress_callback:
                         progress_callback(item[0][1], block_position=item[0])
                     if compiled_pattern.fullmatch(item[2]):
@@ -238,20 +266,28 @@ class RegexRequest:
                             if self.p_subtype in AB.blocks:
                                 # Create an instance of the class with position parameter
                                 element_instance = AB.blocks[self.p_subtype](
-                                    extracted_text, char_position=char_pos, line_position=line_pos)
+                                    extracted_text,
+                                    char_position=char_pos,
+                                    line_position=line_pos)
                             else:
                                 logger.warning(
                                     (f"Subtype `{self.p_subtype}`"
-                                        f" not recognized. Falling back to Block.")
-                                )
+                                     f" not recognized. Falling back to Block."
+                                     ))
                                 element_instance = Block(
-                                    extracted_text, char_position=char_pos, line_position=line_pos)
+                                    extracted_text,
+                                    char_position=char_pos,
+                                    line_position=line_pos)
                         elif self.p_type == "Spacer":
-                            element_instance = Spacer(
-                                extracted_text, char_position=char_pos, line_position=line_pos)
+                            element_instance = Spacer(extracted_text,
+                                                      char_position=char_pos,
+                                                      line_position=line_pos)
 
                         elements_dict[hash(element_instance)] = {
-                            'Element': element_instance, 'CharPosition': char_pos, 'LinePosition': line_pos}
+                            'Element': element_instance,
+                            'CharPosition': char_pos,
+                            'LinePosition': line_pos
+                        }
 
                         return (char_pos, line_pos, element_instance)
 
@@ -284,8 +320,13 @@ class RegexRequest:
                 text_list = convert_to_tuples(
                     text_list, progress_callback=progress_callback)
 
-                text_list = [convert_to_element(
-                    item, elements_dict, compiled_pattern, progress_callback=progress_callback) for item in text_list]
+                text_list = [
+                    convert_to_element(item,
+                                       elements_dict,
+                                       compiled_pattern,
+                                       progress_callback=progress_callback)
+                    for item in text_list
+                ]
 
                 return text_list, elements_dict
 
@@ -294,7 +335,9 @@ class RegexRequest:
                 # Assuming the structure is [(tuple, tuple, str/Element)]
                 if isinstance(marked_text[i][2], str):
                     result, elements_dict = break_block(
-                        marked_text[i], elements_dict, progress_callback=progress_callback)
+                        marked_text[i],
+                        elements_dict,
+                        progress_callback=progress_callback)
                     if result:
                         # Remove the original item
                         del marked_text[i]

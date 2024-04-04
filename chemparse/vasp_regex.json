@@ -1,0 +1,22 @@
+{
+  "order": [
+    "TypeKnownBlocks",
+    "TypeDefaultBlocks",
+    "Spacer"
+  ],
+  "TypeKnownBlocks": {
+    "order": []
+  },
+  "TypeDefaultBlocks": {
+    "order": []
+  },
+  "Spacer": {
+    "p_type": "Spacer",
+    "p_subtype": "Spacer",
+    "pattern": "^(\\s*\\n)",
+    "flags": [
+      "MULTILINE"
+    ],
+    "comment": "Just some empty lines, may have tabs and spaces"
+  }
+}
