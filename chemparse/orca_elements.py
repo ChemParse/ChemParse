@@ -219,7 +219,7 @@ class BlockOrcaFinalSinglePointEnergy(Block):
 
     def data(self) -> Data:
         """
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`pint.Quantity` `Energy`
         :rtype: Data
@@ -269,7 +269,7 @@ class BlockOrcaScfConverged(Block):
 
     def data(self) -> Data:
         """
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`bool` for `Success` of the extraction
             - :class:`int` for amount of `Cycles`
@@ -324,7 +324,7 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
 
     def data(self) -> Data:
         """
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`pint.Quantity`'s with :class:`numpy.ndarray`'s of contributions
             - :class:`pint.Quantity` `Total Dipole Moment` with :class:`numpy.ndarray`'s of contributions in a.u.
@@ -394,7 +394,7 @@ class BlockOrcaTerminatedNormally(Block):
 
     def data(self) -> Data:
         """
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`bool` `Termination status`
                 is always `True`, otherwise you wound`t find this block.
@@ -422,7 +422,7 @@ class BlockOrcaTotalRunTime(Block):
 
     def data(self) -> Data:
         """
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`datetime.timedelta` `Run Time`
                 representing the total run time in days, hours, minutes, seconds, and milliseconds.
@@ -518,7 +518,7 @@ class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
 
     def data(self) -> Data:
         """
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`pandas.DataFrame` `Orbitals`
                 that includes the columns `NO`, `OCC`, `E(Eh)`, and `E(eV)`.
@@ -633,7 +633,7 @@ class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
     def data(self) -> Data:
         """
 
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`dict` `Total Energy` with
 
@@ -739,7 +739,7 @@ class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
     def data(self) -> Data:
         """
 
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
             - (:class:`int`) states as keys, and their respective details as sub-dictionaries. The `Energy (eV)` values are stored as :class:`pint.Quantity`. The `Transitions` are stored in a :class:`list`, with each transition represented as a :class:`dict` containing the `From Orbital` (:class:`str`: number+a|b), `To Orbital` (:class:`str`: number+a|b), and `Coefficient` (:class:`float`).
 
             Parsed data example:

@@ -5,9 +5,9 @@ from itertools import zip_longest
 import pandas as pd
 import pytest
 
-import orcaparse as op
+import chemparse as chp
 
-rs = op.DEFAULT_GPAW_REGEX_SETTINGS
+rs = chp.DEFAULT_GPAW_REGEX_SETTINGS
 known_gpaw_regexes = (rs.items["TypeKnownBlocks"].to_list() +
                       rs.items["TypeDefaultBlocks"].to_list())
 known_gpaw_regexes_subtypes = list(
@@ -101,7 +101,7 @@ def test_default_regex_known(regex, gpaw_output_file):
 def test_default_output_parsing(gpaw_output_file):
     expected_result = pd.read_csv(gpaw_output_file[:-4] + ".csv")
 
-    file = op.File(gpaw_output_file, mode='GPAW')
+    file = chp.File(gpaw_output_file, mode='GPAW')
     data = file.get_data(extract_only_raw=True)
     data = data.drop(columns=['Element'])
     data = data[data["Subtype"].isin(known_gpaw_regexes_subtypes)]
@@ -156,5 +156,5 @@ def test_default_output_parsing(gpaw_output_file):
 
 @pytest.mark.parametrize("gpaw_output_file", gpaw_output_files)
 def test_default_get_data(gpaw_output_file):
-    file = op.File(gpaw_output_file, mode='GPAW')
+    file = chp.File(gpaw_output_file, mode='GPAW')
     data = file.get_data()

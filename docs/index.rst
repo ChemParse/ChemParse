@@ -23,7 +23,7 @@ Contents
    usage
    scripts
    html
-   orcaparse
+   chemparse
 
 Indices and tables
 ==================

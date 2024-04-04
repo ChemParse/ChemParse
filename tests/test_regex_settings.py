@@ -1,6 +1,6 @@
 import pytest
 
-from orcaparse.regex_settings import (DEFAULT_ORCA_REGEX_FILE, RegexBlueprint,
+from chemparse.regex_settings import (DEFAULT_ORCA_REGEX_FILE, RegexBlueprint,
                                       RegexRequest, RegexSettings)
 
 

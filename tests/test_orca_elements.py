@@ -1,9 +1,9 @@
 import pandas as pd
 import pytest
 
-from orcaparse import Data
-from orcaparse.elements import ExtractionError
-from orcaparse.orca_elements import AvailableBlocksOrca
+from chemparse import Data
+from chemparse.elements import ExtractionError
+from chemparse.orca_elements import AvailableBlocksOrca
 
 # Load the test data from the CSV file
 test_data = pd.read_csv("tests/extraction_sample.csv")
