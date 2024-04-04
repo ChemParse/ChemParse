@@ -6,9 +6,19 @@
   ],
   "TypeKnownBlocks": {
     "order": [
+      "BlockGpawEnergyContributions",
       "BlockGpawIcon",
       "BlockGpawDipole"
     ],
+    "BlockGpawEnergyContributions": {
+      "p_type": "Block",
+      "p_subtype": "BlockGpawEnergyContributions",
+      "pattern": "^((?:[ \\t]*Energy contributions relative to reference atoms:[ \\t]*\\(reference[ \\t]*=[ \\t]*[+|-]?\\d+.\\d+\\)[ \\t]*\\n)(?:^[ \\t]*\\n)?(?:^(?!^[ \\t]*$).*\\n)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Searching for the first line of gpaw icon, assuming that the icon ends at the first empty line or block pattern."
+    },
     "BlockGpawIcon": {
       "p_type": "Block",
       "p_subtype": "BlockGpawIcon",

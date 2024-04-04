@@ -447,9 +447,9 @@ Local magnetic moments:
   13 H  ( 0.000000,  0.000000,  0.001690)
   14 H  ( 0.000000,  0.000000,  0.001690)
 "
-Block,BlockGpawUnrecognized,"(16384, 16461)","(458, 459)",Energy contributions relative ...,"Energy contributions relative to reference atoms: (reference = -10231.780790)
-"
-Block,BlockGpawUnrecognized,"(16463, 16705)","(462, 471)",Kinetic Potential External XC ...,"Kinetic:       +111.119958
+Block,BlockGpawEnergyContributions,"(16384, 16705)","(452, 463)",Energy contributions relative ...,"Energy contributions relative to reference atoms: (reference = -10231.780790)
+
+Kinetic:       +111.119958
 Potential:     -114.654058
 External:        +0.000000
 XC:             -93.096053
@@ -459,7 +459,7 @@ Local:           +0.390037
 Free energy:    -96.240117
 Extrapolated:   -96.240117
 "
-Block,BlockGpawUnrecognized,"(16707, 30454)","(474, 729)",Spin contamination electrons U...,"Spin contamination: 0.651158 electrons
+Block,BlockGpawUnrecognized,"(16707, 30454)","(466, 721)",Spin contamination electrons U...,"Spin contamination: 0.651158 electrons
                    Up                     Down
  Band  Eigenvalues  Occupancy  Eigenvalues  Occupancy
     0    -24.42908    1.00000    -24.57211    1.00000
@@ -715,11 +715,11 @@ Block,BlockGpawUnrecognized,"(16707, 30454)","(474, 729)",Spin contamination ele
   250     87.94628    0.00000     87.90765    0.00000
   251     95.86929    0.00000     95.86901    0.00000
 "
-Block,BlockGpawUnrecognized,"(30456, 30472)","(732, 733)",Fermi level inf ,"Fermi level: inf
+Block,BlockGpawUnrecognized,"(30456, 30472)","(724, 725)",Fermi level inf ,"Fermi level: inf
 "
-Block,BlockGpawUnrecognized,"(30474, 30509)","(736, 737)",Writing to abnesmgpw modeall ...,"Writing to abn_esm.gpw (mode='all')
+Block,BlockGpawUnrecognized,"(30474, 30509)","(728, 729)",Writing to abnesmgpw modeall ...,"Writing to abn_esm.gpw (mode='all')
 "
-Block,BlockGpawUnrecognized,"(30511, 37211)","(740, 846)",Timing incl excl Basic WFS set...,"Timing:                               incl.     excl.
+Block,BlockGpawUnrecognized,"(30511, 37211)","(732, 838)",Timing incl excl Basic WFS set...,"Timing:                               incl.     excl.
 ------------------------------------------------------------
 Basic WFS set positions:              0.001     0.000   0.0% |
  Redistribute:                        0.000     0.000   0.0% |
@@ -826,5 +826,5 @@ Other:                                8.675     8.675  24.1% |---------|
 ------------------------------------------------------------
 Total:                                         36.061 100.0%
 "
-Block,BlockGpawUnrecognized,"(37213, 37243)","(849, 850)",Date Tue May ,"Date: Tue May 31 15:53:42 2022
+Block,BlockGpawUnrecognized,"(37213, 37243)","(841, 842)",Date Tue May ,"Date: Tue May 31 15:53:42 2022
 "
