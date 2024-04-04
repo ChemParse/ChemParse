@@ -106,25 +106,26 @@ class BlockGpawEnergyContributions(Block):
 
         :return: :class:`orcaparse.data.Data` object that contains:
 
-            - :class:`pint.Quantity` `Reference` in Eh
-            - :class:`pint.Quantity` `Free energy` in Eh
-            - :class:`pint.Quantity` `Extrapolated` in Eh
-            - :class:`dict` `Contributions` with :class:`pint.Quantity`'s. Data is in Eh
+            - :class:`pint.Quantity` `Reference` in eV
+            - :class:`pint.Quantity` `Free energy` in eV
+            - :class:`pint.Quantity` `Extrapolated` in eV
+            - :class:`dict` `Contributions` with :class:`pint.Quantity`'s. Data is in eV
 
             Parsed data example:
 
             .. code-block:: none
 
-                {'Contributions': {'Kinetic': <Quantity(98.027982, 'hartree')>,
-                    'Potential': <Quantity(-102.525405, 'hartree')>,
-                    'External': <Quantity(0.0, 'hartree')>,
-                    'XC': <Quantity(-86.298926, 'hartree')>,
-                    'Entropy (-ST)': <Quantity(0.0, 'hartree')>,
-                    'Local': <Quantity(0.41107, 'hartree')>},
-                'Reference': <Quantity(-11791.6456, 'hartree')>,
-                'Free energy': <Quantity(-90.385279, 'hartree')>,
-                'Extrapolated': <Quantity(-90.385279, 'hartree')>
+                {'Contributions': {'Kinetic': <Quantity(106.291868, 'electron_volt')>, 
+                                   'Potential': <Quantity(-113.401291, 'electron_volt')>,
+                                   'External': <Quantity(0.0, 'electron_volt')>,
+                                   'XC': <Quantity(-93.210989, 'electron_volt')>,
+                                   'Entropy (-ST)': <Quantity(0.0, 'electron_volt')>, 
+                                   'Local': <Quantity(0.39059, 'electron_volt')>},
+                'Reference': <Quantity(-10231.7808, 'electron_volt')>,
+                'Free energy': <Quantity(-99.929821, 'electron_volt')>,
+                'Extrapolated': <Quantity(-99.929821, 'electron_volt')>
                 }
+
 
         :rtype: Data
         """
@@ -135,21 +136,21 @@ class BlockGpawEnergyContributions(Block):
         for line in energy_data_lines:
             if 'reference' in line:
                 energy_dict['Reference'] = float(
-                    line.split('=')[-1].strip().split(')')[0]) * ureg.Eh
+                    line.split('=')[-1].strip().split(')')[0]) * ureg.eV
             elif 'Free energy' in line:
                 energy_dict['Free energy'] = float(
-                    line.split(':')[-1].strip()) * ureg.Eh
+                    line.split(':')[-1].strip()) * ureg.eV
             elif 'Extrapolated' in line:
                 energy_dict['Extrapolated'] = float(
-                    line.split(':')[-1].strip()) * ureg.Eh
+                    line.split(':')[-1].strip()) * ureg.eV
             elif ':' in line:
                 key, value = line.split(':')
                 energy_dict['Contributions'][key.strip()] = float(
-                    value.strip()) * ureg.Eh
+                    value.strip()) * ureg.eV
 
         return Data(data=energy_dict, comment="""`Reference`, `Free energy`, `Extrapolated` are pint.Quantity objects
                                                 and `Contributions` is a nested dict of pint.Quantity objects.
-                                                Data is in Eh.
+                                                Data is in eV.
                                                 """)
 
 
