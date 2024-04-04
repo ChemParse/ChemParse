@@ -1,7 +1,7 @@
 Installation
 ============
 
-To install OrcaParse, clone the repository and use pip to install the package:
+To install ChemParse, clone the repository and use pip to install the package:
 
 .. code-block:: bash
 
