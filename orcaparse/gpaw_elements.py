@@ -39,14 +39,41 @@ class BlockGpawIcon(Block):
 
 @AvailableBlocksGpaw.register_block
 class BlockGpawDipole(Block):
+    """
+    The block captures and stores Dipole from GPAW output files.
+
+    **Example of GPAW Output:**
+
+    .. code-block:: none
+
+        Dipole moment: (-0.000000, 0.000000, -1.948262) |e|*Ang
+
+    """
     data_available: bool = True
+    """ Formatted data is available for this block. """
 
     def data(self) -> Data:
+        """
+
+        :return: :class:`orcaparse.data.Data` object that contains:
+
+            - :class:`pint.Quantity` `Dipole Moment` in \|e\|*Ang. Can be converted to Debye with ``.to('D')``.
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {'Dipole Moment': <Quantity([ 0.       -0.       -1.128191], 'angstrom * elementary_charge')>}
+
+
+        :rtype: Data
+        """
         numbers = re.findall(r"[-+]?\d*\.\d+|\d+", self.raw_data)
         # Convert extracted numbers to a numpy array of floats
-        dipole_moment = np.array(numbers, dtype=float)
+        dipole_moment = np.array(numbers, dtype=float) * \
+            ureg.elementary_charge * ureg.angstrom
         return Data(data={'Dipole Moment': dipole_moment},
-                    comment="`Dipole Moment` numpy array in |e|*Ang")
+                    comment="`Dipole Moment` numpy array in |e|*Ang, can be converted to Debye with .to('D')")
 
 
 @AvailableBlocksGpaw.register_block

@@ -326,8 +326,23 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
         """
         :return: :class:`orcaparse.data.Data` object that contains:
 
-            - :class:`numpy.ndarray`'s of contributions
+            - :class:`pint.Quantity`'s with :class:`numpy.ndarray`'s of contributions
+            - :class:`pint.Quantity` `Total Dipole Moment` with :class:`numpy.ndarray`'s of contributions in a.u.
+            - :class:`pint.Quantity` `Magnitude (a.u.)` -- total dipole moment. The magnitude in a.u. can be extracted from :class:`pint.Quantity` with .magnitude property.
             - :class:`pint.Quantity` `Magnitude (Debye)` -- total dipole moment. The magnitude in Debye can be extracted from :class:`pint.Quantity` with .magnitude property.
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {
+                'Electronic contribution': <Quantity([0.      0.      5.37241], 'bohr * elementary_charge')>, 
+                'Nuclear contribution': <Quantity([ 0.      0.     -8.2653], 'bohr * elementary_charge')>, 
+                'Total Dipole Moment': <Quantity([ 0.       0.      -2.89289], 'bohr * elementary_charge')>, 
+                'Magnitude (a.u.)': <Quantity(2.89289, 'bohr * elementary_charge')>, 
+                'Magnitude (Debye)': <Quantity(7.35314, 'debye')>
+                }
+
         :rtype: Data
         """
         # Initialize the result dictionary
@@ -343,7 +358,8 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
             pattern_three_numbers, self.raw_data)
         for match in matches_three_numbers:
             label, x, y, z = match
-            result[label.strip()] = np.array([float(x), float(y), float(z)])
+            result[label.strip()] = np.array([float(x), float(y), float(z)]
+                                             ) * ureg.elementary_charge * ureg.bohr_radius
 
         # Find all matches for the one-number pattern
         matches_one_number = re.findall(pattern_one_number, self.raw_data)
@@ -354,7 +370,7 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
             else:
                 unit = "a.u."
             result[label.strip()] = float(
-                value)*ureg.debye if unit == "Debye" else float(value)
+                value)*ureg.debye if unit == "Debye" else float(value) * ureg.elementary_charge * ureg.bohr_radius
 
         return Data(data=result, comment='Numpy arrays of contributions, total dipole moment and pint object of `Magnitude (Debye)`.\nThe magnitude of the magnitude in Debye can be extracted from pint with .magnitude property.')
 
@@ -618,8 +634,17 @@ class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
         """
 
         :return: :class:`orcaparse.data.Data` object that contains:
-            - Dictionary with different sections of the block as keys and their values as sub-dictionaries.
-            The values are :class:`pint.Quantity`.If there are more then one value in a line, they are stored in a sub-dictionary with the unit as key.
+
+            - :class:`dict` `Total Energy` with
+
+                -:class:`pint.Quantity` `Value in Eh`
+
+                -:class:`pint.Quantity` `Value in eV`
+
+            - :class:`dict` `Components`, `Virial components`, and `DFT components` (may differ in different versions of ORCA) with :class:`dict` subdicts with data.
+
+            If data has representation in multiple units, they are stored in the subdicts with the unit as key. Othervise, the value is stored directly in the dict as :class:`pint.Quantity`.
+
             It is expected for the values to represent the same quantity, if they do not, there is an error in ORCA.
 
             Output blocks example from ORCA 6:
@@ -715,7 +740,7 @@ class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
         """
 
         :return: :class:`orcaparse.data.Data` object that contains:
-            - :class:`dict` with states (:class:`int`) as keys, and their respective details as sub-dictionaries. The `Energy (eV)` values are stored as :class:`pint.Quantity`. The `Transitions` are stored in a :class:`list`, with each transition represented as a :class:`dict` containing the `From Orbital` (:class:`str`: number+a|b), `To Orbital` (:class:`str`: number+a|b), and `Coefficient` (:class:`float`).
+            - (:class:`int`) states as keys, and their respective details as sub-dictionaries. The `Energy (eV)` values are stored as :class:`pint.Quantity`. The `Transitions` are stored in a :class:`list`, with each transition represented as a :class:`dict` containing the `From Orbital` (:class:`str`: number+a|b), `To Orbital` (:class:`str`: number+a|b), and `Coefficient` (:class:`float`).
 
             Parsed data example:
 
