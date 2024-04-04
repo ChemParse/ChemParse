@@ -79,7 +79,7 @@ class BlockGpawDipole(Block):
 @AvailableBlocksGpaw.register_block
 class BlockGpawEnergyContributions(Block):
     """
-    The block captures and stores TD-DFT excited states data for singlets from GPAW output files.
+    The block captures and stores Energy contributions from GPAW output files.
 
     **Example of GPAW Output:**
 
@@ -151,3 +151,42 @@ class BlockGpawEnergyContributions(Block):
                                                 and `Contributions` is a nested dict of pint.Quantity objects.
                                                 Data is in Eh.
                                                 """)
+
+
+@AvailableBlocksGpaw.register_block
+class BlockGpawConvergedAfter(Block):
+    """
+    The block captures and stores Converged after from GPAW output files.
+
+    **Example of GPAW Output:**
+
+    .. code-block:: none
+
+        Converged after 12 iterations.
+
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def data(self) -> Data:
+        """
+
+        :return: :class:`orcaparse.data.Data` object that contains:
+
+            - :class:`int` `Iterations`
+            - :class:`bool` `Converged` is always `True`, as the block is only extracted if the calculation is converged
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {'Iterations': 12, 'Converged': True}
+
+        :rtype: Data
+        """
+        numbers = re.findall(r'\d+', self.raw_data)
+
+        assert len(numbers) == 1, f"Expected 1 number, got {len(numbers)}"
+        iterations = int(numbers[0])
+
+        return Data(data={'Iterations': iterations, 'Converged': True}, comment="`Iterations` is an integer and `Converged` is always True")

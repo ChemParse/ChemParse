@@ -425,7 +425,7 @@ Block,BlockGpawUnrecognized,"(14806, 15532)","(501, 515)",iter time total logcha
 "
 Block,BlockGpawUnrecognized,"(15534, 15584)","(518, 519)",Occupied states converged afte...,"Occupied states converged after 13 e/g evaluations
 "
-Block,BlockGpawUnrecognized,"(15586, 15616)","(522, 523)",Converged after iterations ,"Converged after 12 iterations.
+Block,BlockGpawConvergedAfter,"(15586, 15616)","(432, 433)",Converged after iterations ,"Converged after 12 iterations.
 "
 Block,BlockGpawDipole,"(15618, 15673)","(434, 435)",Dipole moment eAng ,"Dipole moment: (-0.000000, 0.000000, -1.948262) |e|*Ang
 "
