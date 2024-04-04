@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (pythonClass === 'BlockUnknown') {
             colorBlock.style.backgroundColor = colorForError;
         } else {
-            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage'].includes(pythonClass)) {
+            if (['BlockOrcaUnrecognizedWithSingeLineHeader', 'BlockOrcaUnrecognizedWithHeader'].includes(pythonClass)) {
                 colorBlock.style.backgroundColor = colorForUnrecognized;
             } else if (pythonClass === 'Block') {
                 colorBlock.style.backgroundColor = colorForNoClass;
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
             indicatorColorBlock.style.backgroundColor = colorForError;
             commentBlockContainer.title = "Block looks incorrectly formatted";
         } else {
-            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage'].includes(pythonClass)) {
+            if (['BlockOrcaUnrecognizedWithSingeLineHeader', 'BlockOrcaUnrecognizedWithHeader'].includes(pythonClass)) {
                 indicatorColorBlock.style.backgroundColor = colorForUnrecognized;
                 commentBlockContainer.title = "Block recognized by general pattern: " + pythonClass + ". Contribute to make this block recognizable.";
             } else {

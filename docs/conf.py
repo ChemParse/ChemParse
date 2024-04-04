@@ -20,7 +20,7 @@ release = '0.3.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.autodoc',]
+    'sphinx.ext.autodoc', 'sphinx.ext.autosummary']
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']

@@ -1,5 +1,5 @@
-from orcaparse.scripts import orca_to_html
+from orcaparse.scripts import orca_to_html_cli
 
 
 if __name__ == "__main__":
-    orca_to_html()
+    orca_to_html_cli()

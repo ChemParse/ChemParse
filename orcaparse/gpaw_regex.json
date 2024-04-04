@@ -6,26 +6,45 @@
   ],
   "TypeKnownBlocks": {
     "order": [
+      "BlockGpawEnergyContributions",
       "BlockGpawIcon",
-      "BlockGpawDipole"
+      "BlueprintParagraphStartsWith"
     ],
-    "BlockGpawIcon": {
+    "BlockGpawEnergyContributions": {
       "p_type": "Block",
-      "p_subtype": "BlockGpawIcon",
-      "pattern": "^((?:[ \\t]*___ ___ ___ _ _ _[ \\t]*\\n)(?:^(?!^[ \\t]*$).*\\n)*)",
+      "p_subtype": "BlockGpawEnergyContributions",
+      "pattern": "^((?:[ \\t]*Energy contributions relative to reference atoms:[ \\t]*\\(reference[ \\t]*=[ \\t]*[+|-]?\\d+.\\d+\\)[ \\t]*\\n)(?:^[ \\t]*\\n)?(?:^(?!^[ \\t]*$).*\\n)*)",
       "flags": [
         "MULTILINE"
       ],
       "comment": "Searching for the first line of gpaw icon, assuming that the icon ends at the first empty line or block pattern."
     },
-    "BlockGpawDipole": {
+    "BlockGpawIcon": {
       "p_type": "Block",
-      "p_subtype": "BlockGpawDipole",
-      "pattern": "^(Dipole moment:.*?\\n)",
+      "p_subtype": "BlockGpawIcon",
+      "pattern": "^((?:[ \\t]*___ ___ ___ _ _ _[ \\t]*\\n)(?:[ \\t]*\\|   \\|   \\|_  \\| \\| \\| \\|[ \\t]*\\n)(?:^(?!^[ \\t]*$).*\\n)*)",
       "flags": [
         "MULTILINE"
       ],
-      "comment": "Dipole moment"
+      "comment": "Searching for the first 2 lines of gpaw icon, assuming that the icon ends at the first empty line or block pattern."
+    },
+    "BlueprintParagraphStartsWith": {
+      "order": [
+        "BlockGpawDipole",
+        "BlockGpawConvergedAfter"
+      ],
+      "pattern_structure": {
+        "beginning": "^([ \\t]*",
+        "ending": ".*?\\n(?:^(?!^[ \\t]*$).*\\n)*)",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockGpawDipole": "Dipole moment:",
+        "BlockGpawConvergedAfter": "Converged after"
+      },
+      "comment": "Blueprint: Paragraph with the line that starts with specified text."
     }
   },
   "TypeDefaultBlocks": {
