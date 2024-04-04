@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 from lxml import etree
 
-import orcaparse as op
+import chemparse as chp
 
 
 def is_html_valid(html):
@@ -21,7 +21,7 @@ def is_html_valid(html):
 def test_orca_blocks(orca_output_file):
     file_path = os.path.join("tests", "orca_test_outputs", orca_output_file)
 
-    orca_file = op.File(file_path)
+    orca_file = chp.File(file_path)
 
     blocks = orca_file.get_blocks()
     # Assert that blocks is an instance of pd.DataFrame
@@ -40,7 +40,7 @@ def test_orca_blocks(orca_output_file):
 def test_orca_marked_text(orca_output_file):
     file_path = os.path.join("tests", "orca_test_outputs", orca_output_file)
 
-    orca_file = op.File(file_path)
+    orca_file = chp.File(file_path)
 
     marked_text = orca_file.get_marked_text()
     # Assert that blocks is an instance of pd.DataFrame
@@ -55,7 +55,7 @@ def test_orca_marked_text(orca_output_file):
 def test_orca_raw_data_extraction(orca_output_file):
     file_path = os.path.join("tests", "orca_test_outputs", orca_output_file)
 
-    orca_file = op.File(file_path)
+    orca_file = chp.File(file_path)
     data = orca_file.get_data(extract_only_raw=True)
 
     assert isinstance(
@@ -75,7 +75,7 @@ def test_orca_raw_data_extraction(orca_output_file):
 def test_orca_data_extraction(orca_output_file):
     file_path = os.path.join("tests", "orca_test_outputs", orca_output_file)
 
-    orca_file = op.File(file_path)
+    orca_file = chp.File(file_path)
     data = orca_file.get_data()
 
     assert isinstance(
@@ -96,7 +96,7 @@ def test_orca_data_extraction(orca_output_file):
 def test_orca_html(orca_output_file):
     file_path = os.path.join("tests", "orca_test_outputs", orca_output_file)
 
-    orca_file = op.File(file_path)
+    orca_file = chp.File(file_path)
     # Assuming this returns a string of HTML content
     html_content = orca_file.create_html()
 

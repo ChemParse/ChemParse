@@ -1,7 +1,7 @@
-Using OrcaParse from the Command Line
+Using ChemParse from the Command Line
 =====================================
 
-OrcaParse supports command-line usage, allowing for the direct extraction of data from ORCA output files into various formats.
+ChemParse supports command-line usage, allowing for the direct extraction of data from ORCA or GPAW output files into various formats.
 
 Example Commands
 ----------------

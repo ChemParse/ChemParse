@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "orcaparse"
-version = "0.3.0"
+name = "chemparse"
+version = "0.4.0"
 description = ""
 authors = ["ivan <imtambovtcev@gmail.com>"]
 readme = "README.md"
@@ -25,5 +25,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-orca_to_html = "orcaparse.scripts:orca_to_html_cli"
-orca_parse = "orcaparse.scripts:orca_parse_cli"
+chem_to_html = "chemparse.scripts:chem_to_html_cli"
+chem_parse = "chemparse.scripts:chem_parse_cli"

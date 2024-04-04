@@ -14,7 +14,7 @@ from .regex_settings import (DEFAULT_GPAW_REGEX_SETTINGS,
 
 class File:
     """
-    Manages the processing of a file within the OrcaParser framework.
+    Manages the processing of a file within the ChemParser framework.
 
     This class is responsible for parsing a given file, identifying and extracting elements based on predefined regex patterns, and facilitating the generation of an HTML representation of the file's content.
 

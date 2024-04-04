@@ -55,7 +55,7 @@ class BlockGpawDipole(Block):
     def data(self) -> Data:
         """
 
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`pint.Quantity` `Dipole Moment` in \|e\|*Ang. Can be converted to Debye with ``.to('D')``.
 
@@ -104,7 +104,7 @@ class BlockGpawEnergyContributions(Block):
     def data(self) -> Data:
         """
 
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`pint.Quantity` `Reference` in eV
             - :class:`pint.Quantity` `Free energy` in eV
@@ -172,7 +172,7 @@ class BlockGpawConvergedAfter(Block):
     def data(self) -> Data:
         """
 
-        :return: :class:`orcaparse.data.Data` object that contains:
+        :return: :class:`chemparse.data.Data` object that contains:
 
             - :class:`int` `Iterations`
             - :class:`bool` `Converged` is always `True`, as the block is only extracted if the calculation is converged

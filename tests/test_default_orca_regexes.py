@@ -5,9 +5,9 @@ from itertools import zip_longest
 import pandas as pd
 import pytest
 
-import orcaparse as op
+import chemparse as chp
 
-rs = op.DEFAULT_ORCA_REGEX_SETTINGS
+rs = chp.DEFAULT_ORCA_REGEX_SETTINGS
 known_orca_regexes = (rs.items["TypeKnownBlocks"].to_list() +
                       rs.items["TypeDefaultBlocks"].to_list())
 known_orca_regexes_subtypes = list(
@@ -101,7 +101,7 @@ def test_default_regex_known(regex, orca_output_file):
 def test_default_output_parsing(orca_output_file):
     expected_result = pd.read_csv(orca_output_file[:-4] + ".csv")
 
-    file = op.File(orca_output_file)
+    file = chp.File(orca_output_file)
     data = file.get_data(extract_only_raw=True)
     data = data.drop(columns=['Element'])
     data = data[data["Subtype"].isin(known_orca_regexes_subtypes)]
@@ -156,5 +156,5 @@ def test_default_output_parsing(orca_output_file):
 
 @pytest.mark.parametrize("orca_output_file", orca_output_files)
 def test_default_get_data(orca_output_file):
-    file = op.File(orca_output_file)
+    file = chp.File(orca_output_file)
     data = file.get_data()

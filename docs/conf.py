@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../orcaparse'))
+sys.path.insert(0, os.path.abspath('../chemparse'))
 
 
 # Configuration file for the Sphinx documentation builder.
@@ -11,10 +11,10 @@ sys.path.insert(0, os.path.abspath('../orcaparse'))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'OrcaParse'
+project = 'ChemParse'
 copyright = '2024, Ivan Tambovtsev'
 author = 'Ivan Tambovtsev'
-release = '0.3.0'
+release = '0.4.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

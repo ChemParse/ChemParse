@@ -1,7 +1,7 @@
-Using OrcaParse with Python
+Using ChemParse with Python
 ===========================
 
-OrcaParse can be seamlessly integrated into Python scripts, enabling the extraction and manipulation of data from ORCA output files using familiar tools like pandas.
+ChemParse can be seamlessly integrated into Python scripts, enabling the extraction and manipulation of data from ORCA output files using familiar tools like pandas.
 
 Example Usage
 -------------
@@ -9,13 +9,13 @@ Example Usage
 .. code-block:: python
 
    
-    import orcaparse as op
+    import chemparse as chp
     from IPython.display import HTML
 
      
     # The main class is File
 
-    orca_file = op.File("example.out")
+    orca_file = chp.File("example.out")
     display(orca_file)
 
      

@@ -298,23 +298,23 @@ body {
 <pre>My start of the message: message1
 message2
 </pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" start-line=6 finish-line=7 is-block="False">
-<br></div><div class="element block" python-class-name="BlockOrcaUnrecognizedWithHeader" readable-name="My data" start-line=6 finish-line=12 data_available=False><div class="header"><h6>
+<br></div><div class="element block" python-class-name="BlockOrcaUnrecognizedWithSingeLineHeader" readable-name="My data" start-line=6 finish-line=12 data_available=False><div class="header"><h7>
 <pre>--------------------
 My data
 --------------------
-</pre></h6></div><hr class="hr-in-block"></hr><div class="data">
+</pre></h7></div><hr class="hr-in-block"></hr><div class="data">
 <pre> 
 My value: 1.234 eV
 
-</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaUnrecognizedWithHeader" readable-name="Another data" start-line=13 finish-line=19 data_available=False><div class="header"><h6>
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaUnrecognizedWithSingeLineHeader" readable-name="Another data" start-line=13 finish-line=19 data_available=False><div class="header"><h7>
 <pre>                            ***************************************
                             *            Another data             *
                             ***************************************
-</pre></h6></div><hr class="hr-in-block"></hr><div class="data">
+</pre></h7></div><hr class="hr-in-block"></hr><div class="data">
 <pre>Not my match
 My value: 9.876 eV
 
-</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=18 finish-line=21 data_available=True><div class="data">
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=18 finish-line=21 data_available=False><div class="data">
 <pre>-------------------------   --------------------
 FINAL SINGLE POINT ENERGY      -440.508559636589
 -------------------------   --------------------
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (pythonClass === 'BlockUnknown') {
             colorBlock.style.backgroundColor = colorForError;
         } else {
-            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage'].includes(pythonClass)) {
+            if (['BlockOrcaUnrecognizedWithSingeLineHeader', 'BlockOrcaUnrecognizedWithHeader'].includes(pythonClass)) {
                 colorBlock.style.backgroundColor = colorForUnrecognized;
             } else if (pythonClass === 'Block') {
                 colorBlock.style.backgroundColor = colorForNoClass;
@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function () {
             indicatorColorBlock.style.backgroundColor = colorForError;
             commentBlockContainer.title = "Block looks incorrectly formatted";
         } else {
-            if (['BlockOrcaUnrecognizedWithHeader', 'BlockOrcaUnrecognizedNotification', 'BlockOrcaUnrecognizedMessage'].includes(pythonClass)) {
+            if (['BlockOrcaUnrecognizedWithSingeLineHeader', 'BlockOrcaUnrecognizedWithHeader'].includes(pythonClass)) {
                 indicatorColorBlock.style.backgroundColor = colorForUnrecognized;
                 commentBlockContainer.title = "Block recognized by general pattern: " + pythonClass + ". Contribute to make this block recognizable.";
             } else {

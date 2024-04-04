@@ -51,10 +51,10 @@ class RegexBlueprint:
 
     .. code-block:: python
 
-        import orcaparse as op
+        import chemparse as chp
 
         # Define a blueprint for extracting multiple blocks of text from an ORCA output file
-        rb = op.RegexBlueprint(
+        rb = chp.RegexBlueprint(
             order=[
                 "BlockOrcaVersion",
                 "BlockOrcaContributions",

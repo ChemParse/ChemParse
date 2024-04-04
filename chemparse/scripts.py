@@ -5,7 +5,7 @@ from typing import Optional
 from .file import File
 
 
-def orca_to_html(input_file: str, output_file: str, insert_css: bool = True, insert_js: bool = True,
+def chem_to_html(input_file: str, output_file: str, insert_css: bool = True, insert_js: bool = True,
                  insert_left_sidebar: bool = True, insert_colorcomment_sidebar: bool = True, mode: str = 'ORCA') -> None:
     """
     Converts an ORCA (or GPAW) output file to an HTML document with various optional features like CSS, JavaScript, and sidebars.
@@ -35,7 +35,7 @@ def orca_to_html(input_file: str, output_file: str, insert_css: bool = True, ins
     )
 
 
-def orca_to_html_cli() -> None:
+def chem_to_html_cli() -> None:
     """
     CLI entry point for converting an ORCA or GPAW output file to an HTML document. Parses command-line arguments for input and output file paths and optional features.
 
@@ -61,7 +61,7 @@ def orca_to_html_cli() -> None:
 
     args = parser.parse_args()
 
-    orca_to_html(input_file=args.input_file, output_file=args.output_file,
+    chem_to_html(input_file=args.input_file, output_file=args.output_file,
                  insert_css=args.insert_css, insert_js=args.insert_js,
                  insert_left_sidebar=args.insert_left_sidebar,
                  insert_colorcomment_sidebar=args.insert_colorcomment_sidebar,
@@ -69,7 +69,7 @@ def orca_to_html_cli() -> None:
                  )
 
 
-def orca_parse(input_file: str, output_file: str, file_format: str = 'auto',
+def chem_parse(input_file: str, output_file: str, file_format: str = 'auto',
                readable_name: Optional[str] = None,
                raw_data_substrings: list[str] = [],
                raw_data_not_substrings: list[str] = [],
@@ -114,9 +114,9 @@ def orca_parse(input_file: str, output_file: str, file_format: str = 'auto',
         data_sorted.to_excel(output_file, index=False)
 
 
-def orca_parse_cli():
+def chem_parse_cli():
     """
-    Command-line interface for the `orca_parse` function, allowing users to export data from an ORCA output file from the terminal.
+    Command-line interface for the `chem_parse` function, allowing users to export data from an ORCA output file from the terminal.
 
     This CLI provides options for specifying the input and output file paths, the desired output format, filtering criteria based on readable names and raw data substrings, and the processing mode.
     """
@@ -140,6 +140,6 @@ def orca_parse_cli():
 
     args = parser.parse_args()
 
-    orca_parse(input_file=args.input_file, output_file=args.output_file, file_format=args.format,
+    chem_parse(input_file=args.input_file, output_file=args.output_file, file_format=args.format,
                readable_name=args.readable_name, raw_data_substrings=args.raw_data_substring,
                raw_data_not_substrings=args.raw_data_not_substring, mode=args.mode)
