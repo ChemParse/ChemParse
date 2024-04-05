@@ -375,7 +375,7 @@ class File:
         html_content += "<html lang=\"en\">\n<head>\n"
         html_content += "    <meta charset=\"UTF-8\">\n"
         html_content += "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-        html_content += "    <title>ORCA</title>\n"
+        html_content += f"    <title>{self.mode}</title>\n"
 
         if insert_css:
             html_content += "    <style>\n        " + \

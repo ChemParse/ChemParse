@@ -231,7 +231,7 @@ body {
     /* Hide overflow to maintain clean sidebar appearance */
     padding-left: 5px;
     /* Provide some spacing from the left edge */
-    width: auto;
+    width: fit-content;
     /* Remove fixed width */
 }
 
@@ -240,7 +240,7 @@ body {
     /* Use flex layout for horizontal alignment of color block and text */
     position: absolute;
     /* Absolute positioning within comment-sidebar */
-    width: calc(100% - 5px);
+    width: fit-content;
     /* Adjust width considering padding */
     /* Height and top properties will be set dynamically by JavaScript */
 }
@@ -254,6 +254,8 @@ body {
     /* Set to 0 for square blocks, or 50% for circles */
     background-color: inherit;
     /* Inherit color from JavaScript dynamically */
+    flex-shrink: 0;
+    /* Prevent the color block from shrinking */
 }
 
 .comment-sidebar .comment-section .text-container {
@@ -263,7 +265,9 @@ body {
     /* Distributes space between top and bottom text */
     height: 100%;
     /* Ensures it takes the full height of its container */
+    width: fit-content;
     margin: 0 2px 0 2px;
+    overflow: visible;
 }
 
 
@@ -271,4 +275,5 @@ body {
 .bottom-text {
     font-size: 10px;
     color: var(--comment-sidebar-text-color);
+    flex-shrink: 0;
 }
