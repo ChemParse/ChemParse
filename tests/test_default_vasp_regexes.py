@@ -17,7 +17,7 @@ all_vasp_regexes = rs.to_list()
 
 # Generate a list of all files in the 'tests/vasp_test_outputs' directory
 vasp_output_files = [os.path.join("tests", "vasp_test_outputs", f) for f in os.listdir(
-    "tests/vasp_test_outputs") if not os.path.isdir(os.path.join("tests", "vasp_test_outputs", f)) and f.endswith(".txt")]
+    "tests/vasp_test_outputs") if not os.path.isdir(os.path.join("tests", "vasp_test_outputs", f)) and not f.endswith(".csv")]
 
 
 def anchor_pattern_maker(compiled_regex):
@@ -101,7 +101,7 @@ def test_default_regex_known(regex, vasp_output_file):
 def test_default_output_parsing(vasp_output_file):
     expected_result = pd.read_csv(vasp_output_file + ".csv")
 
-    file = chp.File(vasp_output_file, mode='GPAW')
+    file = chp.File(vasp_output_file, mode='VASP')
     data = file.get_data(extract_only_raw=True)
     data = data.drop(columns=['Element'])
     data = data[data["Subtype"].isin(known_vasp_regexes_subtypes)]

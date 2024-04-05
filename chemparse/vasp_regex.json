@@ -8,7 +8,28 @@
     "order": []
   },
   "TypeDefaultBlocks": {
-    "order": []
+    "order": [
+      "BlockVaspWithSingleLineHeader",
+      "BlockVaspWithHeader"
+    ],
+    "BlockVaspWithSingleLineHeader": {
+      "p_type": "Block",
+      "p_subtype": "BlockVaspWithSingleLineHeader",
+      "pattern": "^((?:^[ \\t]*\\n)(?:^(?!\\n).*\\n)(?:^ {1,2}-{20,}[ \\t]*$)\\n(?:^(?!^-{80,}[ \\t]*$|^-{20,}[ \\t]*Iteration[ \\t]*\\d+[ \\t]*\\([ \\t]*\\d+[ \\t]*\\)[ \\t]*-{20,}[ \\t]*$|(?:^[ \\t]*\\n)(?:^(?!\\n).*\\n){1,2}(?:^ {1,2}-{20,}[ \\t]*$)).*\\n)+)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Standard VASP block with header"
+    },
+    "BlockVaspWithHeader": {
+      "p_type": "Block",
+      "p_subtype": "BlockVaspWithHeader",
+      "pattern": "^((?:^[ \\t]*\\n)(?:^(?!\\n).*\\n){1,2}(?:^ {1,2}-{20,}[ \\t]*$)\\n(?:^(?!^-{80,}[ \\t]*$|^-{20,}[ \\t]*Iteration[ \\t]*\\d+[ \\t]*\\([ \\t]*\\d+[ \\t]*\\)[ \\t]*-{20,}[ \\t]*$|(?:^[ \\t]*\\n)(?:^(?!\\n).*\\n){1,2}(?:^ {1,2}-{20,}[ \\t]*$)).*\\n)+)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Standard VASP block with header"
+    }
   },
   "Spacer": {
     "p_type": "Spacer",
