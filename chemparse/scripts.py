@@ -22,7 +22,7 @@ def chem_to_html(input_file: str, output_file: str, insert_css: bool = True, ins
     :type insert_left_sidebar: bool, optional
     :param insert_colorcomment_sidebar: If `True`, adds a sidebar for color-coded comments in the HTML output.
     :type insert_colorcomment_sidebar: bool, optional
-    :param mode: Specifies the processing mode, which can be 'ORCA' or 'GPAW'. Default is 'ORCA'.
+    :param mode: Specifies the processing mode, which can be 'ORCA', 'GPAW' or 'VASP'. Default is 'ORCA'.
     :type mode: str, optional
     """
     orca_file = File(file_path=input_file, mode=mode)
@@ -56,8 +56,8 @@ def chem_to_html_cli() -> None:
                         help="Exclude a left sidebar (TOC) from the HTML output. Included by default.")
     parser.add_argument("--insert_colorcomment_sidebar", action="store_false", default=True,
                         help="Exclude a color-comment sidebar from the HTML output. Included by default.")
-    parser.add_argument("--mode", choices=['ORCA', 'GPAW'], default='ORCA',
-                        help="Mode of the input file ('ORCA' or 'GPAW'). Defaults to 'ORCA'.")
+    parser.add_argument("--mode", choices=['ORCA', 'GPAW', 'VASP'], default='ORCA',
+                        help="Mode of the input file ('ORCA', 'GPAW' or 'VASP'). Defaults to 'ORCA'.")
 
     args = parser.parse_args()
 
@@ -91,7 +91,7 @@ def chem_parse(input_file: str, output_file: str, file_format: str = 'auto',
     :type raw_data_substrings: list[str], optional
     :param raw_data_not_substrings: Filters elements not containing these substrings in their raw data.
     :type raw_data_not_substrings: list[str], optional
-    :param mode: Specifies the mode of the input file, which can be 'ORCA' or 'GPAW'. Default is 'ORCA'.
+    :param mode: Specifies the mode of the input file, which can be 'ORCA', 'GPAW' or 'VASP'. Default is 'ORCA'.
     :type mode: str, optional
     """
     orca_file = File(file_path=input_file, mode=mode)
@@ -135,8 +135,8 @@ def chem_parse_cli():
                         help="Filter elements by a substring of their raw data. Can be used multiple times.")
     parser.add_argument("--raw_data_not_substring", action='append', default=[],
                         help="Filter elements by absence of a substring of their raw data. Can be used multiple times.")
-    parser.add_argument("--mode", choices=['ORCA', 'GPAW'], default='ORCA',
-                        help="Mode of the input file ('ORCA' or 'GPAW'). Defaults to 'ORCA'.")
+    parser.add_argument("--mode", choices=['ORCA', 'GPAW', 'VASP'], default='ORCA',
+                        help="Mode of the input file ('ORCA', 'GPAW' or 'VASP'). Defaults to 'ORCA'.")
 
     args = parser.parse_args()
 

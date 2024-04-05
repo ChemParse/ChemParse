@@ -28,6 +28,14 @@ chemparse.file module
    :undoc-members:
    :show-inheritance:
 
+chemparse.orca\_elements module
+-------------------------------
+
+.. automodule:: chemparse.orca_elements
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 chemparse.gpaw\_elements module
 -------------------------------
 
@@ -36,10 +44,10 @@ chemparse.gpaw\_elements module
    :undoc-members:
    :show-inheritance:
 
-chemparse.orca\_elements module
+chemparse.vasp\_elements module
 -------------------------------
 
-.. automodule:: chemparse.orca_elements
+.. automodule:: chemparse.vasp_elements
    :members:
    :undoc-members:
    :show-inheritance:

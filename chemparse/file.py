@@ -9,7 +9,9 @@ from .data import Data
 from .elements import BlockUnknown, Element
 from .logging_config import logger
 from .regex_settings import (DEFAULT_GPAW_REGEX_SETTINGS,
-                             DEFAULT_ORCA_REGEX_SETTINGS, RegexSettings)
+                             DEFAULT_ORCA_REGEX_SETTINGS,
+                             DEFAULT_VASP_REGEX_SETTINGS,
+                             RegexSettings)
 
 
 class File:
@@ -30,14 +32,14 @@ class File:
     :vartype _blocks: pd.DataFrame
     :ivar _marked_text: A list of marked text segments, each containing character and line positions alongside the corresponding text or Element object.
     :vartype _marked_text: list[tuple[tuple[int, int], tuple[int, int], str | Element]]
-    :ivar mode: The operational mode of the file, which may affect regex settings and processing behavior. Common modes include 'ORCA' and 'GPAW'.
+    :ivar mode: The operational mode of the file, which may affect regex settings and processing behavior. Common modes include 'ORCA', 'GPAW' and 'VASP'.
     :vartype mode: str
 
     :param file_path: The path to the file to be processed.
     :type file_path: str
     :param regex_settings: Custom regex settings for pattern processing. If not provided, default settings based on the specified mode will be used.
     :type regex_settings: Optional[RegexSettings], optional
-    :param mode: The processing mode, influencing default regex settings and behavior. Supported modes include 'ORCA' and 'GPAW'.
+    :param mode: The processing mode, influencing default regex settings and behavior. Supported modes include 'ORCA', 'GPAW' and 'VASP'.
     :type mode: Optional[str], optional
     :raises ValueError: If an invalid mode is specified.
     """
@@ -50,7 +52,7 @@ class File:
         :type file_path: str
         :param regex_settings: Custom regex settings for pattern processing. If not provided, default settings based on the specified mode will be used.
         :type regex_settings: Optional[RegexSettings], optional
-        :param mode: The processing mode, influencing default regex settings and behavior. Supported modes include 'ORCA' and 'GPAW'.
+        :param mode: The processing mode, influencing default regex settings and behavior. Supported modes include 'ORCA', 'GPAW' and 'VASP'.
         :type mode: Optional[str], optional
         :raises ValueError: If an invalid mode is specified.
         """
@@ -61,9 +63,11 @@ class File:
                 self.regex_settings: RegexSettings = DEFAULT_ORCA_REGEX_SETTINGS
             elif mode == 'GPAW':
                 self.regex_settings: RegexSettings = DEFAULT_GPAW_REGEX_SETTINGS
+            elif mode == 'VASP':
+                self.regex_settings: RegexSettings = DEFAULT_VASP_REGEX_SETTINGS
             else:
                 raise ValueError(
-                    f"Invalid mode '{mode}'. Must be 'ORCA' or 'GPAW'.")
+                    f"Invalid mode '{mode}'. Must be 'ORCA', 'GPAW' or 'VASP'.")
         else:
             self.regex_settings: RegexSettings = regex_settings
 
