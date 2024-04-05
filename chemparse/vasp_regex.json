@@ -5,12 +5,32 @@
     "Spacer"
   ],
   "TypeKnownBlocks": {
-    "order": []
+    "order": [
+      "BlueprintBlockWithSingeLineHeader"
+    ],
+    "BlueprintBlockWithSingeLineHeader": {
+      "order": [
+        "BlockVaspFreeEnergieOfTheIonElectronSystem",
+        "BlockVaspFreeEnergyOfTheIonElectronSystem"
+      ],
+      "pattern_structure": {
+        "beginning": "^((?:^[ \\t]*\\n)(?:^[ \\t]*",
+        "ending": "[ \\t]*\\n)(?:^ {1,2}-{20,}[ \\t]*$)\\n(?:^(?!^-{80,}[ \\t]*$|^-{20,}[ \\t]*Iteration[ \\t]*\\d+[ \\t]*\\([ \\t]*\\d+[ \\t]*\\)[ \\t]*-{20,}[ \\t]*$|(?:^[ \\t]*\\n)(?:^(?!\\n).*\\n){1,2}(?:^ {1,2}-{20,}[ \\t]*$)).*\\n)+)",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockVaspFreeEnergieOfTheIonElectronSystem": "FREE ENERGIE OF THE ION-ELECTRON SYSTEM \\(eV\\)",
+        "BlockVaspFreeEnergyOfTheIonElectronSystem": "Free energy of the ion-electron system \\(eV\\)"
+      },
+      "comment": "Blueprint: Paragraph with the line that starts with specified text."
+    }
   },
   "TypeDefaultBlocks": {
     "order": [
       "BlockVaspWithSingleLineHeader",
-      "BlockVaspWithHeader"
+      "BlockVaspWithStandardHeader"
     ],
     "BlockVaspWithSingleLineHeader": {
       "p_type": "Block",
@@ -21,9 +41,9 @@
       ],
       "comment": "Standard VASP block with header"
     },
-    "BlockVaspWithHeader": {
+    "BlockVaspWithStandardHeader": {
       "p_type": "Block",
-      "p_subtype": "BlockVaspWithHeader",
+      "p_subtype": "BlockVaspWithStandardHeader",
       "pattern": "^((?:^[ \\t]*\\n)(?:^(?!\\n).*\\n){1,2}(?:^ {1,2}-{20,}[ \\t]*$)\\n(?:^(?!^-{80,}[ \\t]*$|^-{20,}[ \\t]*Iteration[ \\t]*\\d+[ \\t]*\\([ \\t]*\\d+[ \\t]*\\)[ \\t]*-{20,}[ \\t]*$|(?:^[ \\t]*\\n)(?:^(?!\\n).*\\n){1,2}(?:^ {1,2}-{20,}[ \\t]*$)).*\\n)+)",
       "flags": [
         "MULTILINE"

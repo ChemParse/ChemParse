@@ -1,5 +1,5 @@
 Type,Subtype,CharPosition,LinePosition,ReadableName,RawData
-Block,BlockVaspWithSingleLineHeader,"(36134, 36889)","(783, 802)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(36134, 36889)","(783, 802)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -19,7 +19,7 @@ Block,BlockVaspWithSingleLineHeader,"(36134, 36889)","(783, 802)",Free energy of
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(37529, 38284)","(821, 840)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(37529, 38284)","(821, 840)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -39,7 +39,7 @@ Block,BlockVaspWithSingleLineHeader,"(37529, 38284)","(821, 840)",Free energy of
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(38924, 39679)","(859, 878)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(38924, 39679)","(859, 878)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -59,7 +59,7 @@ Block,BlockVaspWithSingleLineHeader,"(38924, 39679)","(859, 878)",Free energy of
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(40319, 41074)","(897, 916)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(40319, 41074)","(897, 916)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -79,7 +79,7 @@ Block,BlockVaspWithSingleLineHeader,"(40319, 41074)","(897, 916)",Free energy of
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(41968, 42723)","(942, 961)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(41968, 42723)","(942, 961)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -99,7 +99,7 @@ Block,BlockVaspWithSingleLineHeader,"(41968, 42723)","(942, 961)",Free energy of
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(43831, 44586)","(993, 1012)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(43831, 44586)","(993, 1012)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -119,7 +119,7 @@ Block,BlockVaspWithSingleLineHeader,"(43831, 44586)","(993, 1012)",Free energy o
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(45702, 46457)","(1044, 1063)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(45702, 46457)","(1044, 1063)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -139,7 +139,7 @@ Block,BlockVaspWithSingleLineHeader,"(45702, 46457)","(1044, 1063)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(47581, 48336)","(1095, 1114)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(47581, 48336)","(1095, 1114)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -159,7 +159,7 @@ Block,BlockVaspWithSingleLineHeader,"(47581, 48336)","(1095, 1114)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(49468, 50223)","(1146, 1165)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(49468, 50223)","(1146, 1165)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -179,7 +179,7 @@ Block,BlockVaspWithSingleLineHeader,"(49468, 50223)","(1146, 1165)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(51363, 52118)","(1197, 1216)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(51363, 52118)","(1197, 1216)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -199,7 +199,7 @@ Block,BlockVaspWithSingleLineHeader,"(51363, 52118)","(1197, 1216)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(53266, 54021)","(1248, 1267)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(53266, 54021)","(1248, 1267)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -219,7 +219,7 @@ Block,BlockVaspWithSingleLineHeader,"(53266, 54021)","(1248, 1267)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(55177, 55932)","(1299, 1318)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(55177, 55932)","(1299, 1318)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -239,7 +239,7 @@ Block,BlockVaspWithSingleLineHeader,"(55177, 55932)","(1299, 1318)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(57096, 57851)","(1350, 1369)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(57096, 57851)","(1350, 1369)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -259,7 +259,7 @@ Block,BlockVaspWithSingleLineHeader,"(57096, 57851)","(1350, 1369)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(59023, 59778)","(1401, 1420)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(59023, 59778)","(1401, 1420)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -279,7 +279,7 @@ Block,BlockVaspWithSingleLineHeader,"(59023, 59778)","(1401, 1420)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(60958, 61713)","(1452, 1471)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(60958, 61713)","(1452, 1471)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -299,7 +299,7 @@ Block,BlockVaspWithSingleLineHeader,"(60958, 61713)","(1452, 1471)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(62902, 63657)","(1504, 1523)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(62902, 63657)","(1504, 1523)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -319,7 +319,7 @@ Block,BlockVaspWithSingleLineHeader,"(62902, 63657)","(1504, 1523)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(64854, 65609)","(1556, 1575)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(64854, 65609)","(1556, 1575)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -339,7 +339,7 @@ Block,BlockVaspWithSingleLineHeader,"(64854, 65609)","(1556, 1575)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(66814, 67569)","(1608, 1627)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(66814, 67569)","(1608, 1627)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -359,7 +359,7 @@ Block,BlockVaspWithSingleLineHeader,"(66814, 67569)","(1608, 1627)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(68782, 69537)","(1660, 1679)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(68782, 69537)","(1660, 1679)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -379,7 +379,7 @@ Block,BlockVaspWithSingleLineHeader,"(68782, 69537)","(1660, 1679)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(70758, 71513)","(1712, 1731)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(70758, 71513)","(1712, 1731)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -399,7 +399,7 @@ Block,BlockVaspWithSingleLineHeader,"(70758, 71513)","(1712, 1731)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(72742, 73497)","(1764, 1783)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(72742, 73497)","(1764, 1783)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -419,7 +419,7 @@ Block,BlockVaspWithSingleLineHeader,"(72742, 73497)","(1764, 1783)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(74734, 75489)","(1816, 1835)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(74734, 75489)","(1816, 1835)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -439,7 +439,7 @@ Block,BlockVaspWithSingleLineHeader,"(74734, 75489)","(1816, 1835)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(76734, 77489)","(1868, 1887)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(76734, 77489)","(1868, 1887)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -459,7 +459,7 @@ Block,BlockVaspWithSingleLineHeader,"(76734, 77489)","(1868, 1887)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(78742, 79497)","(1920, 1939)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(78742, 79497)","(1920, 1939)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -479,7 +479,7 @@ Block,BlockVaspWithSingleLineHeader,"(78742, 79497)","(1920, 1939)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(80758, 81513)","(1972, 1991)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(80758, 81513)","(1972, 1991)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -499,7 +499,7 @@ Block,BlockVaspWithSingleLineHeader,"(80758, 81513)","(1972, 1991)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(82783, 83538)","(2025, 2044)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(82783, 83538)","(2025, 2044)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -519,7 +519,7 @@ Block,BlockVaspWithSingleLineHeader,"(82783, 83538)","(2025, 2044)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(84816, 85571)","(2078, 2097)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(84816, 85571)","(2078, 2097)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -539,7 +539,7 @@ Block,BlockVaspWithSingleLineHeader,"(84816, 85571)","(2078, 2097)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(86857, 87612)","(2131, 2150)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(86857, 87612)","(2131, 2150)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -559,7 +559,7 @@ Block,BlockVaspWithSingleLineHeader,"(86857, 87612)","(2131, 2150)",Free energy 
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(88366, 89121)","(2171, 2190)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(88366, 89121)","(2171, 2190)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -579,7 +579,8 @@ Block,BlockVaspWithSingleLineHeader,"(88366, 89121)","(2171, 2190)",Free energy 
 
 
 "
-Block,BlockVaspWithHeader,"(116578, 117823)","(2919, 2937)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(116578, 117823)","(2919, 2937)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -598,7 +599,7 @@ Block,BlockVaspWithHeader,"(116578, 117823)","(2919, 2937)",FORCE on cell STRESS
   external pressure =      -56.45 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(117824, 118435)","(2937, 2950)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(117824, 118435)","(2937, 2950)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -612,7 +613,8 @@ Block,BlockVaspWithSingleLineHeader,"(117824, 118435)","(2937, 2950)",VOLUME and
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(118436, 124066)","(2951, 2998)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(118436, 124066)","(2951, 2998)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -660,7 +662,7 @@ Block,BlockVaspWithHeader,"(118436, 124066)","(2951, 2998)",FORCES acting on ion
    0.158E-05 -.395E-06 -.290E-01   0.402E-13 -.683E-13 0.455E-11   -.992E-18 -.216E-19 -.602E-02   -.129E-10 0.220E-11 0.307E-01
 
 "
-Block,BlockVaspWithSingleLineHeader,"(124067, 127795)","(2999, 3046)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(124067, 127795)","(2999, 3046)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.63000        -0.000000      0.000000     -2.042011
@@ -708,7 +710,7 @@ Block,BlockVaspWithSingleLineHeader,"(124067, 127795)","(2999, 3046)",POSITION T
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(127903, 128139)","(3051, 3060)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(127903, 128139)","(2989, 2998)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.17068556 eV
@@ -718,7 +720,7 @@ Block,BlockVaspWithSingleLineHeader,"(127903, 128139)","(3051, 3060)",FREE ENERG
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(129650, 130405)","(3103, 3122)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(129650, 130405)","(3041, 3060)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -738,7 +740,7 @@ Block,BlockVaspWithSingleLineHeader,"(129650, 130405)","(3103, 3122)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(131513, 132268)","(3154, 3173)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(131513, 132268)","(3092, 3111)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -758,7 +760,7 @@ Block,BlockVaspWithSingleLineHeader,"(131513, 132268)","(3154, 3173)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(133384, 134139)","(3205, 3224)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(133384, 134139)","(3143, 3162)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -778,7 +780,7 @@ Block,BlockVaspWithSingleLineHeader,"(133384, 134139)","(3205, 3224)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(135263, 136018)","(3256, 3275)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(135263, 136018)","(3194, 3213)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -798,7 +800,7 @@ Block,BlockVaspWithSingleLineHeader,"(135263, 136018)","(3256, 3275)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(137150, 137905)","(3307, 3326)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(137150, 137905)","(3245, 3264)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -818,7 +820,7 @@ Block,BlockVaspWithSingleLineHeader,"(137150, 137905)","(3307, 3326)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(139045, 139800)","(3358, 3377)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(139045, 139800)","(3296, 3315)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -838,7 +840,7 @@ Block,BlockVaspWithSingleLineHeader,"(139045, 139800)","(3358, 3377)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(140554, 141309)","(3398, 3417)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(140554, 141309)","(3336, 3355)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -858,7 +860,8 @@ Block,BlockVaspWithSingleLineHeader,"(140554, 141309)","(3398, 3417)",Free energ
 
 
 "
-Block,BlockVaspWithHeader,"(168766, 170011)","(4146, 4164)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(168766, 170011)","(4084, 4102)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -877,7 +880,7 @@ Block,BlockVaspWithHeader,"(168766, 170011)","(4146, 4164)",FORCE on cell STRESS
   external pressure =      -56.40 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(170012, 170623)","(4164, 4177)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(170012, 170623)","(4102, 4115)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -891,7 +894,8 @@ Block,BlockVaspWithSingleLineHeader,"(170012, 170623)","(4164, 4177)",VOLUME and
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(170624, 176254)","(4178, 4225)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(170624, 176254)","(4116, 4163)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -939,7 +943,7 @@ Block,BlockVaspWithHeader,"(170624, 176254)","(4178, 4225)",FORCES acting on ion
    0.158E-05 -.395E-06 0.140E+01   -.776E-13 0.151E-12 0.773E-11   0.206E-18 0.100E-18 -.164E+00   0.465E-11 -.549E-11 -.125E+01
 
 "
-Block,BlockVaspWithSingleLineHeader,"(176255, 179983)","(4226, 4273)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(176255, 179983)","(4164, 4211)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.62704        -0.000000     -0.000000     -2.007465
@@ -987,7 +991,7 @@ Block,BlockVaspWithSingleLineHeader,"(176255, 179983)","(4226, 4273)",POSITION T
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(180091, 180495)","(4278, 4289)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(180091, 180495)","(4198, 4209)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.20657356 eV
@@ -999,7 +1003,7 @@ Block,BlockVaspWithSingleLineHeader,"(180091, 180495)","(4278, 4289)",FREE ENERG
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(182423, 183178)","(4340, 4359)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(182423, 183178)","(4260, 4279)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1019,7 +1023,7 @@ Block,BlockVaspWithSingleLineHeader,"(182423, 183178)","(4340, 4359)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(184286, 185041)","(4391, 4410)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(184286, 185041)","(4311, 4330)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1039,7 +1043,7 @@ Block,BlockVaspWithSingleLineHeader,"(184286, 185041)","(4391, 4410)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(186157, 186912)","(4442, 4461)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(186157, 186912)","(4362, 4381)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1059,7 +1063,7 @@ Block,BlockVaspWithSingleLineHeader,"(186157, 186912)","(4442, 4461)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(188036, 188791)","(4493, 4512)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(188036, 188791)","(4413, 4432)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1079,7 +1083,7 @@ Block,BlockVaspWithSingleLineHeader,"(188036, 188791)","(4493, 4512)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(189923, 190678)","(4544, 4563)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(189923, 190678)","(4464, 4483)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1099,7 +1103,7 @@ Block,BlockVaspWithSingleLineHeader,"(189923, 190678)","(4544, 4563)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(191818, 192573)","(4595, 4614)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(191818, 192573)","(4515, 4534)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1119,7 +1123,7 @@ Block,BlockVaspWithSingleLineHeader,"(191818, 192573)","(4595, 4614)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(193721, 194476)","(4646, 4665)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(193721, 194476)","(4566, 4585)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1139,7 +1143,7 @@ Block,BlockVaspWithSingleLineHeader,"(193721, 194476)","(4646, 4665)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(195632, 196387)","(4697, 4716)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(195632, 196387)","(4617, 4636)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1159,7 +1163,7 @@ Block,BlockVaspWithSingleLineHeader,"(195632, 196387)","(4697, 4716)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(197141, 197896)","(4737, 4756)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(197141, 197896)","(4657, 4676)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1179,7 +1183,8 @@ Block,BlockVaspWithSingleLineHeader,"(197141, 197896)","(4737, 4756)",Free energ
 
 
 "
-Block,BlockVaspWithHeader,"(225353, 226598)","(5485, 5503)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(225353, 226598)","(5405, 5423)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -1198,7 +1203,7 @@ Block,BlockVaspWithHeader,"(225353, 226598)","(5485, 5503)",FORCE on cell STRESS
   external pressure =      -56.20 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(226599, 227210)","(5503, 5516)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(226599, 227210)","(5423, 5436)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -1212,7 +1217,8 @@ Block,BlockVaspWithSingleLineHeader,"(226599, 227210)","(5503, 5516)",VOLUME and
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(227211, 232841)","(5517, 5564)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(227211, 232841)","(5437, 5484)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -1260,7 +1266,7 @@ Block,BlockVaspWithHeader,"(227211, 232841)","(5517, 5564)",FORCES acting on ion
    0.158E-05 -.395E-06 0.582E+00   0.175E-12 0.495E-13 -.387E-11   -.832E-19 0.189E-18 -.676E+00   0.435E-11 -.150E-11 0.841E-01
 
 "
-Block,BlockVaspWithSingleLineHeader,"(232842, 236570)","(5565, 5612)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(232842, 236570)","(5485, 5532)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.61818         0.000000      0.000000     -1.889775
@@ -1308,7 +1314,7 @@ Block,BlockVaspWithSingleLineHeader,"(232842, 236570)","(5565, 5612)",POSITION T
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(236678, 237082)","(5617, 5628)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(236678, 237082)","(5515, 5526)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.30996161 eV
@@ -1320,7 +1326,7 @@ Block,BlockVaspWithSingleLineHeader,"(236678, 237082)","(5617, 5628)",FREE ENERG
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(238593, 239348)","(5671, 5690)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(238593, 239348)","(5569, 5588)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1340,7 +1346,7 @@ Block,BlockVaspWithSingleLineHeader,"(238593, 239348)","(5671, 5690)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(240456, 241211)","(5722, 5741)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(240456, 241211)","(5620, 5639)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1360,7 +1366,7 @@ Block,BlockVaspWithSingleLineHeader,"(240456, 241211)","(5722, 5741)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(242327, 243082)","(5773, 5792)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(242327, 243082)","(5671, 5690)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1380,7 +1386,7 @@ Block,BlockVaspWithSingleLineHeader,"(242327, 243082)","(5773, 5792)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(244206, 244961)","(5824, 5843)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(244206, 244961)","(5722, 5741)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1400,7 +1406,7 @@ Block,BlockVaspWithSingleLineHeader,"(244206, 244961)","(5824, 5843)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(246093, 246848)","(5875, 5894)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(246093, 246848)","(5773, 5792)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1420,7 +1426,7 @@ Block,BlockVaspWithSingleLineHeader,"(246093, 246848)","(5875, 5894)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(247988, 248743)","(5926, 5945)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(247988, 248743)","(5824, 5843)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1440,7 +1446,7 @@ Block,BlockVaspWithSingleLineHeader,"(247988, 248743)","(5926, 5945)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(249891, 250646)","(5977, 5996)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(249891, 250646)","(5875, 5894)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1460,7 +1466,7 @@ Block,BlockVaspWithSingleLineHeader,"(249891, 250646)","(5977, 5996)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(251802, 252557)","(6028, 6047)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(251802, 252557)","(5926, 5945)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1480,7 +1486,7 @@ Block,BlockVaspWithSingleLineHeader,"(251802, 252557)","(6028, 6047)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(253721, 254476)","(6079, 6098)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(253721, 254476)","(5977, 5996)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1500,7 +1506,7 @@ Block,BlockVaspWithSingleLineHeader,"(253721, 254476)","(6079, 6098)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(255230, 255985)","(6119, 6138)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(255230, 255985)","(6017, 6036)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1520,7 +1526,8 @@ Block,BlockVaspWithSingleLineHeader,"(255230, 255985)","(6119, 6138)",Free energ
 
 
 "
-Block,BlockVaspWithHeader,"(283442, 284687)","(6867, 6885)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(283442, 284687)","(6765, 6783)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -1539,7 +1546,7 @@ Block,BlockVaspWithHeader,"(283442, 284687)","(6867, 6885)",FORCE on cell STRESS
   external pressure =      -55.74 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(284688, 285299)","(6885, 6898)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(284688, 285299)","(6783, 6796)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -1553,7 +1560,8 @@ Block,BlockVaspWithSingleLineHeader,"(284688, 285299)","(6885, 6898)",VOLUME and
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(285300, 290930)","(6899, 6946)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(285300, 290930)","(6797, 6844)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -1601,7 +1609,7 @@ Block,BlockVaspWithHeader,"(285300, 290930)","(6899, 6946)",FORCES acting on ion
    0.158E-05 -.395E-06 0.243E+01   -.459E-13 -.780E-13 0.364E-11   0.153E-18 0.138E-18 -.195E+01   0.125E-10 -.687E-11 -.478E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(290931, 294659)","(6947, 6994)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(290931, 294659)","(6845, 6892)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.60045        -0.000000     -0.000000     -1.623689
@@ -1649,7 +1657,7 @@ Block,BlockVaspWithSingleLineHeader,"(290931, 294659)","(6947, 6994)",POSITION T
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(294767, 295171)","(6999, 7010)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(294767, 295171)","(6873, 6884)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.49594917 eV
@@ -1661,7 +1669,7 @@ Block,BlockVaspWithSingleLineHeader,"(294767, 295171)","(6999, 7010)",FREE ENERG
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(296682, 297437)","(7053, 7072)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(296682, 297437)","(6927, 6946)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1681,7 +1689,7 @@ Block,BlockVaspWithSingleLineHeader,"(296682, 297437)","(7053, 7072)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(298545, 299300)","(7104, 7123)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(298545, 299300)","(6978, 6997)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1701,7 +1709,7 @@ Block,BlockVaspWithSingleLineHeader,"(298545, 299300)","(7104, 7123)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(300416, 301171)","(7155, 7174)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(300416, 301171)","(7029, 7048)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1721,7 +1729,7 @@ Block,BlockVaspWithSingleLineHeader,"(300416, 301171)","(7155, 7174)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(302295, 303050)","(7206, 7225)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(302295, 303050)","(7080, 7099)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1741,7 +1749,7 @@ Block,BlockVaspWithSingleLineHeader,"(302295, 303050)","(7206, 7225)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(304182, 304937)","(7257, 7276)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(304182, 304937)","(7131, 7150)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1761,7 +1769,7 @@ Block,BlockVaspWithSingleLineHeader,"(304182, 304937)","(7257, 7276)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(306077, 306832)","(7308, 7327)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(306077, 306832)","(7182, 7201)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1781,7 +1789,7 @@ Block,BlockVaspWithSingleLineHeader,"(306077, 306832)","(7308, 7327)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(307980, 308735)","(7359, 7378)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(307980, 308735)","(7233, 7252)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1801,7 +1809,7 @@ Block,BlockVaspWithSingleLineHeader,"(307980, 308735)","(7359, 7378)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(309891, 310646)","(7410, 7429)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(309891, 310646)","(7284, 7303)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1821,7 +1829,7 @@ Block,BlockVaspWithSingleLineHeader,"(309891, 310646)","(7410, 7429)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(311810, 312565)","(7461, 7480)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(311810, 312565)","(7335, 7354)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1841,7 +1849,7 @@ Block,BlockVaspWithSingleLineHeader,"(311810, 312565)","(7461, 7480)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(313737, 314492)","(7512, 7531)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(313737, 314492)","(7386, 7405)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1861,7 +1869,7 @@ Block,BlockVaspWithSingleLineHeader,"(313737, 314492)","(7512, 7531)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(315672, 316427)","(7563, 7582)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(315672, 316427)","(7437, 7456)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1881,7 +1889,7 @@ Block,BlockVaspWithSingleLineHeader,"(315672, 316427)","(7563, 7582)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(317616, 318371)","(7615, 7634)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(317616, 318371)","(7489, 7508)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1901,7 +1909,7 @@ Block,BlockVaspWithSingleLineHeader,"(317616, 318371)","(7615, 7634)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(319568, 320323)","(7667, 7686)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(319568, 320323)","(7541, 7560)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1921,7 +1929,7 @@ Block,BlockVaspWithSingleLineHeader,"(319568, 320323)","(7667, 7686)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(321528, 322283)","(7719, 7738)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(321528, 322283)","(7593, 7612)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1941,7 +1949,7 @@ Block,BlockVaspWithSingleLineHeader,"(321528, 322283)","(7719, 7738)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(323496, 324251)","(7771, 7790)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(323496, 324251)","(7645, 7664)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1961,7 +1969,7 @@ Block,BlockVaspWithSingleLineHeader,"(323496, 324251)","(7771, 7790)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(325472, 326227)","(7823, 7842)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(325472, 326227)","(7697, 7716)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -1981,7 +1989,7 @@ Block,BlockVaspWithSingleLineHeader,"(325472, 326227)","(7823, 7842)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(327456, 328211)","(7875, 7894)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(327456, 328211)","(7749, 7768)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2001,7 +2009,7 @@ Block,BlockVaspWithSingleLineHeader,"(327456, 328211)","(7875, 7894)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(328965, 329720)","(7915, 7934)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(328965, 329720)","(7789, 7808)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2021,7 +2029,8 @@ Block,BlockVaspWithSingleLineHeader,"(328965, 329720)","(7915, 7934)",Free energ
 
 
 "
-Block,BlockVaspWithHeader,"(357177, 358422)","(8663, 8681)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(357177, 358422)","(8537, 8555)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -2040,7 +2049,7 @@ Block,BlockVaspWithHeader,"(357177, 358422)","(8663, 8681)",FORCE on cell STRESS
   external pressure =      -54.56 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(358423, 359034)","(8681, 8694)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(358423, 359034)","(8555, 8568)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -2054,7 +2063,8 @@ Block,BlockVaspWithSingleLineHeader,"(358423, 359034)","(8681, 8694)",VOLUME and
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(359035, 364665)","(8695, 8742)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(359035, 364665)","(8569, 8616)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -2102,7 +2112,7 @@ Block,BlockVaspWithHeader,"(359035, 364665)","(8695, 8742)",FORCES acting on ion
    0.158E-05 -.394E-06 0.539E+01   -.417E-15 -.577E-13 0.682E-12   0.189E-18 0.404E-19 -.537E+01   -.114E-11 0.502E-13 -.180E-01
 
 "
-Block,BlockVaspWithSingleLineHeader,"(364666, 368394)","(8743, 8790)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(364666, 368394)","(8617, 8664)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.56498         0.000000     -0.000000     -0.972447
@@ -2150,7 +2160,7 @@ Block,BlockVaspWithSingleLineHeader,"(364666, 368394)","(8743, 8790)",POSITION T
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(368502, 368906)","(8795, 8806)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(368502, 368906)","(8629, 8640)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.76972946 eV
@@ -2162,7 +2172,7 @@ Block,BlockVaspWithSingleLineHeader,"(368502, 368906)","(8795, 8806)",FREE ENERG
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(370417, 371172)","(8849, 8868)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(370417, 371172)","(8683, 8702)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2182,7 +2192,7 @@ Block,BlockVaspWithSingleLineHeader,"(370417, 371172)","(8849, 8868)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(372280, 373035)","(8900, 8919)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(372280, 373035)","(8734, 8753)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2202,7 +2212,7 @@ Block,BlockVaspWithSingleLineHeader,"(372280, 373035)","(8900, 8919)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(374151, 374906)","(8951, 8970)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(374151, 374906)","(8785, 8804)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2222,7 +2232,7 @@ Block,BlockVaspWithSingleLineHeader,"(374151, 374906)","(8951, 8970)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(376030, 376785)","(9002, 9021)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(376030, 376785)","(8836, 8855)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2242,7 +2252,7 @@ Block,BlockVaspWithSingleLineHeader,"(376030, 376785)","(9002, 9021)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(377917, 378672)","(9053, 9072)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(377917, 378672)","(8887, 8906)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2262,7 +2272,7 @@ Block,BlockVaspWithSingleLineHeader,"(377917, 378672)","(9053, 9072)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(379812, 380567)","(9104, 9123)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(379812, 380567)","(8938, 8957)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2282,7 +2292,7 @@ Block,BlockVaspWithSingleLineHeader,"(379812, 380567)","(9104, 9123)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(381715, 382470)","(9155, 9174)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(381715, 382470)","(8989, 9008)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2302,7 +2312,7 @@ Block,BlockVaspWithSingleLineHeader,"(381715, 382470)","(9155, 9174)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(383626, 384381)","(9206, 9225)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(383626, 384381)","(9040, 9059)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2322,7 +2332,7 @@ Block,BlockVaspWithSingleLineHeader,"(383626, 384381)","(9206, 9225)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(385545, 386300)","(9257, 9276)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(385545, 386300)","(9091, 9110)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2342,7 +2352,7 @@ Block,BlockVaspWithSingleLineHeader,"(385545, 386300)","(9257, 9276)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(387472, 388227)","(9308, 9327)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(387472, 388227)","(9142, 9161)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2362,7 +2372,7 @@ Block,BlockVaspWithSingleLineHeader,"(387472, 388227)","(9308, 9327)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(389407, 390162)","(9359, 9378)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(389407, 390162)","(9193, 9212)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2382,7 +2392,7 @@ Block,BlockVaspWithSingleLineHeader,"(389407, 390162)","(9359, 9378)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(391351, 392106)","(9411, 9430)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(391351, 392106)","(9245, 9264)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2402,7 +2412,7 @@ Block,BlockVaspWithSingleLineHeader,"(391351, 392106)","(9411, 9430)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(393303, 394058)","(9463, 9482)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(393303, 394058)","(9297, 9316)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2422,7 +2432,7 @@ Block,BlockVaspWithSingleLineHeader,"(393303, 394058)","(9463, 9482)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(395263, 396018)","(9515, 9534)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(395263, 396018)","(9349, 9368)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2442,7 +2452,7 @@ Block,BlockVaspWithSingleLineHeader,"(395263, 396018)","(9515, 9534)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(397231, 397986)","(9567, 9586)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(397231, 397986)","(9401, 9420)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2462,7 +2472,7 @@ Block,BlockVaspWithSingleLineHeader,"(397231, 397986)","(9567, 9586)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(399207, 399962)","(9619, 9638)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(399207, 399962)","(9453, 9472)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2482,7 +2492,7 @@ Block,BlockVaspWithSingleLineHeader,"(399207, 399962)","(9619, 9638)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(401191, 401946)","(9671, 9690)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(401191, 401946)","(9505, 9524)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2502,7 +2512,7 @@ Block,BlockVaspWithSingleLineHeader,"(401191, 401946)","(9671, 9690)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(403183, 403938)","(9723, 9742)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(403183, 403938)","(9557, 9576)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2522,7 +2532,7 @@ Block,BlockVaspWithSingleLineHeader,"(403183, 403938)","(9723, 9742)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(405183, 405938)","(9775, 9794)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(405183, 405938)","(9609, 9628)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2542,7 +2552,7 @@ Block,BlockVaspWithSingleLineHeader,"(405183, 405938)","(9775, 9794)",Free energ
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(406692, 407447)","(9815, 9834)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(406692, 407447)","(9649, 9668)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2562,7 +2572,8 @@ Block,BlockVaspWithSingleLineHeader,"(406692, 407447)","(9815, 9834)",Free energ
 
 
 "
-Block,BlockVaspWithHeader,"(434904, 436149)","(10563, 10581)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(434904, 436149)","(10397, 10415)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -2581,7 +2592,7 @@ Block,BlockVaspWithHeader,"(434904, 436149)","(10563, 10581)",FORCE on cell STRE
   external pressure =      -50.65 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(436150, 436761)","(10581, 10594)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(436150, 436761)","(10415, 10428)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -2595,7 +2606,8 @@ Block,BlockVaspWithSingleLineHeader,"(436150, 436761)","(10581, 10594)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(436762, 442392)","(10595, 10642)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(436762, 442392)","(10429, 10476)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -2643,7 +2655,7 @@ Block,BlockVaspWithHeader,"(436762, 442392)","(10595, 10642)",FORCES acting on i
    0.158E-05 -.394E-06 0.143E+02   -.225E-12 -.628E-13 0.432E-11   -.314E-18 -.784E-19 -.143E+02   -.502E-12 -.480E-12 -.889E-03
 
 "
-Block,BlockVaspWithSingleLineHeader,"(442393, 446121)","(10643, 10690)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(442393, 446121)","(10477, 10524)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.49405         0.000000      0.000000      0.856975
@@ -2691,7 +2703,7 @@ Block,BlockVaspWithSingleLineHeader,"(442393, 446121)","(10643, 10690)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(446229, 446633)","(10695, 10706)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(446229, 446633)","(10485, 10496)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.80530483 eV
@@ -2703,7 +2715,7 @@ Block,BlockVaspWithSingleLineHeader,"(446229, 446633)","(10695, 10706)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(448144, 448899)","(10749, 10768)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(448144, 448899)","(10539, 10558)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2723,7 +2735,7 @@ Block,BlockVaspWithSingleLineHeader,"(448144, 448899)","(10749, 10768)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(450007, 450762)","(10800, 10819)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(450007, 450762)","(10590, 10609)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2743,7 +2755,7 @@ Block,BlockVaspWithSingleLineHeader,"(450007, 450762)","(10800, 10819)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(451878, 452633)","(10851, 10870)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(451878, 452633)","(10641, 10660)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2763,7 +2775,7 @@ Block,BlockVaspWithSingleLineHeader,"(451878, 452633)","(10851, 10870)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(453757, 454512)","(10902, 10921)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(453757, 454512)","(10692, 10711)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2783,7 +2795,7 @@ Block,BlockVaspWithSingleLineHeader,"(453757, 454512)","(10902, 10921)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(455644, 456399)","(10953, 10972)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(455644, 456399)","(10743, 10762)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2803,7 +2815,7 @@ Block,BlockVaspWithSingleLineHeader,"(455644, 456399)","(10953, 10972)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(457539, 458294)","(11004, 11023)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(457539, 458294)","(10794, 10813)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2823,7 +2835,7 @@ Block,BlockVaspWithSingleLineHeader,"(457539, 458294)","(11004, 11023)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(459442, 460197)","(11055, 11074)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(459442, 460197)","(10845, 10864)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2843,7 +2855,7 @@ Block,BlockVaspWithSingleLineHeader,"(459442, 460197)","(11055, 11074)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(461353, 462108)","(11106, 11125)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(461353, 462108)","(10896, 10915)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2863,7 +2875,7 @@ Block,BlockVaspWithSingleLineHeader,"(461353, 462108)","(11106, 11125)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(463272, 464027)","(11157, 11176)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(463272, 464027)","(10947, 10966)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2883,7 +2895,7 @@ Block,BlockVaspWithSingleLineHeader,"(463272, 464027)","(11157, 11176)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(465199, 465954)","(11208, 11227)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(465199, 465954)","(10998, 11017)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2903,7 +2915,7 @@ Block,BlockVaspWithSingleLineHeader,"(465199, 465954)","(11208, 11227)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(467134, 467889)","(11259, 11278)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(467134, 467889)","(11049, 11068)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2923,7 +2935,7 @@ Block,BlockVaspWithSingleLineHeader,"(467134, 467889)","(11259, 11278)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(469078, 469833)","(11311, 11330)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(469078, 469833)","(11101, 11120)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2943,7 +2955,7 @@ Block,BlockVaspWithSingleLineHeader,"(469078, 469833)","(11311, 11330)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(471030, 471785)","(11363, 11382)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(471030, 471785)","(11153, 11172)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2963,7 +2975,7 @@ Block,BlockVaspWithSingleLineHeader,"(471030, 471785)","(11363, 11382)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(472990, 473745)","(11415, 11434)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(472990, 473745)","(11205, 11224)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -2983,7 +2995,7 @@ Block,BlockVaspWithSingleLineHeader,"(472990, 473745)","(11415, 11434)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(474958, 475713)","(11467, 11486)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(474958, 475713)","(11257, 11276)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3003,7 +3015,7 @@ Block,BlockVaspWithSingleLineHeader,"(474958, 475713)","(11467, 11486)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(476934, 477689)","(11519, 11538)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(476934, 477689)","(11309, 11328)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3023,7 +3035,7 @@ Block,BlockVaspWithSingleLineHeader,"(476934, 477689)","(11519, 11538)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(478918, 479673)","(11571, 11590)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(478918, 479673)","(11361, 11380)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3043,7 +3055,7 @@ Block,BlockVaspWithSingleLineHeader,"(478918, 479673)","(11571, 11590)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(480427, 481182)","(11611, 11630)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(480427, 481182)","(11401, 11420)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3063,7 +3075,8 @@ Block,BlockVaspWithSingleLineHeader,"(480427, 481182)","(11611, 11630)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(508639, 509884)","(12359, 12377)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(508639, 509884)","(12149, 12167)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -3082,7 +3095,7 @@ Block,BlockVaspWithHeader,"(508639, 509884)","(12359, 12377)",FORCE on cell STRE
   external pressure =      -52.79 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(509885, 510496)","(12377, 12390)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(509885, 510496)","(12167, 12180)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -3096,7 +3109,8 @@ Block,BlockVaspWithSingleLineHeader,"(509885, 510496)","(12377, 12390)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(510497, 516127)","(12391, 12438)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(510497, 516127)","(12181, 12228)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -3144,7 +3158,7 @@ Block,BlockVaspWithHeader,"(510497, 516127)","(12391, 12438)",FORCES acting on i
    0.158E-05 -.394E-06 0.985E+01   0.119E-12 0.537E-13 -.477E-11   -.163E-18 -.859E-20 -.983E+01   -.101E-12 -.765E-12 -.992E-02
 
 "
-Block,BlockVaspWithSingleLineHeader,"(516128, 519856)","(12439, 12486)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(516128, 519856)","(12229, 12276)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52733        -0.000000      0.000000     -0.088944
@@ -3192,7 +3206,7 @@ Block,BlockVaspWithSingleLineHeader,"(516128, 519856)","(12439, 12486)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(519964, 520368)","(12491, 12502)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(519964, 520368)","(12241, 12252)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.88493010 eV
@@ -3204,7 +3218,7 @@ Block,BlockVaspWithSingleLineHeader,"(519964, 520368)","(12491, 12502)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(521879, 522634)","(12545, 12564)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(521879, 522634)","(12295, 12314)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3224,7 +3238,7 @@ Block,BlockVaspWithSingleLineHeader,"(521879, 522634)","(12545, 12564)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(523742, 524497)","(12596, 12615)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(523742, 524497)","(12346, 12365)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3244,7 +3258,7 @@ Block,BlockVaspWithSingleLineHeader,"(523742, 524497)","(12596, 12615)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(525613, 526368)","(12647, 12666)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(525613, 526368)","(12397, 12416)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3264,7 +3278,7 @@ Block,BlockVaspWithSingleLineHeader,"(525613, 526368)","(12647, 12666)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(527492, 528247)","(12698, 12717)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(527492, 528247)","(12448, 12467)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3284,7 +3298,7 @@ Block,BlockVaspWithSingleLineHeader,"(527492, 528247)","(12698, 12717)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(529379, 530134)","(12749, 12768)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(529379, 530134)","(12499, 12518)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3304,7 +3318,7 @@ Block,BlockVaspWithSingleLineHeader,"(529379, 530134)","(12749, 12768)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(531274, 532029)","(12800, 12819)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(531274, 532029)","(12550, 12569)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3324,7 +3338,7 @@ Block,BlockVaspWithSingleLineHeader,"(531274, 532029)","(12800, 12819)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(533177, 533932)","(12851, 12870)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(533177, 533932)","(12601, 12620)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3344,7 +3358,7 @@ Block,BlockVaspWithSingleLineHeader,"(533177, 533932)","(12851, 12870)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(534686, 535441)","(12891, 12910)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(534686, 535441)","(12641, 12660)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3364,7 +3378,8 @@ Block,BlockVaspWithSingleLineHeader,"(534686, 535441)","(12891, 12910)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(562898, 564143)","(13639, 13657)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(562898, 564143)","(13389, 13407)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -3383,7 +3398,7 @@ Block,BlockVaspWithHeader,"(562898, 564143)","(13639, 13657)",FORCE on cell STRE
   external pressure =      -52.63 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(564144, 564755)","(13657, 13670)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(564144, 564755)","(13407, 13420)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -3397,7 +3412,8 @@ Block,BlockVaspWithSingleLineHeader,"(564144, 564755)","(13657, 13670)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(564756, 570386)","(13671, 13718)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(564756, 570386)","(13421, 13468)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -3445,7 +3461,7 @@ Block,BlockVaspWithHeader,"(564756, 570386)","(13671, 13718)",FORCES acting on i
    0.158E-05 -.394E-06 0.103E+02   0.175E-13 -.516E-14 -.114E-11   0.388E-18 -.363E-19 -.102E+02   0.422E-11 -.356E-11 -.149E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(570387, 574115)","(13719, 13766)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(570387, 574115)","(13469, 13516)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52452         0.000000     -0.000000     -0.017506
@@ -3493,7 +3509,7 @@ Block,BlockVaspWithSingleLineHeader,"(570387, 574115)","(13719, 13766)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(574223, 574627)","(13771, 13782)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(574223, 574627)","(13501, 13512)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.88546770 eV
@@ -3505,7 +3521,7 @@ Block,BlockVaspWithSingleLineHeader,"(574223, 574627)","(13771, 13782)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(576138, 576893)","(13825, 13844)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(576138, 576893)","(13555, 13574)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3525,7 +3541,7 @@ Block,BlockVaspWithSingleLineHeader,"(576138, 576893)","(13825, 13844)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(578001, 578756)","(13876, 13895)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(578001, 578756)","(13606, 13625)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3545,7 +3561,7 @@ Block,BlockVaspWithSingleLineHeader,"(578001, 578756)","(13876, 13895)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(579872, 580627)","(13927, 13946)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(579872, 580627)","(13657, 13676)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3565,7 +3581,7 @@ Block,BlockVaspWithSingleLineHeader,"(579872, 580627)","(13927, 13946)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(581751, 582506)","(13978, 13997)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(581751, 582506)","(13708, 13727)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3585,7 +3601,7 @@ Block,BlockVaspWithSingleLineHeader,"(581751, 582506)","(13978, 13997)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(583638, 584393)","(14029, 14048)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(583638, 584393)","(13759, 13778)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3605,7 +3621,7 @@ Block,BlockVaspWithSingleLineHeader,"(583638, 584393)","(14029, 14048)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(585533, 586288)","(14080, 14099)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(585533, 586288)","(13810, 13829)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3625,7 +3641,7 @@ Block,BlockVaspWithSingleLineHeader,"(585533, 586288)","(14080, 14099)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(587436, 588191)","(14131, 14150)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(587436, 588191)","(13861, 13880)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3645,7 +3661,7 @@ Block,BlockVaspWithSingleLineHeader,"(587436, 588191)","(14131, 14150)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(588945, 589700)","(14171, 14190)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(588945, 589700)","(13901, 13920)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3665,7 +3681,8 @@ Block,BlockVaspWithSingleLineHeader,"(588945, 589700)","(14171, 14190)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(617157, 618402)","(14919, 14937)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(617157, 618402)","(14649, 14667)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -3684,7 +3701,7 @@ Block,BlockVaspWithHeader,"(617157, 618402)","(14919, 14937)",FORCE on cell STRE
   external pressure =      -52.75 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(618403, 619014)","(14937, 14950)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(618403, 619014)","(14667, 14680)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -3698,7 +3715,8 @@ Block,BlockVaspWithSingleLineHeader,"(618403, 619014)","(14937, 14950)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(619015, 624645)","(14951, 14998)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(619015, 624645)","(14681, 14728)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -3746,7 +3764,7 @@ Block,BlockVaspWithHeader,"(619015, 624645)","(14951, 14998)",FORCES acting on i
    0.158E-05 -.394E-06 0.971E+01   -.193E-12 0.187E-13 -.750E-11   -.163E-18 0.527E-19 -.107E+02   0.265E-11 -.106E-11 0.982E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(624646, 628374)","(14999, 15046)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(624646, 628374)","(14729, 14776)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52356        -0.000000     -0.000000     -0.014579
@@ -3794,7 +3812,7 @@ Block,BlockVaspWithSingleLineHeader,"(624646, 628374)","(14999, 15046)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(628482, 628886)","(15051, 15062)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(628482, 628886)","(14761, 14772)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.89492542 eV
@@ -3806,7 +3824,7 @@ Block,BlockVaspWithSingleLineHeader,"(628482, 628886)","(15051, 15062)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(630816, 631571)","(15113, 15132)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(630816, 631571)","(14823, 14842)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3826,7 +3844,7 @@ Block,BlockVaspWithSingleLineHeader,"(630816, 631571)","(15113, 15132)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(632679, 633434)","(15164, 15183)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(632679, 633434)","(14874, 14893)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3846,7 +3864,7 @@ Block,BlockVaspWithSingleLineHeader,"(632679, 633434)","(15164, 15183)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(634550, 635305)","(15215, 15234)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(634550, 635305)","(14925, 14944)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3866,7 +3884,7 @@ Block,BlockVaspWithSingleLineHeader,"(634550, 635305)","(15215, 15234)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(636429, 637184)","(15266, 15285)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(636429, 637184)","(14976, 14995)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3886,7 +3904,7 @@ Block,BlockVaspWithSingleLineHeader,"(636429, 637184)","(15266, 15285)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(638316, 639071)","(15317, 15336)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(638316, 639071)","(15027, 15046)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3906,7 +3924,7 @@ Block,BlockVaspWithSingleLineHeader,"(638316, 639071)","(15317, 15336)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(640211, 640966)","(15368, 15387)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(640211, 640966)","(15078, 15097)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3926,7 +3944,7 @@ Block,BlockVaspWithSingleLineHeader,"(640211, 640966)","(15368, 15387)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(642114, 642869)","(15419, 15438)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(642114, 642869)","(15129, 15148)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3946,7 +3964,7 @@ Block,BlockVaspWithSingleLineHeader,"(642114, 642869)","(15419, 15438)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(644025, 644780)","(15470, 15489)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(644025, 644780)","(15180, 15199)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3966,7 +3984,7 @@ Block,BlockVaspWithSingleLineHeader,"(644025, 644780)","(15470, 15489)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(645944, 646699)","(15521, 15540)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(645944, 646699)","(15231, 15250)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -3986,7 +4004,7 @@ Block,BlockVaspWithSingleLineHeader,"(645944, 646699)","(15521, 15540)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(647453, 648208)","(15561, 15580)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(647453, 648208)","(15271, 15290)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4006,7 +4024,8 @@ Block,BlockVaspWithSingleLineHeader,"(647453, 648208)","(15561, 15580)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(675665, 676910)","(16309, 16327)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(675665, 676910)","(16019, 16037)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -4025,7 +4044,7 @@ Block,BlockVaspWithHeader,"(675665, 676910)","(16309, 16327)",FORCE on cell STRE
   external pressure =      -53.04 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(676911, 677522)","(16327, 16340)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(676911, 677522)","(16037, 16050)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -4039,7 +4058,8 @@ Block,BlockVaspWithSingleLineHeader,"(676911, 677522)","(16327, 16340)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(677523, 683153)","(16341, 16388)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(677523, 683153)","(16051, 16098)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -4087,7 +4107,7 @@ Block,BlockVaspWithHeader,"(677523, 683153)","(16341, 16388)",FORCES acting on i
    0.158E-05 -.394E-06 0.120E+02   0.108E-12 -.246E-13 0.341E-11   0.319E-18 -.831E-19 -.121E+02   0.632E-11 -.288E-11 0.357E-01
 
 "
-Block,BlockVaspWithSingleLineHeader,"(683154, 686882)","(16389, 16436)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(683154, 686882)","(16099, 16146)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52067         0.000000     -0.000000     -0.011653
@@ -4135,7 +4155,7 @@ Block,BlockVaspWithSingleLineHeader,"(683154, 686882)","(16389, 16436)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(686990, 687394)","(16441, 16452)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(686990, 687394)","(16127, 16138)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.91437430 eV
@@ -4147,7 +4167,7 @@ Block,BlockVaspWithSingleLineHeader,"(686990, 687394)","(16441, 16452)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(688905, 689660)","(16495, 16514)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(688905, 689660)","(16181, 16200)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4167,7 +4187,7 @@ Block,BlockVaspWithSingleLineHeader,"(688905, 689660)","(16495, 16514)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(690768, 691523)","(16546, 16565)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(690768, 691523)","(16232, 16251)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4187,7 +4207,7 @@ Block,BlockVaspWithSingleLineHeader,"(690768, 691523)","(16546, 16565)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(692639, 693394)","(16597, 16616)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(692639, 693394)","(16283, 16302)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4207,7 +4227,7 @@ Block,BlockVaspWithSingleLineHeader,"(692639, 693394)","(16597, 16616)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(694518, 695273)","(16648, 16667)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(694518, 695273)","(16334, 16353)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4227,7 +4247,7 @@ Block,BlockVaspWithSingleLineHeader,"(694518, 695273)","(16648, 16667)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(696405, 697160)","(16699, 16718)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(696405, 697160)","(16385, 16404)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4247,7 +4267,7 @@ Block,BlockVaspWithSingleLineHeader,"(696405, 697160)","(16699, 16718)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(698300, 699055)","(16750, 16769)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(698300, 699055)","(16436, 16455)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4267,7 +4287,7 @@ Block,BlockVaspWithSingleLineHeader,"(698300, 699055)","(16750, 16769)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(700203, 700958)","(16801, 16820)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(700203, 700958)","(16487, 16506)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4287,7 +4307,7 @@ Block,BlockVaspWithSingleLineHeader,"(700203, 700958)","(16801, 16820)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(702114, 702869)","(16852, 16871)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(702114, 702869)","(16538, 16557)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4307,7 +4327,7 @@ Block,BlockVaspWithSingleLineHeader,"(702114, 702869)","(16852, 16871)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(704033, 704788)","(16903, 16922)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(704033, 704788)","(16589, 16608)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4327,7 +4347,7 @@ Block,BlockVaspWithSingleLineHeader,"(704033, 704788)","(16903, 16922)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(705960, 706715)","(16954, 16973)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(705960, 706715)","(16640, 16659)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4347,7 +4367,7 @@ Block,BlockVaspWithSingleLineHeader,"(705960, 706715)","(16954, 16973)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(707469, 708224)","(16994, 17013)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(707469, 708224)","(16680, 16699)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4367,7 +4387,8 @@ Block,BlockVaspWithSingleLineHeader,"(707469, 708224)","(16994, 17013)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(735681, 736926)","(17742, 17760)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(735681, 736926)","(17428, 17446)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -4386,7 +4407,7 @@ Block,BlockVaspWithHeader,"(735681, 736926)","(17742, 17760)",FORCE on cell STRE
   external pressure =      -53.38 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(736927, 737538)","(17760, 17773)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(736927, 737538)","(17446, 17459)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -4400,7 +4421,8 @@ Block,BlockVaspWithSingleLineHeader,"(736927, 737538)","(17760, 17773)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(737539, 743169)","(17774, 17821)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(737539, 743169)","(17460, 17507)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -4448,7 +4470,7 @@ Block,BlockVaspWithHeader,"(737539, 743169)","(17774, 17821)",FORCES acting on i
    0.158E-05 -.394E-06 0.145E+02   0.282E-13 -.110E-12 0.136E-10   -.538E-18 0.285E-18 -.149E+02   -.206E-11 0.286E-11 0.285E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(743170, 746898)","(17822, 17869)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(743170, 746898)","(17508, 17555)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.51491         0.000000      0.000000      0.003777
@@ -4496,7 +4518,7 @@ Block,BlockVaspWithSingleLineHeader,"(743170, 746898)","(17822, 17869)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(747006, 747410)","(17874, 17885)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(747006, 747410)","(17534, 17545)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.91021767 eV
@@ -4508,7 +4530,7 @@ Block,BlockVaspWithSingleLineHeader,"(747006, 747410)","(17874, 17885)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(748921, 749676)","(17928, 17947)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(748921, 749676)","(17588, 17607)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4528,7 +4550,7 @@ Block,BlockVaspWithSingleLineHeader,"(748921, 749676)","(17928, 17947)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(750784, 751539)","(17979, 17998)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(750784, 751539)","(17639, 17658)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4548,7 +4570,7 @@ Block,BlockVaspWithSingleLineHeader,"(750784, 751539)","(17979, 17998)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(752655, 753410)","(18030, 18049)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(752655, 753410)","(17690, 17709)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4568,7 +4590,7 @@ Block,BlockVaspWithSingleLineHeader,"(752655, 753410)","(18030, 18049)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(754534, 755289)","(18081, 18100)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(754534, 755289)","(17741, 17760)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4588,7 +4610,7 @@ Block,BlockVaspWithSingleLineHeader,"(754534, 755289)","(18081, 18100)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(756421, 757176)","(18132, 18151)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(756421, 757176)","(17792, 17811)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4608,7 +4630,7 @@ Block,BlockVaspWithSingleLineHeader,"(756421, 757176)","(18132, 18151)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(758316, 759071)","(18183, 18202)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(758316, 759071)","(17843, 17862)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4628,7 +4650,7 @@ Block,BlockVaspWithSingleLineHeader,"(758316, 759071)","(18183, 18202)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(760219, 760974)","(18234, 18253)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(760219, 760974)","(17894, 17913)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4648,7 +4670,7 @@ Block,BlockVaspWithSingleLineHeader,"(760219, 760974)","(18234, 18253)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(762130, 762885)","(18285, 18304)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(762130, 762885)","(17945, 17964)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4668,7 +4690,7 @@ Block,BlockVaspWithSingleLineHeader,"(762130, 762885)","(18285, 18304)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(764049, 764804)","(18336, 18355)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(764049, 764804)","(17996, 18015)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4688,7 +4710,7 @@ Block,BlockVaspWithSingleLineHeader,"(764049, 764804)","(18336, 18355)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(765558, 766313)","(18376, 18395)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(765558, 766313)","(18036, 18055)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4708,7 +4730,8 @@ Block,BlockVaspWithSingleLineHeader,"(765558, 766313)","(18376, 18395)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(793770, 795015)","(19124, 19142)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(793770, 795015)","(18784, 18802)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -4727,7 +4750,7 @@ Block,BlockVaspWithHeader,"(793770, 795015)","(19124, 19142)",FORCE on cell STRE
   external pressure =      -53.27 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(795016, 795627)","(19142, 19155)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(795016, 795627)","(18802, 18815)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -4741,7 +4764,8 @@ Block,BlockVaspWithSingleLineHeader,"(795016, 795627)","(19142, 19155)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(795628, 801258)","(19156, 19203)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(795628, 801258)","(18816, 18863)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -4789,7 +4813,7 @@ Block,BlockVaspWithHeader,"(795628, 801258)","(19156, 19203)",FORCES acting on i
    0.158E-05 -.394E-06 0.130E+02   -.209E-13 -.757E-13 -.387E-11   0.282E-18 0.536E-19 -.133E+02   -.926E-11 0.913E-12 0.234E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(801259, 804987)","(19204, 19251)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(801259, 804987)","(18864, 18911)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.51818        -0.000000     -0.000000     -0.006000
@@ -4837,7 +4861,7 @@ Block,BlockVaspWithSingleLineHeader,"(801259, 804987)","(19204, 19251)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(805095, 805499)","(19256, 19267)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(805095, 805499)","(18892, 18903)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.91954603 eV
@@ -4849,7 +4873,7 @@ Block,BlockVaspWithSingleLineHeader,"(805095, 805499)","(19256, 19267)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(807010, 807765)","(19310, 19329)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(807010, 807765)","(18946, 18965)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4869,7 +4893,7 @@ Block,BlockVaspWithSingleLineHeader,"(807010, 807765)","(19310, 19329)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(808873, 809628)","(19361, 19380)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(808873, 809628)","(18997, 19016)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4889,7 +4913,7 @@ Block,BlockVaspWithSingleLineHeader,"(808873, 809628)","(19361, 19380)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(810744, 811499)","(19412, 19431)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(810744, 811499)","(19048, 19067)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4909,7 +4933,7 @@ Block,BlockVaspWithSingleLineHeader,"(810744, 811499)","(19412, 19431)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(812623, 813378)","(19463, 19482)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(812623, 813378)","(19099, 19118)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4929,7 +4953,7 @@ Block,BlockVaspWithSingleLineHeader,"(812623, 813378)","(19463, 19482)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(814132, 814887)","(19503, 19522)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(814132, 814887)","(19139, 19158)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -4949,7 +4973,8 @@ Block,BlockVaspWithSingleLineHeader,"(814132, 814887)","(19503, 19522)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(842344, 843589)","(20251, 20269)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(842344, 843589)","(19887, 19905)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -4968,7 +4993,7 @@ Block,BlockVaspWithHeader,"(842344, 843589)","(20251, 20269)",FORCE on cell STRE
   external pressure =      -53.25 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(843590, 844201)","(20269, 20282)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(843590, 844201)","(19905, 19918)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -4982,7 +5007,8 @@ Block,BlockVaspWithSingleLineHeader,"(843590, 844201)","(20269, 20282)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(844202, 849832)","(20283, 20330)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(844202, 849832)","(19919, 19966)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -5030,7 +5056,7 @@ Block,BlockVaspWithHeader,"(844202, 849832)","(20283, 20330)",FORCES acting on i
    0.158E-05 -.394E-06 0.136E+02   0.140E-12 -.484E-13 -.273E-11   0.559E-18 0.623E-19 -.133E+02   -.469E-12 -.169E-12 -.306E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(849833, 853561)","(20331, 20378)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(849833, 853561)","(19967, 20014)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.51802        -0.000000     -0.000000     -0.005586
@@ -5078,7 +5104,7 @@ Block,BlockVaspWithSingleLineHeader,"(849833, 853561)","(20331, 20378)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(853669, 854073)","(20383, 20394)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(853669, 854073)","(20005, 20016)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.91954011 eV
@@ -5090,7 +5116,7 @@ Block,BlockVaspWithSingleLineHeader,"(853669, 854073)","(20383, 20394)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(855584, 856339)","(20437, 20456)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(855584, 856339)","(20059, 20078)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5110,7 +5136,7 @@ Block,BlockVaspWithSingleLineHeader,"(855584, 856339)","(20437, 20456)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(857447, 858202)","(20488, 20507)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(857447, 858202)","(20110, 20129)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5130,7 +5156,7 @@ Block,BlockVaspWithSingleLineHeader,"(857447, 858202)","(20488, 20507)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(859318, 860073)","(20539, 20558)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(859318, 860073)","(20161, 20180)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5150,7 +5176,7 @@ Block,BlockVaspWithSingleLineHeader,"(859318, 860073)","(20539, 20558)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(861197, 861952)","(20590, 20609)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(861197, 861952)","(20212, 20231)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5170,7 +5196,7 @@ Block,BlockVaspWithSingleLineHeader,"(861197, 861952)","(20590, 20609)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(862706, 863461)","(20630, 20649)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(862706, 863461)","(20252, 20271)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5190,7 +5216,8 @@ Block,BlockVaspWithSingleLineHeader,"(862706, 863461)","(20630, 20649)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(890918, 892163)","(21378, 21396)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(890918, 892163)","(21000, 21018)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -5209,7 +5236,7 @@ Block,BlockVaspWithHeader,"(890918, 892163)","(21378, 21396)",FORCE on cell STRE
   external pressure =      -53.25 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(892164, 892775)","(21396, 21409)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(892164, 892775)","(21018, 21031)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -5223,7 +5250,8 @@ Block,BlockVaspWithSingleLineHeader,"(892164, 892775)","(21396, 21409)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(892776, 898406)","(21410, 21457)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(892776, 898406)","(21032, 21079)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -5271,7 +5299,7 @@ Block,BlockVaspWithHeader,"(892776, 898406)","(21410, 21457)",FORCES acting on i
    0.158E-05 -.394E-06 0.129E+02   -.549E-13 -.149E-13 0.341E-11   -.201E-18 0.189E-18 -.134E+02   -.297E-11 0.251E-11 0.473E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(898407, 902135)","(21458, 21505)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(898407, 902135)","(21080, 21127)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.51782        -0.000000      0.000000      0.003578
@@ -5319,7 +5347,7 @@ Block,BlockVaspWithSingleLineHeader,"(898407, 902135)","(21458, 21505)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(902243, 902647)","(21510, 21521)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(902243, 902647)","(21118, 21129)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.91994825 eV
@@ -5331,7 +5359,7 @@ Block,BlockVaspWithSingleLineHeader,"(902243, 902647)","(21510, 21521)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(904577, 905332)","(21572, 21591)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(904577, 905332)","(21180, 21199)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5351,7 +5379,7 @@ Block,BlockVaspWithSingleLineHeader,"(904577, 905332)","(21572, 21591)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(906440, 907195)","(21623, 21642)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(906440, 907195)","(21231, 21250)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5371,7 +5399,7 @@ Block,BlockVaspWithSingleLineHeader,"(906440, 907195)","(21623, 21642)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(908311, 909066)","(21674, 21693)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(908311, 909066)","(21282, 21301)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5391,7 +5419,7 @@ Block,BlockVaspWithSingleLineHeader,"(908311, 909066)","(21674, 21693)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(910190, 910945)","(21725, 21744)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(910190, 910945)","(21333, 21352)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5411,7 +5439,7 @@ Block,BlockVaspWithSingleLineHeader,"(910190, 910945)","(21725, 21744)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(912077, 912832)","(21776, 21795)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(912077, 912832)","(21384, 21403)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5431,7 +5459,7 @@ Block,BlockVaspWithSingleLineHeader,"(912077, 912832)","(21776, 21795)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(913972, 914727)","(21827, 21846)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(913972, 914727)","(21435, 21454)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5451,7 +5479,7 @@ Block,BlockVaspWithSingleLineHeader,"(913972, 914727)","(21827, 21846)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(915875, 916630)","(21878, 21897)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(915875, 916630)","(21486, 21505)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5471,7 +5499,7 @@ Block,BlockVaspWithSingleLineHeader,"(915875, 916630)","(21878, 21897)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(917384, 918139)","(21918, 21937)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(917384, 918139)","(21526, 21545)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5491,7 +5519,8 @@ Block,BlockVaspWithSingleLineHeader,"(917384, 918139)","(21918, 21937)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(945596, 946841)","(22666, 22684)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(945596, 946841)","(22274, 22292)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -5510,7 +5539,7 @@ Block,BlockVaspWithHeader,"(945596, 946841)","(22666, 22684)",FORCE on cell STRE
   external pressure =      -53.23 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(946842, 947453)","(22684, 22697)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(946842, 947453)","(22292, 22305)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -5524,7 +5553,8 @@ Block,BlockVaspWithSingleLineHeader,"(946842, 947453)","(22684, 22697)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(947454, 953084)","(22698, 22745)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(947454, 953084)","(22306, 22353)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -5572,7 +5602,7 @@ Block,BlockVaspWithHeader,"(947454, 953084)","(22698, 22745)",FORCES acting on i
    0.158E-05 -.394E-06 0.131E+02   -.803E-13 0.114E-12 -.114E-11   -.301E-18 -.121E-18 -.134E+02   0.133E-12 -.102E-11 0.253E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(953085, 956813)","(22746, 22793)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(953085, 956813)","(22354, 22401)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.51732        -0.000000     -0.000000      0.021277
@@ -5620,7 +5650,7 @@ Block,BlockVaspWithSingleLineHeader,"(953085, 956813)","(22746, 22793)",POSITION
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(956921, 957325)","(22798, 22809)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(956921, 957325)","(22386, 22397)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92020862 eV
@@ -5632,7 +5662,7 @@ Block,BlockVaspWithSingleLineHeader,"(956921, 957325)","(22798, 22809)",FREE ENE
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(958836, 959591)","(22852, 22871)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(958836, 959591)","(22440, 22459)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5652,7 +5682,7 @@ Block,BlockVaspWithSingleLineHeader,"(958836, 959591)","(22852, 22871)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(960699, 961454)","(22903, 22922)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(960699, 961454)","(22491, 22510)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5672,7 +5702,7 @@ Block,BlockVaspWithSingleLineHeader,"(960699, 961454)","(22903, 22922)",Free ene
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(962208, 962963)","(22943, 22962)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(962208, 962963)","(22531, 22550)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5692,7 +5722,8 @@ Block,BlockVaspWithSingleLineHeader,"(962208, 962963)","(22943, 22962)",Free ene
 
 
 "
-Block,BlockVaspWithHeader,"(990420, 991665)","(23691, 23709)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(990420, 991665)","(23279, 23297)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -5711,7 +5742,7 @@ Block,BlockVaspWithHeader,"(990420, 991665)","(23691, 23709)",FORCE on cell STRE
   external pressure =      -53.24 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(991666, 992277)","(23709, 23722)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(991666, 992277)","(23297, 23310)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -5725,7 +5756,8 @@ Block,BlockVaspWithSingleLineHeader,"(991666, 992277)","(23709, 23722)",VOLUME a
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(992278, 997908)","(23723, 23770)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(992278, 997908)","(23311, 23358)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -5773,7 +5805,7 @@ Block,BlockVaspWithHeader,"(992278, 997908)","(23723, 23770)",FORCES acting on i
    0.158E-05 -.394E-06 0.121E+02   -.356E-14 -.694E-13 -.409E-11   -.288E-18 -.465E-19 -.134E+02   0.950E-12 -.143E-11 0.129E+01
 
 "
-Block,BlockVaspWithSingleLineHeader,"(997909, 1001637)","(23771, 23818)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(997909, 1001637)","(23359, 23406)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.51737        -0.000000     -0.000000      0.019446
@@ -5821,7 +5853,7 @@ Block,BlockVaspWithSingleLineHeader,"(997909, 1001637)","(23771, 23818)",POSITIO
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1001745, 1002149)","(23823, 23834)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1001745, 1002149)","(23401, 23412)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92021158 eV
@@ -5833,7 +5865,7 @@ Block,BlockVaspWithSingleLineHeader,"(1001745, 1002149)","(23823, 23834)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1003660, 1004415)","(23877, 23896)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1003660, 1004415)","(23455, 23474)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5853,7 +5885,7 @@ Block,BlockVaspWithSingleLineHeader,"(1003660, 1004415)","(23877, 23896)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1005523, 1006278)","(23928, 23947)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1005523, 1006278)","(23506, 23525)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5873,7 +5905,7 @@ Block,BlockVaspWithSingleLineHeader,"(1005523, 1006278)","(23928, 23947)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1007394, 1008149)","(23979, 23998)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1007394, 1008149)","(23557, 23576)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5893,7 +5925,7 @@ Block,BlockVaspWithSingleLineHeader,"(1007394, 1008149)","(23979, 23998)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1009273, 1010028)","(24030, 24049)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1009273, 1010028)","(23608, 23627)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5913,7 +5945,7 @@ Block,BlockVaspWithSingleLineHeader,"(1009273, 1010028)","(24030, 24049)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1010782, 1011537)","(24070, 24089)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1010782, 1011537)","(23648, 23667)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -5933,7 +5965,8 @@ Block,BlockVaspWithSingleLineHeader,"(1010782, 1011537)","(24070, 24089)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1038994, 1040239)","(24818, 24836)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1038994, 1040239)","(24396, 24414)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -5952,7 +5985,7 @@ Block,BlockVaspWithHeader,"(1038994, 1040239)","(24818, 24836)",FORCE on cell ST
   external pressure =      -53.21 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1040240, 1040851)","(24836, 24849)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1040240, 1040851)","(24414, 24427)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -5966,7 +5999,8 @@ Block,BlockVaspWithSingleLineHeader,"(1040240, 1040851)","(24836, 24849)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1040852, 1046482)","(24850, 24897)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1040852, 1046482)","(24428, 24475)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -6014,7 +6048,7 @@ Block,BlockVaspWithHeader,"(1040852, 1046482)","(24850, 24897)",FORCES acting on
    0.158E-05 -.394E-06 0.140E+02   -.153E-13 -.620E-13 0.000E+00   0.879E-18 -.470E-19 -.132E+02   0.340E-12 0.304E-11 -.791E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1046483, 1050211)","(24898, 24945)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1046483, 1050211)","(24476, 24523)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.51798         0.000000      0.000000      0.013957
@@ -6062,7 +6096,7 @@ Block,BlockVaspWithSingleLineHeader,"(1046483, 1050211)","(24898, 24945)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1050319, 1050723)","(24950, 24961)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1050319, 1050723)","(24514, 24525)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92041864 eV
@@ -6074,7 +6108,7 @@ Block,BlockVaspWithSingleLineHeader,"(1050319, 1050723)","(24950, 24961)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1052653, 1053408)","(25012, 25031)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1052653, 1053408)","(24576, 24595)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6094,7 +6128,7 @@ Block,BlockVaspWithSingleLineHeader,"(1052653, 1053408)","(25012, 25031)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1054516, 1055271)","(25063, 25082)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1054516, 1055271)","(24627, 24646)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6114,7 +6148,7 @@ Block,BlockVaspWithSingleLineHeader,"(1054516, 1055271)","(25063, 25082)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1056387, 1057142)","(25114, 25133)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1056387, 1057142)","(24678, 24697)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6134,7 +6168,7 @@ Block,BlockVaspWithSingleLineHeader,"(1056387, 1057142)","(25114, 25133)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1058266, 1059021)","(25165, 25184)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1058266, 1059021)","(24729, 24748)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6154,7 +6188,7 @@ Block,BlockVaspWithSingleLineHeader,"(1058266, 1059021)","(25165, 25184)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1060153, 1060908)","(25216, 25235)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1060153, 1060908)","(24780, 24799)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6174,7 +6208,7 @@ Block,BlockVaspWithSingleLineHeader,"(1060153, 1060908)","(25216, 25235)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1062048, 1062803)","(25267, 25286)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1062048, 1062803)","(24831, 24850)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6194,7 +6228,7 @@ Block,BlockVaspWithSingleLineHeader,"(1062048, 1062803)","(25267, 25286)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1063951, 1064706)","(25318, 25337)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1063951, 1064706)","(24882, 24901)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6214,7 +6248,7 @@ Block,BlockVaspWithSingleLineHeader,"(1063951, 1064706)","(25318, 25337)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1065460, 1066215)","(25358, 25377)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1065460, 1066215)","(24922, 24941)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6234,7 +6268,8 @@ Block,BlockVaspWithSingleLineHeader,"(1065460, 1066215)","(25358, 25377)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1093672, 1094917)","(26106, 26124)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1093672, 1094917)","(25670, 25688)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -6253,7 +6288,7 @@ Block,BlockVaspWithHeader,"(1093672, 1094917)","(26106, 26124)",FORCE on cell ST
   external pressure =      -53.32 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1094918, 1095529)","(26124, 26137)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1094918, 1095529)","(25688, 25701)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -6267,7 +6302,8 @@ Block,BlockVaspWithSingleLineHeader,"(1094918, 1095529)","(26124, 26137)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1095530, 1101160)","(26138, 26185)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1095530, 1101160)","(25702, 25749)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -6315,7 +6351,7 @@ Block,BlockVaspWithHeader,"(1095530, 1101160)","(26138, 26185)",FORCES acting on
    0.158E-05 -.394E-06 0.129E+02   0.199E-12 -.613E-14 0.159E-11   -.112E-18 -.707E-19 -.132E+02   -.570E-12 0.163E-12 0.365E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1101161, 1104889)","(26186, 26233)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1101161, 1104889)","(25750, 25797)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.51984        -0.000000     -0.000000     -0.000693
@@ -6363,7 +6399,7 @@ Block,BlockVaspWithSingleLineHeader,"(1101161, 1104889)","(26186, 26233)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1104997, 1105401)","(26238, 26249)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1104997, 1105401)","(25782, 25793)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92079692 eV
@@ -6375,7 +6411,7 @@ Block,BlockVaspWithSingleLineHeader,"(1104997, 1105401)","(26238, 26249)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1106912, 1107667)","(26292, 26311)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1106912, 1107667)","(25836, 25855)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6395,7 +6431,7 @@ Block,BlockVaspWithSingleLineHeader,"(1106912, 1107667)","(26292, 26311)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1108775, 1109530)","(26343, 26362)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1108775, 1109530)","(25887, 25906)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6415,7 +6451,7 @@ Block,BlockVaspWithSingleLineHeader,"(1108775, 1109530)","(26343, 26362)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1110646, 1111401)","(26394, 26413)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1110646, 1111401)","(25938, 25957)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6435,7 +6471,7 @@ Block,BlockVaspWithSingleLineHeader,"(1110646, 1111401)","(26394, 26413)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1112525, 1113280)","(26445, 26464)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1112525, 1113280)","(25989, 26008)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6455,7 +6491,7 @@ Block,BlockVaspWithSingleLineHeader,"(1112525, 1113280)","(26445, 26464)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1114412, 1115167)","(26496, 26515)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1114412, 1115167)","(26040, 26059)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6475,7 +6511,7 @@ Block,BlockVaspWithSingleLineHeader,"(1114412, 1115167)","(26496, 26515)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1115921, 1116676)","(26536, 26555)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1115921, 1116676)","(26080, 26099)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6495,7 +6531,8 @@ Block,BlockVaspWithSingleLineHeader,"(1115921, 1116676)","(26536, 26555)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1144133, 1145378)","(27284, 27302)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1144133, 1145378)","(26828, 26846)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -6514,7 +6551,7 @@ Block,BlockVaspWithHeader,"(1144133, 1145378)","(27284, 27302)",FORCE on cell ST
   external pressure =      -53.39 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1145379, 1145990)","(27302, 27315)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1145379, 1145990)","(26846, 26859)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -6528,7 +6565,8 @@ Block,BlockVaspWithSingleLineHeader,"(1145379, 1145990)","(27302, 27315)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1145991, 1151621)","(27316, 27363)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1145991, 1151621)","(26860, 26907)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -6576,7 +6614,7 @@ Block,BlockVaspWithHeader,"(1145991, 1151621)","(27316, 27363)",FORCES acting on
    0.158E-05 -.394E-06 0.136E+02   -.504E-13 0.391E-13 -.273E-11   0.459E-18 -.522E-19 -.133E+02   0.291E-11 0.227E-12 -.370E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1151622, 1155350)","(27364, 27411)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1151622, 1155350)","(26908, 26955)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52029         0.000000      0.000000      0.012375
@@ -6624,7 +6662,7 @@ Block,BlockVaspWithSingleLineHeader,"(1151622, 1155350)","(27364, 27411)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1155458, 1155862)","(27416, 27427)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1155458, 1155862)","(26944, 26955)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92097932 eV
@@ -6636,7 +6674,7 @@ Block,BlockVaspWithSingleLineHeader,"(1155458, 1155862)","(27416, 27427)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1157792, 1158547)","(27478, 27497)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1157792, 1158547)","(27006, 27025)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6656,7 +6694,7 @@ Block,BlockVaspWithSingleLineHeader,"(1157792, 1158547)","(27478, 27497)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1159655, 1160410)","(27529, 27548)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1159655, 1160410)","(27057, 27076)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6676,7 +6714,7 @@ Block,BlockVaspWithSingleLineHeader,"(1159655, 1160410)","(27529, 27548)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1161526, 1162281)","(27580, 27599)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1161526, 1162281)","(27108, 27127)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6696,7 +6734,7 @@ Block,BlockVaspWithSingleLineHeader,"(1161526, 1162281)","(27580, 27599)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1163405, 1164160)","(27631, 27650)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1163405, 1164160)","(27159, 27178)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6716,7 +6754,7 @@ Block,BlockVaspWithSingleLineHeader,"(1163405, 1164160)","(27631, 27650)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1165292, 1166047)","(27682, 27701)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1165292, 1166047)","(27210, 27229)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6736,7 +6774,7 @@ Block,BlockVaspWithSingleLineHeader,"(1165292, 1166047)","(27682, 27701)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1167187, 1167942)","(27733, 27752)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1167187, 1167942)","(27261, 27280)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6756,7 +6794,7 @@ Block,BlockVaspWithSingleLineHeader,"(1167187, 1167942)","(27733, 27752)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1169090, 1169845)","(27784, 27803)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1169090, 1169845)","(27312, 27331)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6776,7 +6814,7 @@ Block,BlockVaspWithSingleLineHeader,"(1169090, 1169845)","(27784, 27803)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1170599, 1171354)","(27824, 27843)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1170599, 1171354)","(27352, 27371)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6796,7 +6834,8 @@ Block,BlockVaspWithSingleLineHeader,"(1170599, 1171354)","(27824, 27843)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1198811, 1200056)","(28572, 28590)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1198811, 1200056)","(28100, 28118)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -6815,7 +6854,7 @@ Block,BlockVaspWithHeader,"(1198811, 1200056)","(28572, 28590)",FORCE on cell ST
   external pressure =      -53.50 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1200057, 1200668)","(28590, 28603)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1200057, 1200668)","(28118, 28131)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -6829,7 +6868,8 @@ Block,BlockVaspWithSingleLineHeader,"(1200057, 1200668)","(28590, 28603)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1200669, 1206299)","(28604, 28651)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1200669, 1206299)","(28132, 28179)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -6877,7 +6917,7 @@ Block,BlockVaspWithHeader,"(1200669, 1206299)","(28604, 28651)",FORCES acting on
    0.158E-05 -.394E-06 0.131E+02   -.317E-13 -.355E-13 -.100E-10   -.781E-19 0.697E-19 -.134E+02   0.289E-12 -.291E-12 0.279E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1206300, 1210028)","(28652, 28699)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1206300, 1210028)","(28180, 28227)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52096         0.000000      0.000000      0.035712
@@ -6925,7 +6965,7 @@ Block,BlockVaspWithSingleLineHeader,"(1206300, 1210028)","(28652, 28699)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1210136, 1210540)","(28704, 28715)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1210136, 1210540)","(28212, 28223)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92097492 eV
@@ -6937,7 +6977,7 @@ Block,BlockVaspWithSingleLineHeader,"(1210136, 1210540)","(28704, 28715)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1212051, 1212806)","(28758, 28777)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1212051, 1212806)","(28266, 28285)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6957,7 +6997,7 @@ Block,BlockVaspWithSingleLineHeader,"(1212051, 1212806)","(28758, 28777)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1213914, 1214669)","(28809, 28828)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1213914, 1214669)","(28317, 28336)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6977,7 +7017,7 @@ Block,BlockVaspWithSingleLineHeader,"(1213914, 1214669)","(28809, 28828)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1215785, 1216540)","(28860, 28879)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1215785, 1216540)","(28368, 28387)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -6997,7 +7037,7 @@ Block,BlockVaspWithSingleLineHeader,"(1215785, 1216540)","(28860, 28879)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1217294, 1218049)","(28900, 28919)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1217294, 1218049)","(28408, 28427)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7017,7 +7057,8 @@ Block,BlockVaspWithSingleLineHeader,"(1217294, 1218049)","(28900, 28919)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1245506, 1246751)","(29648, 29666)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1245506, 1246751)","(29156, 29174)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -7036,7 +7077,7 @@ Block,BlockVaspWithHeader,"(1245506, 1246751)","(29648, 29666)",FORCE on cell ST
   external pressure =      -53.58 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1246752, 1247363)","(29666, 29679)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1246752, 1247363)","(29174, 29187)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -7050,7 +7091,8 @@ Block,BlockVaspWithSingleLineHeader,"(1246752, 1247363)","(29666, 29679)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1247364, 1252994)","(29680, 29727)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1247364, 1252994)","(29188, 29235)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -7098,7 +7140,7 @@ Block,BlockVaspWithHeader,"(1247364, 1252994)","(29680, 29727)",FORCES acting on
    0.158E-05 -.394E-06 0.148E+02   0.518E-14 -.768E-13 0.136E-11   0.204E-18 0.244E-19 -.133E+02   0.461E-11 -.141E-11 -.154E+01
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1252995, 1256723)","(29728, 29775)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1252995, 1256723)","(29236, 29283)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52163        -0.000000      0.000000      0.032175
@@ -7146,7 +7188,7 @@ Block,BlockVaspWithSingleLineHeader,"(1252995, 1256723)","(29728, 29775)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1256831, 1257235)","(29780, 29791)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1256831, 1257235)","(29276, 29287)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92105168 eV
@@ -7158,7 +7200,7 @@ Block,BlockVaspWithSingleLineHeader,"(1256831, 1257235)","(29780, 29791)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1259165, 1259920)","(29842, 29861)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1259165, 1259920)","(29338, 29357)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7178,7 +7220,7 @@ Block,BlockVaspWithSingleLineHeader,"(1259165, 1259920)","(29842, 29861)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1261028, 1261783)","(29893, 29912)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1261028, 1261783)","(29389, 29408)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7198,7 +7240,7 @@ Block,BlockVaspWithSingleLineHeader,"(1261028, 1261783)","(29893, 29912)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1262899, 1263654)","(29944, 29963)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1262899, 1263654)","(29440, 29459)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7218,7 +7260,7 @@ Block,BlockVaspWithSingleLineHeader,"(1262899, 1263654)","(29944, 29963)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1264778, 1265533)","(29995, 30014)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1264778, 1265533)","(29491, 29510)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7238,7 +7280,7 @@ Block,BlockVaspWithSingleLineHeader,"(1264778, 1265533)","(29995, 30014)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1266665, 1267420)","(30046, 30065)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1266665, 1267420)","(29542, 29561)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7258,7 +7300,7 @@ Block,BlockVaspWithSingleLineHeader,"(1266665, 1267420)","(30046, 30065)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1268560, 1269315)","(30097, 30116)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1268560, 1269315)","(29593, 29612)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7278,7 +7320,7 @@ Block,BlockVaspWithSingleLineHeader,"(1268560, 1269315)","(30097, 30116)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1270069, 1270824)","(30137, 30156)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1270069, 1270824)","(29633, 29652)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7298,7 +7340,8 @@ Block,BlockVaspWithSingleLineHeader,"(1270069, 1270824)","(30137, 30156)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1298281, 1299526)","(30885, 30903)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1298281, 1299526)","(30381, 30399)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -7317,7 +7360,7 @@ Block,BlockVaspWithHeader,"(1298281, 1299526)","(30885, 30903)",FORCE on cell ST
   external pressure =      -53.82 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1299527, 1300138)","(30903, 30916)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1299527, 1300138)","(30399, 30412)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -7331,7 +7374,8 @@ Block,BlockVaspWithSingleLineHeader,"(1299527, 1300138)","(30903, 30916)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1300139, 1305769)","(30917, 30964)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1300139, 1305769)","(30413, 30460)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -7379,7 +7423,7 @@ Block,BlockVaspWithHeader,"(1300139, 1305769)","(30917, 30964)",FORCES acting on
    0.158E-05 -.394E-06 0.131E+02   0.101E-12 -.414E-13 -.273E-11   0.141E-18 0.388E-19 -.134E+02   0.527E-11 -.230E-11 0.324E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1305770, 1309498)","(30965, 31012)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1305770, 1309498)","(30461, 30508)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52363         0.000000      0.000000      0.025657
@@ -7427,7 +7471,7 @@ Block,BlockVaspWithSingleLineHeader,"(1305770, 1309498)","(30965, 31012)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1309606, 1310010)","(31017, 31028)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1309606, 1310010)","(30495, 30506)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92117035 eV
@@ -7439,7 +7483,7 @@ Block,BlockVaspWithSingleLineHeader,"(1309606, 1310010)","(31017, 31028)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1311521, 1312276)","(31071, 31090)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1311521, 1312276)","(30549, 30568)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7459,7 +7503,7 @@ Block,BlockVaspWithSingleLineHeader,"(1311521, 1312276)","(31071, 31090)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1313384, 1314139)","(31122, 31141)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1313384, 1314139)","(30600, 30619)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7479,7 +7523,7 @@ Block,BlockVaspWithSingleLineHeader,"(1313384, 1314139)","(31122, 31141)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1315255, 1316010)","(31173, 31192)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1315255, 1316010)","(30651, 30670)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7499,7 +7543,7 @@ Block,BlockVaspWithSingleLineHeader,"(1315255, 1316010)","(31173, 31192)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1317134, 1317889)","(31224, 31243)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1317134, 1317889)","(30702, 30721)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7519,7 +7563,7 @@ Block,BlockVaspWithSingleLineHeader,"(1317134, 1317889)","(31224, 31243)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1319021, 1319776)","(31275, 31294)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1319021, 1319776)","(30753, 30772)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7539,7 +7583,7 @@ Block,BlockVaspWithSingleLineHeader,"(1319021, 1319776)","(31275, 31294)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1320916, 1321671)","(31326, 31345)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1320916, 1321671)","(30804, 30823)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7559,7 +7603,7 @@ Block,BlockVaspWithSingleLineHeader,"(1320916, 1321671)","(31326, 31345)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1322819, 1323574)","(31377, 31396)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1322819, 1323574)","(30855, 30874)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7579,7 +7623,7 @@ Block,BlockVaspWithSingleLineHeader,"(1322819, 1323574)","(31377, 31396)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1324328, 1325083)","(31417, 31436)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1324328, 1325083)","(30895, 30914)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7599,7 +7643,8 @@ Block,BlockVaspWithSingleLineHeader,"(1324328, 1325083)","(31417, 31436)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1352540, 1353785)","(32165, 32183)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1352540, 1353785)","(31643, 31661)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -7618,7 +7663,7 @@ Block,BlockVaspWithHeader,"(1352540, 1353785)","(32165, 32183)",FORCE on cell ST
   external pressure =      -54.27 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1353786, 1354397)","(32183, 32196)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1353786, 1354397)","(31661, 31674)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -7632,7 +7677,8 @@ Block,BlockVaspWithSingleLineHeader,"(1353786, 1354397)","(32183, 32196)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1354398, 1360028)","(32197, 32244)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1354398, 1360028)","(31675, 31722)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -7680,7 +7726,7 @@ Block,BlockVaspWithHeader,"(1354398, 1360028)","(32197, 32244)",FORCES acting on
    0.158E-05 -.394E-06 0.126E+02   0.839E-13 -.110E-12 0.227E-11   -.929E-19 -.685E-20 -.134E+02   0.313E-11 -.224E-11 0.824E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1360029, 1363757)","(32245, 32292)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1360029, 1363757)","(31723, 31770)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52762        -0.000000      0.000000      0.009181
@@ -7728,7 +7774,7 @@ Block,BlockVaspWithSingleLineHeader,"(1360029, 1363757)","(32245, 32292)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1363865, 1364269)","(32297, 32308)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1363865, 1364269)","(31755, 31766)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92122654 eV
@@ -7740,7 +7786,7 @@ Block,BlockVaspWithSingleLineHeader,"(1363865, 1364269)","(32297, 32308)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1365780, 1366535)","(32351, 32370)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1365780, 1366535)","(31809, 31828)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7760,7 +7806,7 @@ Block,BlockVaspWithSingleLineHeader,"(1365780, 1366535)","(32351, 32370)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1367643, 1368398)","(32402, 32421)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1367643, 1368398)","(31860, 31879)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7780,7 +7826,7 @@ Block,BlockVaspWithSingleLineHeader,"(1367643, 1368398)","(32402, 32421)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1369152, 1369907)","(32442, 32461)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1369152, 1369907)","(31900, 31919)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7800,7 +7846,8 @@ Block,BlockVaspWithSingleLineHeader,"(1369152, 1369907)","(32442, 32461)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1397364, 1398609)","(33190, 33208)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1397364, 1398609)","(32648, 32666)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -7819,7 +7866,7 @@ Block,BlockVaspWithHeader,"(1397364, 1398609)","(33190, 33208)",FORCE on cell ST
   external pressure =      -54.30 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1398610, 1399221)","(33208, 33221)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1398610, 1399221)","(32666, 32679)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -7833,7 +7880,8 @@ Block,BlockVaspWithSingleLineHeader,"(1398610, 1399221)","(33208, 33221)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1399222, 1404852)","(33222, 33269)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1399222, 1404852)","(32680, 32727)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -7881,7 +7929,7 @@ Block,BlockVaspWithHeader,"(1399222, 1404852)","(33222, 33269)",FORCES acting on
    0.158E-05 -.394E-06 0.120E+02   0.207E-12 -.900E-14 -.432E-11   -.711E-18 0.130E-19 -.133E+02   0.250E-11 0.435E-11 0.134E+01
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1404853, 1408581)","(33270, 33317)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1404853, 1408581)","(32728, 32775)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52794         0.000000      0.000000     -0.002355
@@ -7929,7 +7977,7 @@ Block,BlockVaspWithSingleLineHeader,"(1404853, 1408581)","(33270, 33317)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1408689, 1409093)","(33322, 33333)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1408689, 1409093)","(32770, 32781)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92133025 eV
@@ -7941,7 +7989,7 @@ Block,BlockVaspWithSingleLineHeader,"(1408689, 1409093)","(33322, 33333)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1411023, 1411778)","(33384, 33403)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1411023, 1411778)","(32832, 32851)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7961,7 +8009,7 @@ Block,BlockVaspWithSingleLineHeader,"(1411023, 1411778)","(33384, 33403)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1412886, 1413641)","(33435, 33454)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1412886, 1413641)","(32883, 32902)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -7981,7 +8029,7 @@ Block,BlockVaspWithSingleLineHeader,"(1412886, 1413641)","(33435, 33454)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1414757, 1415512)","(33486, 33505)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1414757, 1415512)","(32934, 32953)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -8001,7 +8049,7 @@ Block,BlockVaspWithSingleLineHeader,"(1414757, 1415512)","(33486, 33505)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1416266, 1417021)","(33526, 33545)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1416266, 1417021)","(32974, 32993)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -8021,7 +8069,8 @@ Block,BlockVaspWithSingleLineHeader,"(1416266, 1417021)","(33526, 33545)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1444478, 1445723)","(34274, 34292)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1444478, 1445723)","(33722, 33740)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -8040,7 +8089,7 @@ Block,BlockVaspWithHeader,"(1444478, 1445723)","(34274, 34292)",FORCE on cell ST
   external pressure =      -54.33 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1445724, 1446335)","(34292, 34305)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1445724, 1446335)","(33740, 33753)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -8054,7 +8103,8 @@ Block,BlockVaspWithSingleLineHeader,"(1445724, 1446335)","(34292, 34305)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1446336, 1451966)","(34306, 34353)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1446336, 1451966)","(33754, 33801)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -8102,7 +8152,7 @@ Block,BlockVaspWithHeader,"(1446336, 1451966)","(34306, 34353)",FORCES acting on
    0.158E-05 -.394E-06 0.131E+02   -.305E-12 -.249E-13 -.909E-12   -.470E-18 0.108E-18 -.133E+02   0.284E-11 -.356E-11 0.165E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1451967, 1455695)","(34354, 34401)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1451967, 1455695)","(33802, 33849)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52814        -0.000000      0.000000     -0.012632
@@ -8150,7 +8200,7 @@ Block,BlockVaspWithSingleLineHeader,"(1451967, 1455695)","(34354, 34401)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1455803, 1456207)","(34406, 34417)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1455803, 1456207)","(33842, 33853)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92138687 eV
@@ -8162,7 +8212,7 @@ Block,BlockVaspWithSingleLineHeader,"(1455803, 1456207)","(34406, 34417)",FREE E
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1457718, 1458473)","(34460, 34479)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1457718, 1458473)","(33896, 33915)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -8182,7 +8232,7 @@ Block,BlockVaspWithSingleLineHeader,"(1457718, 1458473)","(34460, 34479)",Free e
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1459227, 1459982)","(34500, 34519)",Free energy of the ionelectron...,"
+Block,BlockVaspFreeEnergyOfTheIonElectronSystem,"(1459227, 1459982)","(33936, 33955)",Free energy of the ion-electron system (eV),"
  Free energy of the ion-electron system (eV)
   ---------------------------------------------------
   alpha Z        PSCENC =       856.26359874
@@ -8202,7 +8252,8 @@ Block,BlockVaspWithSingleLineHeader,"(1459227, 1459982)","(34500, 34519)",Free e
 
 
 "
-Block,BlockVaspWithHeader,"(1487439, 1488684)","(35248, 35266)",FORCE on cell STRESS in cart c...,"
+Block,BlockVaspWithStandardHeader,"(1487439, 1488684)","(34684, 34702)","FORCE on cell =-STRESS in cart. coord.  units (eV):
+  Direction    XX          YY          ZZ          XY          YZ          ZX","
   FORCE on cell =-STRESS in cart. coord.  units (eV):
   Direction    XX          YY          ZZ          XY          YZ          ZX
   --------------------------------------------------------------------------------------
@@ -8221,7 +8272,7 @@ Block,BlockVaspWithHeader,"(1487439, 1488684)","(35248, 35266)",FORCE on cell ST
   external pressure =      -54.32 kB  Pullay stress =        0.00 kB
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1488685, 1489296)","(35266, 35279)",VOLUME and BASISvectors are no...,"
+Block,BlockVaspWithSingleLineHeader,"(1488685, 1489296)","(34702, 34715)",VOLUME and BASIS-vectors are now :,"
  VOLUME and BASIS-vectors are now :
  -----------------------------------------------------------------------------
   energy-cutoff  :      400.00
@@ -8235,7 +8286,8 @@ Block,BlockVaspWithSingleLineHeader,"(1488685, 1489296)","(35266, 35279)",VOLUME
      6.052834047  6.052834047 22.630000000     0.165211865  0.165211865  0.044189129
 
 "
-Block,BlockVaspWithHeader,"(1489297, 1494927)","(35280, 35327)",FORCES acting on ions electron...,"
+Block,BlockVaspWithStandardHeader,"(1489297, 1494927)","(34716, 34763)","FORCES acting on ions
+    electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction","
  FORCES acting on ions
     electron-ion (+dipol)            ewald-force                    non-local-force                 convergence-correction
  -----------------------------------------------------------------------------------------------
@@ -8283,7 +8335,7 @@ Block,BlockVaspWithHeader,"(1489297, 1494927)","(35280, 35327)",FORCES acting on
    0.158E-05 -.394E-06 0.140E+02   0.597E-13 0.226E-13 0.500E-11   -.433E-18 -.604E-19 -.133E+02   0.358E-11 -.491E-11 -.772E+00
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1494928, 1498656)","(35328, 35375)",POSITION TOTALFORCE eVAngst to...,"
+Block,BlockVaspWithSingleLineHeader,"(1494928, 1498656)","(34764, 34811)",POSITION                                       TOTAL-FORCE (eV/Angst),"
  POSITION                                       TOTAL-FORCE (eV/Angst)
  -----------------------------------------------------------------------------------
       0.75660      5.29623      9.52809        -0.000000     -0.000000     -0.006639
@@ -8331,7 +8383,7 @@ Block,BlockVaspWithSingleLineHeader,"(1494928, 1498656)","(35328, 35375)",POSITI
 
 
 "
-Block,BlockVaspWithSingleLineHeader,"(1498764, 1499168)","(35380, 35391)",FREE ENERGIE OF THE IONELECTRO...,"
+Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1498764, 1499168)","(34808, 34819)",FREE ENERGIE OF THE IONELECTRO...,"
   FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
   ---------------------------------------------------
   free  energy   TOTEN  =      -367.92141972 eV
