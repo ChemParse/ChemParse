@@ -6,8 +6,18 @@
   ],
   "TypeKnownBlocks": {
     "order": [
+      "BlockVaspGeneralTiming",
       "BlueprintBlockWithSingeLineHeader"
     ],
+    "BlockVaspGeneralTiming": {
+      "p_type": "Block",
+      "p_subtype": "BlockVaspGeneralTiming",
+      "pattern": "((?:^[ \\t]*\\n)(?:^[ \\t]*General timing and accounting informations for this job:[ \\t]*\\n)(?:^ {1,2}={20,}[ \\t]*\\n)(?:(?:(?:^[ \\t]*$)|(?:^[ \\t]*.*\\:.*[ \\t]*$))\\n?)+)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "`General timing and accounting informations for this job` block"
+    },
     "BlueprintBlockWithSingeLineHeader": {
       "order": [
         "BlockVaspFreeEnergieOfTheIonElectronSystem",

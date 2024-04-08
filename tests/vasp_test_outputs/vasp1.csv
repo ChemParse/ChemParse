@@ -8395,3 +8395,19 @@ Block,BlockVaspFreeEnergieOfTheIonElectronSystem,"(1498764, 1499168)","(34808, 3
 
 
 "
+Block,BlockVaspGeneralTiming,"(1500083, 1500732)","(34799, 34814)",General timing and accounting ...,"  
+ General timing and accounting informations for this job:
+ ========================================================
+  
+                  Total CPU time used (sec):     1410.943
+                            User time (sec):     1394.056
+                          System time (sec):       16.888
+                         Elapsed time (sec):     1460.875
+  
+                   Maximum memory used (kb):      201324.
+                   Average memory used (kb):          N/A
+  
+                          Minor page faults:       310377
+                          Major page faults:          212
+                 Voluntary context switches:         5646
+"

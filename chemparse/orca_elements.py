@@ -318,6 +318,31 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
                                 -----------------------------------------
         Magnitude (a.u.)       :      3.73694
         Magnitude (Debye)      :      9.49854
+
+    or
+
+    .. code-block:: none
+
+        -------------
+        DIPOLE MOMENT
+        -------------
+
+        Method             : SCF
+        Type of density    : Electron Density
+        Multiplicity       :   1
+        Irrep              :   0
+        Energy             :  -379.2946629874107884 Eh
+        Relativity type    : 
+        Basis              : AO
+                                        X                 Y                 Z
+        Electronic contribution:     -0.000041430       0.000000017       4.661630904
+        Nuclear contribution   :      0.000000009       0.000000000      -8.265300471
+                                -----------------------------------------
+        Total Dipole Moment    :     -0.000041422       0.000000017      -3.603669567
+                                -----------------------------------------
+        Magnitude (a.u.)       :      3.603669567
+        Magnitude (Debye)      :      9.159800098
+
     """
     data_available: bool = True
     """ Formatted data is available for this block. """
@@ -345,6 +370,13 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
 
         :rtype: Data
         """
+        # extract the data after the XYZ line
+
+        pattern = r"([ \t]*X[ \t]+Y[ \t]+Z[ \t]*\n)"
+
+        match = re.search(pattern, self.raw_data, re.MULTILINE)
+        data_after_xyz = self.raw_data[match.end():]
+
         # Initialize the result dictionary
         result = {}
 
@@ -355,14 +387,14 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
 
         # Find all matches for the three-number pattern
         matches_three_numbers = re.findall(
-            pattern_three_numbers, self.raw_data)
+            pattern_three_numbers, data_after_xyz)
         for match in matches_three_numbers:
             label, x, y, z = match
             result[label.strip()] = np.array([float(x), float(y), float(z)]
                                              ) * ureg.elementary_charge * ureg.bohr_radius
 
         # Find all matches for the one-number pattern
-        matches_one_number = re.findall(pattern_one_number, self.raw_data)
+        matches_one_number = re.findall(pattern_one_number, data_after_xyz)
         for match in matches_one_number:
             label, value = match
             if "(Debye)" in label:
