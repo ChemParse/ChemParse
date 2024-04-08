@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>chemparse package &mdash; ChemParse 0.4.0 documentation</title>
+  <title>chemparse package &mdash; ChemParse 0.4.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=6c02275b"></script>
+        <script src="_static/documentation_options.js?v=c87aa342"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -237,6 +237,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#chemparse.vasp_elements.BlockVaspFreeEnergyOfTheIonElectronSystem"><code class="docutils literal notranslate"><span class="pre">BlockVaspFreeEnergyOfTheIonElectronSystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#chemparse.vasp_elements.BlockVaspFreeEnergyOfTheIonElectronSystem.data"><code class="docutils literal notranslate"><span class="pre">BlockVaspFreeEnergyOfTheIonElectronSystem.data()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#chemparse.vasp_elements.BlockVaspFreeEnergyOfTheIonElectronSystem.data_available"><code class="docutils literal notranslate"><span class="pre">BlockVaspFreeEnergyOfTheIonElectronSystem.data_available</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#chemparse.vasp_elements.BlockVaspGeneralTiming"><code class="docutils literal notranslate"><span class="pre">BlockVaspGeneralTiming</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#chemparse.vasp_elements.BlockVaspGeneralTiming.data"><code class="docutils literal notranslate"><span class="pre">BlockVaspGeneralTiming.data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chemparse.vasp_elements.BlockVaspGeneralTiming.data_available"><code class="docutils literal notranslate"><span class="pre">BlockVaspGeneralTiming.data_available</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#chemparse.vasp_elements.BlockVaspWarning"><code class="docutils literal notranslate"><span class="pre">BlockVaspWarning</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#chemparse.vasp_elements.BlockVaspWarning.extract_name_header_and_body"><code class="docutils literal notranslate"><span class="pre">BlockVaspWarning.extract_name_header_and_body()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#chemparse.vasp_elements.BlockVaspWithSingleLineHeader"><code class="docutils literal notranslate"><span class="pre">BlockVaspWithSingleLineHeader</span></code></a></li>
@@ -1246,6 +1255,28 @@ Magnitude (a.u.)       :      3.73694
 Magnitude (Debye)      :      9.49854
 </pre></div>
 </div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-------------
+DIPOLE MOMENT
+-------------
+
+Method             : SCF
+Type of density    : Electron Density
+Multiplicity       :   1
+Irrep              :   0
+Energy             :  -379.2946629874107884 Eh
+Relativity type    : 
+Basis              : AO
+                                X                 Y                 Z
+Electronic contribution:     -0.000041430       0.000000017       4.661630904
+Nuclear contribution   :      0.000000009       0.000000000      -8.265300471
+                        -----------------------------------------
+Total Dipole Moment    :     -0.000041422       0.000000017      -3.603669567
+                        -----------------------------------------
+Magnitude (a.u.)       :      3.603669567
+Magnitude (Debye)      :      9.159800098
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="chemparse.orca_elements.BlockOrcaDipoleMoment.data">
 <span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data"><span class="pre">Data</span></a></span></span><a class="headerlink" href="#chemparse.orca_elements.BlockOrcaDipoleMoment.data" title="Link to this definition"></a></dt>
@@ -2056,7 +2087,7 @@ Extrapolated:   -96.240117
 <p>A class to store all available blocks for Wasp.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chemparse.vasp_elements.AvailableBlocksVasp.blocks">
-<span class="sig-name descname"><span class="pre">blocks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#chemparse.elements.Element" title="chemparse.elements.Element"><span class="pre">Element</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'BlockVaspFreeEnergyOfTheIonElectronSystem':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.vasp_elements.BlockVaspFreeEnergyOfTheIonElectronSystem'&gt;,</span> <span class="pre">'BlockVaspWithSingleLineHeader':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.vasp_elements.BlockVaspWithSingleLineHeader'&gt;,</span> <span class="pre">'BlockVaspWithStandardHeader':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.vasp_elements.BlockVaspWithStandardHeader'&gt;}</span></em><a class="headerlink" href="#chemparse.vasp_elements.AvailableBlocksVasp.blocks" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">blocks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#chemparse.elements.Element" title="chemparse.elements.Element"><span class="pre">Element</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'BlockVaspFreeEnergyOfTheIonElectronSystem':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.vasp_elements.BlockVaspFreeEnergyOfTheIonElectronSystem'&gt;,</span> <span class="pre">'BlockVaspGeneralTiming':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.vasp_elements.BlockVaspGeneralTiming'&gt;,</span> <span class="pre">'BlockVaspWarning':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.vasp_elements.BlockVaspWarning'&gt;,</span> <span class="pre">'BlockVaspWithSingleLineHeader':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.vasp_elements.BlockVaspWithSingleLineHeader'&gt;,</span> <span class="pre">'BlockVaspWithStandardHeader':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.vasp_elements.BlockVaspWithStandardHeader'&gt;}</span></em><a class="headerlink" href="#chemparse.vasp_elements.AvailableBlocksVasp.blocks" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2065,8 +2096,8 @@ Extrapolated:   -96.240117
 <dt class="sig sig-object py" id="chemparse.vasp_elements.BlockVaspFreeEnergyOfTheIonElectronSystem">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chemparse.vasp_elements.</span></span><span class="sig-name descname"><span class="pre">BlockVaspFreeEnergyOfTheIonElectronSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chemparse.vasp_elements.BlockVaspFreeEnergyOfTheIonElectronSystem" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#chemparse.vasp_elements.BlockVaspWithSingleLineHeader" title="chemparse.vasp_elements.BlockVaspWithSingleLineHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">BlockVaspWithSingleLineHeader</span></code></a></p>
-<p>The block captures and stores TD-DFT excited states data for singlets from ORCA output files.</p>
-<p><strong>Example of ORCA Output:</strong></p>
+<p>The block captures and stores TD-DFT excited states data for singlets from VASP output files.</p>
+<p><strong>Example of VASP Output:</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Free energy of the ion-electron system (eV)
 ---------------------------------------------------
 alpha Z        PSCENC =       856.26359874
@@ -2123,6 +2154,117 @@ energy without entropy =     -367.08842988  energy(sigma-&gt;0) =     -367.14614
 <dt class="sig sig-object py" id="chemparse.vasp_elements.BlockVaspFreeEnergyOfTheIonElectronSystem.data_available">
 <span class="sig-name descname"><span class="pre">data_available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#chemparse.vasp_elements.BlockVaspFreeEnergyOfTheIonElectronSystem.data_available" title="Link to this definition"></a></dt>
 <dd><p>Formatted data is available for this block.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemparse.vasp_elements.BlockVaspGeneralTiming">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chemparse.vasp_elements.</span></span><span class="sig-name descname"><span class="pre">BlockVaspGeneralTiming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chemparse.vasp_elements.BlockVaspGeneralTiming" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemparse.elements.Block" title="chemparse.elements.Block"><code class="xref py py-class docutils literal notranslate"><span class="pre">Block</span></code></a></p>
+<p>The block captures and stores the Timings for the VASP output files.</p>
+<p><strong>Example of VASP Output:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>General timing and accounting informations for this job:
+========================================================
+
+          Total CPU time used (sec):     1410.943
+                    User time (sec):     1394.056
+                  System time (sec):       16.888
+                 Elapsed time (sec):     1460.875
+
+           Maximum memory used (kb):      201324.
+           Average memory used (kb):          N/A
+
+                  Minor page faults:       310377
+                  Major page faults:          212
+         Voluntary context switches:         5646
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemparse.vasp_elements.BlockVaspGeneralTiming.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data"><span class="pre">Data</span></a></span></span><a class="headerlink" href="#chemparse.vasp_elements.BlockVaspGeneralTiming.data" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemparse.data.Data</span></code></a> object that contains:
+- <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code>’s for time components in seconds
+- <code class="xref py py-class docutils literal notranslate"><span class="pre">bitmath.Byte</span></code>’s for memory components in bytes
+- <code class="xref py py-class docutils literal notranslate"><span class="pre">bitmath.kB</span></code>’s for memory components in kilobytes
+- <code class="xref py py-class docutils literal notranslate"><span class="pre">bitmath.MB</span></code>’s for memory components in megabytes
+- <code class="xref py py-class docutils literal notranslate"><span class="pre">bitmath.GB</span></code>’s for memory components in gigabytes
+- <code class="xref py py-class docutils literal notranslate"><span class="pre">pint.Quantity</span></code>’s for other components with units
+- <cite>N/A</cite> for non-applicable values
+- <cite>str</cite> for other values</p>
+<p>Parsed data example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;Total CPU time used&#39;: datetime.timedelta(seconds=1410, microseconds=943000),
+&#39;User time&#39;: datetime.timedelta(seconds=1394, microseconds=56000),
+&#39;System time&#39;: datetime.timedelta(seconds=16, microseconds=888000),
+&#39;Elapsed time&#39;: datetime.timedelta(seconds=1460, microseconds=875000),
+&#39;Maximum memory used&#39;: kB(201324.0),
+&#39;Average memory used&#39;: &#39;N/A&#39;,
+&#39;Minor page faults&#39;: &#39;310377&#39;,
+&#39;Major page faults&#39;: &#39;212&#39;,
+&#39;Voluntary context switches&#39;: &#39;5646&#39;
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data">Data</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemparse.vasp_elements.BlockVaspGeneralTiming.data_available">
+<span class="sig-name descname"><span class="pre">data_available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#chemparse.vasp_elements.BlockVaspGeneralTiming.data_available" title="Link to this definition"></a></dt>
+<dd><p>Formatted data is available for this block.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemparse.vasp_elements.BlockVaspWarning">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chemparse.vasp_elements.</span></span><span class="sig-name descname"><span class="pre">BlockVaspWarning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chemparse.vasp_elements.BlockVaspWarning" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemparse.elements.Block" title="chemparse.elements.Block"><code class="xref py py-class docutils literal notranslate"><span class="pre">Block</span></code></a></p>
+<p>The block captures and stores waning messages from VASP output files.</p>
+<p><strong>Example of VASP Output:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     For optimal performance we recommend to set                             |
+|       NCORE = 2 up to number-of-cores-per-socket                            |
+|     NCORE specifies how many cores store one orbital (NPAR=cpu/NCORE).      |
+|     This setting can greatly improve the performance of VASP for DFT.       |
+|     The default, NCORE=1 might be grossly inefficient on modern             |
+|     multi-core architectures or massively parallel machines. Do your        |
+|     own testing! More info at https://www.vasp.at/wiki/index.php/NCORE      |
+|     Unfortunately you need to use the default for GW and RPA                |
+|     calculations (for HF NCORE is supported but not extensively tested      |
+|     yet).                                                                   |
+|                                                                             |
+-----------------------------------------------------------------------------
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemparse.vasp_elements.BlockVaspWarning.extract_name_header_and_body">
+<span class="sig-name descname"><span class="pre">extract_name_header_and_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chemparse.vasp_elements.BlockVaspWarning.extract_name_header_and_body" title="Link to this definition"></a></dt>
+<dd><p>Extract the block’s name, header, and body components.</p>
+<p>Offers a basic implementation for separating the block’s name from its content based on naming conventions. This method is intended to be overridden by subclasses for more specialized extraction logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple containing the block’s name, optional header, and body content.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[str, str | None, str]</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
