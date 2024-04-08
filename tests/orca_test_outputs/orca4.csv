@@ -1571,7 +1571,7 @@ SCF XES/XAS/RIXS spectra                ...  NO
 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(66845, 67319)","(1555, 1569)",DIPOLE MOMENT,"-------------
+Block,BlockOrcaDipoleMoment,"(66845, 67613)","(1554, 1573)",DIPOLE MOMENT,"-------------
 DIPOLE MOMENT
 -------------
 
@@ -1585,17 +1585,13 @@ Basis              : AO
                                 X                 Y                 Z
 Electronic contribution:     -0.000000793      -0.000000664       4.661799211
 Nuclear contribution   :      0.000000009       0.000000000      -8.265300471
-"
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(67320, 67616)","(1570, 1578)",Total Dipole Moment    :     -0.000000784      -0.000000664      -3.603501261,"                        -----------------------------------------
+                        -----------------------------------------
 Total Dipole Moment    :     -0.000000784      -0.000000664      -3.603501261
                         -----------------------------------------
 Magnitude (a.u.)       :      3.603501261
 Magnitude (Debye)      :      9.159372297
-
-
-
 "
-Block,BlockOrcaRotationalSpectrum,"(67617, 68145)","(1576, 1593)",Rotational spectrum Rotational...,"--------------------
+Block,BlockOrcaRotationalSpectrum,"(67617, 68145)","(1578, 1595)",Rotational spectrum Rotational...,"--------------------
 Rotational spectrum 
 --------------------
  
@@ -1613,7 +1609,7 @@ Dipole moment calculation done in   0.0 sec
 Maximum memory used throughout the entire PROP-calculation: 29.0 MB
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(68146, 71593)","(1594, 1665)",SUGGESTED CITATIONS FOR THIS RUN,"--------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(68146, 71593)","(1596, 1667)",SUGGESTED CITATIONS FOR THIS RUN,"--------------------------------
 SUGGESTED CITATIONS FOR THIS RUN
 --------------------------------
 
