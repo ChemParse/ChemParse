@@ -2,6 +2,7 @@ import re
 import warnings
 from datetime import timedelta
 
+import bitmath
 import numpy as np
 import pandas as pd
 
@@ -90,9 +91,9 @@ class BlockVaspWithSingleLineHeader(BlockVaspWithStandardHeader):
 @AvailableBlocksVasp.register_block
 class BlockVaspFreeEnergyOfTheIonElectronSystem(BlockVaspWithSingleLineHeader):
     """
-    The block captures and stores TD-DFT excited states data for singlets from ORCA output files.
+    The block captures and stores TD-DFT excited states data for singlets from VASP output files.
 
-    **Example of ORCA Output:**
+    **Example of VASP Output:**
 
     .. code-block:: none
 
@@ -189,3 +190,127 @@ class BlockVaspFreeEnergyOfTheIonElectronSystem(BlockVaspWithSingleLineHeader):
                     extracted_values[key] = float(parts[1].strip()) * ureg.eV
 
         return Data(data=extracted_values, comment="""Parsed data from the block with energy components as pint.Quantity in eV and PAW double counting as a tuple of pint.Quantities in eV if present.""")
+
+
+@AvailableBlocksVasp.register_block
+class BlockVaspGeneralTiming(Block):
+    """
+    The block captures and stores the Timings for the VASP output files.
+
+    **Example of VASP Output:**
+
+    .. code-block:: none
+
+        General timing and accounting informations for this job:
+        ========================================================
+
+                  Total CPU time used (sec):     1410.943
+                            User time (sec):     1394.056
+                          System time (sec):       16.888
+                         Elapsed time (sec):     1460.875
+
+                   Maximum memory used (kb):      201324.
+                   Average memory used (kb):          N/A
+
+                          Minor page faults:       310377
+                          Major page faults:          212
+                 Voluntary context switches:         5646
+
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def data(self) -> Data:
+        """
+
+        :return: :class:`chemparse.data.Data` object that contains:
+            - :class:`datetime.timedelta`'s for time components in seconds
+            - :class:`bitmath.Byte`'s for memory components in bytes
+            - :class:`bitmath.kB`'s for memory components in kilobytes
+            - :class:`bitmath.MB`'s for memory components in megabytes
+            - :class:`bitmath.GB`'s for memory components in gigabytes
+            - :class:`pint.Quantity`'s for other components with units
+            - `N/A` for non-applicable values
+            - `str` for other values
+
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {'Total CPU time used': datetime.timedelta(seconds=1410, microseconds=943000),
+                'User time': datetime.timedelta(seconds=1394, microseconds=56000),
+                'System time': datetime.timedelta(seconds=16, microseconds=888000),
+                'Elapsed time': datetime.timedelta(seconds=1460, microseconds=875000),
+                'Maximum memory used': kB(201324.0),
+                'Average memory used': 'N/A',
+                'Minor page faults': '310377',
+                'Major page faults': '212',
+                'Voluntary context switches': '5646'
+                }
+
+        :rtype: Data
+        """
+
+        # Define a dictionary to hold the extracted data
+        extracted_data = {}
+
+        # Split the string into lines for processing
+        lines = self.raw_data.strip().split('\n')
+
+        # Function to extract unit from the key if present
+        def extract_unit(key):
+            if '(' in key and ')' in key:
+                start = key.find('(') + 1
+                end = key.find(')')
+                unit = key[start:end]
+                # Adjust to remove the unit and preceding space
+                key = key[:start-2]
+                return key, unit
+            return key, None
+
+        # Iterate over each line and extract data
+        for line in lines:
+            # Split each line at the colon
+            parts = line.split(':')
+            if len(parts) == 2 and parts[1].strip() != "":
+                raw_key = parts[0].strip()
+                value = parts[1].strip()
+
+                # Extract unit from the key if present
+                key, unit = extract_unit(raw_key)
+
+                # Check if a unit was found and process accordingly
+                if unit:
+                    if unit == "sec":  # Handle seconds separately
+                        seconds = float(value)
+                        extracted_data[key] = timedelta(seconds=seconds)
+                    elif unit == "b":  # Handle bytes separately
+                        if value != "N/A":
+                            extracted_data[key] = bitmath.Byte(float(value))
+                        else:
+                            extracted_data[key] = value
+                    elif unit == "kb":  # Handle kilobytes separately
+                        if value != "N/A":
+                            extracted_data[key] = bitmath.kB(float(value))
+                        else:
+                            extracted_data[key] = value
+                    elif unit == "Mb":  # Handle megabytes separately
+                        if value != "N/A":
+                            extracted_data[key] = bitmath.MB(float(value))
+                        else:
+                            extracted_data[key] = value
+                    elif unit == "Gb":  # Handle gigabytes separately
+                        if value != "N/A":
+                            extracted_data[key] = bitmath.GB(float(value))
+                        else:
+                            extracted_data[key] = value
+                    else:  # For other units, use ureg to create Quantity objects
+                        if value != "N/A":  # Check for non-applicable values
+                            extracted_data[key] = float(value) * ureg(unit)
+                        else:
+                            extracted_data[key] = value
+                else:
+                    extracted_data[key] = value
+
+        return Data(data=extracted_data, comment="""Parsed data from the block with energy components as pint.Quantity in eV and PAW double counting as a tuple of pint.Quantities in eV if present.""")
