@@ -89,6 +89,43 @@ class BlockVaspWithSingleLineHeader(BlockVaspWithStandardHeader):
 
 
 @AvailableBlocksVasp.register_block
+class BlockVaspWarning(Block):
+    """
+    The block captures and stores waning messages from VASP output files.
+
+    **Example of VASP Output:**
+
+    .. code-block:: none
+
+         -----------------------------------------------------------------------------
+        |                                                                             |
+        |           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+        |           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+        |           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+        |           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+        |           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+        |           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+        |                                                                             |
+        |     For optimal performance we recommend to set                             |
+        |       NCORE = 2 up to number-of-cores-per-socket                            |
+        |     NCORE specifies how many cores store one orbital (NPAR=cpu/NCORE).      |
+        |     This setting can greatly improve the performance of VASP for DFT.       |
+        |     The default, NCORE=1 might be grossly inefficient on modern             |
+        |     multi-core architectures or massively parallel machines. Do your        |
+        |     own testing! More info at https://www.vasp.at/wiki/index.php/NCORE      |
+        |     Unfortunately you need to use the default for GW and RPA                |
+        |     calculations (for HF NCORE is supported but not extensively tested      |
+        |     yet).                                                                   |
+        |                                                                             |
+        -----------------------------------------------------------------------------
+
+    """
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'Warning', None, self.raw_data
+
+
+@AvailableBlocksVasp.register_block
 class BlockVaspFreeEnergyOfTheIonElectronSystem(BlockVaspWithSingleLineHeader):
     """
     The block captures and stores TD-DFT excited states data for singlets from VASP output files.

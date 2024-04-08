@@ -6,9 +6,19 @@
   ],
   "TypeKnownBlocks": {
     "order": [
+      "BlockVaspWarning",
       "BlockVaspGeneralTiming",
       "BlueprintBlockWithSingeLineHeader"
     ],
+    "BlockVaspWarning": {
+      "p_type": "Block",
+      "p_subtype": "BlockVaspWarning",
+      "pattern": "((?:^[ \\t]*-{50,}[ \\t]*\\n)(?:[ \\t]*\\|(?!\\n).*\\|[ \\t]*\\n)*(^[ \\t]*\\|[ \\t]*W.*?A.*?R.*?N.*?I.*?N.*?G.*?\\!.*?\\|[ \\t]*\\n)(?:[ \\t]*\\|(?!\\n).*\\|[ \\t]*\\n)*(?:^[ \\t]*-{50,}[ \\t]*\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "`General timing and accounting informations for this job` block"
+    },
     "BlockVaspGeneralTiming": {
       "p_type": "Block",
       "p_subtype": "BlockVaspGeneralTiming",
