@@ -9,6 +9,7 @@
       "BlockOrcaTotalRunTime",
       "BlockOrcaTerminatedNormally",
       "BlockOrcaFinalSinglePointEnergy",
+      "BlockOrcaDipoleMomentFromOrca6",
       "BlockOrcaDipoleMoment",
       "BlockOrcaInputFile",
       "BlockOrcaShark",
@@ -47,6 +48,15 @@
         "MULTILINE"
       ],
       "comment": "This pattern matches the final single point energy block in an ORCA output file. It looks for a line of 25 dashes, followed by a line with FINAL SINGLE POINT ENERGY, and then the energy value represented by an optional minus sign followed by one or more digits, a period, and more digits. This is encapsulated within a pattern of dashes that frame the title and the value."
+    },
+    "BlockOrcaDipoleMomentFromOrca6": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaDipoleMoment",
+      "pattern": "^(([ \\t]*-{10,}[ \\t]*\\n[ \\t]*DIPOLE MOMENT[ \\t]*\\n[ \\t]*-{10,}[ \\t]*\\n)(?:(^[ \\t]*\\n)|(^(?!\\n).*:(?!\\n).*\\n))*([ \\t]*X[ \\t]+Y[ \\t]+Z[ \\t]*\\n)(([ \\t]*[a-zA-Z\\.\\,() ]+:[ \\t]*-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]*\\n))*(([ \\t]*-{10,}[ \\t]*\\n))(([ \\t]*[a-zA-Z\\.\\,() ]+:[ \\t]*-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]+-?\\d+\\.\\d+[ \\t]*\\n))(([ \\t]*-{10,}[ \\t]*\\n))([ \\t]*[a-zA-Z\\.,\\(\\)\\s]+[ \\t]*:[ \\t]*(-?\\d+\\.\\d+)[ \\t]*\\n)*[ \\t]*[a-zA-Z\\.,\\(\\)\\s]+[ \\t]*:[ \\t]*(-?\\d+\\.\\d+)[ \\t]*\\n)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Equal signs around the INPUT FILE, then any nonspecial line until the equal signs again."
     },
     "BlockOrcaDipoleMoment": {
       "p_type": "Block",
