@@ -227,20 +227,20 @@ class BlockGpawOrbitalEnergies(Block):
 
             .. code-block:: none
 
-                {'UpDownOrbitals':      Band Eigenvalues_Up Occupancy_Up Eigenvalues_Down Occupancy_Down
-                0    Band    Eigenvalues    Occupancy      Eigenvalues      Occupancy
-                1       0      -24.42908      1.00000        -24.57211        1.00000
-                2       1      -22.16252      1.00000        -22.18228        1.00000
-                3       2      -21.55401      1.00000        -21.60131        1.00000
-                4       3      -19.15063      1.00000        -19.19201        1.00000
-                ..    ...            ...          ...              ...            ...
-                248   247       81.59782      0.00000         81.62746        0.00000
-                249   248       81.85757      0.00000         81.83158        0.00000
-                250   249       83.60243      0.00000         83.51849        0.00000
-                251   250       87.94628      0.00000         87.90765        0.00000
-                252   251       95.86929      0.00000         95.86901        0.00000
+                {'UpDownOrbitals':      Band  Eigenvalues_Up  Occupancy_Up  Eigenvalues_Down  Occupancy_Down
+                0       0       -24.42908           1.0         -24.57211             1.0
+                1       1       -22.16252           1.0         -22.18228             1.0
+                2       2       -21.55401           1.0         -21.60131             1.0
+                3       3       -19.15063           1.0         -19.19201             1.0
+                4       4       -19.10920           1.0         -19.10168             1.0
+                ..    ...             ...           ...               ...             ...
+                247   247        81.59782           0.0          81.62746             0.0
+                248   248        81.85757           0.0          81.83158             0.0
+                249   249        83.60243           0.0          83.51849             0.0
+                250   250        87.94628           0.0          87.90765             0.0
+                251   251        95.86929           0.0          95.86901             0.0
 
-                [253 rows x 5 columns]}
+                [252 rows x 5 columns]}
 
         :rtype: Data
         """
@@ -253,7 +253,7 @@ class BlockGpawOrbitalEnergies(Block):
 
         # Reading the data using read_csv from the simulated file
         df = pd.read_csv(data_io, delim_whitespace=True,
-                         names=column_names, skiprows=1)
+                         names=column_names, skiprows=2)
 
         df['Eigenvalues_Up'] *= ureg.eV
         df['Eigenvalues_Down'] *= ureg.eV
