@@ -459,8 +459,9 @@ Local:           +0.390037
 Free energy:    -96.240117
 Extrapolated:   -96.240117
 "
-Block,BlockGpawUnrecognized,"(16707, 30454)","(466, 721)",Spin contamination electrons U...,"Spin contamination: 0.651158 electrons
-                   Up                     Down
+Block,BlockGpawUnrecognized,"(16707, 16745)","(466, 467)",Spin contamination electrons ...,"Spin contamination: 0.651158 electrons
+"
+Block,BlockGpawOrbitalEnergies,"(16746, 30454)","(467, 721)",Orbitals,"                   Up                     Down
  Band  Eigenvalues  Occupancy  Eigenvalues  Occupancy
     0    -24.42908    1.00000    -24.57211    1.00000
     1    -22.16252    1.00000    -22.18228    1.00000
