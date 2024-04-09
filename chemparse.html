@@ -227,6 +227,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#chemparse.gpaw_elements.BlockGpawIcon.readable_name"><code class="docutils literal notranslate"><span class="pre">BlockGpawIcon.readable_name()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#chemparse.gpaw_elements.BlockGpawOrbitalEnergies"><code class="docutils literal notranslate"><span class="pre">BlockGpawOrbitalEnergies</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#chemparse.gpaw_elements.BlockGpawOrbitalEnergies.data"><code class="docutils literal notranslate"><span class="pre">BlockGpawOrbitalEnergies.data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chemparse.gpaw_elements.BlockGpawOrbitalEnergies.data_available"><code class="docutils literal notranslate"><span class="pre">BlockGpawOrbitalEnergies.data_available</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chemparse.gpaw_elements.BlockGpawOrbitalEnergies.extract_name_header_and_body"><code class="docutils literal notranslate"><span class="pre">BlockGpawOrbitalEnergies.extract_name_header_and_body()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-chemparse.vasp_elements">chemparse.vasp_elements module</a><ul>
@@ -1888,7 +1894,7 @@ DFET-embed. en.    :        0.000000000000 Eh
 <p>A class to store all available blocks for GPAW.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chemparse.gpaw_elements.AvailableBlocksGpaw.blocks">
-<span class="sig-name descname"><span class="pre">blocks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#chemparse.elements.Element" title="chemparse.elements.Element"><span class="pre">Element</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'BlockGpawConvergedAfter':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.gpaw_elements.BlockGpawConvergedAfter'&gt;,</span> <span class="pre">'BlockGpawDipole':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.gpaw_elements.BlockGpawDipole'&gt;,</span> <span class="pre">'BlockGpawEnergyContributions':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.gpaw_elements.BlockGpawEnergyContributions'&gt;,</span> <span class="pre">'BlockGpawIcon':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.gpaw_elements.BlockGpawIcon'&gt;}</span></em><a class="headerlink" href="#chemparse.gpaw_elements.AvailableBlocksGpaw.blocks" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">blocks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#chemparse.elements.Element" title="chemparse.elements.Element"><span class="pre">Element</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'BlockGpawConvergedAfter':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.gpaw_elements.BlockGpawConvergedAfter'&gt;,</span> <span class="pre">'BlockGpawDipole':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.gpaw_elements.BlockGpawDipole'&gt;,</span> <span class="pre">'BlockGpawEnergyContributions':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.gpaw_elements.BlockGpawEnergyContributions'&gt;,</span> <span class="pre">'BlockGpawIcon':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.gpaw_elements.BlockGpawIcon'&gt;,</span> <span class="pre">'BlockGpawOrbitalEnergies':</span> <span class="pre">&lt;class</span> <span class="pre">'chemparse.gpaw_elements.BlockGpawOrbitalEnergies'&gt;}</span></em><a class="headerlink" href="#chemparse.gpaw_elements.AvailableBlocksGpaw.blocks" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2071,6 +2077,76 @@ Extrapolated:   -96.240117
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemparse.gpaw_elements.BlockGpawOrbitalEnergies">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chemparse.gpaw_elements.</span></span><span class="sig-name descname"><span class="pre">BlockGpawOrbitalEnergies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chemparse.gpaw_elements.BlockGpawOrbitalEnergies" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemparse.elements.Block" title="chemparse.elements.Block"><code class="xref py py-class docutils literal notranslate"><span class="pre">Block</span></code></a></p>
+<p>The block captures and stores Orbitals from GPAW output files.</p>
+<p><strong>Example of GPAW Output:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                        Up                     Down
+Band  Eigenvalues  Occupancy  Eigenvalues  Occupancy
+    0    -24.42908    1.00000    -24.57211    1.00000
+    1    -22.16252    1.00000    -22.18228    1.00000
+    2    -21.55401    1.00000    -21.60131    1.00000
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemparse.gpaw_elements.BlockGpawOrbitalEnergies.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data"><span class="pre">Data</span></a></span></span><a class="headerlink" href="#chemparse.gpaw_elements.BlockGpawOrbitalEnergies.data" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemparse.data.Data</span></code></a> object that contains:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> <cite>UpDownOrbitals</cite> with columns: Band, Eigenvalues_Up, Occupancy_Up, Eigenvalues_Down, Occupancy_Down. Eigenvalues are in eV.</p></li>
+</ul>
+<p>Parsed data example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;UpDownOrbitals&#39;:      Band Eigenvalues_Up Occupancy_Up Eigenvalues_Down Occupancy_Down
+0    Band    Eigenvalues    Occupancy      Eigenvalues      Occupancy
+1       0      -24.42908      1.00000        -24.57211        1.00000
+2       1      -22.16252      1.00000        -22.18228        1.00000
+3       2      -21.55401      1.00000        -21.60131        1.00000
+4       3      -19.15063      1.00000        -19.19201        1.00000
+..    ...            ...          ...              ...            ...
+248   247       81.59782      0.00000         81.62746        0.00000
+249   248       81.85757      0.00000         81.83158        0.00000
+250   249       83.60243      0.00000         83.51849        0.00000
+251   250       87.94628      0.00000         87.90765        0.00000
+252   251       95.86929      0.00000         95.86901        0.00000
+
+[253 rows x 5 columns]}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data">Data</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemparse.gpaw_elements.BlockGpawOrbitalEnergies.data_available">
+<span class="sig-name descname"><span class="pre">data_available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#chemparse.gpaw_elements.BlockGpawOrbitalEnergies.data_available" title="Link to this definition"></a></dt>
+<dd><p>Formatted data is available for this block.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemparse.gpaw_elements.BlockGpawOrbitalEnergies.extract_name_header_and_body">
+<span class="sig-name descname"><span class="pre">extract_name_header_and_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#chemparse.gpaw_elements.BlockGpawOrbitalEnergies.extract_name_header_and_body" title="Link to this definition"></a></dt>
+<dd><p>Extract the block’s name, header, and body components.</p>
+<p>Offers a basic implementation for separating the block’s name from its content based on naming conventions. This method is intended to be overridden by subclasses for more specialized extraction logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple containing the block’s name, optional header, and body content.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[str, str | None, str]</p>
 </dd>
 </dl>
 </dd></dl>
