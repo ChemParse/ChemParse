@@ -1,6 +1,7 @@
 import re
 import warnings
 from datetime import timedelta
+from io import StringIO
 
 import numpy as np
 import pandas as pd
@@ -191,3 +192,70 @@ class BlockGpawConvergedAfter(Block):
         iterations = int(numbers[0])
 
         return Data(data={'Iterations': iterations, 'Converged': True}, comment="`Iterations` is an integer and `Converged` is always True")
+
+
+@AvailableBlocksGpaw.register_block
+class BlockGpawOrbitalEnergies(Block):
+    """
+    The block captures and stores Orbitals from GPAW output files.
+
+    **Example of GPAW Output:**
+
+    .. code-block:: none
+
+                                Up                     Down
+        Band  Eigenvalues  Occupancy  Eigenvalues  Occupancy
+            0    -24.42908    1.00000    -24.57211    1.00000
+            1    -22.16252    1.00000    -22.18228    1.00000
+            2    -21.55401    1.00000    -21.60131    1.00000
+
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'Orbitals', None, self.raw_data
+
+    def data(self) -> Data:
+        """
+
+        :return: :class:`chemparse.data.Data` object that contains:
+
+            - :class:`pandas.DataFrame` `UpDownOrbitals` with columns: Band, Eigenvalues_Up, Occupancy_Up, Eigenvalues_Down, Occupancy_Down. Eigenvalues are in eV.
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {'UpDownOrbitals':      Band Eigenvalues_Up Occupancy_Up Eigenvalues_Down Occupancy_Down
+                0    Band    Eigenvalues    Occupancy      Eigenvalues      Occupancy
+                1       0      -24.42908      1.00000        -24.57211        1.00000
+                2       1      -22.16252      1.00000        -22.18228        1.00000
+                3       2      -21.55401      1.00000        -21.60131        1.00000
+                4       3      -19.15063      1.00000        -19.19201        1.00000
+                ..    ...            ...          ...              ...            ...
+                248   247       81.59782      0.00000         81.62746        0.00000
+                249   248       81.85757      0.00000         81.83158        0.00000
+                250   249       83.60243      0.00000         83.51849        0.00000
+                251   250       87.94628      0.00000         87.90765        0.00000
+                252   251       95.86929      0.00000         95.86901        0.00000
+
+                [253 rows x 5 columns]}
+
+        :rtype: Data
+        """
+        # Using StringIO to simulate a file
+        data_io = StringIO(self.raw_data)
+
+        # Column names need to be adjusted due to duplicate 'Eigenvalues' and 'Occupancy'
+        column_names = ['Band', 'Eigenvalues_Up',
+                        'Occupancy_Up', 'Eigenvalues_Down', 'Occupancy_Down']
+
+        # Reading the data using read_csv from the simulated file
+        df = pd.read_csv(data_io, delim_whitespace=True,
+                         names=column_names, skiprows=1)
+
+        df['Eigenvalues_Up'] *= ureg.eV
+        df['Eigenvalues_Down'] *= ureg.eV
+
+        return Data(data={'UpDownOrbitals': df}, comment="`UpDownOrbitals` is pandas DataFrame with columns: Band, Eigenvalues_Up, Occupancy_Up, Eigenvalues_Down, Occupancy_Down")
