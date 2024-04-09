@@ -252,7 +252,7 @@ class BlockGpawOrbitalEnergies(Block):
                         'Occupancy_Up', 'Eigenvalues_Down', 'Occupancy_Down']
 
         # Reading the data using read_csv from the simulated file
-        df = pd.read_csv(data_io, delim_whitespace=True,
+        df = pd.read_csv(data_io, sep='\s+',
                          names=column_names, skiprows=2)
 
         df['Eigenvalues_Up'] *= ureg.eV
