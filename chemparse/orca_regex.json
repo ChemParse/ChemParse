@@ -215,9 +215,19 @@
   },
   "TypeDefaultBlocks": {
     "order": [
+      "BlockOrcaUnrecognizedScf",
       "BlockOrcaUnrecognizedWithSingeLineHeader",
       "BlockOrcaUnrecognizedWithHeader"
     ],
+    "BlockOrcaUnrecognizedScf": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaUnrecognizedScf",
+      "pattern": "^((?:(?:[ \\t]*([\\-\\*\\#\\=]){5,})[ \\t]*[a-zA-Z0-9](?!\\n).*?[ \\t]*\\2{7,}\\n)(?:(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n){1,2}(?:\\2*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "SCF type of block: the first line has not only special characters, but text in between it, followed by 1-2 regular lines and the closing header line with the sam special character as the first one. Then text until the special line or the next block"
+    },
     "BlockOrcaUnrecognizedWithSingeLineHeader": {
       "p_type": "Block",
       "p_subtype": "BlockOrcaUnrecognizedWithSingeLineHeader",
