@@ -896,7 +896,7 @@ class BlockOrcaScfType(Block):
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         """
-        Identifies and separates the name, header, and body of the block based on a standard header format.
+        Identifies and separates the name, header, and body of the block based on a SCF header format.
 
         Utilizes regular expressions to discern the header portion from the body, processing the header to extract a distinct name and the header content. The text following the header is treated as the body of the block.
 
@@ -970,26 +970,27 @@ class BlockOrcaScf(BlockOrcaScfType):
 
     def data(self) -> Data:
         """
+        Returns a :class:`chemparse.data.Data` object containing:
 
-        :return: :class:`chemparse.data.Data` object that contains:
-            - (:class:`pandas.DataFrame`) `Data` with columns `Iteration`, `Energy (Eh)`, `Delta-E`, `RMSDP`, `MaxDP`, `Damp`, `Time(sec)`.
-                `Time(sec)` is represented as a timedelta object. Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.
-            - (:class:`pandas.DataFrame`) `Comments` with columns `Iteration` and `Comment`.
-            - (:class:`str`) `Name` of the block.
+        - :class:`pandas.DataFrame` `Data` with columns `Iteration`, `Energy (Eh)`, `Delta-E`, `RMSDP`, `MaxDP`, `Damp`, `Time(sec)`:
+            - `Time(sec)` is represented as a timedelta object.
+            - `Energy (Eh)` is represented by a pint object. Magnitude can be extracted with the .magnitude method.
+        - :class:`pandas.DataFrame` `Comments` with columns `Iteration` and `Comment`.
+        - :class:`str` `Name` of the block.
 
-            Parsed data example:
+        Parsed data example:
 
-            .. code-block:: none
+        .. code-block:: none
 
-                {'Data': Empty DataFrame
-                Columns: [Iteration, Energy (Eh), Delta-E, RMSDP, MaxDP, Damp, Time(sec)]
-                Index: [],
-                'Comments':    Iteration                                            Comment
-                0          0  ***  Starting incremental Fock matrix formatio...
-                1          0                         *** Initializing SOSCF ***
-                2          0                      *** Constraining orbitals ***
-                3          0                        *** Switching to L-BFGS ***,
-                'Name': 'S-C-F'}
+            {'Data': Empty DataFrame
+            Columns: [Iteration, Energy (Eh), Delta-E, RMSDP, MaxDP, Damp, Time(sec)]
+            Index: [],
+            'Comments':    Iteration                                            Comment
+            0          0  ***  Starting incremental Fock matrix formatio...
+            1          0                         *** Initializing SOSCF ***
+            2          0                      *** Constraining orbitals ***
+            3          0                        *** Switching to L-BFGS ***,
+            'Name': 'S-C-F'}
 
         :rtype: Data
         """
@@ -1084,34 +1085,37 @@ class BlockOrcaSoscf(BlockOrcaScf):
     def data(self) -> Data:
         """
 
-        :return: :class:`chemparse.data.Data` object that contains:
-            - (:class:`pandas.DataFrame`) `Data` with columns `Iteration`, `Energy (Eh)`, `Delta-E`, `RMSDP`, `MaxDP`, `Damp`, `Time(sec)`.
-                `Time(sec)` is represented as a timedelta object. Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.
-            - (:class:`pandas.DataFrame`) `Comments` with columns `Iteration` and `Comment`.
-            - (:class:`str`) `Name` of the block.
+        Returns a :class:`chemparse.data.Data` object containing:
 
-            Parsed data example:
+        - :class:`pandas.DataFrame` `Data` with columns `Iteration`, `Energy (Eh)`, `Delta-E`, `RMSDP`, `MaxDP`, `Damp`, `Time(sec)`:
+            - `Time(sec)` is represented as a timedelta object.
+            - `Energy (Eh)` is represented by a pint object. Magnitude can be extracted with the .magnitude method.
+        - :class:`pandas.DataFrame` `Comments` with columns `Iteration` and `Comment`.
+        - :class:`str` `Name` of the block.
 
-            .. code-block:: none
+        Parsed data example:
 
-                {'Data':
-                Iteration                  Energy (Eh)       Delta-E     RMSDP   MaxDP      MaxGrad              Time(sec)  
-                0           1  -440.42719635301455 hartree  0.000000e+00  0.000000  0.0000   0.029500 0 days 00:00:00.500000 
-                1           2  -440.42719635301455 hartree  0.000000e+00  0.004710  0.2320   0.029500 0 days 00:00:00.400000  
-                2           3     -440.49687163902 hartree -6.970000e-02  0.012600  1.1300   0.011100 0 days 00:00:00.400000, 
+        .. code-block:: none
 
-                'Comments':
-                Iteration                                            Comment
-                0          1  *** Restarting incremental Fock matrix formati...
-                1         13         **** Energy Check signals convergence ****
-                2         13                    *** Unconstraining orbitals ***
-                3         13  *** Restarting Hessian update and switching to...
-                4         21  *** Restarting incremental Fock matrix formati...
-                5         33         **** Energy Check signals convergence ****,
-                'Name': 'S-O-S-C-F'}
+            {'Data':
+            Iteration                  Energy (Eh)       Delta-E     RMSDP   MaxDP      MaxGrad              Time(sec)  
+            0           1  -440.42719635301455 hartree  0.000000e+00  0.000000  0.0000   0.029500 0 days 00:00:00.500000 
+            1           2  -440.42719635301455 hartree  0.000000e+00  0.004710  0.2320   0.029500 0 days 00:00:00.400000  
+            2           3     -440.49687163902 hartree -6.970000e-02  0.012600  1.1300   0.011100 0 days 00:00:00.400000, 
+
+            'Comments':
+            Iteration                                            Comment
+            0          1  *** Restarting incremental Fock matrix formati...
+            1         13         **** Energy Check signals convergence ****
+            2         13                    *** Unconstraining orbitals ***
+            3         13  *** Restarting Hessian update and switching to...
+            4         21  *** Restarting incremental Fock matrix formati...
+            5         33         **** Energy Check signals convergence ****,
+            'Name': 'S-O-S-C-F'}
 
 
         :rtype: Data
+
         """
 
         return super().data()
