@@ -1,5 +1,6 @@
 import re
 from datetime import timedelta
+from io import StringIO
 
 import numpy as np
 import pandas as pd
@@ -840,3 +841,277 @@ class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
                     Quantity and, `Transitions`: dict with elements: `From Orbital`: string - number+a|b, `To Orbital`: string - number+a|b, `Coefficient`: float. 
                     Parsed data example: {1:{'Energy (eV)': <Quantity(4.647, 'electron_volt')>, 'Transitions': [{'From Orbital': '29a', 'To Orbital': '32a', 'Coefficient': 0.055845}, {'From Orbital': '30a', 'To Orbital': '31a', 'Coefficient': 0.906577}]}}
                     """)
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaScfType(Block):
+    """
+    The block captures and stores SCF data from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        -------------------------------------S-C-F---------------------------------------
+        Iteration    Energy (Eh)           Delta-E    RMSDP     MaxDP     Damp  Time(sec)
+        ---------------------------------------------------------------------------------
+                    ***  Starting incremental Fock matrix formation  ***
+                                    *** Initializing SOSCF ***
+                                    *** Constraining orbitals ***
+                                    *** Switching to L-BFGS ***
+        Constrained orbitals (energetic order)
+        30 31 
+        Constrained orbitals (compact order)
+        31 30 
+
+    or
+
+    .. code-block:: none
+
+        ---------------------------------------S-O-S-C-F--------------------------------------
+        Iteration    Energy (Eh)            Delta-E     RMSDP    MaxDP     MaxGrad    Time(sec)
+        --------------------------------------------------------------------------------------
+            1    -379.2796837014277571     0.00e+00  0.00e+00  0.00e+00  3.00e-02   0.3
+                    *** Restarting incremental Fock matrix formation ***
+            2    -379.2796837014277571     0.00e+00  5.39e-03  2.36e-01  3.00e-02   0.3
+            3    -379.2788786204820326     8.05e-04  2.96e-03  1.30e-01  3.68e-02   0.3
+            4    -379.2897810987828962    -1.09e-02  1.69e-03  1.37e-01  9.46e-03   0.2
+            5    -379.2878642728886689     1.92e-03  8.10e-04  7.42e-02  1.68e-02   0.2
+            6    -379.2909711775516826    -3.11e-03  7.04e-04  3.11e-02  4.12e-03   0.2
+                            ***Gradient convergence achieved***
+                                *** Unconstraining orbitals ***
+                *** Restarting Hessian update and switching to L-SR1 ***
+            7    -379.2904844538218185     4.87e-04  1.27e-03  4.23e-02  1.72e-02   0.2
+            8    -379.2892451088814596     1.24e-03  9.18e-04  7.40e-02  2.70e-02   0.3
+            9    -379.2943354063930883    -5.09e-03  3.93e-04  1.30e-02  2.96e-03   0.2
+            10    -379.2945957143243731    -2.60e-04  2.02e-04  7.28e-03  1.37e-03   0.2
+            11    -379.2946565737383935    -6.09e-05  7.77e-04  4.26e-02  4.79e-04   0.2
+            12    -379.2946442625134296     1.23e-05  3.75e-03  2.20e-01  9.99e-04   0.2
+            13    -379.2946572622200847    -1.30e-05  8.03e-04  4.98e-02  7.21e-04   0.2
+            14    -379.2946626618473829    -5.40e-06  4.17e-04  2.11e-02  1.05e-04   0.2
+            15    -379.2946629954453783    -3.34e-07  1.04e-03  5.09e-02  4.80e-05   0.2
+                                ***Gradient convergence achieved***
+
+    """
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        """
+        Identifies and separates the name, header, and body of the block based on a standard header format.
+
+        Utilizes regular expressions to discern the header portion from the body, processing the header to extract a distinct name and the header content. The text following the header is treated as the body of the block.
+
+        Returns
+        -------
+        tuple[str, str | None, str]
+            The name of the block, the header content (or None if a header is not present), and the body of the block.
+
+        """
+
+        lines = self.raw_data.strip().split('\n')
+        # Take the first line
+        first_line = lines[0]
+        # Strip unwanted characters from the start and end
+        readable_name = first_line.strip('-*#= \t')
+        readable_name = readable_name if len(
+            readable_name) > 2 else Element.process_invalid_name(self.raw_data)
+
+        # Define regex pattern to split header and body
+        pattern = r"^((?:(?:[ \t]*([\-\*\#\=]){5,})[ \t]*[a-zA-Z0-9](?!\n).*?[ \t]*\2{7,}\n)(?:(?!^[ \t]*[\-\*\#\=]{5,}.*$|^[ \t]*$).*\n){1,2}(?:\2*\n))"
+
+        match = re.search(pattern, self.raw_data)
+
+        if match:
+            # Header is the content between the first and second header delimiters
+
+            # Body is the content after the second header delimiter
+            # The end of the header delimiter is marked by the start of the body_raw
+            body_start = match.end(1)
+            header_raw = self.raw_data[:body_start]
+            body_raw = self.raw_data[body_start:]
+
+            return readable_name, header_raw, body_raw
+        else:
+            logger.warning(
+                f'No header found in\n{self.raw_data}\n, and that is really weird as it was extracted based on the idea that there is a header in it')
+            # If no match is found, put everything into header
+            return readable_name, None, self.raw_data
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaUnrecognizedScf(BlockOrcaScfType):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaScf(BlockOrcaScfType):
+    """
+    The block captures and stores SCF data from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        -------------------------------------S-C-F---------------------------------------
+        Iteration    Energy (Eh)           Delta-E    RMSDP     MaxDP     Damp  Time(sec)
+        ---------------------------------------------------------------------------------
+                    ***  Starting incremental Fock matrix formation  ***
+                                    *** Initializing SOSCF ***
+                                    *** Constraining orbitals ***
+                                    *** Switching to L-BFGS ***
+        Constrained orbitals (energetic order)
+        30 31 
+        Constrained orbitals (compact order)
+        31 30 
+
+    """
+
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def data(self) -> Data:
+        """
+
+        :return: :class:`chemparse.data.Data` object that contains:
+            - (:class:`pandas.DataFrame`) `Data` with columns `Iteration`, `Energy (Eh)`, `Delta-E`, `RMSDP`, `MaxDP`, `Damp`, `Time(sec)`.
+                `Time(sec)` is represented as a timedelta object. Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.
+            - (:class:`pandas.DataFrame`) `Comments` with columns `Iteration` and `Comment`.
+            - (:class:`str`) `Name` of the block.
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {'Data': Empty DataFrame
+                Columns: [Iteration, Energy (Eh), Delta-E, RMSDP, MaxDP, Damp, Time(sec)]
+                Index: [],
+                'Comments':    Iteration                                            Comment
+                0          0  ***  Starting incremental Fock matrix formatio...
+                1          0                         *** Initializing SOSCF ***
+                2          0                      *** Constraining orbitals ***
+                3          0                        *** Switching to L-BFGS ***,
+                'Name': 'S-C-F'}
+
+        :rtype: Data
+        """
+        data = {}
+        readable_name, header_raw, body_raw = self.extract_name_header_and_body()
+
+        if header_raw is None or len([line for line in header_raw.split('\n') if len(line) > 0]) != 3:
+            return Data(data=None, comment="No header found")
+
+        header_lines = header_raw.split('\n')
+        column_names = [s.strip() for s in re.split(
+            r'\s{2,}', header_lines[1].strip()) if s.strip() != '']
+
+        data_lines = []
+        comments = []
+
+        current_iteration = 0
+        for line in body_raw.split('\n'):
+
+            line = line.strip()
+
+            if line.startswith('***'):
+                comments.append((current_iteration, line))
+                continue
+
+            split_line = line.split()
+            if len(split_line) == 0:
+                continue
+            if split_line[0].isdigit():
+                current_iteration = int(split_line[0])
+                data_lines.append(line)
+
+        # Convert numeric data to a StringIO object and read into DataFrame
+        df = pd.read_csv(StringIO('\n'.join(data_lines)),
+                         sep='\s+', names=column_names)
+
+        if 'Time(sec)' in df.columns:
+            df['Time(sec)'] = df['Time(sec)'].apply(
+                lambda x: timedelta(seconds=x))
+
+        if 'Energy (Eh)' in df.columns:
+            df['Energy (Eh)'] = df['Energy (Eh)'].apply(
+                lambda x: x * ureg.hartree)
+
+        data['Data'] = df
+
+        data['Comments'] = pd.DataFrame(
+            comments, columns=['Iteration', 'Comment'])
+
+        data['Name'] = readable_name
+
+        return Data(data=data, comment="""Pandas DataFrame with columns `Iteration`, `Energy (Eh)`, `Delta-E`, `RMSDP`, `MaxDP`, `Damp`, `Time(sec)`.
+                    `Time(sec)` is represented as a timedelta object. Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.
+                    Comments are stored in a separate DataFrame with columns `Iteration` and `Comment`.""")
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaSoscf(BlockOrcaScf):
+    """
+    The block captures and stores SOSCF data from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        ---------------------------------------S-O-S-C-F--------------------------------------
+        Iteration    Energy (Eh)            Delta-E     RMSDP    MaxDP     MaxGrad    Time(sec)
+        --------------------------------------------------------------------------------------
+            1    -379.2796837014277571     0.00e+00  0.00e+00  0.00e+00  3.00e-02   0.3
+                    *** Restarting incremental Fock matrix formation ***
+            2    -379.2796837014277571     0.00e+00  5.39e-03  2.36e-01  3.00e-02   0.3
+            3    -379.2788786204820326     8.05e-04  2.96e-03  1.30e-01  3.68e-02   0.3
+            4    -379.2897810987828962    -1.09e-02  1.69e-03  1.37e-01  9.46e-03   0.2
+            5    -379.2878642728886689     1.92e-03  8.10e-04  7.42e-02  1.68e-02   0.2
+            6    -379.2909711775516826    -3.11e-03  7.04e-04  3.11e-02  4.12e-03   0.2
+                            ***Gradient convergence achieved***
+                                *** Unconstraining orbitals ***
+                *** Restarting Hessian update and switching to L-SR1 ***
+            7    -379.2904844538218185     4.87e-04  1.27e-03  4.23e-02  1.72e-02   0.2
+            8    -379.2892451088814596     1.24e-03  9.18e-04  7.40e-02  2.70e-02   0.3
+            9    -379.2943354063930883    -5.09e-03  3.93e-04  1.30e-02  2.96e-03   0.2
+            10    -379.2945957143243731    -2.60e-04  2.02e-04  7.28e-03  1.37e-03   0.2
+            11    -379.2946565737383935    -6.09e-05  7.77e-04  4.26e-02  4.79e-04   0.2
+            12    -379.2946442625134296     1.23e-05  3.75e-03  2.20e-01  9.99e-04   0.2
+            13    -379.2946572622200847    -1.30e-05  8.03e-04  4.98e-02  7.21e-04   0.2
+            14    -379.2946626618473829    -5.40e-06  4.17e-04  2.11e-02  1.05e-04   0.2
+            15    -379.2946629954453783    -3.34e-07  1.04e-03  5.09e-02  4.80e-05   0.2
+                                ***Gradient convergence achieved***
+
+    """
+
+    def data(self) -> Data:
+        """
+
+        :return: :class:`chemparse.data.Data` object that contains:
+            - (:class:`pandas.DataFrame`) `Data` with columns `Iteration`, `Energy (Eh)`, `Delta-E`, `RMSDP`, `MaxDP`, `Damp`, `Time(sec)`.
+                `Time(sec)` is represented as a timedelta object. Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.
+            - (:class:`pandas.DataFrame`) `Comments` with columns `Iteration` and `Comment`.
+            - (:class:`str`) `Name` of the block.
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {'Data':
+                Iteration                  Energy (Eh)       Delta-E     RMSDP   MaxDP      MaxGrad              Time(sec)  
+                0           1  -440.42719635301455 hartree  0.000000e+00  0.000000  0.0000   0.029500 0 days 00:00:00.500000 
+                1           2  -440.42719635301455 hartree  0.000000e+00  0.004710  0.2320   0.029500 0 days 00:00:00.400000  
+                2           3     -440.49687163902 hartree -6.970000e-02  0.012600  1.1300   0.011100 0 days 00:00:00.400000, 
+
+                'Comments':
+                Iteration                                            Comment
+                0          1  *** Restarting incremental Fock matrix formati...
+                1         13         **** Energy Check signals convergence ****
+                2         13                    *** Unconstraining orbitals ***
+                3         13  *** Restarting Hessian update and switching to...
+                4         21  *** Restarting incremental Fock matrix formati...
+                5         33         **** Energy Check signals convergence ****,
+                'Name': 'S-O-S-C-F'}
+
+
+        :rtype: Data
+        """
+
+        return super().data()

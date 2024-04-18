@@ -616,7 +616,7 @@ Aufbau metric                              ... Fixed occupations
 Keep initial reference                     ... true
 
 "
-Block,BlockOrcaScf,"(31335, 31818)","(613, 620)",SCF Iteration Energy Eh DeltaE...,"-------------------------------------S-C-F---------------------------------------
+Block,BlockOrcaScf,"(31335, 31818)","(613, 620)",S-C-F,"-------------------------------------S-C-F---------------------------------------
 Iteration    Energy (Eh)           Delta-E    RMSDP     MaxDP     Damp  Time(sec)
 ---------------------------------------------------------------------------------
                ***  Starting incremental Fock matrix formation  ***
@@ -624,7 +624,7 @@ Iteration    Energy (Eh)           Delta-E    RMSDP     MaxDP     Damp  Time(sec
                             *** Constraining orbitals ***
                              *** Switching to L-BFGS ***
 "
-Block,BlockOrcaSoscf,"(31819, 35100)","(621, 663)",SOSCF Iteration Energy Eh Delt...,"---------------------------------------S-O-S-C-F--------------------------------------
+Block,BlockOrcaSoscf,"(31819, 35100)","(621, 663)",S-O-S-C-F,"---------------------------------------S-O-S-C-F--------------------------------------
 Iteration    Energy (Eh)            Delta-E     RMSDP    MaxDP     MaxGrad    Time(sec)
 --------------------------------------------------------------------------------------
     1    -440.4271963530145513     0.00e+00  0.00e+00  0.00e+00  2.95e-02   0.5
