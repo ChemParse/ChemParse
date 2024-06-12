@@ -1119,3 +1119,103 @@ class BlockOrcaSoscf(BlockOrcaScf):
         """
 
         return super().data()
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
+    """
+    The block captures and stores NEB-TS path summary data from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        ---------------------------------------------------------------
+                      PATH SUMMARY FOR NEB-TS             
+        ---------------------------------------------------------------
+        All forces in Eh/Bohr. Global forces for TS.
+
+        Image     E(Eh)   dE(kcal/mol)  max(|Fp|)  RMS(Fp)
+        0   -1040.28151     0.00       0.00024   0.00008
+        1   -1040.26641     9.48       0.00357   0.00076
+        2   -1040.25443    17.00       0.00387   0.00111
+        3   -1040.24519    22.79       0.00279   0.00095
+        4   -1040.23692    27.98       0.00459   0.00133
+        5   -1040.23342    30.18       0.00189   0.00067 <= CI
+        TS   -1040.23850    26.99       0.00022   0.00005 <= TS
+        6   -1040.23665    28.15       0.00216   0.00079
+        7   -1040.24833    20.82       0.00200   0.00076
+        8   -1040.26217    12.14       0.00200   0.00058
+        9   -1040.27575     3.62       0.00012   0.00004
+
+    """
+
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def data(self) -> Data:
+        """
+
+        :return: :class:`chemparse.data.Data` object that contains:
+            - (:class:`int`) states as keys, and their respective details as sub-dictionaries. The `Energy (eV)` values are stored as :class:`pint.Quantity`. The `Transitions` are stored in a :class:`list`, with each transition represented as a :class:`dict` containing the `From Orbital` (:class:`str`: number+a|b), `To Orbital` (:class:`str`: number+a|b), and `Coefficient` (:class:`float`).
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {'Data':    Image                      E(Eh)              dE(kcal/mol)  \
+                    0      0  -1040.28151 electron_volt    0.0 kilocalorie / mole   
+                    1      1  -1040.27082 electron_volt   6.71 kilocalorie / mole   
+                    2      2   -1040.2608 electron_volt   13.0 kilocalorie / mole   
+                    3      3   -1040.2518 electron_volt  18.64 kilocalorie / mole   
+                    4      4  -1040.24453 electron_volt  23.21 kilocalorie / mole   
+                    5      5  -1040.24169 electron_volt  24.99 kilocalorie / mole   
+                    6     TS  -1040.24272 electron_volt  24.34 kilocalorie / mole   
+                    7      6  -1040.24575 electron_volt  22.44 kilocalorie / mole   
+                    8      7  -1040.25472 electron_volt  16.81 kilocalorie / mole   
+                    9      8  -1040.26597 electron_volt   9.75 kilocalorie / mole   
+                    10     9  -1040.27575 electron_volt   3.62 kilocalorie / mole   
+
+                                    max(|Fp|)                 RMS(Fp) Comment  
+                    0   0.00023 hartree / bohr    7e-05 hartree / bohr          
+                    1   0.00068 hartree / bohr  0.00023 hartree / bohr          
+                    2   0.00072 hartree / bohr  0.00023 hartree / bohr          
+                    3   0.00073 hartree / bohr  0.00022 hartree / bohr          
+                    4   0.00067 hartree / bohr   0.0002 hartree / bohr          
+                    5   0.00063 hartree / bohr  0.00021 hartree / bohr   <= CI  
+                    6     7e-05 hartree / bohr    2e-05 hartree / bohr   <= TS  
+                    7   0.00058 hartree / bohr  0.00021 hartree / bohr          
+                    8   0.00055 hartree / bohr  0.00019 hartree / bohr          
+                    9   0.00065 hartree / bohr  0.00019 hartree / bohr          
+                    10  0.00018 hartree / bohr    5e-05 hartree / bohr          
+                }
+
+        :rtype: Data
+        """
+        states_data = {}
+
+        # Extracting data from the text
+        pattern = re.compile(
+            r'(\d+|TS)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)(?:\s+(<= CI|<= TS))?')
+        matches = pattern.findall(self.raw_data)
+
+        # Convert matches to dataframe
+        columns = ["Image", "E(Eh)", "dE(kcal/mol)",
+                   "max(|Fp|)", "RMS(Fp)", "Comment"]
+        df_extracted = pd.DataFrame(matches, columns=columns)
+
+        # Convert numerical columns to appropriate data types with units
+        df_extracted["Image"] = df_extracted["Image"].apply(
+            lambda x: int(x) if x.isdigit() else x)
+        df_extracted["E(Eh)"] = df_extracted["E(Eh)"].astype(
+            float).apply(lambda x: x * ureg.Eh)
+        df_extracted["dE(kcal/mol)"] = df_extracted["dE(kcal/mol)"].astype(
+            float).apply(lambda x: x * (ureg.kilocalorie / ureg.mole))
+        df_extracted["max(|Fp|)"] = df_extracted["max(|Fp|)"].astype(
+            float).apply(lambda x: x * (ureg.hartree / ureg.bohr))
+        df_extracted["RMS(Fp)"] = df_extracted["RMS(Fp)"].astype(
+            float).apply(lambda x: x * (ureg.hartree / ureg.bohr))
+
+        print(df_extracted.info())
+
+        return Data(data={'Data': df_extracted}, comment="""Collects a DataFrame with columns `Image`, `E(Eh)`, `dE(kcal/mol)`, `max(|Fp|)`, `RMS(Fp)`, `Comment`.""")
