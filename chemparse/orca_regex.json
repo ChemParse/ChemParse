@@ -9,6 +9,7 @@
       "BlockOrcaTotalRunTime",
       "BlockOrcaTerminatedNormally",
       "BlockOrcaFinalSinglePointEnergy",
+      "BlockOrcaGeometryConvergence",
       "BlockOrcaDipoleMomentFromOrca6",
       "BlockOrcaDipoleMoment",
       "BlockOrcaInputFile",
@@ -48,6 +49,15 @@
         "MULTILINE"
       ],
       "comment": "This pattern matches the final single point energy block in an ORCA output file. It looks for a line of 25 dashes, followed by a line with FINAL SINGLE POINT ENERGY, and then the energy value represented by an optional minus sign followed by one or more digits, a period, and more digits. This is encapsulated within a pattern of dashes that frame the title and the value."
+    },
+    "BlockOrcaGeometryConvergence": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaGeometryConvergence",
+      "pattern": "((?:[ \\t]*\\.-{5,}\\.[ \\t]*\\n)(?:[ \\t]*\\-{5,}\\|?Geometry convergence\\|?\\-{5,}[ \\t]*\\n)(?:[ \\t]*(?:[A-Za-z]+[ \\t]*)*\\n)(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)+(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Orca Geometry convergence block, starts with a line of dots, then a line with Geometry convergence, then a line of dashes, then text until the next block or the line of dashes"
     },
     "BlockOrcaDipoleMomentFromOrca6": {
       "p_type": "Block",

@@ -490,6 +490,83 @@ class BlockOrcaTotalRunTime(Block):
 
 
 @AvailableBlocksOrca.register_block
+class BlockOrcaGeometryConvergence(Block):
+    """
+    The block captures and stores Total run time from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+                              .--------------------.
+        ----------------------|Geometry convergence|-------------------------
+        Item                value                   Tolerance       Converged
+        ---------------------------------------------------------------------
+        Energy change       0.0000035570            0.0000050000      YES
+        RMS gradient        0.0000436223            0.0001000000      YES
+        MAX gradient        0.0002094156            0.0003000000      YES
+        RMS step            0.0022222022            0.0020000000      NO
+        MAX step            0.0170204003            0.0040000000      NO
+        ........................................................
+        Max(Bonds)      0.0003      Max(Angles)    0.02
+        Max(Dihed)        0.98      Max(Improp)    0.00
+        ---------------------------------------------------------------------
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'TOTAL RUN TIME', None, self.raw_data
+
+    def data(self) -> Data:
+        """
+        :return: :class:`chemparse.data.Data` object that contains:
+
+            - :class:`pandas.DataFrame` `Geometry convergence data`
+        :rtype: Data
+        """
+        # Split the raw_data by the line containing only spaces and dots
+        parts = re.split(r'\n\s*\.{2,}\s*\n', self.raw_data)
+
+        if len(parts) < 2:
+            return Data(data={}, comment='Data format is incorrect')
+
+        # Extract the main data part
+        main_data_part = parts[0]
+
+        # Define the regex pattern to match the main data
+        pattern = r"Item\s+value\s+Tolerance\s+Converged\s+[-]+\s+(.*?)\s+[-]+\s+"
+        match = re.search(pattern, main_data_part, re.DOTALL)
+
+        if match:
+            data_str = match.group(1)
+            data_lines = data_str.strip().split('\n')
+            data = [re.split(r'\s{2,}', line.strip()) for line in data_lines]
+            main_df = pd.DataFrame(
+                data, columns=["Item", "Value", "Tolerance", "Converged"])
+        else:
+            main_df = pd.DataFrame()
+
+        # Extract additional fields from the part after the main data part
+        additional_data_part = parts[1]
+        additional_data = {}
+        additional_lines = additional_data_part.strip().split('\n')
+        for line in additional_lines:
+            numbers = re.findall(r'\d+\.\d+', line)
+            labels = re.findall(r'[A-Za-z()]+', line)
+            for label, number in zip(labels, numbers):
+                additional_data[label] = float(number)
+
+        # Combine all data into the final Data object
+        final_data = {
+            'Covregence data': main_df,
+            **additional_data
+        }
+
+        return Data(data=final_data, comment='`Covregence data` is a pandas DataFrame and additional fields are extracted values.')
+
+
+@AvailableBlocksOrca.register_block
 class BlockOrcaTimingsForIndividualModules(Block):
     data_available: bool = True
 
