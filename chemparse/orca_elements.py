@@ -1269,7 +1269,6 @@ class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
 
         :rtype: Data
         """
-        states_data = {}
 
         # Extracting data from the text
         pattern = re.compile(
@@ -1293,6 +1292,100 @@ class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
         df_extracted["RMS(Fp)"] = df_extracted["RMS(Fp)"].astype(
             float).apply(lambda x: x * (ureg.hartree / ureg.bohr))
 
-        print(df_extracted.info())
-
         return Data(data={'Data': df_extracted}, comment="""Collects a DataFrame with columns `Image`, `E(Eh)`, `dE(kcal/mol)`, `max(|Fp|)`, `RMS(Fp)`, `Comment`.""")
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaVibrationalFrequencies(BlockOrcaWithStandardHeader):
+    """
+    The block captures and stores vibrational frequencies data from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        -----------------------
+        VIBRATIONAL FREQUENCIES
+        -----------------------
+
+        Scaling factor for frequencies =  1.000000000  (already applied!)
+
+        0:         0.00 cm**-1
+        1:         0.00 cm**-1
+        2:         0.00 cm**-1
+        3:         0.00 cm**-1
+        4:         0.00 cm**-1
+        5:         0.00 cm**-1
+        6:       -15.28 cm**-1 ***imaginary mode***
+        7:        32.56 cm**-1
+        8:        38.76 cm**-1
+        9:        48.22 cm**-1
+        10:        89.12 cm**-1
+        11:       101.15 cm**-1
+        12:       114.47 cm**-1
+        13:       135.76 cm**-1
+
+    """
+
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def data(self) -> Data:
+        """
+
+        :return: :class:`chemparse.data.Data` object that contains:
+            - :class:`pandas.DataFrame` `Data` with columns `Index`, `Frequency`, `Type`:
+                - `Frequency` is represented as a :class:`pint.Quantity`.
+
+            Parsed data example:
+
+            .. code-block:: none
+
+                {'Data':      Index             Frequency  Type
+                    0        0      0.0 / centimeter  Real
+                    1        1      0.0 / centimeter  Real
+                    2        2      0.0 / centimeter  Real
+                    3        3      0.0 / centimeter  Real
+                    4        4      0.0 / centimeter  Real
+                    ..     ...                   ...   ...
+                    136    136  3201.84 / centimeter  Real
+                    137    137  3202.58 / centimeter  Real
+                    138    138  3220.66 / centimeter  Real
+                    139    139  3231.88 / centimeter  Real
+                    140    140   3383.2 / centimeter  Real
+
+                    [141 rows x 3 columns]}
+
+        :rtype: Data
+        """
+        lines = self.raw_data.strip().split('\n')
+        data_lines = [line for line in lines if 'cm**-1' in line]
+
+        # Prepare data for DataFrame
+        data = {
+            'Index': [],
+            'Frequency': [],
+            'Type': []
+        }
+
+        for line in data_lines:
+            parts = line.split(':')
+            index = int(parts[0].strip())
+            frequency_part = parts[1].strip()
+            frequency_value = frequency_part.split(' ')[0]
+            if "***imaginary mode***" in frequency_part:
+                mode_type = 'Imaginary'
+            else:
+                mode_type = 'Real'
+
+            data['Index'].append(index)
+            data['Frequency'].append(float(frequency_value))
+            data['Type'].append(mode_type)
+
+        df = pd.DataFrame(data)
+
+        df['Frequency'] = df['Frequency'].apply(
+            lambda x: x * ureg.cm**-1)
+
+        return Data(data={'Data': df}, comment="""Collects a DataFrame with columns `Index`, `Frequency`, `Type`.
+        """)

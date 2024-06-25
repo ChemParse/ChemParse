@@ -28213,7 +28213,7 @@ Writing the Hessian file to the disk             ... done
 Maximum memory used throughout the entire SCFHESS-calculation: 1677.6 MB
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(1799795, 1803623)","(37566, 37715)",VIBRATIONAL FREQUENCIES,"-----------------------
+Block,BlockOrcaVibrationalFrequencies,"(1799795, 1803623)","(37562, 37711)",VIBRATIONAL FREQUENCIES,"-----------------------
 VIBRATIONAL FREQUENCIES
 -----------------------
 
@@ -28363,7 +28363,7 @@ Scaling factor for frequencies =  1.000000000  (already applied!)
 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(1803624, 2065025)","(37716, 41134)",NORMAL MODES,"------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(1803624, 2065025)","(37712, 41130)",NORMAL MODES,"------------
 NORMAL MODES
 ------------
 
@@ -31782,14 +31782,14 @@ Thus, these vectors are normalized but *not* orthogonal
 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2065026, 2065177)","(41135, 41141)",IR SPECTRUM,"-----------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2065026, 2065177)","(41131, 41137)",IR SPECTRUM,"-----------
 IR SPECTRUM
 -----------
 
  Mode   freq       eps      Int      T**2         TX        TY        TZ
        cm**-1   L/(mol*cm) km/mol    a.u.
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2075812, 2082230)","(41286, 41439)",THERMOCHEMISTRY AT 298.15K,"--------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2075812, 2082230)","(41282, 41435)",THERMOCHEMISTRY AT 298.15K,"--------------------------
 THERMOCHEMISTRY AT 298.15K
 --------------------------
 
@@ -31943,7 +31943,7 @@ freq.    3231.88  E(vib)   ...       0.00
 freq.    3383.20  E(vib)   ...       0.00 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2082231, 2083195)","(41440, 41459)",INNER ENERGY,"------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2082231, 2083195)","(41436, 41455)",INNER ENERGY,"------------
 INNER ENERGY
 ------------
 
@@ -31963,7 +31963,7 @@ Thermal vibrational correction   ...      0.01626166 Eh      10.20 kcal/mol
 Thermal rotational correction    ...      0.00141627 Eh       0.89 kcal/mol
 Thermal translational correction ...      0.00141627 Eh       0.89 kcal/mol
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2083721, 2083955)","(41473, 41481)",ENTHALPY,"--------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2083721, 2083955)","(41469, 41477)",ENTHALPY,"--------
 ENTHALPY
 --------
 
@@ -31972,7 +31972,7 @@ The enthalpy is H = U + kB*T
 Total free energy                 ...  -1039.83904240 Eh 
 Thermal Enthalpy correction       ...      0.00094421 Eh       0.59 kcal/mol
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2084622, 2085245)","(41501, 41517)",ENTROPY,"-------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2084622, 2085245)","(41497, 41513)",ENTROPY,"-------
 ENTROPY
 -------
 
@@ -31989,7 +31989,7 @@ Vibrational entropy               ...      0.02732843 Eh     17.15 kcal/mol
 Rotational entropy                ...      0.01678298 Eh     10.53 kcal/mol
 Translational entropy             ...      0.02062289 Eh     12.94 kcal/mol
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2086425, 2086655)","(41541, 41549)",GIBBS FREE ENERGY,"-------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(2086425, 2086655)","(41537, 41545)",GIBBS FREE ENERGY,"-------------------
 GIBBS FREE ENERGY
 -------------------
 
