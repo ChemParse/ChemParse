@@ -214,6 +214,8 @@ class BlockOrcaFinalSinglePointEnergy(Block):
         FINAL SINGLE POINT ENERGY      -379.259324337759
         -------------------------   --------------------
     """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return 'FINAL SINGLE POINT ENERGY', None, self.raw_data
