@@ -1273,18 +1273,28 @@ class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
         """
 
         # Extracting data from the text
-        pattern = re.compile(
-            r'(\d+|TS)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)(?:\s+(<= CI|<= TS))?')
+        if "Dist.(Ang.)" in self.raw_data:
+            pattern = re.compile(
+                r'(\d+)\s+(\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)(?:\s+(<= CI|<= TS))?')
+            columns = ["Image", "Dist.(Ang.)", "E(Eh)", "dE(kcal/mol)",
+                       "max(|Fp|)", "RMS(Fp)", "Comment"]
+        else:
+            pattern = re.compile(
+                r'(\d+|TS)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)(?:\s+(<= CI|<= TS))?')
+            columns = ["Image", "E(Eh)", "dE(kcal/mol)",
+                       "max(|Fp|)", "RMS(Fp)", "Comment"]
+
         matches = pattern.findall(self.raw_data)
 
         # Convert matches to dataframe
-        columns = ["Image", "E(Eh)", "dE(kcal/mol)",
-                   "max(|Fp|)", "RMS(Fp)", "Comment"]
         df_extracted = pd.DataFrame(matches, columns=columns)
 
         # Convert numerical columns to appropriate data types with units
         df_extracted["Image"] = df_extracted["Image"].apply(
             lambda x: int(x) if x.isdigit() else x)
+        if "Dist.(Ang.)" in df_extracted.columns:
+            df_extracted["Dist.(Ang.)"] = df_extracted["Dist.(Ang.)"].astype(
+                float).apply(lambda x: x * ureg.angstrom)
         df_extracted["E(Eh)"] = df_extracted["E(Eh)"].astype(
             float).apply(lambda x: x * ureg.Eh)
         df_extracted["dE(kcal/mol)"] = df_extracted["dE(kcal/mol)"].astype(
@@ -1294,7 +1304,48 @@ class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
         df_extracted["RMS(Fp)"] = df_extracted["RMS(Fp)"].astype(
             float).apply(lambda x: x * (ureg.hartree / ureg.bohr))
 
-        return Data(data={'Data': df_extracted}, comment="""Collects a DataFrame with columns `Image`, `E(Eh)`, `dE(kcal/mol)`, `max(|Fp|)`, `RMS(Fp)`, `Comment`.""")
+        return Data(data={'Data': df_extracted}, comment="""Collects a DataFrame with columns `Image`, `Dist.(Ang.)`, `E(Eh)`, `dE(kcal/mol)`, `max(|Fp|)`, `RMS(Fp)`, `Comment`.""")
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaPathSummaryForNebCi(BlockOrcaPathSummaryForNebTs):
+    """
+    The block captures and stores NEB-TS path summary data from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        ---------------------------------------------------------------
+                                PATH SUMMARY              
+        ---------------------------------------------------------------
+        All forces in Eh/Bohr.
+
+        Image Dist.(Ang.)    E(Eh)   dE(kcal/mol)  max(|Fp|)  RMS(Fp)
+        0     0.000   -1040.28151      0.00       0.00024   0.00008
+        1     4.329   -1040.26830      8.29       0.00103   0.00025
+        2     6.607   -1040.25791     14.81       0.00120   0.00029
+        3     8.283   -1040.25022     19.64       0.00174   0.00042
+        4     9.599   -1040.24240     24.54       0.00116   0.00026
+        5    10.780   -1040.23790     27.37       0.00047   0.00015 <= CI
+        6    12.215   -1040.24200     24.80       0.00098   0.00026
+        7    13.815   -1040.25258     18.16       0.00076   0.00021
+        8    16.040   -1040.26419     10.87       0.00043   0.00013
+        9    19.933   -1040.27575      3.62       0.00012   0.00004
+
+        Straight line distance between images along the path:
+                D( 0- 1) =   4.3288 Ang.
+                D( 1- 2) =   2.2782 Ang.
+                D( 2- 3) =   1.6757 Ang.
+                D( 3- 4) =   1.3168 Ang.
+                D( 4- 5) =   1.1801 Ang.
+                D( 5- 6) =   1.4358 Ang.
+                D( 6- 7) =   1.5995 Ang.
+                D( 7- 8) =   2.2254 Ang.
+                D( 8- 9) =   3.8933 Ang.
+
+
+    """
 
 
 @AvailableBlocksOrca.register_block
@@ -1335,28 +1386,7 @@ class BlockOrcaVibrationalFrequencies(BlockOrcaWithStandardHeader):
     def data(self) -> Data:
         """
 
-        :return: :class:`chemparse.data.Data` object that contains:
-            - :class:`pandas.DataFrame` `Data` with columns `Index`, `Frequency`, `Type`:
-                - `Frequency` is represented as a :class:`pint.Quantity`.
-
-            Parsed data example:
-
-            .. code-block:: none
-
-                {'Data':      Index             Frequency  Type
-                    0        0      0.0 / centimeter  Real
-                    1        1      0.0 / centimeter  Real
-                    2        2      0.0 / centimeter  Real
-                    3        3      0.0 / centimeter  Real
-                    4        4      0.0 / centimeter  Real
-                    ..     ...                   ...   ...
-                    136    136  3201.84 / centimeter  Real
-                    137    137  3202.58 / centimeter  Real
-                    138    138  3220.66 / centimeter  Real
-                    139    139  3231.88 / centimeter  Real
-                    140    140   3383.2 / centimeter  Real
-
-                    [141 rows x 3 columns]}
+        :return: 
 
         :rtype: Data
         """
