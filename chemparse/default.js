@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
     dataBlocks.forEach(function (dataBlock, index) {
         const isDataAvailable = dataBlock.getAttribute('data_available');
         const pythonClass = dataBlock.getAttribute('python-class-name');
+        const specifiedClassName = dataBlock.getAttribute('specified-class-name');
         const startLineOfBlock = dataBlock.getAttribute('start-line');
         const endLineOfBlock = dataBlock.getAttribute('finish-line');
 
@@ -124,20 +125,20 @@ document.addEventListener('DOMContentLoaded', function () {
             indicatorColorBlock.style.backgroundColor = colorForError;
             commentBlockContainer.title = "Block looks incorrectly formatted";
         } else {
-            if (['BlockOrcaUnrecognizedWithSingeLineHeader', 'BlockOrcaUnrecognizedWithHeader'].includes(pythonClass)) {
+            if (['BlockOrcaUnrecognizedWithSingeLineHeader', 'BlockOrcaUnrecognizedWithHeader'].includes(specifiedClassName)) {
                 indicatorColorBlock.style.backgroundColor = colorForUnrecognized;
-                commentBlockContainer.title = "Block recognized by general pattern: " + pythonClass + ". Contribute to make this block recognizable.";
+                commentBlockContainer.title = "Block recognized by general pattern: " + specifiedClassName + ". Contribute to make this block recognizable.";
             } else {
                 if (pythonClass === 'Block') {
                     indicatorColorBlock.style.backgroundColor = colorForNoClass;
-                    commentBlockContainer.title = "Block was recognized by specific pattern, but there is no class for it to extract the data. Contribute if you know how to extract the data from this block.";
+                    commentBlockContainer.title = "Block was recognized by specific pattern (" + specifiedClassName + "), but there is no class for it to extract the data. Contribute if you know how to extract the data from this block.";
                 } else {
                     if (isDataAvailable === "True") {
                         indicatorColorBlock.style.backgroundColor = colorForAvailable;
-                        commentBlockContainer.title = "Data available for class: " + pythonClass;
+                        commentBlockContainer.title = "Data available for class: " + specifiedClassName;
                     } else {
                         indicatorColorBlock.style.backgroundColor = colorForNoDataPossible;
-                        commentBlockContainer.title = "Class: " + pythonClass + " has no data available. Contribute if you know how to extract the data from this block.";
+                        commentBlockContainer.title = "Class: " + specifiedClassName + " has no data available. Contribute if you know how to extract the data from this block.";
                     }
                 }
             }
