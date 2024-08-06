@@ -43,7 +43,7 @@ Block,BlockOrcaAllRightsReserved,"(2308, 3195)","(35, 47)",All Rights Reserved,"
                   #                        -***-                        #
                   #######################################################
 "
-Block,BlockOrcaVersion,"(3198, 3258)","(49, 50)",Program Version RELEASE ,"                         Program Version 5.0.4 -  RELEASE  -
+Block,BlockOrcaVersion,"(3198, 3258)","(49, 50)",Program Version,"                         Program Version 5.0.4 -  RELEASE  -
 "
 Block,BlockOrcaContributions,"(3261, 6052)","(54, 99)",With contributions from in alp...," With contributions from (in alphabetic order):
    Daniel Aravena         : Magnetic Suceptibility

@@ -170,8 +170,48 @@ class BlockOrcaIcon(Block):
         '''
         return Data(data={'Icon': self.raw_data}, comment="Raw `Icon` string")
 
-    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
-        return 'Orca Icon', None, self.raw_data
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaVersion(Block):
+    """
+    The block captures and stores ORCA version from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+                        Program Version 5.0.0 -  RELEASE  -
+                                (SVN: $Rev: 19529$)
+                ($Date: 2021-06-28 11:36:33 +0200 (Mo, 28 Jun 2021) $)
+    """
+
+    data_available: bool = True
+
+    def readable_name(self) -> str:
+        return 'Program Version'
+
+    def data(self) -> Data:
+        """
+        :return: :class:`chemparse.data.Data` object that contains:
+
+                - :class:`str` `Version`
+        :rtype: Data
+        """
+
+        def extract_version(data):
+
+            pattern = r'Program Version ([^\s]+)'
+
+            match = re.search(pattern, data)
+
+            if match:
+                return match.group(1)
+            else:
+                return None
+
+        version = extract_version(self.raw_data)
+
+        return Data(data={'Version': version}, comment='`Version` is a string with the version number')
 
 
 @AvailableBlocksOrca.register_block

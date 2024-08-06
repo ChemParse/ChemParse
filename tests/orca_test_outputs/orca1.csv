@@ -43,7 +43,7 @@ Block,BlockOrcaAllRightsReserved,"(2308, 3195)","(35, 47)",All Rights Reserved,"
                   #                        -***-                        #
                   #######################################################
 "
-Block,BlockOrcaVersion,"(3198, 3366)","(49, 52)",Program Version CURRENT GIT cd...,"                         Program Version 6.0  -  CURRENT   -
+Block,BlockOrcaVersion,"(3198, 3366)","(49, 52)",Program Version,"                         Program Version 6.0  -  CURRENT   -
                                 (GIT: $63c991db52$)
                           ($2024-03-07 17:44:56 +0100$)
 "

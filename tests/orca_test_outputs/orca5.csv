@@ -43,7 +43,7 @@ Block,BlockOrcaAllRightsReserved,"(2329, 3216)","(35, 47)",All Rights Reserved,"
                   #                        -***-                        #
                   #######################################################
 "
-Block,BlockOrcaVersion,"(3219, 3402)","(49, 52)",Program Version RELEASE SVN Re...,"                         Program Version 5.0.0 -  RELEASE  -
+Block,BlockOrcaVersion,"(3219, 3402)","(49, 52)",Program Version,"                         Program Version 5.0.0 -  RELEASE  -
                                 (SVN: $Rev: 19529$)
                 ($Date: 2021-06-28 11:36:33 +0200 (Mo, 28 Jun 2021) $)
 "
