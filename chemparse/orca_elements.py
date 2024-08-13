@@ -342,6 +342,66 @@ class BlockOrcaScfConverged(Block):
 
 
 @AvailableBlocksOrca.register_block
+class BlockOrcaErrorMessage(Block):
+    """
+    The block captures and stores ORCA error message from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        ----------------------------------------------------------------------------
+                                    ERROR !!!
+            The TS optimization did not converge but reached the maximum 
+            number of optimization cycles.
+            As a subsequent Frequencies calculation has been requested
+            ORCA will abort at this point of the run.
+        ----------------------------------------------------------------------------
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'Orca Error', None, self.raw_data
+
+    def data(self) -> Data:
+        """
+        :return: :class:`chemparse.data.Data` object that contains:
+
+            - :class:`str` for the `Error` message if present
+
+        Parsed data example:
+
+            .. code-block:: none
+
+                {'Error': 'ERROR !!!\n       The optimization did not converge but reached the maximum \n       number of optimization cycles.\n       As a subsequent Frequencies calculation has been requested\n       ORCA will abort at this point of the run.\n       Please restart the calculation with the lowest energy geometry and/or\n       a larger maxiter for the geometry optimization.'}
+
+        :rtype: Data
+        """
+        # Define regex pattern to match the error message using the provided pattern
+        error_pattern = r"(?:[ \t]*[\-\*\#\=]{5,}[ \t]*\n)(?:[ \t]*ERROR !!![ \t]*\n)(?:^(?!^[ \t]*[\-\*\#\=]{5,}.*$).*\n)*(?:[ \t]*[\-\*\#\=]{5,}[ \t]*\n)"
+
+        # Search for the error message in self.raw_data
+        error_match = re.search(error_pattern, self.raw_data, re.MULTILINE)
+
+        # Prepare the result dictionary
+        result = {
+            'Error': None  # Default value for Error message
+        }
+
+        # If a match for error is found, extract and clean the error message in the result dictionary
+        if error_match:
+            # Clean the extracted message by removing the leading and trailing lines of dashes or equal signs
+            error_message = error_match.group(0)
+            # Removing the delimiters from the start and end
+            error_message = re.sub(
+                r"^[ \t]*[\-\*\#\=]{5,}[ \t]*\n|[ \t]*[\-\*\#\=]{5,}[ \t]*\n$", "", error_message, flags=re.MULTILINE).strip()
+            result['Error'] = error_message
+
+        return Data(data=result, comment='str for the `Error` message')
+
+
+@AvailableBlocksOrca.register_block
 class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
     """
     The block captures and stores Dipole moment from ORCA output files.

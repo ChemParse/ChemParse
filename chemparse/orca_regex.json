@@ -13,6 +13,7 @@
       "BlockOrcaDipoleMomentFromOrca6",
       "BlockOrcaDipoleMoment",
       "BlockOrcaInputFile",
+      "BlockOrcaErrorMessage",
       "BlockOrcaShark",
       "BlockOrcaWarnings",
       "BlueprintParagraphStartsWith",
@@ -85,6 +86,15 @@
         "MULTILINE"
       ],
       "comment": "Equal signs around the INPUT FILE, then any nonspecial line until the equal signs again."
+    },
+    "BlockOrcaErrorMessage": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaErrorMessage",
+      "pattern": "^((?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:[ \\t]*ERROR !!![ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)*(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Block with error message, starts with a line of special characters, then the line with ERROR !!!, then text until the next block or the line of special characters"
     },
     "BlockOrcaShark": {
       "p_type": "Block",
