@@ -162,7 +162,7 @@
         "BlockOrcaOrbitalEnergies": "ORBITAL ENERGIES",
         "BlockOrcaTotalScfEnergy": "TOTAL SCF ENERGY",
         "BlockOrcaTddftExcitedStatesSinglets": "TD-DFT EXCITED STATES \\(SINGLETS\\)",
-        "BlockOrcaPathSummaryForNebTs": "PATH SUMMARY FOR NEB-TS",
+        "BlockOrcaPathSummaryForNebTs": "PATH SUMMARY FOR N[Ee][Bb]-TS",
         "BlockOrcaPathSummaryForNebCi": "PATH SUMMARY",
         "BlockOrcaVibrationalFrequencies": "VIBRATIONAL FREQUENCIES"
       },
