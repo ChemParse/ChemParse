@@ -1521,3 +1521,66 @@ class BlockOrcaVibrationalFrequencies(BlockOrcaWithStandardHeader):
 
         return Data(data={'Data': df}, comment="""Collects a DataFrame with columns `Index`, `Frequency`, `Type`.
         """)
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaCiNebConvergence(Block):
+    """
+    The block captures and stores CI-NEB convergence data from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+                                .--------------------.
+          ----------------------| CI-Neb convergence |-------------------------
+          Item                value                   Tolerance       Converged
+          ---------------------------------------------------------------------
+          RMS(Fp)             0.0002797716            0.0100000000      YES
+          MAX(|Fp|)           0.0014572463            0.0200000000      YES
+          RMS(FCI)            0.0001842330            0.0010000000      YES
+          MAX(|FCI|)          0.0005858110            0.0020000000      YES
+          ---------------------------------------------------------------------
+
+    """
+
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def readable_name(self) -> str:
+        return 'CI-Neb convergence'
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return self.readable_name(), None, self.raw_data
+
+    def data(self) -> Data:
+        """
+        Returns a :class:`chemparse.data.Data` object containing:
+
+        - :class:`pandas.DataFrame` `Data` with columns `Item`, `Value`, `Tolerance`, `Converged`.
+        - :class:`str` `Comment`.
+
+        Parsed data example:
+
+        .. code-block:: none
+                        'Data':          Item     Value  Tolerance Converged
+                0     RMS(Fp)  0.000188      0.010       YES
+                1   MAX(|Fp|)  0.000727      0.020       YES
+                2    RMS(FCI)  0.000212      0.001       YES
+                3  MAX(|FCI|)  0.000644      0.002       YES
+
+        :rtype: Data
+        """
+        # Extracting the table part of the string
+        table_data = re.findall(
+            r"(\S+)\s+([\d\.]+)\s+([\d\.]+)\s+(\S+)", self.raw_data)
+
+        # Create a pandas dataframe
+        df = pd.DataFrame(table_data, columns=[
+                          "Item", "Value", "Tolerance", "Converged"])
+
+        # Convert numeric columns to float
+        df["Value"] = df["Value"].astype(float)
+        df["Tolerance"] = df["Tolerance"].astype(float)
+
+        return Data(data={'Data': df}, comment="""Collects a DataFrame with columns `Item`, `Value`, `Tolerance`, `Converged`.""")

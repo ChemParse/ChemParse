@@ -22,6 +22,7 @@
       "BlueprintBlockNote",
       "BlueprintBlockSCF",
       "BlockOrcaScfConverged",
+      "BlockOrcaCiNebConvergence",
       "BlockOrcaIcon"
     ],
     "BlockOrcaTotalRunTime": {
@@ -228,6 +229,15 @@
         "MULTILINE"
       ],
       "comment": "Note, but with CF CONVERGED AFTER[ \t]*\\d+[ \t]*CYCLES inside"
+    },
+    "BlockOrcaCiNebConvergence": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaCiNebConvergence",
+      "pattern": "^((?:[ \\t]*\\.\\-{5,}\\.[ \\t]*\\n)(?:[ \\t]*\\-{5,}\\|[ \\t]*CI-N[Ee][Bb] convergence[ \\t]*\\|\\-{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)+(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n))$",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "CI-Neb convergence block, starts with a line of dots, then a line with CI-Neb convergence, then a line of dashes, then text until the next block or the line of dashes"
     },
     "BlockOrcaIcon": {
       "p_type": "Block",

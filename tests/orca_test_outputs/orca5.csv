@@ -711,7 +711,7 @@ Writing initial trajectory to file      ....  orca_initial_path_trj.xyz
 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(34830, 36697)","(781, 822)",NEB OPTIMIZATION,"----------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(34830, 36642)","(781, 821)",NEB OPTIMIZATION,"----------------------
 NEB OPTIMIZATION      
 ----------------------
 
@@ -751,17 +751,18 @@ Optim.  Iteration  CI   E(CI)-E(0)   max(|Fp|)   RMS(Fp)    dS     max(|FCI|)   
 Convergence thresholds               0.020000   0.010000            0.002000    0.001000 
    LBFGS     1      5    0.039827    0.000727   0.000188  43.0947    0.000644    0.000212       
 
-                                .--------------------.
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(36698, 37241)","(823, 830)",CINEB convergence Item value T...,"          ----------------------| CI-NEB convergence |-------------------------
+Block,BlockOrcaCiNebConvergence,"(36643, 37321)","(809, 818)",CINEB convergence Item value T...,"                                .--------------------.
+          ----------------------| CI-NEB convergence |-------------------------
           Item                value                   Tolerance       Converged
           ---------------------------------------------------------------------
           RMS(Fp)             0.0001875842            0.0100000000      YES
           MAX(|Fp|)           0.0007272942            0.0200000000      YES
           RMS(FCI)            0.0002119141            0.0010000000      YES
           MAX(|FCI|)          0.0006438771            0.0020000000      YES
+          ---------------------------------------------------------------------
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(37415, 37639)","(837, 843)",H U R R A Y THE NEB OPTIMIZATI...,"                    *********************H U R R A Y*********************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(37415, 37639)","(824, 830)",H U R R A Y THE NEB OPTIMIZATI...,"                    *********************H U R R A Y*********************
                     ***        THE NEB OPTIMIZATION HAS CONVERGED     ***
                     *****************************************************
 
