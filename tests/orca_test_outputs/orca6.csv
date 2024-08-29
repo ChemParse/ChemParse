@@ -768,7 +768,7 @@ Convergence thresholds               0.020000   0.010000            0.002000    
    LBFGS    19      5    0.049281    0.001786   0.000260  37.7020    0.001964    0.000705       
 
 "
-Block,BlockOrcaCiNebConvergence,"(38278, 38956)","(825, 834)",CINEB convergence Item value T...,"                                .--------------------.
+Block,BlockOrcaCiNebConvergence,"(38278, 38956)","(825, 834)",CI-Neb convergence,"                                .--------------------.
           ----------------------| CI-NEB convergence |-------------------------
           Item                value                   Tolerance       Converged
           ---------------------------------------------------------------------
