@@ -1584,3 +1584,53 @@ class BlockOrcaCiNebConvergence(Block):
         df["Tolerance"] = df["Tolerance"].astype(float)
 
         return Data(data={'Data': df}, comment="""Collects a DataFrame with columns `Item`, `Value`, `Tolerance`, `Converged`.""")
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaInputFile(Block):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaShark(Block):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaWarnings(Block):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaContributions(Block):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaAcknowledgement(Block):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaLibint2(Block):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaLibXc(Block):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaUses(Block):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaOrbitalBasis(Block):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaAuxJBasis(Block):
+    pass
