@@ -17,6 +17,7 @@
       "BlockOrcaShark",
       "BlockOrcaWarnings",
       "BlueprintParagraphStartsWith",
+      "BlueprintHurray",
       "BlueprintBlockWithSingeLineHeader",
       "BlueprintBlockWithInlineHeader",
       "BlueprintBlockNote",
@@ -141,6 +142,26 @@
       },
       "comment": "Blueprint: Paragraph with the line that starts with specified text."
     },
+    "BlueprintHurray": {
+      "order": [
+        "BlockOrcaHurrayTS",
+        "BlockOrcaHurrayCI",
+        "BlockOrcaHurrayOptimization"
+      ],
+      "pattern_structure": {
+        "beginning": "^((?:[ \\t]*\\*{5,}[ \\t]*H[ \\t]*U[ \\t]*R[ \\t]*R[ \\t]*A[ \\t]*Y[ \\t]*\\*{5,}\\*{5,}[ \\t]*\\n)(?:[ \\t]*\\*+[ \\t]*",
+        "ending": "[ \\t]*\\*+[ \\t]*\\n)(?:[ \\t]*\\*{5,}\\n))",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockOrcaHurrayTS": "THE TS OPTIMIZATION HAS CONVERGED",
+        "BlockOrcaHurrayCI": "THE N[Ee][Bb] OPTIMIZATION HAS CONVERGED",
+        "BlockOrcaHurrayOptimization": "THE OPTIMIZATION HAS CONVERGED"
+      },
+      "comment": "Blueprint: Hurray messages"
+    },
     "BlueprintBlockWithSingeLineHeader": {
       "order": [
         "BlockOrcaRotationalSpectrum",
@@ -252,6 +273,7 @@
   "TypeDefaultBlocks": {
     "order": [
       "BlockOrcaUnrecognizedScf",
+      "BlockOrcaUnrecognizedHurray",
       "BlockOrcaUnrecognizedWithSingeLineHeader",
       "BlockOrcaUnrecognizedWithHeader"
     ],
@@ -263,6 +285,15 @@
         "MULTILINE"
       ],
       "comment": "SCF type of block: the first line has not only special characters, but text in between it, followed by 1-2 regular lines and the closing header line with the sam special character as the first one. Then text until the special line or the next block"
+    },
+    "BlockOrcaUnrecognizedHurray": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaUnrecognizedHurray",
+      "pattern": "((?:[ \\t]*\\*{5,}[ \\t]*H[ \\t]*U[ \\t]*R[ \\t]*R[ \\t]*A[ \\t]*Y[ \\t]*\\*{5,}[ \\t]*\\n)(?:[ \\t]*\\*+[ \\t]*(?:[a-zA-Z0-9](?!\\n).*?)[ \\t]*\\*+[ \\t]*\\n)(?:[ \\t]*\\*{5,}\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Hurray type of block: the first line has 5 or more asterisks, followed by H U R R A Y, then 5 or more asterisks, then 1 line of text, then 5 or more asterisks"
     },
     "BlockOrcaUnrecognizedWithSingeLineHeader": {
       "p_type": "Block",

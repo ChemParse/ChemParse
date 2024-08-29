@@ -1634,3 +1634,36 @@ class BlockOrcaOrbitalBasis(Block):
 @AvailableBlocksOrca.register_block
 class BlockOrcaAuxJBasis(Block):
     pass
+
+
+class BlockOrcaHurray(Block):
+    def readable_name(self) -> str:
+        pattern = r"(?:[ \t]*\*{5,}[ \t]*H[ \t]*U[ \t]*R[ \t]*R[ \t]*A[ \t]*Y[ \t]*\*{5,}[ \t]*\n)(?:[ \t]*\*+[ \t]*([a-zA-Z0-9](?!\n).*?)[ \t]*\*+[ \t]*\n)(?:[ \t]*\*{5,}\n)"
+        extracted_texts = list(re.findall(pattern, self.raw_data))
+        assert len(
+            extracted_texts) == 1, f"Expected 1 match, found {len(extracted_texts)} matches"
+
+        return extracted_texts[0]
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return self.readable_name(), None, self.raw_data
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaUnrecognizedHurray(BlockOrcaHurray):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaHurrayTS(BlockOrcaHurray):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaHurrayCI(BlockOrcaHurray):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaHurrayOptimization(BlockOrcaHurray):
+    pass

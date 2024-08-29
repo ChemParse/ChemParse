@@ -762,14 +762,11 @@ Block,BlockOrcaCiNebConvergence,"(36643, 37321)","(809, 818)",CI-Neb convergence
           MAX(|FCI|)          0.0006438771            0.0020000000      YES
           ---------------------------------------------------------------------
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(37415, 37639)","(824, 830)",H U R R A Y THE NEB OPTIMIZATI...,"                    *********************H U R R A Y*********************
+Block,BlockOrcaHurrayCI,"(37415, 37636)","(822, 825)",THE NEB OPTIMIZATION HAS CONVERGED,"                    *********************H U R R A Y*********************
                     ***        THE NEB OPTIMIZATION HAS CONVERGED     ***
                     *****************************************************
-
-
-
 "
-Block,BlockOrcaPathSummaryForNebCi,"(37640, 38884)","(828, 856)",PATH SUMMARY,"---------------------------------------------------------------
+Block,BlockOrcaPathSummaryForNebCi,"(37640, 38884)","(830, 858)",PATH SUMMARY,"---------------------------------------------------------------
                          PATH SUMMARY              
 ---------------------------------------------------------------
 All forces in Eh/Bohr.
@@ -798,7 +795,7 @@ Straight line distance between images along the path:
         D( 8- 9) =   5.5294 Ang.
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(38885, 39249)","(857, 865)",INFORMATION ABOUT SADDLE POINT,"---------------------------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(38885, 39249)","(859, 867)",INFORMATION ABOUT SADDLE POINT,"---------------------------------------------------------------
                INFORMATION ABOUT SADDLE POINT     
 ---------------------------------------------------------------
 
@@ -807,7 +804,7 @@ Energy                                    ....  -1040.24168599 Eh
 Max. abs. force                           ....  6.4388e-04 Eh/Bohr
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(39250, 41382)","(866, 917)",SADDLE POINT (ANGSTROEM),"-----------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(39250, 41382)","(868, 919)",SADDLE POINT (ANGSTROEM),"-----------------------------------------
   SADDLE POINT (ANGSTROEM)
 -----------------------------------------
 C      1.945057    -2.597396    -0.884860 
@@ -859,7 +856,7 @@ H     -1.896270    -3.173218     4.247672
 H      0.544089    -3.283875     3.763840 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(41383, 43507)","(918, 969)",FORCES (Eh/Bohr),"-----------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(41383, 43507)","(920, 971)",FORCES (Eh/Bohr),"-----------------------------------------
   FORCES (Eh/Bohr)
 -----------------------------------------
 C      0.000231    -0.000354    -0.000237 
@@ -911,7 +908,7 @@ H      0.000136     0.000260    -0.000152
 H      0.000028     0.000112    -0.000048 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(43508, 45765)","(970, 1024)",UNIT TANGENT,"-----------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(43508, 45765)","(972, 1026)",UNIT TANGENT,"-----------------------------------------
   UNIT TANGENT
 -----------------------------------------
 C      0.012191     0.024554    -0.000483 
@@ -966,7 +963,7 @@ H     -0.019300    -0.124432    -0.076375
 Next a TS optimization is performed on the CI from the NEB run.
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(45766, 46806)","(1025, 1047)",TS OPTIMIZATION,"         *************************************************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(45766, 46806)","(1027, 1049)",TS OPTIMIZATION,"         *************************************************************
          *                       TS OPTIMIZATION                     *
          *************************************************************
 
@@ -989,7 +986,7 @@ Max. Displacement        TolMAXD  ....  4.0000e-03 bohr
 RMS Displacement         TolRMSD  ....  2.0000e-03 bohr
 Strict Convergence                ....  False
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(46807, 48113)","(1048, 1077)",ORCA OPTIMIZATION COORDINATE SETUP,"------------------------------------------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(46807, 48113)","(1050, 1079)",ORCA OPTIMIZATION COORDINATE SETUP,"------------------------------------------------------------------------------
                         ORCA OPTIMIZATION COORDINATE SETUP
 ------------------------------------------------------------------------------
 
@@ -1019,7 +1016,7 @@ The first mode is                       ....  151
 The number of degrees of freedom        ....  135
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(48237, 67906)","(1083, 1372)",Definition                    Initial Value    d2E/dq (diagonal element),"    -----------------------------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(48237, 67906)","(1085, 1374)",Definition                    Initial Value    d2E/dq (diagonal element),"    -----------------------------------------------------------------
          Definition                    Initial Value    d2E/dq (diagonal element)
     -----------------------------------------------------------------
       1. B(C   1,C   0)                  1.5414         0.358269   
@@ -1309,18 +1306,18 @@ Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(48237, 67906)","(1083, 1372)",D
     285. D(C  25,C  26,C   3,C   4)      1.3244         0.007748   
     286. D(C  25,C  26,C   3,C   2)   -179.5705         0.007466   
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(68076, 68290)","(1379, 1384)",GEOMETRY OPTIMIZATION CYCLE   1,"         *************************************************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(68076, 68290)","(1381, 1386)",GEOMETRY OPTIMIZATION CYCLE   1,"         *************************************************************
          *                GEOMETRY OPTIMIZATION CYCLE   1            *
          *************************************************************
 
 
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(68291, 68578)","(1385, 1389)",Program running with 64 parallel MPI-processes working on a common directory,"           ************************************************************
+Block,BlockOrcaUnrecognizedWithHeader,"(68291, 68578)","(1387, 1391)",Program running with 64 parallel MPI-processes working on a common directory,"           ************************************************************
            *        Program running with 64 parallel MPI-processes    *
            *              working on a common directory               *
            ************************************************************
 "
-Block,BlockOrcaUnrecognizedWithHeader,"(68579, 68850)","(1390, 1394)",ORCA GTO INTEGRAL CALCULATION - RI-GTO INTEGRALS CHOSEN -,"------------------------------------------------------------------------------
+Block,BlockOrcaUnrecognizedWithHeader,"(68579, 68850)","(1392, 1396)",ORCA GTO INTEGRAL CALCULATION - RI-GTO INTEGRALS CHOSEN -,"------------------------------------------------------------------------------
                            ORCA GTO INTEGRAL CALCULATION
                            -- RI-GTO INTEGRALS CHOSEN --
 ------------------------------------------------------------------------------
@@ -5888,11 +5885,9 @@ Block,BlockOrcaGeometryConvergence,"(329694, 330631)","(7045, 7058)",TOTAL RUN T
           Max(Dihed)        0.11      Max(Improp)    0.00
           ---------------------------------------------------------------------
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(330633, 330844)","(7061, 7066)",HURRAY THE OPTIMIZATION HAS CO...,"                    ***********************HURRAY********************
+Block,BlockOrcaHurrayOptimization,"(330633, 330842)","(7061, 7064)",THE OPTIMIZATION HAS CONVERGED,"                    ***********************HURRAY********************
                     ***        THE OPTIMIZATION HAS CONVERGED     ***
                     *************************************************
-
-
 "
 Block,BlockOrcaUnrecognizedWithHeader,"(353114, 353407)","(7363, 7369)",** FINAL ENERGY EVALUATION AT THE STATIONARY POINT ** **               (AFTER   26 CYCLES)               **,"                 *******************************************************
                  *** FINAL ENERGY EVALUATION AT THE STATIONARY POINT ***
@@ -7206,14 +7201,11 @@ Block,BlockOrcaFinalSinglePointEnergy,"(414994, 415140)","(8716, 8719)",FINAL SI
 FINAL SINGLE POINT ENERGY     -1040.242723122346
 -------------------------   --------------------
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(415206, 415430)","(8725, 8731)",HURRAY THE TS OPTIMIZATION HAS...,"                    ***********************HURRAY************************
+Block,BlockOrcaHurrayTS,"(415206, 415427)","(8725, 8728)",THE TS OPTIMIZATION HAS CONVERGED,"                    ***********************HURRAY************************
                     ***        THE TS OPTIMIZATION HAS CONVERGED      ***
                     *****************************************************
-
-
-
 "
-Block,BlockOrcaPathSummaryForNebTs,"(415431, 416287)","(8731, 8748)",PATH SUMMARY FOR NEB-TS,"---------------------------------------------------------------
+Block,BlockOrcaPathSummaryForNebTs,"(415431, 416287)","(8733, 8750)",PATH SUMMARY FOR NEB-TS,"---------------------------------------------------------------
                       PATH SUMMARY FOR NEB-TS             
 ---------------------------------------------------------------
 All forces in Eh/Bohr. Global forces for TS.
@@ -7231,7 +7223,7 @@ Image     E(Eh)   dE(kcal/mol)  max(|Fp|)  RMS(Fp)
   8   -1040.26597     9.75       0.00065   0.00019
   9   -1040.27575     3.62       0.00018   0.00005
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(416288, 416653)","(8749, 8762)",STATISTICS,"----------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(416288, 416653)","(8751, 8764)",STATISTICS,"----------
 STATISTICS
 ----------
 
@@ -7245,7 +7237,7 @@ Number of SCF / gradient calculations:
      TS optimization                   ... 27  50.9%
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(416654, 416941)","(8763, 8774)",TIMINGS,"----------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(416654, 416941)","(8765, 8776)",TIMINGS,"----------
  TIMINGS
 ----------
 
@@ -7257,19 +7249,19 @@ TS Optimization                        ...      774.904 sec  57.0%
 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(416942, 417146)","(8775, 8779)",ORCA property calculations,"                            ***************************************
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(416942, 417146)","(8777, 8781)",ORCA property calculations,"                            ***************************************
                             *     ORCA property calculations      *
                             ***************************************
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(417147, 417343)","(8780, 8786)",Active property flags,"                                    ---------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(417147, 417343)","(8782, 8788)",Active property flags,"                                    ---------------------
                                     Active property flags
                                     ---------------------
    (+) Dipole Moment
 
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(417344, 417945)","(8787, 8798)",ORCA ELECTRIC PROPERTIES CALCULATION,"------------------------------------------------------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(417344, 417945)","(8789, 8800)",ORCA ELECTRIC PROPERTIES CALCULATION,"------------------------------------------------------------------------------
                        ORCA ELECTRIC PROPERTIES CALCULATION
 ------------------------------------------------------------------------------
 
