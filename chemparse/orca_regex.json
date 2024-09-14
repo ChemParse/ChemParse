@@ -23,6 +23,7 @@
       "BlueprintBlockNote",
       "BlueprintBlockSCF",
       "BlockOrcaScfConverged",
+      "BlockOrcaTimingsForIndividualModules",
       "BlockOrcaCiNebConvergence",
       "BlockOrcaIcon"
     ],
@@ -250,6 +251,15 @@
         "MULTILINE"
       ],
       "comment": "Note, but with CF CONVERGED AFTER[ \t]*\\d+[ \t]*CYCLES inside"
+    },
+    "BlockOrcaTimingsForIndividualModules": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaTimingsForIndividualModules",
+      "pattern": "^((?:[ \\t]*Timings for individual modules:[ \\t]*\\n)(?:[ \\t]*\\n)?(?:[ \\t]*Sum of individual times(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)(?:(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\.{3}(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\%[ \\t]*\\n)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Timings for individual modules, then Sum of individual times, then ... and % lines"
     },
     "BlockOrcaCiNebConvergence": {
       "p_type": "Block",

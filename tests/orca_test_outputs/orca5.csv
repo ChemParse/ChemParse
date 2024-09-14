@@ -11175,6 +11175,16 @@ The Gibbs free energy is G = H - T*S
 Total enthalpy                    ...  -1039.83809819 Eh 
 Total entropy correction          ...     -0.06473429 Eh    -40.62 kcal/mol
 "
+Block,BlockOrcaTimingsForIndividualModules,"(711894, 712457)","(12917, 12926)",Timings for individual modules,"Timings for individual modules:
+
+Sum of individual times         ...     1802.542 sec (=  30.042 min)
+GTO integral calculation        ...       35.143 sec (=   0.586 min)   1.9 %
+SCF iterations                  ...      631.216 sec (=  10.520 min)  35.0 %
+SCF Gradient evaluation         ...      155.185 sec (=   2.586 min)   8.6 %
+Geometry relaxation             ...        4.554 sec (=   0.076 min)   0.3 %
+Analytical frequency calculation...      392.902 sec (=   6.548 min)  21.8 %
+NEB Iterations                  ...      583.542 sec (=   9.726 min)  32.4 %
+"
 Block,BlockOrcaTerminatedNormally,"(712458, 712519)","(12910, 12911)",ORCA TERMINATED NORMALLY,"                             ****ORCA TERMINATED NORMALLY****
 "
 Block,BlockOrcaTotalRunTime,"(712520, 712581)","(12911, 12912)",TOTAL RUN TIME,"TOTAL RUN TIME: 0 days 0 hours 29 minutes 13 seconds 374 msec

@@ -130,31 +130,31 @@ class BlockOrcaIcon(Block):
 
     .. code-block:: none
 
-                                            #,                                       
-                                            ###                                      
-                                            ####                                     
-                                            #####                                    
-                                            ######                                   
-                                           ########,                                 
-                                     ,,################,,,,,                         
-                               ,,#################################,,                 
-                          ,,##########################################,,             
-                       ,#########################################, ''#####,          
-                    ,#############################################,,   '####,        
-                  ,##################################################,,,,####,       
-                ,###########''''           ''''###############################       
-              ,#####''   ,,,,##########,,,,          '''####'''          '####       
-            ,##' ,,,,###########################,,,                        '##       
-           ' ,,###''''                  '''############,,,                           
+                                            #,
+                                            ###
+                                            ####
+                                            #####
+                                            ######
+                                           ########,
+                                     ,,################,,,,,
+                               ,,#################################,,
+                          ,,##########################################,,
+                       ,#########################################, ''#####,
+                    ,#############################################,,   '####,
+                  ,##################################################,,,,####,
+                ,###########''''           ''''###############################
+              ,#####''   ,,,,##########,,,,          '''####'''          '####
+            ,##' ,,,,###########################,,,                        '##
+           ' ,,###''''                  '''############,,,
          ,,##''                                '''############,,,,        ,,,,,,###''
-      ,#''                                            '''#######################'''  
-     '                                                          ''''####''''         
-             ,#######,   #######,   ,#######,      ##                                
-            ,#'     '#,  ##    ##  ,#'     '#,    #''#        ######   ,####,        
-            ##       ##  ##   ,#'  ##            #'  '#       #        #'  '#        
-            ##       ##  #######   ##           ,######,      #####,   #    #        
-            '#,     ,#'  ##    ##  '#,     ,#' ,#      #,         ##   #,  ,#        
-             '#######'   ##     ##  '#######'  #'      '#     #####' # '####'        
+      ,#''                                            '''#######################'''
+     '                                                          ''''####''''
+             ,#######,   #######,   ,#######,      ##
+            ,#'     '#,  ##    ##  ,#'     '#,    #''#        ######   ,####,
+            ##       ##  ##   ,#'  ##            #'  '#       #        #'  '#
+            ##       ##  #######   ##           ,######,      #####,   #    #
+            '#,     ,#'  ##    ##  '#,     ,#' ,#      #,         ##   #,  ,#
+             '#######'   ##     ##  '#######'  #'      '#     #####' # '####'
     """
     data_available: bool = True
 
@@ -352,7 +352,7 @@ class BlockOrcaErrorMessage(Block):
 
         ----------------------------------------------------------------------------
                                     ERROR !!!
-            The TS optimization did not converge but reached the maximum 
+            The TS optimization did not converge but reached the maximum
             number of optimization cycles.
             As a subsequent Frequencies calculation has been requested
             ORCA will abort at this point of the run.
@@ -435,7 +435,7 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
         Multiplicity       :   1
         Irrep              :   0
         Energy             :  -379.2946629874107884 Eh
-        Relativity type    : 
+        Relativity type    :
         Basis              : AO
                                         X                 Y                 Z
         Electronic contribution:     -0.000041430       0.000000017       4.661630904
@@ -464,10 +464,10 @@ class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
             .. code-block:: none
 
                 {
-                'Electronic contribution': <Quantity([0.      0.      5.37241], 'bohr * elementary_charge')>, 
-                'Nuclear contribution': <Quantity([ 0.      0.     -8.2653], 'bohr * elementary_charge')>, 
-                'Total Dipole Moment': <Quantity([ 0.       0.      -2.89289], 'bohr * elementary_charge')>, 
-                'Magnitude (a.u.)': <Quantity(2.89289, 'bohr * elementary_charge')>, 
+                'Electronic contribution': <Quantity([0.      0.      5.37241], 'bohr * elementary_charge')>,
+                'Nuclear contribution': <Quantity([ 0.      0.     -8.2653], 'bohr * elementary_charge')>,
+                'Total Dipole Moment': <Quantity([ 0.       0.      -2.89289], 'bohr * elementary_charge')>,
+                'Magnitude (a.u.)': <Quantity(2.89289, 'bohr * elementary_charge')>,
                 'Magnitude (Debye)': <Quantity(7.35314, 'debye')>
                 }
 
@@ -670,7 +670,29 @@ class BlockOrcaGeometryConvergence(Block):
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaTimingsForIndividualModules(Block):
+    """
+    The block captures and stores CI-NEB convergence data from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        Timings for individual modules:
+
+        Sum of individual times         ...      509.556 sec (=   8.493 min)
+        GTO integral calculation        ...        7.722 sec (=   0.129 min)   1.5 %
+        SCF iterations                  ...      123.801 sec (=   2.063 min)  24.3 %
+        SCF Gradient evaluation         ...       26.450 sec (=   0.441 min)   5.2 %
+        Geometry relaxation             ...        0.826 sec (=   0.014 min)   0.2 %
+        Analytical frequency calculation...      350.758 sec (=   5.846 min)  68.8 %
+
+    """
+
     data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def readable_name(self) -> str:
+        return 'Timings for individual modules'
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         match = re.search(
@@ -683,6 +705,21 @@ class BlockOrcaTimingsForIndividualModules(Block):
         return 'Timings for individual modules', header_raw, body_raw
 
     def data(self) -> Data:
+        """
+        :return: :class:`chemparse.data.Data` object that contains:
+
+                - :class:`dict` `Timings`
+                    with module names as keys and timings as :class:`datetime.timedelta` objects.
+        :rtype: Data
+
+        Parsed data example:
+
+        .. code-block:: none
+            'Sum of individual times': datetime.timedelta(seconds=24, microseconds=36000),
+            'GTO integral calculation': datetime.timedelta(seconds=8, microseconds=80000),
+            'SCF iterations': datetime.timedelta(seconds=15, microseconds=956000)
+
+        """
         # Initialize a dictionary to store the results
         timings_dict = {}
 
@@ -703,10 +740,10 @@ class BlockOrcaTimingsForIndividualModules(Block):
             # Add the module name and timedelta to the dictionary
             timings_dict[module_name.strip()] = module_time
 
-        return Data(data=timings_dict, comment='Timings for different modules as timedelta objects')
+        return Data(data={"Timings": timings_dict, comment = 'Timings for different modules as timedelta objects')
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
     """
     The block captures and stores orbital energies and occupation numbers from ORCA output files.
@@ -804,7 +841,7 @@ class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
                         Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.""")
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
     """
     The block captures and stores Total SCF Energy from ORCA output files.
@@ -834,10 +871,10 @@ class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
         N(Alpha)           :       31.000002566977 electrons
         N(Beta)            :       31.000002566977 electrons
         N(Total)           :       62.000005133953 electrons
-        E(X)               :      -51.506470961700 Eh       
-        E(C)               :       -2.061628237949 Eh       
-        E(XC)              :      -53.568099199649 Eh       
-        DFET-embed. en.    :        0.000000000000 Eh      
+        E(X)               :      -51.506470961700 Eh
+        E(C)               :       -2.061628237949 Eh
+        E(XC)              :      -53.568099199649 Eh
+        DFET-embed. en.    :        0.000000000000 Eh
     """
     data_available: bool = True
     """ Formatted data is available for this block. """
@@ -915,18 +952,18 @@ class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
         return Data(data=data_dict, comment="""Dictionary with different sections of the block as keys and their values as sub-dictionaries.
                     The values are pint objects.If there are more then one value in a line, they are stored in a sub-dictionary with the unit as key.
                     It is expected for the values to represent the same quantity, if they do not, there is an error in ORCA.
-                    
+
                     Output blocks example from for ORCA 6:
 
                     Total Energy: {'Value in Eh': <Quantity(-379.430116, 'hartree')>, 'Value in eV': <Quantity(-10324.8184, 'electron_volt')>}
                     Components: {'Nuclear Repulsion': {'Value in Eh': <Quantity(376.827292, 'hartree')>, 'Value in eV': <Quantity(10253.9919, 'electron_volt')>}, 'Electronic Energy': {'Value in Eh': <Quantity(-756.257408, 'hartree')>, 'Value in eV': <Quantity(-20578.8103, 'electron_volt')>}, 'One Electron Energy': {'Value in Eh': <Quantity(-1258.1559, 'hartree')>, 'Value in eV': <Quantity(-34236.1626, 'electron_volt')>}, 'Two Electron Energy': {'Value in Eh': <Quantity(501.898492, 'hartree')>, 'Value in eV': <Quantity(13657.3523, 'electron_volt')>}}
                     Virial components: {'Potential Energy': {'Value in Eh': <Quantity(-757.038751, 'hartree')>, 'Value in eV': <Quantity(-20600.0717, 'electron_volt')>}, 'Kinetic Energy': {'Value in Eh': <Quantity(377.608635, 'hartree')>, 'Value in eV': <Quantity(10275.2534, 'electron_volt')>}, 'Virial Ratio': 2.00482373}
                     DFT components: {'N(Alpha)': <Quantity(31.0000026, 'electron')>, 'N(Beta)': <Quantity(31.0000026, 'electron')>, 'N(Total)': <Quantity(62.0000051, 'electron')>, 'E(X)': <Quantity(-51.506471, 'hartree')>, 'E(C)': <Quantity(-2.06162824, 'hartree')>, 'E(XC)': <Quantity(-53.5680992, 'hartree')>, 'DFET-embed. en.': <Quantity(0.0, 'hartree')>}
-                    
+
                     """)
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
     """
     The block captures and stores TD-DFT excited states data for singlets from ORCA output files.
@@ -941,8 +978,8 @@ class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
         the weight of the individual excitations are printed if larger than 0.01
 
         STATE  1:  E=   0.154808 au      4.213 eV    33976.3 cm**-1  =   0.000000
-            29a ->  31a  :     0.078253 
-            30a ->  32a  :     0.907469 
+            29a ->  31a  :     0.078253
+            30a ->  32a  :     0.907469
 
     """
     data_available: bool = True
@@ -962,8 +999,10 @@ class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
                 1: {
                     'Energy (eV)': <Quantity(4.647, 'electron_volt')>,
                     'Transitions': [
-                            {'From Orbital': '29a', 'To Orbital': '32a', 'Coefficient': 0.055845},
-                            {'From Orbital': '30a', 'To Orbital': '31a', 'Coefficient': 0.906577}
+                            {'From Orbital': '29a', 'To Orbital': '32a',
+                                'Coefficient': 0.055845},
+                            {'From Orbital': '30a', 'To Orbital': '31a',
+                                'Coefficient': 0.906577}
                         ]
                     },
                 # Additional states follow the same structure
@@ -1017,12 +1056,12 @@ class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
             }
 
         return Data(data=states_data, comment="""Collects a dict with keys - integers - STATE numbers, and values - dict with elements: `Energy (eV)` -- pint.
-                    Quantity and, `Transitions`: dict with elements: `From Orbital`: string - number+a|b, `To Orbital`: string - number+a|b, `Coefficient`: float. 
+                    Quantity and, `Transitions`: dict with elements: `From Orbital`: string - number+a|b, `To Orbital`: string - number+a|b, `Coefficient`: float.
                     Parsed data example: {1:{'Energy (eV)': <Quantity(4.647, 'electron_volt')>, 'Transitions': [{'From Orbital': '29a', 'To Orbital': '32a', 'Coefficient': 0.055845}, {'From Orbital': '30a', 'To Orbital': '31a', 'Coefficient': 0.906577}]}}
                     """)
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaScfType(Block):
     """
     The block captures and stores SCF data from ORCA output files.
@@ -1039,9 +1078,9 @@ class BlockOrcaScfType(Block):
                                     *** Constraining orbitals ***
                                     *** Switching to L-BFGS ***
         Constrained orbitals (energetic order)
-        30 31 
+        30 31
         Constrained orbitals (compact order)
-        31 30 
+        31 30
 
     or
 
@@ -1116,12 +1155,12 @@ class BlockOrcaScfType(Block):
             return readable_name, None, self.raw_data
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaUnrecognizedScf(BlockOrcaScfType):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaScf(BlockOrcaScfType):
     """
     The block captures and stores SCF data from ORCA output files.
@@ -1138,9 +1177,9 @@ class BlockOrcaScf(BlockOrcaScfType):
                                     *** Constraining orbitals ***
                                     *** Switching to L-BFGS ***
         Constrained orbitals (energetic order)
-        30 31 
+        30 31
         Constrained orbitals (compact order)
-        31 30 
+        31 30
 
     """
 
@@ -1162,7 +1201,8 @@ class BlockOrcaScf(BlockOrcaScfType):
         .. code-block:: none
 
             {'Data': Empty DataFrame
-            Columns: [Iteration, Energy (Eh), Delta-E, RMSDP, MaxDP, Damp, Time(sec)]
+            Columns: [Iteration, Energy (
+                Eh), Delta-E, RMSDP, MaxDP, Damp, Time(sec)]
             Index: [],
             'Comments':    Iteration                                            Comment
             0          0  ***  Starting incremental Fock matrix formatio...
@@ -1226,7 +1266,7 @@ class BlockOrcaScf(BlockOrcaScfType):
                     Comments are stored in a separate DataFrame with columns `Iteration` and `Comment`.""")
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaSoscf(BlockOrcaScf):
     """
     The block captures and stores SOSCF data from ORCA output files.
@@ -1277,10 +1317,10 @@ class BlockOrcaSoscf(BlockOrcaScf):
         .. code-block:: none
 
             {'Data':
-            Iteration                  Energy (Eh)       Delta-E     RMSDP   MaxDP      MaxGrad              Time(sec)  
-            0           1  -440.42719635301455 hartree  0.000000e+00  0.000000  0.0000   0.029500 0 days 00:00:00.500000 
-            1           2  -440.42719635301455 hartree  0.000000e+00  0.004710  0.2320   0.029500 0 days 00:00:00.400000  
-            2           3     -440.49687163902 hartree -6.970000e-02  0.012600  1.1300   0.011100 0 days 00:00:00.400000, 
+            Iteration                  Energy (Eh)       Delta-E     RMSDP   MaxDP      MaxGrad              Time(sec)
+            0           1  -440.42719635301455 hartree  0.000000e+00  0.000000  0.0000   0.029500 0 days 00:00:00.500000
+            1           2  -440.42719635301455 hartree  0.000000e+00  0.004710  0.2320   0.029500 0 days 00:00:00.400000
+            2           3     -440.49687163902 hartree -6.970000e-02  0.012600  1.1300   0.011100 0 days 00:00:00.400000,
 
             'Comments':
             Iteration                                            Comment
@@ -1300,7 +1340,7 @@ class BlockOrcaSoscf(BlockOrcaScf):
         return super().data()
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
     """
     The block captures and stores NEB-TS path summary data from ORCA output files.
@@ -1310,7 +1350,7 @@ class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
     .. code-block:: none
 
         ---------------------------------------------------------------
-                      PATH SUMMARY FOR NEB-TS             
+                      PATH SUMMARY FOR NEB-TS
         ---------------------------------------------------------------
         All forces in Eh/Bohr. Global forces for TS.
 
@@ -1343,30 +1383,30 @@ class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
             .. code-block:: none
 
                 {'Data':    Image                      E(Eh)              dE(kcal/mol)  \
-                    0      0  -1040.28151 electron_volt    0.0 kilocalorie / mole   
-                    1      1  -1040.27082 electron_volt   6.71 kilocalorie / mole   
-                    2      2   -1040.2608 electron_volt   13.0 kilocalorie / mole   
-                    3      3   -1040.2518 electron_volt  18.64 kilocalorie / mole   
-                    4      4  -1040.24453 electron_volt  23.21 kilocalorie / mole   
-                    5      5  -1040.24169 electron_volt  24.99 kilocalorie / mole   
-                    6     TS  -1040.24272 electron_volt  24.34 kilocalorie / mole   
-                    7      6  -1040.24575 electron_volt  22.44 kilocalorie / mole   
-                    8      7  -1040.25472 electron_volt  16.81 kilocalorie / mole   
-                    9      8  -1040.26597 electron_volt   9.75 kilocalorie / mole   
-                    10     9  -1040.27575 electron_volt   3.62 kilocalorie / mole   
+                    0      0  -1040.28151 electron_volt    0.0 kilocalorie / mole
+                    1      1  -1040.27082 electron_volt   6.71 kilocalorie / mole
+                    2      2   -1040.2608 electron_volt   13.0 kilocalorie / mole
+                    3      3   -1040.2518 electron_volt  18.64 kilocalorie / mole
+                    4      4  -1040.24453 electron_volt  23.21 kilocalorie / mole
+                    5      5  -1040.24169 electron_volt  24.99 kilocalorie / mole
+                    6     TS  -1040.24272 electron_volt  24.34 kilocalorie / mole
+                    7      6  -1040.24575 electron_volt  22.44 kilocalorie / mole
+                    8      7  -1040.25472 electron_volt  16.81 kilocalorie / mole
+                    9      8  -1040.26597 electron_volt   9.75 kilocalorie / mole
+                    10     9  -1040.27575 electron_volt   3.62 kilocalorie / mole
 
-                                    max(|Fp|)                 RMS(Fp) Comment  
-                    0   0.00023 hartree / bohr    7e-05 hartree / bohr          
-                    1   0.00068 hartree / bohr  0.00023 hartree / bohr          
-                    2   0.00072 hartree / bohr  0.00023 hartree / bohr          
-                    3   0.00073 hartree / bohr  0.00022 hartree / bohr          
-                    4   0.00067 hartree / bohr   0.0002 hartree / bohr          
-                    5   0.00063 hartree / bohr  0.00021 hartree / bohr   <= CI  
-                    6     7e-05 hartree / bohr    2e-05 hartree / bohr   <= TS  
-                    7   0.00058 hartree / bohr  0.00021 hartree / bohr          
-                    8   0.00055 hartree / bohr  0.00019 hartree / bohr          
-                    9   0.00065 hartree / bohr  0.00019 hartree / bohr          
-                    10  0.00018 hartree / bohr    5e-05 hartree / bohr          
+                                    max(|Fp|)                 RMS(Fp) Comment
+                    0   0.00023 hartree / bohr    7e-05 hartree / bohr
+                    1   0.00068 hartree / bohr  0.00023 hartree / bohr
+                    2   0.00072 hartree / bohr  0.00023 hartree / bohr
+                    3   0.00073 hartree / bohr  0.00022 hartree / bohr
+                    4   0.00067 hartree / bohr   0.0002 hartree / bohr
+                    5   0.00063 hartree / bohr  0.00021 hartree / bohr   <= CI
+                    6     7e-05 hartree / bohr    2e-05 hartree / bohr   <= TS
+                    7   0.00058 hartree / bohr  0.00021 hartree / bohr
+                    8   0.00055 hartree / bohr  0.00019 hartree / bohr
+                    9   0.00065 hartree / bohr  0.00019 hartree / bohr
+                    10  0.00018 hartree / bohr    5e-05 hartree / bohr
                 }
 
         :rtype: Data
@@ -1407,7 +1447,7 @@ class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
         return Data(data={'Data': df_extracted}, comment="""Collects a DataFrame with columns `Image`, `Dist.(Ang.)`, `E(Eh)`, `dE(kcal/mol)`, `max(|Fp|)`, `RMS(Fp)`, `Comment`.""")
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaPathSummaryForNebCi(BlockOrcaPathSummaryForNebTs):
     """
     The block captures and stores NEB-TS path summary data from ORCA output files.
@@ -1417,7 +1457,7 @@ class BlockOrcaPathSummaryForNebCi(BlockOrcaPathSummaryForNebTs):
     .. code-block:: none
 
         ---------------------------------------------------------------
-                                PATH SUMMARY              
+                                PATH SUMMARY
         ---------------------------------------------------------------
         All forces in Eh/Bohr.
 
@@ -1448,7 +1488,7 @@ class BlockOrcaPathSummaryForNebCi(BlockOrcaPathSummaryForNebTs):
     """
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaVibrationalFrequencies(BlockOrcaWithStandardHeader):
     """
     The block captures and stores vibrational frequencies data from ORCA output files.
@@ -1486,7 +1526,7 @@ class BlockOrcaVibrationalFrequencies(BlockOrcaWithStandardHeader):
     def data(self) -> Data:
         """
 
-        :return: 
+        :return:
 
         :rtype: Data
         """
@@ -1523,7 +1563,7 @@ class BlockOrcaVibrationalFrequencies(BlockOrcaWithStandardHeader):
         """)
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaCiNebConvergence(Block):
     """
     The block captures and stores CI-NEB convergence data from ORCA output files.
@@ -1586,52 +1626,52 @@ class BlockOrcaCiNebConvergence(Block):
         return Data(data={'Data': df}, comment="""Collects a DataFrame with columns `Item`, `Value`, `Tolerance`, `Converged`.""")
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaInputFile(Block):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaShark(Block):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaWarnings(Block):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaContributions(Block):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaAcknowledgement(Block):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaLibint2(Block):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaLibXc(Block):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaUses(Block):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaOrbitalBasis(Block):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaAuxJBasis(Block):
     pass
 
@@ -1649,21 +1689,21 @@ class BlockOrcaHurray(Block):
         return self.readable_name(), None, self.raw_data
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaUnrecognizedHurray(BlockOrcaHurray):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaHurrayTS(BlockOrcaHurray):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaHurrayCI(BlockOrcaHurray):
     pass
 
 
-@AvailableBlocksOrca.register_block
+@ AvailableBlocksOrca.register_block
 class BlockOrcaHurrayOptimization(BlockOrcaHurray):
     pass

@@ -1609,7 +1609,7 @@ Dipole moment calculation done in   0.0 sec
 Maximum memory used throughout the entire PROP-calculation: 29.0 MB
 
 "
-Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(68146, 71593)","(1596, 1667)",SUGGESTED CITATIONS FOR THIS RUN,"--------------------------------
+Block,BlockOrcaUnrecognizedWithSingeLineHeader,"(68146, 71256)","(1596, 1661)",SUGGESTED CITATIONS FOR THIS RUN,"--------------------------------
 SUGGESTED CITATIONS FOR THIS RUN
 --------------------------------
 
@@ -1674,7 +1674,8 @@ List of optional additional citations
      Chem. Phys. Lett., 2000 325(1-3)93-98
      doi.org/10.1016/s0009-2614(00)00662-x
 
-Timings for individual modules:
+"
+Block,BlockOrcaTimingsForIndividualModules,"(71257, 71593)","(1662, 1668)",Timings for individual modules,"Timings for individual modules:
 
 Sum of individual times          ...       27.855 sec (=   0.464 min)
 GTO integral calculation         ...       13.431 sec (=   0.224 min)  48.2 %
