@@ -740,7 +740,7 @@ class BlockOrcaTimingsForIndividualModules(Block):
             # Add the module name and timedelta to the dictionary
             timings_dict[module_name.strip()] = module_time
 
-        return Data(data={"Timings": timings_dict, comment = 'Timings for different modules as timedelta objects')
+        return Data(data={"Timings": timings_dict}, comment='Timings for different modules as timedelta objects')
 
 
 @ AvailableBlocksOrca.register_block
