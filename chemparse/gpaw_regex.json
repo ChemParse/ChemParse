@@ -32,7 +32,8 @@
       "order": [
         "BlockGpawDipole",
         "BlockGpawConvergedAfter",
-        "BlockGpawOrbitalEnergies"
+        "BlockGpawOrbitalEnergies",
+        "BlockGpawTiming"
       ],
       "pattern_structure": {
         "beginning": "^([ \\t]*",
@@ -44,7 +45,8 @@
       "pattern_texts": {
         "BlockGpawDipole": "Dipole moment:",
         "BlockGpawConvergedAfter": "Converged after",
-        "BlockGpawOrbitalEnergies": "Up[ \\t]+Down"
+        "BlockGpawOrbitalEnergies": "Up[ \\t]+Down",
+        "BlockGpawTiming": "Timing:"
       },
       "comment": "Blueprint: Paragraph with the line that starts with specified text."
     }

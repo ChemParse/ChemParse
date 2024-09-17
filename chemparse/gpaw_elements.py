@@ -259,3 +259,152 @@ class BlockGpawOrbitalEnergies(Block):
         df['Eigenvalues_Down'] *= ureg.eV
 
         return Data(data={'UpDownOrbitals': df}, comment="`UpDownOrbitals` is pandas DataFrame with columns: Band, Eigenvalues_Up, Occupancy_Up, Eigenvalues_Down, Occupancy_Down")
+
+
+@AvailableBlocksGpaw.register_block
+class BlockGpawTiming(Block):
+    """
+    The block captures and stores Timing from GPAW output files.
+
+    **Example of GPAW Output:**
+
+    .. code-block:: none
+
+                Timing:                               incl.     excl.
+        ------------------------------------------------------------
+        Basic WFS set positions:              0.000     0.000   0.0% |
+        Redistribute:                        0.000     0.000   0.0% |
+        Basis functions set positions:        0.003     0.003   0.0% |
+        ...
+        ST tci:                               0.001     0.001   0.0% |
+        Set symmetry:                         0.000     0.000   0.0% |
+        TCI: Evaluate splines:                0.182     0.182   2.4% ||
+        mktci:                                0.001     0.001   0.0% |
+        Other:                                0.803     0.803  10.5% |---|
+        ------------------------------------------------------------
+        Total:                                          7.661 100.0%
+
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'Timing', None, self.raw_data
+
+    def data(self) -> Data:
+        """
+        Parses the timing data, maintains the hierarchy, and extracts the total time separately.
+
+        :return: :class:`chemparse.data.Data` object that contains:
+
+            - `Total`: A dictionary with 'Total Time' and 'Percentage'.
+            - `TimingHierarchy`: A list of timing data entries maintaining the hierarchy.
+
+        :rtype: Data
+        """
+
+        # Define the Node class to represent each entry in the timing data
+        class Node:
+            def __init__(self, name, incl_time, excl_time, percentage, level):
+                self.name = name
+                self.incl_time = timedelta(seconds=float(incl_time))
+                self.excl_time = timedelta(seconds=float(excl_time))
+                self.percentage = percentage  # Keep percentage as it is
+                self.level = level
+                self.children = []
+
+            def to_dict(self):
+                """Converts the node and its children to a dictionary."""
+                return {
+                    'name': self.name,
+                    'incl_time': self.incl_time,
+                    'excl_time': self.excl_time,
+                    'percentage': self.percentage,
+                    'children': [child.to_dict() for child in self.children]
+                }
+
+            def __repr__(self):
+                return (f"Node(name='{self.name}', incl_time={self.incl_time}, "
+                        f"excl_time={self.excl_time}, percentage='{self.percentage}', level={self.level})")
+
+        # Function to parse the timing data text and build the hierarchy
+        def parse_timing_data(text):
+            lines = text.strip().split('\n')
+            root = Node('Root', 0, 0, '0%', -1)  # Dummy root node
+            stack = [root]
+            total_time = None
+            total_percentage = None
+
+            for line in lines:
+                # Check for the Total line
+                if line.strip().startswith('Total:'):
+                    total_match = re.search(
+                        r'Total:\s+([\d\.]+)\s+([\d\.]+)%', line)
+                    if total_match:
+                        total_time = timedelta(
+                            seconds=float(total_match.group(1)))
+                        total_percentage = total_match.group(2) + '%'
+                    continue  # Skip processing the Total line further
+
+                # Skip lines that don't contain a colon (e.g., separators)
+                if ':' not in line:
+                    continue
+
+                # Count leading spaces to determine the level
+                stripped_line = line.lstrip()
+                leading_spaces = len(line) - len(stripped_line)
+                level = leading_spaces
+
+                # Split the line at the colon
+                name_part, rest = line.split(':', 1)
+                name = name_part.strip()
+
+                # Extract the incl_time, excl_time, and percentage
+                tokens = rest.strip().split()
+                # Check if this line contains timing data
+                if len(tokens) >= 3 and re.match(r'[\d\.]+', tokens[0]):
+                    incl_time = tokens[0]
+                    excl_time = tokens[1]
+                    percentage = tokens[2]
+                else:
+                    # If tokens are missing or not numbers, skip this line
+                    continue
+
+                # Create a new node
+                node = Node(name, incl_time, excl_time, percentage, level)
+
+                # Adjust the stack to maintain the hierarchy
+                while level <= stack[-1].level and len(stack) > 1:
+                    stack.pop()
+
+                # Append the new node to the current parent
+                stack[-1].children.append(node)
+                # Push the new node onto the stack
+                stack.append(node)
+
+            # Return the list of top-level nodes and total time
+            return root.children, total_time, total_percentage
+
+        # Parse the timing data
+        timing_entries, total_time, total_percentage = parse_timing_data(
+            self.raw_data)
+
+        # Convert the hierarchical timing data to a list of dictionaries for easier handling
+        def nodes_to_dicts(nodes):
+            return [node.to_dict() for node in nodes]
+
+        timing_hierarchy = nodes_to_dicts(timing_entries)
+
+        # Prepare the data to return
+        data_dict = {
+            'Total': {
+                'Total Time': total_time,
+                'Percentage': total_percentage
+            },
+            'TimingHierarchy': timing_hierarchy
+        }
+
+        return Data(
+            data=data_dict,
+            comment="`Total` contains the total time and percentage. `TimingHierarchy` is a list of timing entries maintaining the hierarchy, with times as timedelta objects."
+        )
