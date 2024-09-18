@@ -1,6 +1,7 @@
 import re
 from datetime import timedelta
 from io import StringIO
+from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -743,7 +744,7 @@ class BlockOrcaTimingsForIndividualModules(Block):
         return Data(data={"Timings": timings_dict}, comment='Timings for different modules as timedelta objects')
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
     """
     The block captures and stores orbital energies and occupation numbers from ORCA output files.
@@ -841,7 +842,7 @@ class BlockOrcaOrbitalEnergies(BlockOrcaWithStandardHeader):
                         Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.""")
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
     """
     The block captures and stores Total SCF Energy from ORCA output files.
@@ -963,7 +964,7 @@ class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
                     """)
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
     """
     The block captures and stores TD-DFT excited states data for singlets from ORCA output files.
@@ -1061,7 +1062,7 @@ class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
                     """)
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaScfType(Block):
     """
     The block captures and stores SCF data from ORCA output files.
@@ -1155,12 +1156,12 @@ class BlockOrcaScfType(Block):
             return readable_name, None, self.raw_data
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaUnrecognizedScf(BlockOrcaScfType):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaScf(BlockOrcaScfType):
     """
     The block captures and stores SCF data from ORCA output files.
@@ -1266,7 +1267,7 @@ class BlockOrcaScf(BlockOrcaScfType):
                     Comments are stored in a separate DataFrame with columns `Iteration` and `Comment`.""")
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaSoscf(BlockOrcaScf):
     """
     The block captures and stores SOSCF data from ORCA output files.
@@ -1340,7 +1341,7 @@ class BlockOrcaSoscf(BlockOrcaScf):
         return super().data()
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
     """
     The block captures and stores NEB-TS path summary data from ORCA output files.
@@ -1447,7 +1448,7 @@ class BlockOrcaPathSummaryForNebTs(BlockOrcaWithStandardHeader):
         return Data(data={'Data': df_extracted}, comment="""Collects a DataFrame with columns `Image`, `Dist.(Ang.)`, `E(Eh)`, `dE(kcal/mol)`, `max(|Fp|)`, `RMS(Fp)`, `Comment`.""")
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaPathSummaryForNebCi(BlockOrcaPathSummaryForNebTs):
     """
     The block captures and stores NEB-TS path summary data from ORCA output files.
@@ -1488,7 +1489,7 @@ class BlockOrcaPathSummaryForNebCi(BlockOrcaPathSummaryForNebTs):
     """
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaVibrationalFrequencies(BlockOrcaWithStandardHeader):
     """
     The block captures and stores vibrational frequencies data from ORCA output files.
@@ -1563,7 +1564,7 @@ class BlockOrcaVibrationalFrequencies(BlockOrcaWithStandardHeader):
         """)
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaCiNebConvergence(Block):
     """
     The block captures and stores CI-NEB convergence data from ORCA output files.
@@ -1626,52 +1627,52 @@ class BlockOrcaCiNebConvergence(Block):
         return Data(data={'Data': df}, comment="""Collects a DataFrame with columns `Item`, `Value`, `Tolerance`, `Converged`.""")
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaInputFile(Block):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaShark(Block):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaWarnings(Block):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaContributions(Block):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaAcknowledgement(Block):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaLibint2(Block):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaLibXc(Block):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaUses(Block):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaOrbitalBasis(Block):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaAuxJBasis(Block):
     pass
 
@@ -1689,21 +1690,420 @@ class BlockOrcaHurray(Block):
         return self.readable_name(), None, self.raw_data
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaUnrecognizedHurray(BlockOrcaHurray):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaHurrayTS(BlockOrcaHurray):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaHurrayCI(BlockOrcaHurray):
     pass
 
 
-@ AvailableBlocksOrca.register_block
+@AvailableBlocksOrca.register_block
 class BlockOrcaHurrayOptimization(BlockOrcaHurray):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaSpectrumType(Block):
+    """
+    The block captures and stores spectrum data from ORCA output files.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        -----------------------------------------------------------------------------
+         ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS
+        -----------------------------------------------------------------------------
+        State   Energy    Wavelength  fosc         T2        TX        TY        TZ  
+                (cm-1)      (nm)                 (au**2)    (au)      (au)      (au) 
+        -----------------------------------------------------------------------------
+        1   16903.5    591.6   0.000000000   0.00000   0.00000  -0.00000  -0.00000
+        2   22365.6    447.1   0.000000000   0.00000  -0.00000  -0.00000   0.00000
+        3   23649.8    422.8   0.000000000   0.00000   0.00000   0.00000   0.00000
+        4   25396.9    393.7   0.002096634   0.02718  -0.13602   0.04159   0.08336
+        5   26409.5    378.7   0.626104251   7.80481  -1.15488  -2.10174   1.43308
+        6   28468.1    351.3   0.000000000   0.00000   0.00000   0.00000  -0.00000
+        7   28944.3    345.5   0.000000000   0.00000   0.00000  -0.00000  -0.00000
+        8   28964.5    345.3   0.000000000   0.00000  -0.00000   0.00000   0.00000
+        9   29986.3    333.5   0.025998669   0.28543  -0.44658  -0.18107   0.23069
+        10   30178.3    331.4   0.000000000   0.00000   0.00000   0.00000  -0.00000
+        11   31055.6    322.0   0.000000000   0.00000  -0.00000  -0.00000   0.00000
+        12   32047.8    312.0   0.000000000   0.00000  -0.00000  -0.00000   0.00000
+        13   32343.8    309.2   0.000000000   0.00000  -0.00000   0.00000  -0.00000
+        14   32365.6    309.0   0.012474234   0.12688  -0.23853   0.23551  -0.12051
+        15   32454.2    308.1   0.023480417   0.23818   0.00690  -0.48392   0.06292
+        16   33446.2    299.0   0.001756413   0.01729  -0.06205   0.06809  -0.09382
+        17   34637.6    288.7   0.000000000   0.00000   0.00000  -0.00000  -0.00000
+        18   35255.9    283.6   0.000000000   0.00000   0.00000  -0.00000  -0.00000
+        ...
+
+    """
+    data_available: bool = True
+    """Formatted data is available for this block."""
+
+    def extract_name_header_and_body(self) -> tuple[str, Optional[str], str]:
+        """
+        Identifies and separates the name, header, and body of the block.
+
+        Returns
+        -------
+        Tuple[str, Optional[str], str]
+            The name of the block, the header content (or None if a header is not present),
+            and the body of the block.
+        """
+        raw_data = self.raw_data
+
+        # Define the separator pattern
+        separator_pattern = r"(?:[ \t]*[\-\*\#\=]{5,}[ \t]*\n)"
+        # Find all occurrences of the separator pattern
+        separators = list(re.finditer(separator_pattern, raw_data))
+
+        if len(separators) >= 2:
+            # The header is everything up to the end of the second separator
+            header_end = separators[1].end()
+            header_raw = raw_data[:header_end]
+            body_raw = raw_data[header_end:]
+
+            # Extract the name from the second line of the header
+            header_lines = header_raw.strip().split('\n')
+            if len(header_lines) > 1:
+                readable_name = header_lines[1].strip('-*#= \t')
+            else:
+                readable_name = ''
+
+            return readable_name, header_raw, body_raw
+        else:
+            logger.warning('No proper separators found in the block.')
+            # If separators are not found, treat the entire raw_data as body
+            readable_name = self.raw_data.strip('-*#= \t\n')
+            return readable_name, None, self.raw_data
+
+    def data(self) -> Data:
+        """
+        Parses the spectrum block and returns a Data object containing a DataFrame with units applied.
+
+        Returns
+        -------
+        Data
+            The parsed data.
+
+        Parsed data example:
+
+        .. code-block:: none
+
+            {'Data':    State                Energy       Wavelength      fosc  \
+             0      1  33976.3 / centimeter  294.3 nanometer  0.021335   
+             1      2  35755.9 / centimeter  279.7 nanometer  0.001973   
+             2      3  37484.5 / centimeter  266.8 nanometer  0.390239   
+             3      4  41161.2 / centimeter  242.9 nanometer  0.000000   
+             4      5  41566.8 / centimeter  240.6 nanometer  0.002970   
+             5      6  44735.6 / centimeter  223.5 nanometer  0.000000   
+             6      7  45450.2 / centimeter  220.0 nanometer  0.086304   
+             7      8  46804.9 / centimeter  213.7 nanometer  0.000000   
+             8      9  47631.6 / centimeter  209.9 nanometer  0.000000   
+             9     10  48254.4 / centimeter  207.2 nanometer  0.001034   
+             10    11  48584.4 / centimeter  205.8 nanometer  0.009750   
+             11    12  48919.0 / centimeter  204.4 nanometer  0.000000   
+             12    13  49700.3 / centimeter  201.2 nanometer  0.000723   
+             13    14  50102.4 / centimeter  199.6 nanometer  0.051594   
+             14    15  50284.6 / centimeter  198.9 nanometer  0.000321   
+             15    16  51032.4 / centimeter  196.0 nanometer  0.150104   
+             16    17  52308.5 / centimeter  191.2 nanometer  0.013270   
+             17    18  52383.7 / centimeter  190.9 nanometer  0.000000   
+             18    19  52417.6 / centimeter  190.8 nanometer  0.458435   
+             19    20  52615.8 / centimeter  190.1 nanometer  0.000000   
+
+                                                 T2  \
+             0   0.20672 bohr ** 2 * elementary_charge ** 2   
+             1   0.01817 bohr ** 2 * elementary_charge ** 2   
+             2   3.42732 bohr ** 2 * elementary_charge ** 2   
+             3       0.0 bohr ** 2 * elementary_charge ** 2   
+             4   0.02352 bohr ** 2 * elementary_charge ** 2   
+             5       0.0 bohr ** 2 * elementary_charge ** 2   
+             6   0.62513 bohr ** 2 * elementary_charge ** 2   
+             7       0.0 bohr ** 2 * elementary_charge ** 2   
+             8       0.0 bohr ** 2 * elementary_charge ** 2   
+             9   0.00705 bohr ** 2 * elementary_charge ** 2   
+             10  0.06607 bohr ** 2 * elementary_charge ** 2   
+             11      0.0 bohr ** 2 * elementary_charge ** 2   
+             12  0.00479 bohr ** 2 * elementary_charge ** 2   
+             13  0.33902 bohr ** 2 * elementary_charge ** 2   
+             14   0.0021 bohr ** 2 * elementary_charge ** 2   
+             15  0.96833 bohr ** 2 * elementary_charge ** 2   
+             16  0.08352 bohr ** 2 * elementary_charge ** 2   
+             17      0.0 bohr ** 2 * elementary_charge ** 2   
+             18  2.87923 bohr ** 2 * elementary_charge ** 2   
+             19      0.0 bohr ** 2 * elementary_charge ** 2   
+
+                                        TX                                 TY  \
+             0    0.45467 bohr * elementary_charge       0.0 bohr * elementary_charge   
+             1        0.0 bohr * elementary_charge    0.1348 bohr * elementary_charge   
+             2       -0.0 bohr * elementary_charge       0.0 bohr * elementary_charge   
+             3       -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+             4       -0.0 bohr * elementary_charge  -0.15338 bohr * elementary_charge   
+             5        0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+             6    0.79065 bohr * elementary_charge       0.0 bohr * elementary_charge   
+             7        0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+             8       -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+             9        0.0 bohr * elementary_charge  -0.08397 bohr * elementary_charge   
+             10      -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+             11       0.0 bohr * elementary_charge       0.0 bohr * elementary_charge   
+             12       0.0 bohr * elementary_charge   -0.0692 bohr * elementary_charge   
+             13  -0.58225 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+             14       0.0 bohr * elementary_charge  -0.04587 bohr * elementary_charge   
+             15      -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+             16       0.0 bohr * elementary_charge  -0.28899 bohr * elementary_charge   
+             17       0.0 bohr * elementary_charge       0.0 bohr * elementary_charge   
+             18      -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+             19       0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+
+                                        TZ  
+             0       -0.0 bohr * elementary_charge  
+             1        0.0 bohr * elementary_charge  
+             2     1.8513 bohr * elementary_charge  
+             3       -0.0 bohr * elementary_charge  
+             4       -0.0 bohr * elementary_charge  
+             5       -0.0 bohr * elementary_charge  
+             6        0.0 bohr * elementary_charge  
+             7       -0.0 bohr * elementary_charge  
+             8        0.0 bohr * elementary_charge  
+             9       -0.0 bohr * elementary_charge  
+             10   0.25704 bohr * elementary_charge  
+             11       0.0 bohr * elementary_charge  
+             12      -0.0 bohr * elementary_charge  
+             13       0.0 bohr * elementary_charge  
+             14      -0.0 bohr * elementary_charge  
+             15  -0.98404 bohr * elementary_charge  
+             16       0.0 bohr * elementary_charge  
+             17      -0.0 bohr * elementary_charge  
+             18  -1.69683 bohr * elementary_charge  
+             19       0.0 bohr * elementary_charge  }
+
+        """
+        def process_column_names_and_units(column_names: list, units_list: list) -> list:
+            """
+            Processes the column names and units, adjusting units according to specified rules.
+
+            Parameters
+            ----------
+            column_names : list
+                List of column names extracted from the subheader.
+            units_list : list
+                List of units extracted from the subheader.
+
+            Returns
+            -------
+            list
+                List of tuples (name, unit) after processing.
+            """
+            from pint import UnitRegistry
+            ureg = UnitRegistry()
+
+            # Manual mapping of column names to units (unitless columns mapped to None)
+            unitless_columns = {'State', 'Transition',
+                                'fosc', 'fosc(D2)', 'fosc(P2)'}
+            manual_unit_mapping = {name: None for name in unitless_columns}
+
+            # Additional manual unit mapping for units not recognized by Pint
+            manual_unit_mapping_units = {
+                'cm-1': ureg('1/cm'),
+                'cm^-1': ureg('1/cm'),
+                'au': ureg.bohr * ureg.elementary_charge,  # au as bohr * elementary charge
+                'au^2': (ureg.bohr * ureg.elementary_charge) ** 2,
+                'au**2': (ureg.bohr * ureg.elementary_charge) ** 2,
+                # Add more mappings as needed
+            }
+
+            units_index = 0  # Index to track units_list
+            name_unit_pairs = []
+
+            for name in column_names:
+                # Check if the column name is in the manual mapping (unitless columns)
+                if name in manual_unit_mapping:
+                    unit = manual_unit_mapping[name]
+                else:
+                    # Try to get the next unit from units_list
+                    if units_index < len(units_list):
+                        unit_str = units_list[units_index]
+                        units_index += 1
+                        # Remove external brackets if present and strip whitespace
+                        unit_str_clean = unit_str.strip('()').strip()
+                        if unit_str_clean == '':
+                            unit = None  # Empty unit string implies dimensionless
+                        else:
+                            # Map unit_str_clean to manual units if available
+                            if unit_str_clean in manual_unit_mapping_units:
+                                unit = manual_unit_mapping_units[unit_str_clean]
+                            else:
+                                # Try to parse the unit string using Pint
+                                try:
+                                    unit = ureg.parse_units(unit_str_clean)
+                                except Exception:
+                                    # Parsing failed, assume dimensionless
+                                    unit = None
+                                    # Optionally modify the column name to include the unit
+                                    # name = f"{name} ({unit_str})"
+                    else:
+                        # No more units available in units_list
+                        unit = None
+                        logger.warning(
+                            f'No unit provided for column "{name}", defaulting to None.')
+                name_unit_pairs.append((name, unit))
+
+            # Check if any units remain unused
+            if units_index < len(units_list):
+                logger.warning(
+                    'Units list has more entries than columns with units. Extra units will be ignored.')
+
+            return name_unit_pairs
+
+        # Extract the readable name, header, and body from the raw data
+        readable_name, header_raw, body_raw = self.extract_name_header_and_body()
+
+        if body_raw is None:
+            return Data(data=None, comment="No data found")
+
+        # Split the body into lines
+        body_lines = body_raw.strip().split('\n')
+
+        # Identify the separator line in the body (line consisting of '-')
+        separator_indices = [i for i, line in enumerate(
+            body_lines) if set(line.strip()) == {'-'}]
+
+        if separator_indices:
+            separator_index = separator_indices[0]
+            # Lines before the separator are subheader (column names and units)
+            subheader_lines = body_lines[:separator_index]
+            # Lines after the separator are data
+            data_lines = body_lines[separator_index + 1:]
+        else:
+            logger.warning('No separator line found in the body.')
+            return Data(data=None, comment="Could not parse body to get column names and data")
+
+        if len(subheader_lines) >= 2:
+            # Extract column names from the first line of subheader
+            colnames_line = subheader_lines[0]
+            column_names = colnames_line.strip().split()
+
+            N = len(column_names)  # Number of columns
+
+            # Extract units from the second line of subheader
+            units_line = subheader_lines[1]
+            units_list = units_line.strip().split()
+
+            # Process column names and units to adjust units according to rules
+            column_name_unit_pairs = process_column_names_and_units(
+                column_names, units_list)
+
+            # Unzip the pairs into separate lists
+            column_names, units = zip(*column_name_unit_pairs)
+
+            # Ensure that lengths match
+            assert len(column_names) == len(
+                units), "Column names and units lists must have the same length."
+
+        else:
+            logger.warning(
+                'Not enough lines in subheader to extract column names and units.')
+            return Data(data=None, comment="Could not parse subheader to get column names and units")
+
+        # Parse data lines
+        parsed_rows = []
+        for line_num, line in enumerate(data_lines):
+            if not line.strip() or set(line.strip()) == {'-'}:
+                continue  # Skip empty lines and separator lines
+
+            parts = line.strip().split()
+
+            # Check if the line has at least N parts
+            if len(parts) < N:
+                logger.error(
+                    f'Line {line_num + 1} does not have enough columns: {line}')
+                continue
+
+            # The last N-1 parts should be numeric values
+            numeric_parts = parts[-(N - 1):]
+            text_parts = parts[:-(N - 1)] if N > 1 else parts
+
+            # Join text parts into a single string for the first column
+            first_col_value = ' '.join(text_parts).strip()
+
+            # Convert numeric parts to floats
+            try:
+                float_values = [float(f.replace('D', 'E'))
+                                for f in numeric_parts]
+            except ValueError:
+                logger.error(
+                    f'Error parsing numeric data on line {line_num + 1}: {line}')
+                continue
+
+            # Combine data into a single row
+            row = [first_col_value] + float_values
+            parsed_rows.append(row)
+
+        # Create DataFrame
+        df_columns = column_names
+        df = pd.DataFrame(parsed_rows, columns=df_columns)
+
+        # Apply units to DataFrame columns
+        for col_name, unit in zip(df.columns, units):
+            if unit is not None:
+                # Multiply the column values by the unit to create Pint Quantities
+                df[col_name] = df[col_name].astype(
+                    float).apply(lambda x: x * unit)
+
+        # Return the DataFrame in the Data object
+        return Data(data={'Data': df}, comment=f"Parsed {readable_name} data.")
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaAbsorptionSpectrumViaTransitionElectricDipoleMoments(BlockOrcaSpectrumType):
+    """
+    Parses the 'ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS' block.
+    """
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaAbsorptionSpectrumViaTransitionVelocityDipoleMoments(BlockOrcaSpectrumType):
+    """
+    Parses the 'ABSORPTION SPECTRUM VIA TRANSITION VELOCITY DIPOLE MOMENTS' block.
+    """
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaCdSpectrumViaTransitionElectricDipoleMoments(BlockOrcaSpectrumType):
+    """
+    Parses the 'CD SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS' block.
+    """
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaCdSpectrumViaTransitionVelocityDipoleMoments(BlockOrcaSpectrumType):
+    """
+    Parses the 'CD SPECTRUM VIA TRANSITION VELOCITY DIPOLE MOMENTS' block.
+    """
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaCdSpectrum(BlockOrcaSpectrumType):
+    """
+    Parses the 'CD SPECTRUM' block.
+    """
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaRotationalSpectrum(Block):
     pass
