@@ -964,8 +964,7 @@ class BlockOrcaTotalScfEnergy(BlockOrcaWithStandardHeader):
                     """)
 
 
-@AvailableBlocksOrca.register_block
-class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
+class BlockOrcaTddftExcitations(BlockOrcaWithStandardHeader):
     """
     The block captures and stores TD-DFT excited states data for singlets from ORCA output files.
 
@@ -981,6 +980,27 @@ class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
         STATE  1:  E=   0.154808 au      4.213 eV    33976.3 cm**-1  =   0.000000
             29a ->  31a  :     0.078253
             30a ->  32a  :     0.907469
+
+    or
+
+    .. code-block:: none
+
+        -------------------------
+        TD-DFT/TDA EXCITED STATES
+        -------------------------
+        the weight of the individual excitations are printed if larger than 1.0e-02
+
+        UHF/UKS reference: multiplicity estimated based on rounded  value, RELEVANCE IS LIMITED!
+
+        STATE  1:  E=   0.077106 au      2.098 eV    16922.9 cm**-1  =   2.000000 Mult 3
+            90a ->  91a  :     0.468442 (c=  0.68442790)
+            90b ->  91b  :     0.468442 (c= -0.68442790)
+
+        STATE  2:  E=   0.101930 au      2.774 eV    22371.1 cm**-1  =   2.000000 Mult 3
+            89a ->  91a  :     0.418245 (c=  0.64671829)
+            89a ->  92a  :     0.050001 (c= -0.22360974)
+            89b ->  91b  :     0.418245 (c= -0.64671829)
+            89b ->  92b  :     0.050001 (c=  0.22360974)
 
     """
     data_available: bool = True
@@ -1060,6 +1080,16 @@ class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaWithStandardHeader):
                     Quantity and, `Transitions`: dict with elements: `From Orbital`: string - number+a|b, `To Orbital`: string - number+a|b, `Coefficient`: float.
                     Parsed data example: {1:{'Energy (eV)': <Quantity(4.647, 'electron_volt')>, 'Transitions': [{'From Orbital': '29a', 'To Orbital': '32a', 'Coefficient': 0.055845}, {'From Orbital': '30a', 'To Orbital': '31a', 'Coefficient': 0.906577}]}}
                     """)
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaTddftExcitedStatesSinglets(BlockOrcaTddftExcitations):
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaTddftTdaExcitedStates(BlockOrcaTddftExcitations):
+    pass
 
 
 @AvailableBlocksOrca.register_block
