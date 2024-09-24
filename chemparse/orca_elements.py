@@ -1829,93 +1829,57 @@ class BlockOrcaSpectrumType(Block):
 
         .. code-block:: none
 
-            {'Data':    State                Energy       Wavelength      fosc  \
-             0      1  33976.3 / centimeter  294.3 nanometer  0.021335   
-             1      2  35755.9 / centimeter  279.7 nanometer  0.001973   
-             2      3  37484.5 / centimeter  266.8 nanometer  0.390239   
-             3      4  41161.2 / centimeter  242.9 nanometer  0.000000   
-             4      5  41566.8 / centimeter  240.6 nanometer  0.002970   
-             5      6  44735.6 / centimeter  223.5 nanometer  0.000000   
-             6      7  45450.2 / centimeter  220.0 nanometer  0.086304   
-             7      8  46804.9 / centimeter  213.7 nanometer  0.000000   
-             8      9  47631.6 / centimeter  209.9 nanometer  0.000000   
-             9     10  48254.4 / centimeter  207.2 nanometer  0.001034   
-             10    11  48584.4 / centimeter  205.8 nanometer  0.009750   
-             11    12  48919.0 / centimeter  204.4 nanometer  0.000000   
-             12    13  49700.3 / centimeter  201.2 nanometer  0.000723   
-             13    14  50102.4 / centimeter  199.6 nanometer  0.051594   
-             14    15  50284.6 / centimeter  198.9 nanometer  0.000321   
-             15    16  51032.4 / centimeter  196.0 nanometer  0.150104   
-             16    17  52308.5 / centimeter  191.2 nanometer  0.013270   
-             17    18  52383.7 / centimeter  190.9 nanometer  0.000000   
-             18    19  52417.6 / centimeter  190.8 nanometer  0.458435   
-             19    20  52615.8 / centimeter  190.1 nanometer  0.000000   
+            'Data':         Transition             Energy (eV)         Energy (cm-1)  \
+            0     0-1A -> 1-3A   2.09817 electron_volt  16922.9 / centimeter   
+            1     0-1A -> 2-3A  2.773662 electron_volt  22371.1 / centimeter   
+            2     0-1A -> 3-3A  2.932123 electron_volt  23649.2 / centimeter   
+            3     0-1A -> 4-1A  3.149596 electron_volt  25403.2 / centimeter   
+            4     0-1A -> 5-1A  3.275905 electron_volt  26422.0 / centimeter   
+            ..             ...                     ...                   ...   
+            95   0-1A -> 96-1A  6.641358 electron_volt  53566.2 / centimeter   
+            96   0-1A -> 97-3A  6.656552 electron_volt  53688.7 / centimeter   
+            97   0-1A -> 98-3A  6.701102 electron_volt  54048.0 / centimeter   
+            98   0-1A -> 99-3A  6.727343 electron_volt  54259.7 / centimeter   
+            99  0-1A -> 100-1A  6.746272 electron_volt  54412.4 / centimeter   
 
-                                                 T2  \
-             0   0.20672 bohr ** 2 * elementary_charge ** 2   
-             1   0.01817 bohr ** 2 * elementary_charge ** 2   
-             2   3.42732 bohr ** 2 * elementary_charge ** 2   
-             3       0.0 bohr ** 2 * elementary_charge ** 2   
-             4   0.02352 bohr ** 2 * elementary_charge ** 2   
-             5       0.0 bohr ** 2 * elementary_charge ** 2   
-             6   0.62513 bohr ** 2 * elementary_charge ** 2   
-             7       0.0 bohr ** 2 * elementary_charge ** 2   
-             8       0.0 bohr ** 2 * elementary_charge ** 2   
-             9   0.00705 bohr ** 2 * elementary_charge ** 2   
-             10  0.06607 bohr ** 2 * elementary_charge ** 2   
-             11      0.0 bohr ** 2 * elementary_charge ** 2   
-             12  0.00479 bohr ** 2 * elementary_charge ** 2   
-             13  0.33902 bohr ** 2 * elementary_charge ** 2   
-             14   0.0021 bohr ** 2 * elementary_charge ** 2   
-             15  0.96833 bohr ** 2 * elementary_charge ** 2   
-             16  0.08352 bohr ** 2 * elementary_charge ** 2   
-             17      0.0 bohr ** 2 * elementary_charge ** 2   
-             18  2.87923 bohr ** 2 * elementary_charge ** 2   
-             19      0.0 bohr ** 2 * elementary_charge ** 2   
+                Wavelength (nm)  fosc(D2)                                  D2 (au**2)  \
+            0   590.9 nanometer  0.000000      0.0 bohr ** 2 * elementary_charge ** 2   
+            1   447.0 nanometer  0.000000      0.0 bohr ** 2 * elementary_charge ** 2   
+            2   422.8 nanometer  0.000000      0.0 bohr ** 2 * elementary_charge ** 2   
+            3   393.7 nanometer  0.002212  0.02866 bohr ** 2 * elementary_charge ** 2   
+            4   378.5 nanometer  0.624346  7.77921 bohr ** 2 * elementary_charge ** 2   
+            ..              ...       ...                                         ...   
+            95  186.7 nanometer  0.191542   1.1772 bohr ** 2 * elementary_charge ** 2   
+            96  186.3 nanometer  0.000000      0.0 bohr ** 2 * elementary_charge ** 2   
+            97  185.0 nanometer  0.000000      0.0 bohr ** 2 * elementary_charge ** 2   
+            98  184.3 nanometer  0.000000      0.0 bohr ** 2 * elementary_charge ** 2   
+            99  183.8 nanometer  0.233894  1.41514 bohr ** 2 * elementary_charge ** 2   
 
-                                        TX                                 TY  \
-             0    0.45467 bohr * elementary_charge       0.0 bohr * elementary_charge   
-             1        0.0 bohr * elementary_charge    0.1348 bohr * elementary_charge   
-             2       -0.0 bohr * elementary_charge       0.0 bohr * elementary_charge   
-             3       -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
-             4       -0.0 bohr * elementary_charge  -0.15338 bohr * elementary_charge   
-             5        0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
-             6    0.79065 bohr * elementary_charge       0.0 bohr * elementary_charge   
-             7        0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
-             8       -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
-             9        0.0 bohr * elementary_charge  -0.08397 bohr * elementary_charge   
-             10      -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
-             11       0.0 bohr * elementary_charge       0.0 bohr * elementary_charge   
-             12       0.0 bohr * elementary_charge   -0.0692 bohr * elementary_charge   
-             13  -0.58225 bohr * elementary_charge      -0.0 bohr * elementary_charge   
-             14       0.0 bohr * elementary_charge  -0.04587 bohr * elementary_charge   
-             15      -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
-             16       0.0 bohr * elementary_charge  -0.28899 bohr * elementary_charge   
-             17       0.0 bohr * elementary_charge       0.0 bohr * elementary_charge   
-             18      -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
-             19       0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+                                        DX (au)                            DY (au)  \
+            0        0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+            1        0.0 bohr * elementary_charge       0.0 bohr * elementary_charge   
+            2       -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+            3   -0.14047 bohr * elementary_charge   0.03394 bohr * elementary_charge   
+            4   -1.15138 bohr * elementary_charge  -2.09801 bohr * elementary_charge   
+            ..                                ...                                ...   
+            95   0.94121 bohr * elementary_charge  -0.11391 bohr * elementary_charge   
+            96       0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+            97       0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+            98      -0.0 bohr * elementary_charge      -0.0 bohr * elementary_charge   
+            99   0.60355 bohr * elementary_charge   -0.5407 bohr * elementary_charge   
 
-                                        TZ  
-             0       -0.0 bohr * elementary_charge  
-             1        0.0 bohr * elementary_charge  
-             2     1.8513 bohr * elementary_charge  
-             3       -0.0 bohr * elementary_charge  
-             4       -0.0 bohr * elementary_charge  
-             5       -0.0 bohr * elementary_charge  
-             6        0.0 bohr * elementary_charge  
-             7       -0.0 bohr * elementary_charge  
-             8        0.0 bohr * elementary_charge  
-             9       -0.0 bohr * elementary_charge  
-             10   0.25704 bohr * elementary_charge  
-             11       0.0 bohr * elementary_charge  
-             12      -0.0 bohr * elementary_charge  
-             13       0.0 bohr * elementary_charge  
-             14      -0.0 bohr * elementary_charge  
-             15  -0.98404 bohr * elementary_charge  
-             16       0.0 bohr * elementary_charge  
-             17      -0.0 bohr * elementary_charge  
-             18  -1.69683 bohr * elementary_charge  
-             19       0.0 bohr * elementary_charge  }
+                                        DZ (au)  
+            0       0.0 bohr * elementary_charge  
+            1       0.0 bohr * elementary_charge  
+            2       0.0 bohr * elementary_charge  
+            3   0.08819 bohr * elementary_charge  
+            4   1.43244 bohr * elementary_charge  
+            ..                               ...  
+            95  0.52758 bohr * elementary_charge  
+            96      0.0 bohr * elementary_charge  
+            97      0.0 bohr * elementary_charge  
+            98      0.0 bohr * elementary_charge  
+            99  0.87092 bohr * elementary_charge  
 
         """
         def process_column_names_and_units(column_names: list, units_list: list) -> list:
@@ -1959,6 +1923,7 @@ class BlockOrcaSpectrumType(Block):
                 # Check if the column name is in the manual mapping (unitless columns)
                 if name in manual_unit_mapping:
                     unit = manual_unit_mapping[name]
+                    final_name = name  # Keep the name as is for manual mapping
                 else:
                     # Try to get the next unit from units_list
                     if units_index < len(units_list):
@@ -1968,25 +1933,26 @@ class BlockOrcaSpectrumType(Block):
                         unit_str_clean = unit_str.strip('()').strip()
                         if unit_str_clean == '':
                             unit = None  # Empty unit string implies dimensionless
+                            final_name = name  # No unit, so final name is just the name
                         else:
-                            # Map unit_str_clean to manual units if available
+                            # Use the cleaned unit string directly for the final name
+                            final_name = f"{name} ({unit_str_clean})"
+                            # Map to a manual unit if available or parse with Pint (optional)
                             if unit_str_clean in manual_unit_mapping_units:
                                 unit = manual_unit_mapping_units[unit_str_clean]
                             else:
-                                # Try to parse the unit string using Pint
                                 try:
                                     unit = ureg.parse_units(unit_str_clean)
                                 except Exception:
-                                    # Parsing failed, assume dimensionless
-                                    unit = None
-                                    # Optionally modify the column name to include the unit
-                                    # name = f"{name} ({unit_str})"
+                                    unit = None  # Parsing failed, assume dimensionless
                     else:
                         # No more units available in units_list
                         unit = None
+                        final_name = name  # No unit, so final name is just the name
                         logger.warning(
                             f'No unit provided for column "{name}", defaulting to None.')
-                name_unit_pairs.append((name, unit))
+
+                name_unit_pairs.append((final_name, unit))
 
             # Check if any units remain unused
             if units_index < len(units_list):
