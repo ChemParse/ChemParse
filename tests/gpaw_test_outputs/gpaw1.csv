@@ -720,7 +720,7 @@ Block,BlockGpawUnrecognized,"(30456, 30472)","(724, 725)",Fermi level inf ,"Ferm
 "
 Block,BlockGpawUnrecognized,"(30474, 30509)","(728, 729)",Writing to abnesmgpw modeall ...,"Writing to abn_esm.gpw (mode='all')
 "
-Block,BlockGpawUnrecognized,"(30511, 37211)","(732, 838)",Timing incl excl Basic WFS set...,"Timing:                               incl.     excl.
+Block,BlockGpawTiming,"(30511, 37211)","(728, 834)",Timing,"Timing:                               incl.     excl.
 ------------------------------------------------------------
 Basic WFS set positions:              0.001     0.000   0.0% |
  Redistribute:                        0.000     0.000   0.0% |
@@ -827,5 +827,5 @@ Other:                                8.675     8.675  24.1% |---------|
 ------------------------------------------------------------
 Total:                                         36.061 100.0%
 "
-Block,BlockGpawUnrecognized,"(37213, 37243)","(841, 842)",Date Tue May ,"Date: Tue May 31 15:53:42 2022
+Block,BlockGpawUnrecognized,"(37213, 37243)","(837, 838)",Date Tue May ,"Date: Tue May 31 15:53:42 2022
 "

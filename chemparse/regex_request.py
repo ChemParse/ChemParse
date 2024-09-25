@@ -278,6 +278,7 @@ class RegexRequest:
                                     extracted_text,
                                     char_position=char_pos,
                                     line_position=line_pos)
+                                element_instance.specified_class_name = self.p_subtype
                         elif self.p_type == "Spacer":
                             element_instance = Spacer(extracted_text,
                                                       char_position=char_pos,

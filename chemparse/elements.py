@@ -212,8 +212,10 @@ class Block(Element):
     :vartype data_available: bool
     :ivar position: The position of the block within the larger document structure, often expressed as a range of line numbers.
     :vartype position: tuple | None
+    :ivar specified_class_name: A placeholder for the block's subtype if it cannot be determined during processing. Defaults to `None`.
     """
     data_available: bool = False
+    specified_class_name: str | None = None
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         """
@@ -311,6 +313,7 @@ class Block(Element):
                 f'python-class-name="{self.__class__.__name__}" '
                 f'readable-name="{readable_name}" '
                 f'start-line={line_start} finish-line={line_finish} '
+                f'specified-class-name="{self.specified_class_name if self.specified_class_name else self.__class__.__name__}"'
                 f'data_available={can_extract_data}>'
                 f'{header_html+body_html}</div>'
                 f'<hr class = "hr-between-blocks"></hr>')

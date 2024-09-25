@@ -9,17 +9,23 @@
       "BlockOrcaTotalRunTime",
       "BlockOrcaTerminatedNormally",
       "BlockOrcaFinalSinglePointEnergy",
+      "BlockOrcaGeometryConvergence",
       "BlockOrcaDipoleMomentFromOrca6",
       "BlockOrcaDipoleMoment",
       "BlockOrcaInputFile",
+      "BlockOrcaErrorMessage",
       "BlockOrcaShark",
       "BlockOrcaWarnings",
       "BlueprintParagraphStartsWith",
+      "BlueprintHurray",
       "BlueprintBlockWithSingeLineHeader",
+      "BlueprintBlockWithSingeLineHeaderAndSubheader",
       "BlueprintBlockWithInlineHeader",
       "BlueprintBlockNote",
       "BlueprintBlockSCF",
       "BlockOrcaScfConverged",
+      "BlockOrcaTimingsForIndividualModules",
+      "BlockOrcaCiNebConvergence",
       "BlockOrcaIcon"
     ],
     "BlockOrcaTotalRunTime": {
@@ -49,6 +55,15 @@
       ],
       "comment": "This pattern matches the final single point energy block in an ORCA output file. It looks for a line of 25 dashes, followed by a line with FINAL SINGLE POINT ENERGY, and then the energy value represented by an optional minus sign followed by one or more digits, a period, and more digits. This is encapsulated within a pattern of dashes that frame the title and the value."
     },
+    "BlockOrcaGeometryConvergence": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaGeometryConvergence",
+      "pattern": "((?:[ \\t]*\\.-{5,}\\.[ \\t]*\\n)(?:[ \\t]*\\-{5,}\\|?Geometry convergence\\|?\\-{5,}[ \\t]*\\n)(?:[ \\t]*(?:[A-Za-z]+[ \\t]*)*\\n)(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)+(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Orca Geometry convergence block, starts with a line of dots, then a line with Geometry convergence, then a line of dashes, then text until the next block or the line of dashes"
+    },
     "BlockOrcaDipoleMomentFromOrca6": {
       "p_type": "Block",
       "p_subtype": "BlockOrcaDipoleMoment",
@@ -75,6 +90,15 @@
         "MULTILINE"
       ],
       "comment": "Equal signs around the INPUT FILE, then any nonspecial line until the equal signs again."
+    },
+    "BlockOrcaErrorMessage": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaErrorMessage",
+      "pattern": "^((?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:[ \\t]*ERROR !!![ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)*(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Block with error message, starts with a line of special characters, then the line with ERROR !!!, then text until the next block or the line of special characters"
     },
     "BlockOrcaShark": {
       "p_type": "Block",
@@ -120,12 +144,36 @@
       },
       "comment": "Blueprint: Paragraph with the line that starts with specified text."
     },
+    "BlueprintHurray": {
+      "order": [
+        "BlockOrcaHurrayTS",
+        "BlockOrcaHurrayCI",
+        "BlockOrcaHurrayOptimization"
+      ],
+      "pattern_structure": {
+        "beginning": "^((?:[ \\t]*\\*{5,}[ \\t]*H[ \\t]*U[ \\t]*R[ \\t]*R[ \\t]*A[ \\t]*Y[ \\t]*\\*{5,}\\*{5,}[ \\t]*\\n)(?:[ \\t]*\\*+[ \\t]*",
+        "ending": "[ \\t]*\\*+[ \\t]*\\n)(?:[ \\t]*\\*{5,}\\n))",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockOrcaHurrayTS": "THE TS OPTIMIZATION HAS CONVERGED",
+        "BlockOrcaHurrayCI": "THE N[Ee][Bb] OPTIMIZATION HAS CONVERGED",
+        "BlockOrcaHurrayOptimization": "THE OPTIMIZATION HAS CONVERGED"
+      },
+      "comment": "Blueprint: Hurray messages"
+    },
     "BlueprintBlockWithSingeLineHeader": {
       "order": [
         "BlockOrcaRotationalSpectrum",
         "BlockOrcaOrbitalEnergies",
         "BlockOrcaTotalScfEnergy",
-        "BlockOrcaTddftExcitedStatesSinglets"
+        "BlockOrcaTddftExcitedStatesSinglets",
+        "BlockOrcaTddftTdaExcitedStates",
+        "BlockOrcaPathSummaryForNebTs",
+        "BlockOrcaPathSummaryForNebCi",
+        "BlockOrcaVibrationalFrequencies"
       ],
       "pattern_structure": {
         "beginning": "^((?:^[ \\t]*[\\-\\*\\#\\=]{5,}.*\\n)(?:[ \\t]*",
@@ -138,9 +186,37 @@
         "BlockOrcaRotationalSpectrum": "Rotational spectrum",
         "BlockOrcaOrbitalEnergies": "ORBITAL ENERGIES",
         "BlockOrcaTotalScfEnergy": "TOTAL SCF ENERGY",
-        "BlockOrcaTddftExcitedStatesSinglets": "TD-DFT EXCITED STATES \\(SINGLETS\\)"
+        "BlockOrcaTddftExcitedStatesSinglets": "TD-DFT EXCITED STATES \\(SINGLETS\\)",
+        "BlockOrcaTddftTdaExcitedStates": "TD-DFT\\/TDA EXCITED STATES",
+        "BlockOrcaPathSummaryForNebTs": "PATH SUMMARY FOR N[Ee][Bb]-TS",
+        "BlockOrcaPathSummaryForNebCi": "PATH SUMMARY",
+        "BlockOrcaVibrationalFrequencies": "VIBRATIONAL FREQUENCIES"
       },
       "comment": "Blueprint: Block starts with a line of special characters, followed by the 1 line header and then one more line of special characters. Then text until the special line or the next block"
+    },
+    "BlueprintBlockWithSingeLineHeaderAndSubheader": {
+      "order": [
+        "BlockOrcaAbsorptionSpectrumViaTransitionElectricDipoleMoments",
+        "BlockOrcaAbsorptionSpectrumViaTransitionVelocityDipoleMoments",
+        "BlockOrcaCdSpectrumViaTransitionElectricDipoleMoments",
+        "BlockOrcaCdSpectrumViaTransitionVelocityDipoleMoments",
+        "BlockOrcaCdSpectrum"
+      ],
+      "pattern_structure": {
+        "beginning": "^((?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:[ \\t]*",
+        "ending": "[ \\t]*\\n)(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n){1,2}(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n)+)",
+        "flags": [
+          "MULTILINE"
+        ]
+      },
+      "pattern_texts": {
+        "BlockOrcaAbsorptionSpectrumViaTransitionElectricDipoleMoments": "ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS",
+        "BlockOrcaAbsorptionSpectrumViaTransitionVelocityDipoleMoments": "ABSORPTION SPECTRUM VIA TRANSITION VELOCITY DIPOLE MOMENTS",
+        "BlockOrcaCdSpectrumViaTransitionElectricDipoleMoments": "CD SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS",
+        "BlockOrcaCdSpectrumViaTransitionVelocityDipoleMoments": "CD SPECTRUM VIA TRANSITION VELOCITY DIPOLE MOMENTS",
+        "BlockOrcaCdSpectrum": "CD SPECTRUM"
+      },
+      "comment": "Blueprint: Block starts with a line of special characters, followed by the 1 line header and then one more line of special characters, then 1 or 2 nonempty nonspecial lines, then special line. Then text until the special line or the next block"
     },
     "BlueprintBlockWithInlineHeader": {
       "order": [
@@ -203,6 +279,24 @@
       ],
       "comment": "Note, but with CF CONVERGED AFTER[ \t]*\\d+[ \t]*CYCLES inside"
     },
+    "BlockOrcaTimingsForIndividualModules": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaTimingsForIndividualModules",
+      "pattern": "^((?:[ \\t]*Timings for individual modules:[ \\t]*\\n)(?:[ \\t]*\\n)?(?:[ \\t]*Sum of individual times(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)(?:(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\.{3}(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\%[ \\t]*\\n)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Timings for individual modules, then Sum of individual times, then ... and % lines"
+    },
+    "BlockOrcaCiNebConvergence": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaCiNebConvergence",
+      "pattern": "^((?:[ \\t]*\\.\\-{5,}\\.[ \\t]*\\n)(?:[ \\t]*\\-{5,}\\|[ \\t]*CI-N[Ee][Bb] convergence[ \\t]*\\|\\-{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$).*\\n)+(?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n))$",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "CI-Neb convergence block, starts with a line of dots, then a line with CI-Neb convergence, then a line of dashes, then text until the next block or the line of dashes"
+    },
     "BlockOrcaIcon": {
       "p_type": "Block",
       "p_subtype": "BlockOrcaIcon",
@@ -215,9 +309,39 @@
   },
   "TypeDefaultBlocks": {
     "order": [
+      "BlockOrcaUnrecognizedScf",
+      "BlockOrcaUnrecognizedHurray",
+      "BlockOrcaUnrecognizedWithSingeLineHeaderAndSubheader",
       "BlockOrcaUnrecognizedWithSingeLineHeader",
       "BlockOrcaUnrecognizedWithHeader"
     ],
+    "BlockOrcaUnrecognizedScf": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaUnrecognizedScf",
+      "pattern": "^((?:(?:[ \\t]*([\\-\\*\\#\\=]){5,})[ \\t]*[a-zA-Z0-9](?!\\n).*?[ \\t]*\\2{7,}\\n)(?:(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n){1,2}(?:\\2*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n)*)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "SCF type of block: the first line has not only special characters, but text in between it, followed by 1-2 regular lines and the closing header line with the sam special character as the first one. Then text until the special line or the next block"
+    },
+    "BlockOrcaUnrecognizedHurray": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaUnrecognizedHurray",
+      "pattern": "((?:[ \\t]*\\*{5,}[ \\t]*H[ \\t]*U[ \\t]*R[ \\t]*R[ \\t]*A[ \\t]*Y[ \\t]*\\*{5,}[ \\t]*\\n)(?:[ \\t]*\\*+[ \\t]*(?:[a-zA-Z0-9](?!\\n).*?)[ \\t]*\\*+[ \\t]*\\n)(?:[ \\t]*\\*{5,}\\n))",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Hurray type of block: the first line has 5 or more asterisks, followed by H U R R A Y, then 5 or more asterisks, then 1 line of text, then 5 or more asterisks"
+    },
+    "BlockOrcaUnrecognizedWithSingeLineHeaderAndSubheader": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaUnrecognizedWithSingeLineHeaderAndSubheader",
+      "pattern": "^((?:[ \\t]*[\\-\\*\\#\\=]{5,}[ \\t]*\\n)(?:^(?!^[ \\t]*[\\-\\*\\#\\=]{5,}.*$|^[ \\t]*$).*\\n)(?:[ \t]*[\\-\\*\\#\\=]{5,}[ \t]*\n)(?:^(?!^[ \t]*[\\-\\*\\#\\=]{5,}.*$|^[ \t]*$).*\n){1,2}(?:[ \t]*[\\-\\*\\#\\=]{5,}[ \t]*\n)(?:^(?!^[ \t]*[\\-\\*\\#\\=]{5,}.*$|^[ \t]*$).*\n)+)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Block starts with a line of special characters, followed by the 1 line header and then one more line of special characters, then 1 or 2 nonempty nonspecial lines, then special line. Then text until the special line or the next block"
+    },
     "BlockOrcaUnrecognizedWithSingeLineHeader": {
       "p_type": "Block",
       "p_subtype": "BlockOrcaUnrecognizedWithSingeLineHeader",
