@@ -1,4 +1,4 @@
-chemparse package
+API Documentation
 =================
 
 Submodules

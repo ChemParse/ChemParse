@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>chemparse package &mdash; ChemParse 0.4.1 documentation</title>
+  <title>API Documentation &mdash; ChemParse 0.5.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,13 +15,13 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=c87aa342"></script>
+        <script src="_static/documentation_options.js?v=b9afe91b"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Interactive HTML Output" href="html.html" /> 
+    <link rel="prev" title="Contributing to ChemParse" href="contributing.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,7 +48,8 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Using ChemParse with Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripts.html">Using ChemParse from the Command Line</a></li>
 <li class="toctree-l1"><a class="reference internal" href="html.html">Interactive HTML Output</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">chemparse package</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to ChemParse</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-chemparse.data">chemparse.data module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#chemparse.data.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
@@ -428,7 +429,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">chemparse package</li>
+      <li class="breadcrumb-item active">API Documentation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/chemparse.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -438,8 +439,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="chemparse-package">
-<h1>chemparse package<a class="headerlink" href="#chemparse-package" title="Link to this heading"></a></h1>
+  <section id="api-documentation">
+<h1>API Documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
@@ -1413,6 +1414,13 @@ MAX(|FCI|)          0.0005858110            0.0020000000      YES
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> <cite>Comment</cite>.</p></li>
 </ul>
 <p>Parsed data example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>        &#39;Data&#39;:          Item     Value  Tolerance Converged
+0     RMS(Fp)  0.000188      0.010       YES
+1   MAX(|Fp|)  0.000727      0.020       YES
+2    RMS(FCI)  0.000212      0.001       YES
+3  MAX(|FCI|)  0.000644      0.002       YES
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data">Data</a></p>
@@ -1561,35 +1569,30 @@ Magnitude (Debye)      :      9.159800098
 <dl class="py method">
 <dt class="sig sig-object py" id="chemparse.orca_elements.BlockOrcaErrorMessage.data">
 <span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data"><span class="pre">Data</span></a></span></span><a class="headerlink" href="#chemparse.orca_elements.BlockOrcaErrorMessage.data" title="Link to this definition"></a></dt>
-<dd><blockquote>
-<div><dl class="field-list simple">
-<dt class="field-odd">return<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemparse.data.Data</span></code></a> object that contains:</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemparse.data.Data</span></code></a> object that contains:</p>
 <ul class="simple">
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> for the <cite>Error</cite> message if present</p></li>
 </ul>
+</p>
 </dd>
 </dl>
 <p>Parsed data example:</p>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;Error&#39;: &#39;ERROR !!!
-</pre></div>
-</div>
-</div></blockquote>
-</div></blockquote>
-<p>The optimization did not converge but reached the maximum 
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;Error&#39;: &#39;ERROR !!!
+The optimization did not converge but reached the maximum
 number of optimization cycles.
 As a subsequent Frequencies calculation has been requested
 ORCA will abort at this point of the run.
 Please restart the calculation with the lowest energy geometry and/or
-a larger maxiter for the geometry optimization.’}</p>
-<blockquote>
-<div><dl class="field-list simple">
-<dt class="field-odd">rtype<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Data</p>
+a larger maxiter for the geometry optimization.&#39;}
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#chemparse.data.Data" title="chemparse.data.Data">Data</a></p>
 </dd>
 </dl>
-</div></blockquote>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2598,6 +2601,11 @@ Analytical frequency calculation...      350.758 sec (=   5.846 min)  68.8 %
 </dd>
 </dl>
 <p>Parsed data example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;Sum of individual times&#39;: datetime.timedelta(seconds=24, microseconds=36000),
+&#39;GTO integral calculation&#39;: datetime.timedelta(seconds=8, microseconds=80000),
+&#39;SCF iterations&#39;: datetime.timedelta(seconds=15, microseconds=956000)
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4037,7 +4045,7 @@ text snippet to be inserted into the pattern structure.</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="html.html" class="btn btn-neutral float-left" title="Interactive HTML Output" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="contributing.html" class="btn btn-neutral float-left" title="Contributing to ChemParse" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
