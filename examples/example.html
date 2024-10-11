@@ -238,7 +238,7 @@ body {
     /* Hide overflow to maintain clean sidebar appearance */
     padding-left: 5px;
     /* Provide some spacing from the left edge */
-    width: auto;
+    width: fit-content;
     /* Remove fixed width */
 }
 
@@ -247,7 +247,7 @@ body {
     /* Use flex layout for horizontal alignment of color block and text */
     position: absolute;
     /* Absolute positioning within comment-sidebar */
-    width: calc(100% - 5px);
+    width: fit-content;
     /* Adjust width considering padding */
     /* Height and top properties will be set dynamically by JavaScript */
 }
@@ -261,6 +261,8 @@ body {
     /* Set to 0 for square blocks, or 50% for circles */
     background-color: inherit;
     /* Inherit color from JavaScript dynamically */
+    flex-shrink: 0;
+    /* Prevent the color block from shrinking */
 }
 
 .comment-sidebar .comment-section .text-container {
@@ -270,7 +272,9 @@ body {
     /* Distributes space between top and bottom text */
     height: 100%;
     /* Ensures it takes the full height of its container */
+    width: fit-content;
     margin: 0 2px 0 2px;
+    overflow: visible;
 }
 
 
@@ -278,6 +282,7 @@ body {
 .bottom-text {
     font-size: 10px;
     color: var(--comment-sidebar-text-color);
+    flex-shrink: 0;
 }
     </style>
 </head>
@@ -294,11 +299,11 @@ body {
         </div>
         <div class="content">
             <div class="element" python-class-name="Spacer" start-line=1 finish-line=2 is-block="False">
-<br></div><div class="element block" python-class-name="BlockUnknown" readable-name="My start of the message messag..." start-line=3 finish-line=5 data_available=False><div class="data">
+<br></div><div class="element block" python-class-name="BlockUnknown" readable-name="My start of the message messag..." start-line=3 finish-line=5 specified-class-name="BlockUnknown"data_available=False><div class="data">
 <pre>My start of the message: message1
 message2
 </pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" start-line=6 finish-line=7 is-block="False">
-<br></div><div class="element block" python-class-name="BlockOrcaUnrecognizedWithSingeLineHeader" readable-name="My data" start-line=6 finish-line=12 data_available=False><div class="header"><h7>
+<br></div><div class="element block" python-class-name="BlockOrcaUnrecognizedWithSingeLineHeader" readable-name="My data" start-line=6 finish-line=12 specified-class-name="BlockOrcaUnrecognizedWithSingeLineHeader"data_available=False><div class="header"><h7>
 <pre>--------------------
 My data
 --------------------
@@ -306,7 +311,7 @@ My data
 <pre> 
 My value: 1.234 eV
 
-</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaUnrecognizedWithSingeLineHeader" readable-name="Another data" start-line=13 finish-line=19 data_available=False><div class="header"><h7>
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaUnrecognizedWithSingeLineHeader" readable-name="Another data" start-line=13 finish-line=19 specified-class-name="BlockOrcaUnrecognizedWithSingeLineHeader"data_available=False><div class="header"><h7>
 <pre>                            ***************************************
                             *            Another data             *
                             ***************************************
@@ -314,20 +319,29 @@ My value: 1.234 eV
 <pre>Not my match
 My value: 9.876 eV
 
-</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=18 finish-line=21 data_available=False><div class="data">
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaFinalSinglePointEnergy" readable-name="FINAL SINGLE POINT ENERGY" start-line=18 finish-line=21 specified-class-name="BlockOrcaFinalSinglePointEnergy"data_available=True><div class="data">
 <pre>-------------------------   --------------------
 FINAL SINGLE POINT ENERGY      -440.508559636589
 -------------------------   --------------------
 </pre></div></div><hr class = "hr-between-blocks"></hr><div class="element" python-class-name="Spacer" start-line=22 finish-line=24 is-block="False">
-<br><br></div><div class="element block" python-class-name="BlockOrcaTerminatedNormally" readable-name="ORCA TERMINATED NORMALLY" start-line=23 finish-line=24 data_available=True><div class="data">
+<br><br></div><div class="element block" python-class-name="BlockOrcaTerminatedNormally" readable-name="ORCA TERMINATED NORMALLY" start-line=23 finish-line=24 specified-class-name="BlockOrcaTerminatedNormally"data_available=True><div class="data">
 <pre>                             ****ORCA TERMINATED NORMALLY****
-</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaTotalRunTime" readable-name="TOTAL RUN TIME" start-line=24 finish-line=25 data_available=True><div class="data">
+</pre></div></div><hr class = "hr-between-blocks"></hr><div class="element block" python-class-name="BlockOrcaTotalRunTime" readable-name="TOTAL RUN TIME" start-line=24 finish-line=25 specified-class-name="BlockOrcaTotalRunTime"data_available=True><div class="data">
 <pre>TOTAL RUN TIME: 0 days 0 hours 0 minutes 26 seconds 139 msec
 </pre></div></div><hr class = "hr-between-blocks"></hr>
         </div>
     </div>
     <script>
-        //TOC
+        // List of unrecognized blocks
+const unrecognizedBlocks = [
+    "BlockOrcaUnrecognizedScf",
+    "BlockOrcaUnrecognizedHurray",
+    "BlockOrcaUnrecognizedWithSingeLineHeaderAndSubheader",
+    "BlockOrcaUnrecognizedWithSingeLineHeader",
+    "BlockOrcaUnrecognizedWithHeader"
+];
+
+//TOC
 document.addEventListener('DOMContentLoaded', function () {
     const toc = document.querySelector('.toc');
 
@@ -364,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (pythonClass === 'BlockUnknown') {
             colorBlock.style.backgroundColor = colorForError;
         } else {
-            if (['BlockOrcaUnrecognizedWithSingeLineHeader', 'BlockOrcaUnrecognizedWithHeader'].includes(pythonClass)) {
+            if (unrecognizedBlocks.includes(pythonClass)) {
                 colorBlock.style.backgroundColor = colorForUnrecognized;
             } else if (pythonClass === 'Block') {
                 colorBlock.style.backgroundColor = colorForNoClass;
@@ -377,7 +391,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-
         const entryText = startLine ? `Line ${startLine}: ${readableName}` : readableName;
         const textNode = document.createTextNode(entryText);
 
@@ -388,7 +401,6 @@ document.addEventListener('DOMContentLoaded', function () {
         toc.appendChild(tocEntry);
 
         blockId++;
-
     });
 
     document.querySelectorAll('.toc-entry').forEach(function (entry) {
@@ -402,7 +414,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
 // comment sidebar
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -415,6 +426,7 @@ document.addEventListener('DOMContentLoaded', function () {
     dataBlocks.forEach(function (dataBlock, index) {
         const isDataAvailable = dataBlock.getAttribute('data_available');
         const pythonClass = dataBlock.getAttribute('python-class-name');
+        const specifiedClassName = dataBlock.getAttribute('specified-class-name');
         const startLineOfBlock = dataBlock.getAttribute('start-line');
         const endLineOfBlock = dataBlock.getAttribute('finish-line');
 
@@ -453,25 +465,24 @@ document.addEventListener('DOMContentLoaded', function () {
             indicatorColorBlock.style.backgroundColor = colorForError;
             commentBlockContainer.title = "Block looks incorrectly formatted";
         } else {
-            if (['BlockOrcaUnrecognizedWithSingeLineHeader', 'BlockOrcaUnrecognizedWithHeader'].includes(pythonClass)) {
+            if (unrecognizedBlocks.includes(specifiedClassName)) {
                 indicatorColorBlock.style.backgroundColor = colorForUnrecognized;
-                commentBlockContainer.title = "Block recognized by general pattern: " + pythonClass + ". Contribute to make this block recognizable.";
+                commentBlockContainer.title = "Block recognized by general pattern: " + specifiedClassName + ". Contribute to make this block recognizable.";
             } else {
                 if (pythonClass === 'Block') {
                     indicatorColorBlock.style.backgroundColor = colorForNoClass;
-                    commentBlockContainer.title = "Block was recognized by specific pattern, but there is no class for it to extract the data. Contribute if you know how to extract the data from this block.";
+                    commentBlockContainer.title = "Block was recognized by specific pattern (" + specifiedClassName + "), but there is no class for it to extract the data. Contribute if you know how to extract the data from this block.";
                 } else {
                     if (isDataAvailable === "True") {
                         indicatorColorBlock.style.backgroundColor = colorForAvailable;
-                        commentBlockContainer.title = "Data available for class: " + pythonClass;
+                        commentBlockContainer.title = "Data available for class: " + specifiedClassName;
                     } else {
                         indicatorColorBlock.style.backgroundColor = colorForNoDataPossible;
-                        commentBlockContainer.title = "Class: " + pythonClass + " has no data available. Contribute if you know how to extract the data from this block.";
+                        commentBlockContainer.title = "Class: " + specifiedClassName + " has no data available. Contribute if you know how to extract the data from this block.";
                     }
                 }
             }
         }
-
 
         // Append the indicator color block and text container to the comment block container
         commentBlockContainer.appendChild(indicatorColorBlock);

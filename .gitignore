@@ -163,3 +163,6 @@ poetry.lock
 .vscode/
 node_modules
 tmp/
+
+
+examples/*.ipynb
