@@ -358,6 +358,9 @@ class BlockOrcaErrorMessage(Block):
             As a subsequent Frequencies calculation has been requested
             ORCA will abort at this point of the run.
         ----------------------------------------------------------------------------
+
+
+
     """
     data_available: bool = True
     """ Formatted data is available for this block. """
@@ -373,11 +376,18 @@ class BlockOrcaErrorMessage(Block):
 
         Parsed data example:
 
-            .. code-block:: none
+        .. code-block:: none
 
-                {'Error': 'ERROR !!!\n       The optimization did not converge but reached the maximum \n       number of optimization cycles.\n       As a subsequent Frequencies calculation has been requested\n       ORCA will abort at this point of the run.\n       Please restart the calculation with the lowest energy geometry and/or\n       a larger maxiter for the geometry optimization.'}
+            {'Error': 'ERROR !!!
+            The optimization did not converge but reached the maximum
+            number of optimization cycles.
+            As a subsequent Frequencies calculation has been requested
+            ORCA will abort at this point of the run.
+            Please restart the calculation with the lowest energy geometry and/or
+            a larger maxiter for the geometry optimization.'}
 
         :rtype: Data
+
         """
         # Define regex pattern to match the error message using the provided pattern
         error_pattern = r"(?:[ \t]*[\-\*\#\=]{5,}[ \t]*\n)(?:[ \t]*ERROR !!![ \t]*\n)(?:^(?!^[ \t]*[\-\*\#\=]{5,}.*$).*\n)*(?:[ \t]*[\-\*\#\=]{5,}[ \t]*\n)"
@@ -716,6 +726,7 @@ class BlockOrcaTimingsForIndividualModules(Block):
         Parsed data example:
 
         .. code-block:: none
+
             'Sum of individual times': datetime.timedelta(seconds=24, microseconds=36000),
             'GTO integral calculation': datetime.timedelta(seconds=8, microseconds=80000),
             'SCF iterations': datetime.timedelta(seconds=15, microseconds=956000)
@@ -1634,6 +1645,7 @@ class BlockOrcaCiNebConvergence(Block):
         Parsed data example:
 
         .. code-block:: none
+
                         'Data':          Item     Value  Tolerance Converged
                 0     RMS(Fp)  0.000188      0.010       YES
                 1   MAX(|Fp|)  0.000727      0.020       YES
