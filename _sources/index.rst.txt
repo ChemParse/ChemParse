@@ -24,7 +24,7 @@ Contents
    scripts
    html
    contributing
-   chemparse
+   pychemparse
 
 .. Indices and tables
 .. ==================
