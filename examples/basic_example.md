@@ -1,5 +1,5 @@
 ```python
-import chemparse as chp
+import pychemparse as chp
 from IPython.display import HTML
 ```
 
@@ -12,7 +12,7 @@ display(orca_file)
 ```
 
 
-    <chemparse.file.File at 0x75c2fd715450>
+    <pychemparse.file.File at 0x75c2fd715450>
 
 
 You can convert orca output to HTML
@@ -133,7 +133,7 @@ orca_file.get_blocks()
       <th>8092521010537</th>
       <td>Block</td>
       <td>BlockOrcaTotalRunTime</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaTotalRunTime...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaTotalRunTime...</td>
       <td>(565, 625)</td>
       <td>(24, 25)</td>
     </tr>
@@ -141,7 +141,7 @@ orca_file.get_blocks()
       <th>8092521010777</th>
       <td>Block</td>
       <td>BlockOrcaTerminatedNormally</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaTerminatedNo...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaTerminatedNo...</td>
       <td>(503, 564)</td>
       <td>(23, 24)</td>
     </tr>
@@ -149,7 +149,7 @@ orca_file.get_blocks()
       <th>8092521010588</th>
       <td>Block</td>
       <td>BlockOrcaFinalSinglePointEnergy</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaFinalSingleP...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaFinalSingleP...</td>
       <td>(354, 500)</td>
       <td>(18, 21)</td>
     </tr>
@@ -157,7 +157,7 @@ orca_file.get_blocks()
       <th>8092521010894</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(45, 116)</td>
       <td>(6, 12)</td>
     </tr>
@@ -165,7 +165,7 @@ orca_file.get_blocks()
       <th>8092521010864</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(117, 353)</td>
       <td>(13, 19)</td>
     </tr>
@@ -173,7 +173,7 @@ orca_file.get_blocks()
       <th>8092521010996</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x75c2fd7...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x75c2fd7...</td>
       <td>(0, 0)</td>
       <td>(1, 2)</td>
     </tr>
@@ -181,7 +181,7 @@ orca_file.get_blocks()
       <th>8092521010879</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x75c2fd7...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x75c2fd7...</td>
       <td>(44, 44)</td>
       <td>(6, 7)</td>
     </tr>
@@ -189,7 +189,7 @@ orca_file.get_blocks()
       <th>8092521011128</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x75c2fd7...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x75c2fd7...</td>
       <td>(501, 502)</td>
       <td>(22, 24)</td>
     </tr>
@@ -197,7 +197,7 @@ orca_file.get_blocks()
       <th>8092521010819</th>
       <td>Block</td>
       <td>BlockUnknown</td>
-      <td>&lt;chemparse.elements.BlockUnknown object at 0x7...</td>
+      <td>&lt;pychemparse.elements.BlockUnknown object at 0x7...</td>
       <td>(1, 43)</td>
       <td>(3, 5)</td>
     </tr>
@@ -249,7 +249,7 @@ orca_file.get_data(extract_only_raw=True)
       <th>8092521010537</th>
       <td>Block</td>
       <td>BlockOrcaTotalRunTime</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaTotalRunTime...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaTotalRunTime...</td>
       <td>(565, 625)</td>
       <td>(24, 25)</td>
       <td>TOTAL RUN TIME</td>
@@ -259,7 +259,7 @@ orca_file.get_data(extract_only_raw=True)
       <th>8092521010777</th>
       <td>Block</td>
       <td>BlockOrcaTerminatedNormally</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaTerminatedNo...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaTerminatedNo...</td>
       <td>(503, 564)</td>
       <td>(23, 24)</td>
       <td>ORCA TERMINATED NORMALLY</td>
@@ -269,7 +269,7 @@ orca_file.get_data(extract_only_raw=True)
       <th>8092521010588</th>
       <td>Block</td>
       <td>BlockOrcaFinalSinglePointEnergy</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaFinalSingleP...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaFinalSingleP...</td>
       <td>(354, 500)</td>
       <td>(18, 21)</td>
       <td>FINAL SINGLE POINT ENERGY</td>
@@ -279,7 +279,7 @@ orca_file.get_data(extract_only_raw=True)
       <th>8092521010894</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(45, 116)</td>
       <td>(6, 12)</td>
       <td>My data</td>
@@ -289,7 +289,7 @@ orca_file.get_data(extract_only_raw=True)
       <th>8092521010864</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(117, 353)</td>
       <td>(13, 19)</td>
       <td>Another data</td>
@@ -299,7 +299,7 @@ orca_file.get_data(extract_only_raw=True)
       <th>8092521010996</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x75c2fd7...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x75c2fd7...</td>
       <td>(0, 0)</td>
       <td>(1, 2)</td>
       <td>None</td>
@@ -309,7 +309,7 @@ orca_file.get_data(extract_only_raw=True)
       <th>8092521010879</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x75c2fd7...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x75c2fd7...</td>
       <td>(44, 44)</td>
       <td>(6, 7)</td>
       <td>None</td>
@@ -319,7 +319,7 @@ orca_file.get_data(extract_only_raw=True)
       <th>8092521011128</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x75c2fd7...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x75c2fd7...</td>
       <td>(501, 502)</td>
       <td>(22, 24)</td>
       <td>None</td>
@@ -329,7 +329,7 @@ orca_file.get_data(extract_only_raw=True)
       <th>8092521010819</th>
       <td>Block</td>
       <td>BlockUnknown</td>
-      <td>&lt;chemparse.elements.BlockUnknown object at 0x7...</td>
+      <td>&lt;pychemparse.elements.BlockUnknown object at 0x7...</td>
       <td>(1, 43)</td>
       <td>(3, 5)</td>
       <td>My start of the message messag...</td>
@@ -350,7 +350,7 @@ You will get warnings about the unrecognized blocks. ExtractedData type is None 
 orca_file.get_data()
 ```
 
-    2024-10-11 14:47:07,100 - chemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
+    2024-10-11 14:47:07,100 - pychemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
     --------------------
     My data
     --------------------
@@ -358,7 +358,7 @@ orca_file.get_data()
     My value: 1.234 eV
     
     
-    2024-10-11 14:47:07,101 - chemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
+    2024-10-11 14:47:07,101 - pychemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
                                 ***************************************
                                 *            Another data             *
                                 ***************************************
@@ -366,7 +366,7 @@ orca_file.get_data()
     My value: 9.876 eV
     
     
-    2024-10-11 14:47:07,102 - chemparse - WARNING - The block looks unstructured. Please contribute to the project if you have knowledge on how to extract data from it.
+    2024-10-11 14:47:07,102 - pychemparse - WARNING - The block looks unstructured. Please contribute to the project if you have knowledge on how to extract data from it.
 
 
 
@@ -405,7 +405,7 @@ orca_file.get_data()
       <th>8092521010537</th>
       <td>Block</td>
       <td>BlockOrcaTotalRunTime</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaTotalRunTime...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaTotalRunTime...</td>
       <td>(565, 625)</td>
       <td>(24, 25)</td>
       <td>TOTAL RUN TIME</td>
@@ -416,7 +416,7 @@ orca_file.get_data()
       <th>8092521010777</th>
       <td>Block</td>
       <td>BlockOrcaTerminatedNormally</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaTerminatedNo...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaTerminatedNo...</td>
       <td>(503, 564)</td>
       <td>(23, 24)</td>
       <td>ORCA TERMINATED NORMALLY</td>
@@ -427,7 +427,7 @@ orca_file.get_data()
       <th>8092521010588</th>
       <td>Block</td>
       <td>BlockOrcaFinalSinglePointEnergy</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaFinalSingleP...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaFinalSingleP...</td>
       <td>(354, 500)</td>
       <td>(18, 21)</td>
       <td>FINAL SINGLE POINT ENERGY</td>
@@ -438,7 +438,7 @@ orca_file.get_data()
       <th>8092521010894</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(45, 116)</td>
       <td>(6, 12)</td>
       <td>My data</td>
@@ -449,7 +449,7 @@ orca_file.get_data()
       <th>8092521010864</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(117, 353)</td>
       <td>(13, 19)</td>
       <td>Another data</td>
@@ -460,7 +460,7 @@ orca_file.get_data()
       <th>8092521010996</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x75c2fd7...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x75c2fd7...</td>
       <td>(0, 0)</td>
       <td>(1, 2)</td>
       <td>None</td>
@@ -471,7 +471,7 @@ orca_file.get_data()
       <th>8092521010879</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x75c2fd7...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x75c2fd7...</td>
       <td>(44, 44)</td>
       <td>(6, 7)</td>
       <td>None</td>
@@ -482,7 +482,7 @@ orca_file.get_data()
       <th>8092521011128</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x75c2fd7...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x75c2fd7...</td>
       <td>(501, 502)</td>
       <td>(22, 24)</td>
       <td>None</td>
@@ -493,7 +493,7 @@ orca_file.get_data()
       <th>8092521010819</th>
       <td>Block</td>
       <td>BlockUnknown</td>
-      <td>&lt;chemparse.elements.BlockUnknown object at 0x7...</td>
+      <td>&lt;pychemparse.elements.BlockUnknown object at 0x7...</td>
       <td>(1, 43)</td>
       <td>(3, 5)</td>
       <td>My start of the message messag...</td>
@@ -515,7 +515,7 @@ The same text may occur in different blocks
 orca_file.get_data(raw_data_substring="My value")
 ```
 
-    2024-10-11 14:47:07,112 - chemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
+    2024-10-11 14:47:07,112 - pychemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
     --------------------
     My data
     --------------------
@@ -523,7 +523,7 @@ orca_file.get_data(raw_data_substring="My value")
     My value: 1.234 eV
     
     
-    2024-10-11 14:47:07,112 - chemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
+    2024-10-11 14:47:07,112 - pychemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
                                 ***************************************
                                 *            Another data             *
                                 ***************************************
@@ -569,7 +569,7 @@ orca_file.get_data(raw_data_substring="My value")
       <th>8092521010894</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(45, 116)</td>
       <td>(6, 12)</td>
       <td>My data</td>
@@ -580,7 +580,7 @@ orca_file.get_data(raw_data_substring="My value")
       <th>8092521010864</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(117, 353)</td>
       <td>(13, 19)</td>
       <td>Another data</td>
@@ -600,7 +600,7 @@ The easiest way to extract the needed data in this case is to add some other tex
 orca_file.get_data(raw_data_substring=("My value", "My data"))
 ```
 
-    2024-10-11 14:47:07,119 - chemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
+    2024-10-11 14:47:07,119 - pychemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
     --------------------
     My data
     --------------------
@@ -646,7 +646,7 @@ orca_file.get_data(raw_data_substring=("My value", "My data"))
       <th>8092521010894</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(45, 116)</td>
       <td>(6, 12)</td>
       <td>My data</td>
@@ -667,7 +667,7 @@ orca_file.get_data(raw_data_substring="My value",
                    raw_data_not_substring="Not my match")
 ```
 
-    2024-10-11 14:47:07,127 - chemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
+    2024-10-11 14:47:07,127 - pychemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
     --------------------
     My data
     --------------------
@@ -713,7 +713,7 @@ orca_file.get_data(raw_data_substring="My value",
       <th>8092521010894</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(45, 116)</td>
       <td>(6, 12)</td>
       <td>My data</td>
@@ -733,7 +733,7 @@ or we can extract the one we need by the readable name (you can find it in html 
 orca_file.get_data(readable_name="My data")
 ```
 
-    2024-10-11 14:47:07,133 - chemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
+    2024-10-11 14:47:07,133 - pychemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
     --------------------
     My data
     --------------------
@@ -779,7 +779,7 @@ orca_file.get_data(readable_name="My data")
       <th>8092521010894</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(45, 116)</td>
       <td>(6, 12)</td>
       <td>My data</td>
@@ -800,7 +800,7 @@ orca_file.get_data(raw_data_substring=(
     "My value", "My data"), readable_name="My data")
 ```
 
-    2024-10-11 14:47:07,140 - chemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
+    2024-10-11 14:47:07,140 - pychemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
     --------------------
     My data
     --------------------
@@ -846,7 +846,7 @@ orca_file.get_data(raw_data_substring=(
       <th>8092521010894</th>
       <td>Block</td>
       <td>BlockOrcaUnrecognizedWithSingeLineHeader</td>
-      <td>&lt;chemparse.orca_elements.BlockOrcaUnrecognized...</td>
+      <td>&lt;pychemparse.orca_elements.BlockOrcaUnrecognized...</td>
       <td>(45, 116)</td>
       <td>(6, 12)</td>
       <td>My data</td>
@@ -866,7 +866,7 @@ Lets extract the data and have a look on what it contains
 df = orca_file.get_data(readable_name="My data")
 ```
 
-    2024-10-11 14:47:07,147 - chemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
+    2024-10-11 14:47:07,147 - pychemparse - WARNING - No procedure for analyzing the data found in type `BlockOrcaUnrecognizedWithSingeLineHeader`, returning the raw data:
     --------------------
     My data
     --------------------
@@ -883,7 +883,7 @@ print(f"{type(data) = }")
 print(f"{str(data) = }")
 ```
 
-    type(data) = <class 'chemparse.data.Data'>
+    type(data) = <class 'pychemparse.data.Data'>
     str(data) = 'Data with items: `raw data`. Comment: No procedure for analyzing the data found, `raw data` collected.\nPlease contribute to the project if you have knowledge on how to extract data from it.'
 
 

@@ -5,7 +5,7 @@ from itertools import zip_longest
 import pandas as pd
 import pytest
 
-import chemparse as chp
+import pychemparse as chp
 
 rs = chp.DEFAULT_ORCA_REGEX_SETTINGS
 known_orca_regexes = (rs.items["TypeKnownBlocks"].to_list() +

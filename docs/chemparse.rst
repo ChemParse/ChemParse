@@ -4,82 +4,82 @@ API Documentation
 Submodules
 ----------
 
-chemparse.data module
+pychemparse.data module
 ---------------------
 
-.. automodule:: chemparse.data
+.. automodule:: pychemparse.data
    :members:
    :undoc-members:
    :show-inheritance:
 
-chemparse.elements module
+pychemparse.elements module
 -------------------------
 
-.. automodule:: chemparse.elements
+.. automodule:: pychemparse.elements
    :members:
    :undoc-members:
    :show-inheritance:
 
-chemparse.file module
+pychemparse.file module
 ---------------------
 
-.. automodule:: chemparse.file
+.. automodule:: pychemparse.file
    :members:
    :undoc-members:
    :show-inheritance:
 
-chemparse.orca\_elements module
+pychemparse.orca\_elements module
 -------------------------------
 
-.. automodule:: chemparse.orca_elements
+.. automodule:: pychemparse.orca_elements
    :members:
    :undoc-members:
    :show-inheritance:
 
-chemparse.gpaw\_elements module
+pychemparse.gpaw\_elements module
 -------------------------------
 
-.. automodule:: chemparse.gpaw_elements
+.. automodule:: pychemparse.gpaw_elements
    :members:
    :undoc-members:
    :show-inheritance:
 
-chemparse.vasp\_elements module
+pychemparse.vasp\_elements module
 -------------------------------
 
-.. automodule:: chemparse.vasp_elements
+.. automodule:: pychemparse.vasp_elements
    :members:
    :undoc-members:
    :show-inheritance:
 
-chemparse.regex\_request module
+pychemparse.regex\_request module
 -------------------------------
 
-.. automodule:: chemparse.regex_request
+.. automodule:: pychemparse.regex_request
    :members:
    :undoc-members:
    :show-inheritance:
 
-chemparse.regex\_settings module
+pychemparse.regex\_settings module
 --------------------------------
 
-.. automodule:: chemparse.regex_settings
+.. automodule:: pychemparse.regex_settings
    :members:
    :undoc-members:
    :show-inheritance:
 
-chemparse.scripts module
+pychemparse.scripts module
 ------------------------
 
-.. automodule:: chemparse.scripts
+.. automodule:: pychemparse.scripts
    :members:
    :undoc-members:
    :show-inheritance:
 
-chemparse.units\_and\_constants module
+pychemparse.units\_and\_constants module
 --------------------------------------
 
-.. automodule:: chemparse.units_and_constants
+.. automodule:: pychemparse.units_and_constants
    :members:
    :undoc-members:
    :show-inheritance:

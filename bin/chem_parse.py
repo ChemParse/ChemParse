@@ -1,4 +1,4 @@
-from chemparse.scripts import chem_parse_cli
+from pychemparse.scripts import chem_parse_cli
 
 
 if __name__ == "__main__":

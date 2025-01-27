@@ -1,4 +1,4 @@
----
+<!-- ---
 
 title: 'ChemParse: A User-Centric Tool for Parsing Computational Chemistry Outputs'
 tags:
@@ -16,7 +16,7 @@ affiliations:
  - name: Science Institute and Faculty of Physical Sciences, University of Iceland, 107 Reykjav\'{\i}k, Iceland
    index: 1
 date: 13 September 2024
-bibliography: paper.bib
+bibliography: paper.bib -->
 
 # Summary
 

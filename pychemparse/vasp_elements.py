@@ -161,7 +161,7 @@ class BlockVaspFreeEnergyOfTheIonElectronSystem(BlockVaspWithSingleLineHeader):
     def data(self) -> Data:
         """
 
-        :return: :class:`chemparse.data.Data` object that contains:
+        :return: :class:`pychemparse.data.Data` object that contains:
             - :class:`pint.Quantity`'s for energy components in eV
             - :class:`tuple`'s of :class:`pint.Quantity`'s for `PAW double counting` in eV if present in the block
 
@@ -260,7 +260,7 @@ class BlockVaspGeneralTiming(Block):
     def data(self) -> Data:
         """
 
-        :return: :class:`chemparse.data.Data` object that contains:
+        :return: :class:`pychemparse.data.Data` object that contains:
             - :class:`datetime.timedelta`'s for time components in seconds
             - :class:`bitmath.Byte`'s for memory components in bytes
             - :class:`bitmath.kB`'s for memory components in kilobytes

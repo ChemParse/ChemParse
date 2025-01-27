@@ -1,7 +1,7 @@
 import pytest
 
-from chemparse.regex_settings import (DEFAULT_ORCA_REGEX_FILE, RegexBlueprint,
-                                      RegexRequest, RegexSettings)
+from pychemparse.regex_settings import (DEFAULT_ORCA_REGEX_FILE, RegexBlueprint,
+                                        RegexRequest, RegexSettings)
 
 
 @pytest.fixture

@@ -56,7 +56,7 @@ class BlockGpawDipole(Block):
     def data(self) -> Data:
         """
 
-        :return: :class:`chemparse.data.Data` object that contains:
+        :return: :class:`pychemparse.data.Data` object that contains:
 
             - :class:`pint.Quantity` `Dipole Moment` in \|e\|*Ang. Can be converted to Debye with ``.to('D')``.
 
@@ -105,7 +105,7 @@ class BlockGpawEnergyContributions(Block):
     def data(self) -> Data:
         """
 
-        :return: :class:`chemparse.data.Data` object that contains:
+        :return: :class:`pychemparse.data.Data` object that contains:
 
             - :class:`pint.Quantity` `Reference` in eV
             - :class:`pint.Quantity` `Free energy` in eV
@@ -173,7 +173,7 @@ class BlockGpawConvergedAfter(Block):
     def data(self) -> Data:
         """
 
-        :return: :class:`chemparse.data.Data` object that contains:
+        :return: :class:`pychemparse.data.Data` object that contains:
 
             - :class:`int` `Iterations`
             - :class:`bool` `Converged` is always `True`, as the block is only extracted if the calculation is converged
@@ -219,7 +219,7 @@ class BlockGpawOrbitalEnergies(Block):
     def data(self) -> Data:
         """
 
-        :return: :class:`chemparse.data.Data` object that contains:
+        :return: :class:`pychemparse.data.Data` object that contains:
 
             - :class:`pandas.DataFrame` `UpDownOrbitals` with columns: Band, Eigenvalues_Up, Occupancy_Up, Eigenvalues_Down, Occupancy_Down. Eigenvalues are in eV.
 
@@ -295,7 +295,7 @@ class BlockGpawTiming(Block):
         """
         Parses the timing data, maintains the hierarchy, and extracts the total time separately.
 
-        :return: :class:`chemparse.data.Data` object that contains:
+        :return: :class:`pychemparse.data.Data` object that contains:
 
             - `Total`: A dictionary with 'Total Time' and 'Percentage'.
             - `TimingHierarchy`: A list of timing data entries maintaining the hierarchy.

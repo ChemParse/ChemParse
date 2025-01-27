@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from chemparse.scripts import chem_parse, chem_to_html
+from pychemparse.scripts import chem_parse, chem_to_html
 
 # Test data directory
 orca_output_files = [os.path.join("tests", "orca_test_outputs", f) for f in os.listdir(

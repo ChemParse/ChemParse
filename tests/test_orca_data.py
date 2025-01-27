@@ -1,6 +1,6 @@
 import pytest
 
-import chemparse as chp
+import pychemparse as chp
 
 
 def test_initialization():

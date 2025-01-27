@@ -5,7 +5,7 @@ from itertools import zip_longest
 import pandas as pd
 import pytest
 
-import chemparse as chp
+import pychemparse as chp
 
 rs = chp.DEFAULT_VASP_REGEX_SETTINGS
 known_vasp_regexes = (rs.items["TypeKnownBlocks"].to_list() +

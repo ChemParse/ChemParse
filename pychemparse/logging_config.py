@@ -18,7 +18,7 @@ class InMemoryHandler(logging.Handler):
 
 
 # Configure package-level logger
-logger = logging.getLogger('chemparse')
+logger = logging.getLogger('pychemparse')
 logger.setLevel(logging.DEBUG)  # Capture all logs, regardless of level
 
 # Create and configure the in-memory handler to store all logs
