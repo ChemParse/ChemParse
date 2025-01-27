@@ -2,7 +2,7 @@ If you need to handle reasonably large outputs ~ 100MB, it would be faster to ex
 
 
 ```python
-import chemparse as chp
+import pychemparse as chp
 ```
 
 You can create your own regex or use one from the standard ones (see add_block_example)
@@ -43,7 +43,7 @@ new_blocks
 
 
 
-    {8520959472914: {'Element': <chemparse.orca_elements.BlockOrcaFinalSinglePointEnergy at 0x7bff0c335120>,
+    {8520959472914: {'Element': <pychemparse.orca_elements.BlockOrcaFinalSinglePointEnergy at 0x7bff0c335120>,
       'CharPosition': (354, 500),
       'LinePosition': (18, 21)}}
 

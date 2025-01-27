@@ -1,5 +1,5 @@
 ```python
-import chemparse as chp
+import pychemparse as chp
 ```
 
 Use `mode` argument to change the extraction mode in `File`
@@ -49,7 +49,7 @@ gpaw_file.get_blocks()
       <th>8749855079965</th>
       <td>Block</td>
       <td>BlockGpawIcon</td>
-      <td>&lt;chemparse.gpaw_elements.BlockGpawIcon object ...</td>
+      <td>&lt;pychemparse.gpaw_elements.BlockGpawIcon object ...</td>
       <td>(1, 109)</td>
       <td>(3, 8)</td>
     </tr>
@@ -57,7 +57,7 @@ gpaw_file.get_blocks()
       <th>8749855080007</th>
       <td>Block</td>
       <td>BlockGpawDipole</td>
-      <td>&lt;chemparse.gpaw_elements.BlockGpawDipole objec...</td>
+      <td>&lt;pychemparse.gpaw_elements.BlockGpawDipole objec...</td>
       <td>(111, 166)</td>
       <td>(11, 12)</td>
     </tr>
@@ -65,7 +65,7 @@ gpaw_file.get_blocks()
       <th>8749855079905</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x7f53c00...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x7f53c00...</td>
       <td>(0, 0)</td>
       <td>(1, 2)</td>
     </tr>
@@ -73,7 +73,7 @@ gpaw_file.get_blocks()
       <th>8749855079983</th>
       <td>Spacer</td>
       <td>Spacer</td>
-      <td>&lt;chemparse.elements.Spacer object at 0x7f53c00...</td>
+      <td>&lt;pychemparse.elements.Spacer object at 0x7f53c00...</td>
       <td>(110, 110)</td>
       <td>(9, 10)</td>
     </tr>
@@ -100,11 +100,11 @@ chp.gpaw_elements.AvailableBlocksGpaw.blocks
 
 
 
-    {'BlockGpawIcon': chemparse.gpaw_elements.BlockGpawIcon,
-     'BlockGpawDipole': chemparse.gpaw_elements.BlockGpawDipole,
-     'BlockGpawEnergyContributions': chemparse.gpaw_elements.BlockGpawEnergyContributions,
-     'BlockGpawConvergedAfter': chemparse.gpaw_elements.BlockGpawConvergedAfter,
-     'BlockGpawOrbitalEnergies': chemparse.gpaw_elements.BlockGpawOrbitalEnergies,
-     'BlockGpawTiming': chemparse.gpaw_elements.BlockGpawTiming}
+    {'BlockGpawIcon': pychemparse.gpaw_elements.BlockGpawIcon,
+     'BlockGpawDipole': pychemparse.gpaw_elements.BlockGpawDipole,
+     'BlockGpawEnergyContributions': pychemparse.gpaw_elements.BlockGpawEnergyContributions,
+     'BlockGpawConvergedAfter': pychemparse.gpaw_elements.BlockGpawConvergedAfter,
+     'BlockGpawOrbitalEnergies': pychemparse.gpaw_elements.BlockGpawOrbitalEnergies,
+     'BlockGpawTiming': pychemparse.gpaw_elements.BlockGpawTiming}
 
 

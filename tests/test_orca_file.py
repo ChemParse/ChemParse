@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 from lxml import etree
 
-import chemparse as chp
+import pychemparse as chp
 
 
 def is_html_valid(html):

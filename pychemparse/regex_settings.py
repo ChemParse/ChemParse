@@ -51,7 +51,7 @@ class RegexBlueprint:
 
     .. code-block:: python
 
-        import chemparse as chp
+        import pychemparse as chp
 
         # Define a blueprint for extracting multiple blocks of text from an ORCA output file
         rb = chp.RegexBlueprint(

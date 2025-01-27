@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "chemparse"
-version = "0.5.1"
-description = ""
+name = "pychemparse"
+version = "0.6.1"
+description = "A package for extracting data from ORCA .out, GPAW .txt files, and more. It allows for the creation of user-defined extraction patterns to ensure accurate data extraction from various ORCA versions."
 authors = ["ivan <imtambovtcev@gmail.com>"]
 readme = "README.md"
 
@@ -14,7 +14,6 @@ openpyxl = "^3.1.2"
 tqdm = "^4.66.2"
 bitmath = "^1.3.3.1"
 
-
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
 lxml = "^5.1.0"
@@ -26,5 +25,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-chem_to_html = "chemparse.scripts:chem_to_html_cli"
-chem_parse = "chemparse.scripts:chem_parse_cli"
+chem_to_html = "pychemparse.scripts:chem_to_html_cli"
+chem_parse = "pychemparse.scripts:chem_parse_cli"

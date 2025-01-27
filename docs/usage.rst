@@ -9,7 +9,7 @@ Example Usage
 .. code-block:: python
 
    
-    import chemparse as chp
+    import pychemparse as chp
     from IPython.display import HTML
 
      
