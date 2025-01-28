@@ -1,6 +1,5 @@
-<!-- ---
-
-title: 'ChemParse: A User-Centric Tool for Parsing Computational Chemistry Outputs'
+---
+title: "ChemParse: A User-Centric Tool for Parsing Computational Chemistry Outputs"
 tags:
   - Python
   - computational chemistry
@@ -13,43 +12,65 @@ authors:
     orcid: 0000-0001-9223-8961
     affiliation: 1
 affiliations:
- - name: Science Institute and Faculty of Physical Sciences, University of Iceland, 107 Reykjav\'{\i}k, Iceland
-   index: 1
+  - name: Science Institute and Faculty of Physical Sciences, University of Iceland, 107 Reykjavík, Iceland
+    index: 1
 date: 13 September 2024
-bibliography: paper.bib -->
+bibliography: paper.bib
+---
+
 
 # Summary
 
-ChemParse is a tool designed to enhance the parsing of computational chemistry outputs, addressing the need for accessible data handling capabilities. Existing tools such as cclib [@oboyleCclibLibraryPackageindependent2008], ASE [@larsenAtomicSimulationEnvironment2017; @bahnObjectorientedScriptingInterface2002], and NOMAD [@scheidgenNOMADDistributedWebbased2023] require significant developer expertise for adaptation and extension, which can be a barrier for researchers with limited programming knowledge. ChemParse mitigates this by allowing users to define custom extraction patterns through a user-friendly interface, making the parsing process more accessible. The tool supports data from various computational chemistry software, including ORCA [@neeseORCAProgramSystem2012; @neeseSoftwareUpdateORCA2018; @neeseSoftwareUpdateORCA2022], GPAW [@enkovaaraElectronicStructureCalculations2010], and VASP [@kresseEfficientIterativeSchemes1996; @kresseEfficiencyAbinitioTotal1996], but is not limited to these sources.
+ChemParse is a Python-based tool that simplifies the parsing and analysis of computational chemistry toolkit outputs. The software's architecture separates the identification of logical output sections (like geometry optimization steps or frequency calculations) from the extraction of specific numerical values, enabling researchers to define custom extraction patterns with minimal programming overhead. This is particularly important because the formatting of data in output files is often inconsistent between different versions of computational chemistry packages. Furthermore, unexpected warning messages and other inconsistencies within the extracted data can make the extraction process challenging. ChemParse's design caters to researchers who may not have extensive experience with time-efficient coding, providing a user-friendly framework that balances accessibility and computational performance through its two-phase extraction approach.
 
-The architecture of ChemParse emphasizes simplicity and flexibility, supporting user-driven development and facilitating contributions from a broad user base. This adaptability is complemented by features that convert outputs into interactive HTML documents, alongside a two-part system that separates output blocks identification from the data extraction. This method enhances the reliability of the parsing process compared to traditional methods and promotes a collaborative environment through community contributions.
-
-ChemParse contributes to the field of computational chemistry by providing a tool that is both accessible and effective, addressing the evolving needs of the scientific community.
+ChemParse is designed to parse outputs from major computational chemistry packages, including ORCA[@neeseORCAProgramSystem2012; @neeseSoftwareUpdateORCA2018; @neeseSoftwareUpdateORCA2022], GPAW[@enkovaaraElectronicStructureCalculations2010], and VASP [@kresseEfficientIterativeSchemes1996; @kresseEfficiencyAbinitioTotal1996]. While it can be extended to support other formats through custom templates, the current version focuses on providing strong support for ORCA outputs. The tool converts computational results into dynamic HTML documents featuring collapsible sections and configurable visualizations. This approach to output presentation streamlines data analysis and interpretation. Given its open architecture, ChemParse grows through community contributions, allowing researchers to extend and modify the codebase.
 
 # Statement of need
 
-The field of computational chemistry relies heavily on sophisticated tools to parse and interpret output data from various quantum chemistry software packages. Those tools often require extensive developer expertise to adapt to new software outputs or integrate additional features. This dependency creates a significant barrier for researchers, particularly those without advanced programming skills, who need to customize data extraction for their specific research needs.
+Computational chemistry relies heavily on tools that can extract meaningful insights from the output of quantum chemistry simulations. However, many available tools demand significant technical expertise to customize or extend, creating a barrier for researchers who lack advanced programming skills. These challenges are compounded by the constant evolution of output formats, making adaptability a critical requirement for any parsing solution.
 
-ChemParse addresses these challenges by providing a more accessible, user-centric tool that simplifies the process of customizing and extending data extraction capabilities. It enables researchers to define custom extraction patterns through an intuitive interface, without needing to engage deeply with the underlying codebase. This feature is particularly beneficial in a field where output formats are continually evolving and where the ability to adapt parsing strategies quickly can significantly enhance research efficiency and effectiveness.
+ChemParse addresses these challenges by providing an intuitive interface for defining custom extraction patterns, easing the technical burden on researchers. The tool's architecture handles diverse output formats efficiently, making it particularly valuable for processing large-scale datasets or outputs from multiple quantum chemistry packages.
 
-Moreover, the existing tools' complex and rigid structure often discourages contributions from the broader scientific community. ChemParse, with its emphasis on user-driven development and simplicity, not only facilitates easier customization but also encourages contributions, making it a living repository of collective scientific knowledge. By lowering the entry barrier for adding new functionalities, ChemParse enhances the collaborative spirit within the scientific community, fostering a more inclusive environment for innovation and development in computational chemistry.
-
+ChemParse is a data extraction framework designed to support researchers who may not have advanced technical expertise, allowing them to effectively extract and analyze data. This approach differs from tools like cclib[@oboyleCclibLibraryPackageindependent2008], ASE[@larsenAtomicSimulationEnvironment2017; @bahnObjectorientedScriptingInterface2002], and NOMAD[@scheidgenNOMADDistributedWebbased2023], which are geared more toward users with a strong technical background.
 
 # Software description
 
-ChemParse is a computational chemistry tool designed to enhance the data extraction process from quantum chemistry software outputs. Its architecture promotes flexibility and user-friendliness, encouraging contributions from researchers across a wide spectrum of programming expertise. The software operates primarily through a two-part system aimed at efficient and precise data handling.
+ChemParse breaks down computational chemistry outputs into discrete data blocks - energies, geometries, dipoles, and similar quantities. Using regular expressions, both built-in and custom, the software identifies these blocks and converts them into structured Python objects for analysis.
 
-The first component of ChemParse involves the use of regular expressions (regex) to identify distinct data blocks within output files. This step ensures that the data is organized into contextually coherent blocks, laying the groundwork for accurate data extraction. Recognizing the complexity regex might pose for non-programmers, ChemParse introduces "blueprints." These are user-friendly templates that allow users to easily generate new regex patterns tailored to their specific needs without requiring in-depth knowledge of regex syntax.
+The tool simplifies regex pattern creation through "blueprints" - templated guides that help users craft extraction patterns without deep regex knowledge. To optimize performance, especially for large files, data extraction occurs only on demand rather than during initial parsing.
 
-Following the identification of data blocks, the second component of ChemParse is activated—specific data extraction. This process is only performed upon user request for the specific block data extraction, optimizing the tool's performance and ensuring that the extraction does not become a bottleneck, even when handling large datasets. The data blocks' manageable size contributes to the system's overall efficiency and reliability.
+This block-based architecture provides an additional benefit: poorly optimized extraction code only impacts its specific block, not the entire parsing process. By constraining inefficient logic to these small, isolated units, ChemParse maintains robust performance even when users implement suboptimal extraction patterns.
 
-Additionally, ChemParse can transform output files into interactive HTML documents with CSS and JavaScript to improve data visualization and make it easier for users to navigate and analyze results.
+ChemParse also renders parsed data as interactive HTML reports, featuring collapsible navigation and configurable visualizations. The generated output adapts to both exploratory analysis and collaborative review through customizable display templates. This visualization layer integrates with the core parsing framework to create dynamic, browser-based interfaces for computational results.
 
+![Figure 1: Preview of an interactive HTML document generated by ChemParse.](html_preview.png)
+
+The current version of the software supports data extraction from ORCA output files (tested with ORCA versions 5 and 6):
+
+- **Energies and SCF[@RevModPhys.23.69] Data**  
+  Final single-point energy, total SCF energy, SCF iterations, convergence status, and total runtime.
+
+- **Orbital Data**  
+  Orbital energies, occupation numbers.
+
+- **Spectroscopy Data**  
+  TD-DFT[@PhysRevLett.52.997] excitations, absorption spectra, and Circular Dichroism[@jp0105138] (CD) spectra.
+
+- **Path and NEB[@asgeirsson2021] Calculations (including NEB-TS and NEB-CI)**  
+
+- **Geometry Optimization Data**
+
+- **Vibrational and Rotational Spectra[@wilson1980molecular] Data**
+
+- **Dipole moments**
+  
+- **Run Information**  
+  Program version, acknowledgments, warnings, input file details, module timings, and success messages.
+
+The tabular data is represented using pandas DataFrames, quantities with units are represented using pint objects.
 
 # Acknowledgements
 
 This work was funded by the Icelandic Research Fund (grant 239970).
 
 # References
-
----
