@@ -28,10 +28,30 @@ Conversion of .out files into interactive HTML with block markup is available (s
 
 ![html](image/README/html_preview.png "HTML output")
 
-## Instalation
+Here is a fixed version of the installation instructions:
 
-Git clone the repository and
+---
 
+## Installation
+
+### Install from PyPI
+
+You can install the package directly from PyPI:
+
+```bash
+pip install pychemparse
 ```
+
+### Install from GitHub
+
+Alternatively, you can clone the repository and install it manually:
+
+```bash
+git clone https://github.com/ChemParse/ChemParse.git
+cd ChemParse
 pip install .
 ```
+
+--- 
+
+This version corrects the directory change (`cd ChemParse` instead of `cd pychemparse`) and makes the instructions clearer.
