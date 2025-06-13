@@ -1269,9 +1269,23 @@ class BlockOrcaScf(BlockOrcaScfType):
         comments = []
 
         current_iteration = 0
+
+        inside_of_solving_hessian = False
+
         for line in body_raw.split('\n'):
 
             line = line.strip()
+
+            if inside_of_solving_hessian:
+                if line.startswith('Eigenvalues'):
+                    inside_of_solving_hessian = False
+                comments.append((current_iteration, line))
+                continue
+
+            if line.startswith('Solving for'):
+                inside_of_solving_hessian = True
+                comments.append((current_iteration, line))
+                continue
 
             if line.startswith('***'):
                 comments.append((current_iteration, line))
@@ -1280,6 +1294,7 @@ class BlockOrcaScf(BlockOrcaScfType):
             split_line = line.split()
             if len(split_line) == 0:
                 continue
+
             if split_line[0].isdigit():
                 current_iteration = int(split_line[0])
                 data_lines.append(line)
