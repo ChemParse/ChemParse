@@ -413,6 +413,55 @@ class BlockOrcaErrorMessage(Block):
 
 
 @AvailableBlocksOrca.register_block
+class BlockOrcaErrorTermination(Block):
+    """
+    The block captures and stores ORCA error termination messages from ORCA output files.
+    
+    This block captures single-line messages indicating that ORCA finished with an error
+    in a specific module or process.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        ORCA finished by error termination in PROPERTIES
+        ORCA finished by error termination in LEANSCF
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'ORCA Error Termination', None, self.raw_data
+
+    def data(self) -> Data:
+        """
+        :return: :class:`pychemparse.data.Data` object that contains:
+
+            - :class:`str` `Module`: The module/process where the error occurred
+            - :class:`str` `Error Message`: The full error termination message
+        :rtype: Data
+        """
+        # Define the regex pattern to match ORCA error termination
+        pattern = r"ORCA finished by error termination in (\w+)"
+        
+        # Search for the pattern in self.raw_data
+        match = re.search(pattern, self.raw_data)
+        
+        # Prepare the result dictionary
+        result = {
+            'Module': None,
+            'Error Message': None
+        }
+        
+        # If a match is found, extract the module name and full message
+        if match:
+            result['Module'] = match.group(1)
+            result['Error Message'] = self.raw_data.strip()
+        
+        return Data(data=result, comment='Module name and error termination message')
+
+
+@AvailableBlocksOrca.register_block
 class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
     """
     The block captures and stores Dipole moment from ORCA output files.
