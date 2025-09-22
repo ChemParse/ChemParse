@@ -1818,7 +1818,49 @@ class BlockOrcaCiNebConvergence(Block):
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaInputFile(Block):
-    pass
+    """
+    The block captures and stores the input file content from ORCA output files.
+    """
+    data_available: bool = True
+
+    def readable_name(self) -> str:
+        """
+        Return a readable name for the block.
+        """
+        return "INPUT FILE"
+    
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return self.readable_name(), None, self.raw_data
+
+    def data(self) -> Data:
+        """
+        Extract the input file name and content.
+        """
+        raw_data = self.raw_data
+
+        # Extract file name
+        file_name_match = re.search(r"NAME = (.*)", raw_data)
+        file_name = file_name_match.group(1).strip() if file_name_match else None
+
+        # Extract and clean input content
+        lines = raw_data.split('\n')
+        input_lines = []
+        for line in lines:
+            if line.strip().startswith('|'):
+                # remove the prefix like |  1>
+                clean_line = re.sub(r'\|\s*\d*>\s*', '', line).rstrip()
+                input_lines.append(clean_line)
+
+        # Join the cleaned lines
+        input_text = "\n".join(input_lines)
+
+        # Remove the end of input marker
+        input_text = re.sub(r'\*+END OF INPUT\*+', '', input_text).strip()
+
+        return Data(
+            data={'file_name': file_name, 'input_text': input_text},
+            comment="Extracted input file name and content."
+        )
 
 
 @AvailableBlocksOrca.register_block
