@@ -167,7 +167,7 @@ WARNING: Geometry Optimization
 INFO   : the flag for use of the SHARK integral package has been found!
 
 "
-Block,BlockOrcaInputFile,"(10129, 10714)","(179, 197)",INPUT FILE NAME orcainp UKS BL...,"================================================================================
+Block,BlockOrcaInputFile,"(10129, 10714)","(179, 197)",INPUT FILE,"================================================================================
                                        INPUT FILE
 ================================================================================
 NAME = orca.inp

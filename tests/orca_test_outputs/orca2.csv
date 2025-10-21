@@ -160,7 +160,7 @@ Block,BlockOrcaWarnings,"(10047, 10399)","(164, 172)",WARNINGS Please study thes
 INFO   : the flag for use of the SHARK integral package has been found!
 
 "
-Block,BlockOrcaInputFile,"(10400, 10945)","(172, 189)",INPUT FILE NAME tddftinp PBE N...,"================================================================================
+Block,BlockOrcaInputFile,"(10400, 10945)","(172, 189)",INPUT FILE,"================================================================================
                                        INPUT FILE
 ================================================================================
 NAME = tddft.inp

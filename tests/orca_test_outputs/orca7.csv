@@ -175,7 +175,7 @@ WARNING: CIS/ROCIS methods need fully converged wavefunctions
 
 
 "
-Block,BlockOrcaInputFile,"(11249, 11763)","(187, 202)",INPUT FILE NAME orcainp UKS BL...,"================================================================================
+Block,BlockOrcaInputFile,"(11249, 11763)","(187, 202)",INPUT FILE,"================================================================================
                                        INPUT FILE
 ================================================================================
 NAME = orca.inp
