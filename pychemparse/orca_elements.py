@@ -416,7 +416,7 @@ class BlockOrcaErrorMessage(Block):
 class BlockOrcaErrorTermination(Block):
     """
     The block captures and stores ORCA error termination messages from ORCA output files.
-    
+
     This block captures single-line messages indicating that ORCA finished with an error
     in a specific module or process.
 
@@ -443,21 +443,21 @@ class BlockOrcaErrorTermination(Block):
         """
         # Define the regex pattern to match ORCA error termination
         pattern = r"ORCA finished by error termination in (\w+)"
-        
+
         # Search for the pattern in self.raw_data
         match = re.search(pattern, self.raw_data)
-        
+
         # Prepare the result dictionary
         result = {
             'Module': None,
             'Error Message': None
         }
-        
+
         # If a match is found, extract the module name and full message
         if match:
             result['Module'] = match.group(1)
             result['Error Message'] = self.raw_data.strip()
-        
+
         return Data(data=result, comment='Module name and error termination message')
 
 
@@ -1828,7 +1828,7 @@ class BlockOrcaInputFile(Block):
         Return a readable name for the block.
         """
         return "INPUT FILE"
-    
+
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
         return self.readable_name(), None, self.raw_data
 
@@ -1840,7 +1840,8 @@ class BlockOrcaInputFile(Block):
 
         # Extract file name
         file_name_match = re.search(r"NAME = (.*)", raw_data)
-        file_name = file_name_match.group(1).strip() if file_name_match else None
+        file_name = file_name_match.group(
+            1).strip() if file_name_match else None
 
         # Extract and clean input content
         lines = raw_data.split('\n')
