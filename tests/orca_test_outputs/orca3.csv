@@ -169,7 +169,7 @@ WARNING: CIS/ROCIS methods need fully converged wavefunctions
 INFO   : the flag for use of the SHARK integral package has been found!
 
 "
-Block,BlockOrcaInputFile,"(10690, 11304)","(181, 203)",INPUT FILE NAME tddftinp PBE N...,"================================================================================
+Block,BlockOrcaInputFile,"(10690, 11304)","(181, 203)",INPUT FILE,"================================================================================
                                        INPUT FILE
 ================================================================================
 NAME = tddft.inp

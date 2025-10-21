@@ -413,6 +413,55 @@ class BlockOrcaErrorMessage(Block):
 
 
 @AvailableBlocksOrca.register_block
+class BlockOrcaErrorTermination(Block):
+    """
+    The block captures and stores ORCA error termination messages from ORCA output files.
+
+    This block captures single-line messages indicating that ORCA finished with an error
+    in a specific module or process.
+
+    **Example of ORCA Output:**
+
+    .. code-block:: none
+
+        ORCA finished by error termination in PROPERTIES
+        ORCA finished by error termination in LEANSCF
+    """
+    data_available: bool = True
+    """ Formatted data is available for this block. """
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return 'ORCA Error Termination', None, self.raw_data
+
+    def data(self) -> Data:
+        """
+        :return: :class:`pychemparse.data.Data` object that contains:
+
+            - :class:`str` `Module`: The module/process where the error occurred
+            - :class:`str` `Error Message`: The full error termination message
+        :rtype: Data
+        """
+        # Define the regex pattern to match ORCA error termination
+        pattern = r"ORCA finished by error termination in (\w+)"
+
+        # Search for the pattern in self.raw_data
+        match = re.search(pattern, self.raw_data)
+
+        # Prepare the result dictionary
+        result = {
+            'Module': None,
+            'Error Message': None
+        }
+
+        # If a match is found, extract the module name and full message
+        if match:
+            result['Module'] = match.group(1)
+            result['Error Message'] = self.raw_data.strip()
+
+        return Data(data=result, comment='Module name and error termination message')
+
+
+@AvailableBlocksOrca.register_block
 class BlockOrcaDipoleMoment(BlockOrcaWithStandardHeader):
     """
     The block captures and stores Dipole moment from ORCA output files.
@@ -1152,6 +1201,26 @@ class BlockOrcaScfType(Block):
             15    -379.2946629954453783    -3.34e-07  1.04e-03  5.09e-02  4.80e-05   0.2
                                 ***Gradient convergence achieved***
 
+        or
+
+        ---------------------------------------S-O-S-C-F--------------------------------------
+        Iteration    Energy (Eh)           Delta-E    RMSDP     MaxDP     MaxGrad    Time(sec)
+        --------------------------------------------------------------------------------------
+            1    -379.7506727530962962     0.00e+00  0.00e+00  0.00e+00  6.98e-06     1.3
+                    *** Restarting incremental Fock matrix formation ***
+                Solving for 3 Hessian eigenvectors
+                    It.    Root MAX Err.:          1          2          3
+                    1                      8.686e-02  3.025e-02  2.075e-01 
+                    2                      4.391e-02  2.910e-02  1.353e-01 
+                    3                      1.159e-02  2.716e-03  6.115e-02 
+                    4                      1.624e-02  7.596e-03  3.988e-03 
+                    5                      1.416e-02  1.238e-02  4.792e-03 
+                    6                      9.504e-03  8.714e-03  2.169e-03 
+                    Eigenvalues:          -1.198e-01  7.680e-03  1.116e-02 
+        Target saddle point order set to 1
+            2    -379.7506727530962962     0.00e+00  3.76e-06  5.08e-05  6.98e-06    25.5
+                        *** Gradient check signals convergence ***
+
     """
 
     def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
@@ -1228,6 +1297,34 @@ class BlockOrcaScf(BlockOrcaScfType):
     data_available: bool = True
     """ Formatted data is available for this block. """
 
+    _HESSIAN_RE = re.compile(
+        r"(Solving\s+for\s+\d+\s+Hessian\s+eigenvectors.*?Eigenvalues:[^\n]*\n)",
+        re.DOTALL,
+    )
+
+    @staticmethod
+    def _extract_hessian_blocks(text: str):
+        """Remove Hessian blocks from *text* and return (clean_text, eigenvalues_list).
+
+        ``eigenvalues_list`` is a list of ``list[float]`` – one sub‑list per
+        diagnostic block encountered in *text*.
+        """
+
+        eigenvalues = []
+
+        for match in BlockOrcaScf._HESSIAN_RE.finditer(text):
+            diag_block = match.group(0)
+            m = re.search(r"Eigenvalues:\s+([\d\-eE\.\s]+)", diag_block)
+            if m:
+                try:
+                    eigenvalues.append([float(v) for v in m.group(1).split()])
+                except ValueError:
+                    # If conversion fails we still proceed but skip the block’s eigenvalues.
+                    pass
+
+        clean_text = BlockOrcaScf._HESSIAN_RE.sub("", text)
+        return clean_text, eigenvalues
+
     def data(self) -> Data:
         """
         Returns a :class:`pychemparse.data.Data` object containing:
@@ -1255,57 +1352,85 @@ class BlockOrcaScf(BlockOrcaScfType):
 
         :rtype: Data
         """
-        data = {}
+        # *extract_name_header_and_body* is provided by BlockOrcaScfType.
         readable_name, header_raw, body_raw = self.extract_name_header_and_body()
 
-        if header_raw is None or len([line for line in header_raw.split('\n') if len(line) > 0]) != 3:
+        # Sanity‑check: header must contain exactly three non‑empty lines.
+        if header_raw is None or len([ln for ln in header_raw.split("\n") if ln.strip()]) != 3:
             return Data(data=None, comment="No header found")
 
-        header_lines = header_raw.split('\n')
-        column_names = [s.strip() for s in re.split(
-            r'\s{2,}', header_lines[1].strip()) if s.strip() != '']
+        # Strip Hessian eigenvector diagnostics and harvest eigenvalues.
+        body_clean, eigenvalues = self._extract_hessian_blocks(body_raw)
 
+        # -----------------------------------------------------------------
+        # Column name parsing (from the second line of the header)
+        # -----------------------------------------------------------------
+        header_lines = header_raw.split("\n")
+        column_names = [s.strip() for s in re.split(
+            r"\s{2,}", header_lines[1].strip()) if s.strip()]
+
+        # -----------------------------------------------------------------
+        # Main loop: iterate over body lines collecting data rows & comments
+        # -----------------------------------------------------------------
         data_lines = []
         comments = []
-
         current_iteration = 0
-        for line in body_raw.split('\n'):
 
-            line = line.strip()
+        for raw_line in body_clean.split("\n"):
+            line = raw_line.rstrip()
+            if not line:
+                continue  # skip blank lines
 
-            if line.startswith('***'):
+            if line.startswith("***"):
                 comments.append((current_iteration, line))
                 continue
 
-            split_line = line.split()
-            if len(split_line) == 0:
-                continue
-            if split_line[0].isdigit():
-                current_iteration = int(split_line[0])
+            split = line.split()
+            if split and split[0].isdigit():
+                # New SCF iteration row.
+                current_iteration = int(split[0])
                 data_lines.append(line)
+            else:
+                # Any other non‑blank line is treated as a comment bound to the
+                # current iteration index.
+                comments.append((current_iteration, line))
 
-        # Convert numeric data to a StringIO object and read into DataFrame
-        df = pd.read_csv(StringIO('\n'.join(data_lines)),
-                         sep='\s+', names=column_names)
+        # -----------------------------------------------------------------
+        # Convert numeric rows into a DataFrame
+        # -----------------------------------------------------------------
+        if data_lines:
+            df = pd.read_csv(StringIO("\n".join(data_lines)),
+                             sep="\s+", names=column_names)
+        else:
+            df = pd.DataFrame(columns=column_names)
 
-        if 'Time(sec)' in df.columns:
-            df['Time(sec)'] = df['Time(sec)'].apply(
-                lambda x: timedelta(seconds=x))
+        # Post‑processing: convert time to timedelta and energy to pint units.
+        if "Time(sec)" in df.columns:
+            df["Time(sec)"] = df["Time(sec)"].apply(
+                lambda s: timedelta(seconds=s))
+        if "Energy (Eh)" in df.columns:
+            df["Energy (Eh)"] = df["Energy (Eh)"].apply(
+                lambda e: e * ureg.hartree)
 
-        if 'Energy (Eh)' in df.columns:
-            df['Energy (Eh)'] = df['Energy (Eh)'].apply(
-                lambda x: x * ureg.hartree)
+        # -----------------------------------------------------------------
+        # Assemble the Data object expected by callers
+        # -----------------------------------------------------------------
+        data_dict = {
+            "Data": df,
+            "Comments": pd.DataFrame(comments, columns=["Iteration", "Comment"]),
+            "Name": readable_name,
+            "Eigenvalues": eigenvalues,
+        }
 
-        data['Data'] = df
-
-        data['Comments'] = pd.DataFrame(
-            comments, columns=['Iteration', 'Comment'])
-
-        data['Name'] = readable_name
-
-        return Data(data=data, comment="""Pandas DataFrame with columns `Iteration`, `Energy (Eh)`, `Delta-E`, `RMSDP`, `MaxDP`, `Damp`, `Time(sec)`.
-                    `Time(sec)` is represented as a timedelta object. Energy is represented by pint object. Magnitude cane be extracted with .magnitude method.
-                    Comments are stored in a separate DataFrame with columns `Iteration` and `Comment`.""")
+        return Data(
+            data=data_dict,
+            comment=(
+                "Pandas DataFrame with columns `Iteration`, `Energy (Eh)`, `Delta-E`, `RMSDP`, "
+                "`MaxDP`, `MaxGrad`/`Damp`, `Time(sec)`. Time is `timedelta`, energy is a Pint "
+                "quantity. Any Hessian diagnostic eigenvalues are available via the `Eigenvalues` "
+                "key (list of float lists)."
+            ),
+        )
 
 
 @AvailableBlocksOrca.register_block
@@ -1341,6 +1466,26 @@ class BlockOrcaSoscf(BlockOrcaScf):
             15    -379.2946629954453783    -3.34e-07  1.04e-03  5.09e-02  4.80e-05   0.2
                                 ***Gradient convergence achieved***
 
+    or
+
+        ---------------------------------------S-O-S-C-F--------------------------------------
+        Iteration    Energy (Eh)           Delta-E    RMSDP     MaxDP     MaxGrad    Time(sec)
+        --------------------------------------------------------------------------------------
+            1    -379.7506727530962962     0.00e+00  0.00e+00  0.00e+00  6.98e-06     1.3
+                    *** Restarting incremental Fock matrix formation ***
+                Solving for 3 Hessian eigenvectors
+                    It.    Root MAX Err.:          1          2          3
+                    1                      8.686e-02  3.025e-02  2.075e-01 
+                    2                      4.391e-02  2.910e-02  1.353e-01 
+                    3                      1.159e-02  2.716e-03  6.115e-02 
+                    4                      1.624e-02  7.596e-03  3.988e-03 
+                    5                      1.416e-02  1.238e-02  4.792e-03 
+                    6                      9.504e-03  8.714e-03  2.169e-03 
+                    Eigenvalues:          -1.198e-01  7.680e-03  1.116e-02 
+        Target saddle point order set to 1
+            2    -379.7506727530962962     0.00e+00  3.76e-06  5.08e-05  6.98e-06    25.5
+                        *** Gradient check signals convergence ***
+
     """
 
     def data(self) -> Data:
@@ -1353,6 +1498,7 @@ class BlockOrcaSoscf(BlockOrcaScf):
             - `Energy (Eh)` is represented by a pint object. Magnitude can be extracted with the .magnitude method.
         - :class:`pandas.DataFrame` `Comments` with columns `Iteration` and `Comment`.
         - :class:`str` `Name` of the block.
+        - :class:`list` list of eigenvectors if available, if not - emply list.
 
         Parsed data example:
 
@@ -1372,7 +1518,8 @@ class BlockOrcaSoscf(BlockOrcaScf):
             3         13  *** Restarting Hessian update and switching to...
             4         21  *** Restarting incremental Fock matrix formati...
             5         33         **** Energy Check signals convergence ****,
-            'Name': 'S-O-S-C-F'}
+            'Name': 'S-O-S-C-F',
+            'Eigenvalues': [-1.198e-01  7.680e-03  1.116e-02]}
 
 
         :rtype: Data
@@ -1671,7 +1818,50 @@ class BlockOrcaCiNebConvergence(Block):
 
 @AvailableBlocksOrca.register_block
 class BlockOrcaInputFile(Block):
-    pass
+    """
+    The block captures and stores the input file content from ORCA output files.
+    """
+    data_available: bool = True
+
+    def readable_name(self) -> str:
+        """
+        Return a readable name for the block.
+        """
+        return "INPUT FILE"
+
+    def extract_name_header_and_body(self) -> tuple[str, str | None, str]:
+        return self.readable_name(), None, self.raw_data
+
+    def data(self) -> Data:
+        """
+        Extract the input file name and content.
+        """
+        raw_data = self.raw_data
+
+        # Extract file name
+        file_name_match = re.search(r"NAME = (.*)", raw_data)
+        file_name = file_name_match.group(
+            1).strip() if file_name_match else None
+
+        # Extract and clean input content
+        lines = raw_data.split('\n')
+        input_lines = []
+        for line in lines:
+            if line.strip().startswith('|'):
+                # remove the prefix like |  1>
+                clean_line = re.sub(r'\|\s*\d*>\s*', '', line).rstrip()
+                input_lines.append(clean_line)
+
+        # Join the cleaned lines
+        input_text = "\n".join(input_lines)
+
+        # Remove the end of input marker
+        input_text = re.sub(r'\*+END OF INPUT\*+', '', input_text).strip()
+
+        return Data(
+            data={'file_name': file_name, 'input_text': input_text},
+            comment="Extracted input file name and content."
+        )
 
 
 @AvailableBlocksOrca.register_block

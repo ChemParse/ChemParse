@@ -14,6 +14,7 @@
       "BlockOrcaDipoleMoment",
       "BlockOrcaInputFile",
       "BlockOrcaErrorMessage",
+      "BlockOrcaErrorTermination",
       "BlockOrcaShark",
       "BlockOrcaWarnings",
       "BlueprintParagraphStartsWith",
@@ -99,6 +100,15 @@
         "MULTILINE"
       ],
       "comment": "Block with error message, starts with a line of special characters, then the line with ERROR !!!, then text until the next block or the line of special characters"
+    },
+    "BlockOrcaErrorTermination": {
+      "p_type": "Block",
+      "p_subtype": "BlockOrcaErrorTermination",
+      "pattern": "^([ \\t]*ORCA finished by error termination in \\w+[ \\t]*\\n)",
+      "flags": [
+        "MULTILINE"
+      ],
+      "comment": "Single-line block that captures ORCA error termination messages indicating that ORCA finished with an error in a specific module or process"
     },
     "BlockOrcaShark": {
       "p_type": "Block",
