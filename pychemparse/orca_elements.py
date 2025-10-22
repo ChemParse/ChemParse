@@ -2325,6 +2325,7 @@ class BlockOrcaSpinFlipCdSpectrumViaTransitionVelocityDipoleMoments(BlockOrcaSpe
     """
     pass
 
+
 @AvailableBlocksOrca.register_block
 class BlockOrcaCdSpectrum(BlockOrcaSpectrumType):
     """
