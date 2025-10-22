@@ -2295,6 +2295,37 @@ class BlockOrcaCdSpectrumViaTransitionVelocityDipoleMoments(BlockOrcaSpectrumTyp
 
 
 @AvailableBlocksOrca.register_block
+class BlockOrcaSpinFlipAbsorptionSpectrumViaTransitionElectricDipoleMoments(BlockOrcaSpectrumType):
+    """
+    Parses the 'SPIN-FLIP ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS' block.
+    """
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaSpinFlipAbsorptionSpectrumViaTransitionVelocityDipoleMoments(BlockOrcaSpectrumType):
+    """
+    Parses the 'SPIN-FLIP ABSORPTION SPECTRUM VIA TRANSITION VELOCITY DIPOLE MOMENTS' block.
+    """
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaSpinFlipCdSpectrumViaTransitionElectricDipoleMoments(BlockOrcaSpectrumType):
+    """
+    Parses the 'SPIN-FLIP CD SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS' block.
+    """
+    pass
+
+
+@AvailableBlocksOrca.register_block
+class BlockOrcaSpinFlipCdSpectrumViaTransitionVelocityDipoleMoments(BlockOrcaSpectrumType):
+    """
+    Parses the 'SPIN-FLIP CD SPECTRUM VIA TRANSITION VELOCITY DIPOLE MOMENTS' block.
+    """
+    pass
+
+@AvailableBlocksOrca.register_block
 class BlockOrcaCdSpectrum(BlockOrcaSpectrumType):
     """
     Parses the 'CD SPECTRUM' block.
